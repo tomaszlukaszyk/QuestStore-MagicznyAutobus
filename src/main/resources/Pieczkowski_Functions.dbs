@@ -4,7 +4,6 @@ BEGIN
 INSERT INTO class(classdescription) VALUES (description);
 END;
 $$ LANGUAGE plpgsql;
-
 CREATE OR REPLACE FUNCTION assignMentor(idMentor integer, idClass integer)
 RETURNS void AS $$
 BEGIN
@@ -17,7 +16,6 @@ BEGIN
 INSERT INTO student(githubadress, coolcoins, xppoints, iduser) VALUES (githubacc, 0, 0, createUser(userSurname, username, useremail, userlogin, userpass, idrole));
 END;
 $$ LANGUAGE plpgsql;
-
 CREATE OR REPLACE FUNCTION createUser(surname text, firstname text, mail text, login text, userpass text, idrole integer)
 RETURNS integer AS $userid$
 BEGIN
@@ -41,7 +39,6 @@ UPDATE artifact SET currentartifactcost = newcost
 WHERE artid = idartifact;
 END;
 $updatedartifact$ LANGUAGE plpgsql;
-
 CREATE OR REPLACE FUNCTION updateQuest(questid integer, newcost integer)
 RETURNS void AS $updatedartifact$
 BEGIN
