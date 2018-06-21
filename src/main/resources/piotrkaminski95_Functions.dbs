@@ -1,3 +1,4 @@
+
 create or replace function showmentorprofile (email_ text)
 returns table (
     name_ text,
@@ -13,14 +14,16 @@ begin
     where useremail=email_;
 end;
 $$ language plpgsql;
+
 create or replace function markQuest (idstudent_ integer, idquest_ integer)
 returns void as
 $$
 begin
     update questhistory set status='accepted' 
-    where idquest=idquest_ and idstudent=idstudent_ and status!='accepted'
-end
+    where idquest=idquest_ and idstudent=idstudent_ and status!='accepted';
+end;
 $$ language plpgsql;
+
 create or replace function buypersonalartifact(idartifact_ int, idstudent_ int)
 returns void as
 $$
@@ -29,12 +32,12 @@ artifactcost int = (
     select currentartifactcost
     from artifact
     where idartifact=idartifact_
-); 
-
+);
 begin
     insert into personalartifacthistory(idartifact, idstudent, cost) values (idartifact_, idstudent_, artifactcost);
 end;
 $$ language plpgsql;
+
 create or replace function addexplevel(leveltitle_ text)
 returns void as
 $$
@@ -42,6 +45,7 @@ begin
     insert into levelchart(leveltitle) values (leveltitle_);
 end;
 $$ language plpgsql;
+
 create or replace function verifyexplevel(exppoints int)
 returns int as
 $$

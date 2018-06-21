@@ -11,6 +11,7 @@ public class DataInserter {
             db.connect();
 
             insertData(db);
+            new FunctionsCreator().start();
 
             db.close();
         } catch (SQLException e) {
