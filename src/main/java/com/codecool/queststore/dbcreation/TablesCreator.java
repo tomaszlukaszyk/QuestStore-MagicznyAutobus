@@ -16,6 +16,7 @@ final class TablesCreator {
             db.connect();
 
             initializeDatabase(db);
+            new DataInserter().start();
 
             db.close();
         } catch (SQLException e) {
@@ -26,50 +27,53 @@ final class TablesCreator {
     private String generateStatementTableLevelChart() {
         StringBuilder sb = new StringBuilder();
         sb      .append("CREATE TABLE IF NOT EXISTS ")
-                .append("level_chart")
+                .append("levelChart")
                 .append(" ( ")
-                .append("id_level_chart SERIAL PRIMARY KEY, ")
-                .append("level_title TEXT UNIQUE NOT NULL ")
+                .append("idLevelChart SERIAL PRIMARY KEY, ")
+                .append("levelTitle TEXT UNIQUE NOT NULL ")
                 .append(");");
         return sb.toString();
     }
 
-    private String generateStatementTableShopGroup() {
+    private String generateStatementTableGroupArtifactFunding() {
         StringBuilder sb = new StringBuilder();
         sb      .append("CREATE TABLE IF NOT EXISTS ")
-                .append("shop_group")
+                .append("artifactFundingGroup")
                 .append(" ( ")
-                .append("id_shop_group SERIAL PRIMARY KEY, ")
-                .append("group_description TEXT NOT NULL, ")
-                .append("id_artifact INTEGER REFERENCES artifact(id_artifact), ")
-                .append("is_funding_achieved BOOLEAN NOT NULL DEFAULT FALSE ")
+                .append("idArtifactFundingGroup SERIAL PRIMARY KEY, ")
+                .append("groupDescription TEXT NOT NULL, ")
+                .append("idArtifact INTEGER REFERENCES artifact(idArtifact), ")
+                .append("cost INTEGER NOT NULL ")
                 .append(");");
         return sb.toString();
     }
 
-    private String generateStatementTableGroupHistory() {
+    private String generateStatementTableGroupArtifactHistory() {
         StringBuilder sb = new StringBuilder();
         sb      .append("CREATE TABLE IF NOT EXISTS ")
-                .append("group_history")
+                .append("groupArtifactHistory")
                 .append(" ( ")
-                .append("id_funding_history SERIAL PRIMARY KEY, ")
+                .append("idGroupArtifactHistory SERIAL PRIMARY KEY, ")
                 .append("donation INTEGER NOT NULL, ")
-                .append("id_student INTEGER REFERENCES student(id_student), ")
-                .append("id_shop_group INTEGER REFERENCES shop_group(id_shop_group) ")
+                .append("idStudent INTEGER REFERENCES student(idStudent), ")
+                .append("date DATE NOT NULL DEFAULT CURRENT_DATE, ")
+                .append("idArtifactFundingGroup INTEGER REFERENCES artifactFundingGroup(idArtifactFundingGroup) ")
                 .append(");");
         return sb.toString();
     }
 
 
-    private String generateStatementTableArtifactHistory() {
+    private String generateStatementTablePersonalArtifactHistory() {
         StringBuilder sb = new StringBuilder();
         sb      .append("CREATE TABLE IF NOT EXISTS ")
-                .append("artifact_history")
+                .append("personalArtifactHistory")
                 .append(" ( ")
-                .append("id_artifact_history SERIAL PRIMARY KEY, ")
-                .append("id_student INTEGER REFERENCES student(id_student), ")
-                .append("id_artifact INTEGER REFERENCES artifact(id_artifact), ")
-                .append("is_used BOOLEAN NOT NULL DEFAULT FALSE ")
+                .append("idPersonalArtifactHistory SERIAL PRIMARY KEY, ")
+                .append("idStudent INTEGER REFERENCES student(idStudent), ")
+                .append("idArtifact INTEGER REFERENCES artifact(idArtifact), ")
+                .append("cost INTEGER, ")
+                .append("date DATE NOT NULL DEFAULT CURRENT_DATE, ")
+                .append("isUsed BOOLEAN NOT NULL DEFAULT FALSE ")
                 .append(");");
         return sb.toString();
     }
@@ -77,11 +81,12 @@ final class TablesCreator {
     private String generateStatementTableQuestsHistory() {
         StringBuilder sb = new StringBuilder();
         sb      .append("CREATE TABLE IF NOT EXISTS ")
-                .append("quest_history")
+                .append("questHistory")
                 .append(" ( ")
-                .append("id_quest_history SERIAL PRIMARY KEY, ")
-                .append("id_student INTEGER REFERENCES student(id_student), ")
-                .append("id_quest INTEGER REFERENCES quest(id_quest), ")
+                .append("idQuestHistory SERIAL PRIMARY KEY, ")
+                .append("idStudent INTEGER REFERENCES student(idStudent), ")
+                .append("idQuest INTEGER REFERENCES quest(idQuest), ")
+                .append("date DATE NOT NULL DEFAULT CURRENT_DATE, ")
                 .append("status TEXT ")
                 .append(");");
         return sb.toString();
@@ -92,11 +97,11 @@ final class TablesCreator {
         sb      .append("CREATE TABLE IF NOT EXISTS ")
                 .append("quest")
                 .append(" ( ")
-                .append("id_quest SERIAL PRIMARY KEY, ")
-                .append("quest_name TEXT UNIQUE NOT NULL, ")
-                .append("quest_description TEXT NOT NULL, ")
-                .append("quest_value INTEGER NOT NULL, ")
-                .append("id_quest_category INTEGER REFERENCES quest_category(id_quest_category) ")
+                .append("idQuest SERIAL PRIMARY KEY, ")
+                .append("questName TEXT UNIQUE NOT NULL, ")
+                .append("questDescription TEXT NOT NULL, ")
+                .append("questValue INTEGER NOT NULL, ")
+                .append("idQuestCategory INTEGER REFERENCES questCategory(idQuestCategory) ")
                 .append(");");
         return sb.toString();
 
@@ -107,11 +112,11 @@ final class TablesCreator {
         sb      .append("CREATE TABLE IF NOT EXISTS ")
                 .append("artifact")
                 .append(" ( ")
-                .append("id_artifact SERIAL PRIMARY KEY, ")
-                .append("artifact_name TEXT NOT NULL UNIQUE, ")
-                .append("artifact_description TEXT, ")
-                .append("artifact_cost INTEGER NOT NULL, ")
-                .append("id_artifact_category INTEGER REFERENCES artifact_category(id_artifact_category) ")
+                .append("idArtifact SERIAL PRIMARY KEY, ")
+                .append("artifactName TEXT NOT NULL UNIQUE, ")
+                .append("artifactDescription TEXT, ")
+                .append("currentArtifactCost INTEGER NOT NULL, ")
+                .append("idArtifactCategory INTEGER REFERENCES artifactCategory(idArtifactCategory) ")
                 .append(");");
         return sb.toString();
 
@@ -120,11 +125,11 @@ final class TablesCreator {
     private String generateStatementTableQuestCategory() {
         StringBuilder sb = new StringBuilder();
         sb      .append("CREATE TABLE IF NOT EXISTS ")
-                .append("quest_category")
+                .append("questCategory")
                 .append(" ( ")
-                .append("id_quest_category SERIAL PRIMARY KEY, ")
-                .append("quest_category_description TEXT NOT NULL UNIQUE, ")
-                .append("is_group_quest BOOLEAN ")
+                .append("idQuestCategory SERIAL PRIMARY KEY, ")
+                .append("questCategoryDescription TEXT NOT NULL UNIQUE, ")
+                .append("isGroupQuest BOOLEAN ")
                 .append(");");
         return sb.toString();
     }
@@ -132,11 +137,11 @@ final class TablesCreator {
     private String generateStatementTableArtifactCategory() {
         StringBuilder sb = new StringBuilder();
         sb      .append("CREATE TABLE IF NOT EXISTS ")
-                .append("artifact_category")
+                .append("artifactCategory")
                 .append(" ( ")
-                .append("id_artifact_category SERIAL PRIMARY KEY, ")
-                .append("artifact_category_description TEXT NOT NULL UNIQUE, ")
-                .append("is_group_artifact BOOLEAN ")
+                .append("idArtifactCategory SERIAL PRIMARY KEY, ")
+                .append("artifactCategoryDescription TEXT NOT NULL UNIQUE, ")
+                .append("isGroupArtifact BOOLEAN ")
                 .append(");");
         return sb.toString();
     }
@@ -146,9 +151,9 @@ final class TablesCreator {
         sb      .append("CREATE TABLE IF NOT EXISTS ")
                 .append("mentor_class")
                 .append(" ( ")
-                .append("id_mentor INTEGER REFERENCES mentor(id_mentor), ")
-                .append("id_class INTEGER REFERENCES class(id_class), ")
-                .append("PRIMARY KEY (id_mentor, id_class) ")
+                .append("idMentor INTEGER REFERENCES mentor(idMentor), ")
+                .append("idClass INTEGER REFERENCES class(idClass), ")
+                .append("PRIMARY KEY (idMentor, idClass) ")
                 .append(");");
         return sb.toString();
     }
@@ -158,12 +163,12 @@ final class TablesCreator {
         sb      .append("CREATE TABLE IF NOT EXISTS ")
                 .append("student")
                 .append(" ( ")
-                .append("id_student SERIAL PRIMARY KEY, ")
-                .append("git_hub_adress TEXT, ")
-                .append("coolcoins INTEGER NOT NULL, ")
-                .append("xp_points INTEGER NOT NULL, ")
-                .append("id_user INTEGER REFERENCES users(id_user), ")
-                .append("id_class INTEGER REFERENCES class(id_class) ")
+                .append("idStudent SERIAL PRIMARY KEY, ")
+                .append("gitHubAdress TEXT, ")
+                .append("coolcoins INTEGER NOT NULL DEFAULT 0,")
+                .append("xpPoints INTEGER NOT NULL DEFAULT 0,")
+                .append("idUser INTEGER REFERENCES users(idUser), ")
+                .append("idClass INTEGER REFERENCES class(idClass) ")
                 .append(");");
         return sb.toString();
     }
@@ -171,10 +176,10 @@ final class TablesCreator {
     private String generateStatementTableCodecoolRole() {
         StringBuilder sb = new StringBuilder();
         sb      .append("CREATE TABLE IF NOT EXISTS ")
-                .append("codecool_role")
+                .append("codecoolRole")
                 .append(" ( ")
-                .append("id_codecool_role SERIAL PRIMARY KEY, ")
-                .append("role_description TEXT UNIQUE")
+                .append("idCodecoolRole SERIAL PRIMARY KEY, ")
+                .append("roleDescription TEXT UNIQUE")
                 .append(");");
         return sb.toString();
     }
@@ -184,14 +189,14 @@ final class TablesCreator {
         sb      .append("CREATE TABLE IF NOT EXISTS ")
                 .append("users")
                 .append(" ( ")
-                .append("id_user SERIAL PRIMARY KEY, ")
-                .append("user_surname TEXT NOT NULL, ")
-                .append("user_name TEXT NOT NULL, ")
-                .append("user_email TEXT UNIQUE, ")
-                .append("user_login TEXT UNIQUE, ")
+                .append("idUser SERIAL PRIMARY KEY, ")
+                .append("userSurname TEXT NOT NULL, ")
+                .append("userName TEXT NOT NULL, ")
+                .append("userEmail TEXT UNIQUE, ")
+                .append("userLogin TEXT UNIQUE, ")
                 .append("salt INTEGER, ")
-                .append("user_password TEXT NOT NULL, ")
-                .append("role_id INTEGER REFERENCES codecool_role(id_codecool_role)")
+                .append("userPassword TEXT NOT NULL, ")
+                .append("idCodecoolRole INTEGER REFERENCES codecoolRole(idCodecoolRole)")
                 .append(" );");
         return sb.toString();
     }
@@ -202,9 +207,9 @@ final class TablesCreator {
         sb      .append("CREATE TABLE IF NOT EXISTS ")
                 .append("mentor")
                 .append(" ( ")
-                .append("id_mentor SERIAL PRIMARY KEY, ")
-                .append("mentor_address TEXT, ")
-                .append("id_user INTEGER REFERENCES users(id_user)")
+                .append("idMentor SERIAL PRIMARY KEY, ")
+                .append("mentorAddress TEXT, ")
+                .append("idUser INTEGER REFERENCES users(idUser)")
                 .append(");");
         return sb.toString();
     }
@@ -215,8 +220,8 @@ final class TablesCreator {
         sb      .append("CREATE TABLE IF NOT EXISTS ")
                 .append("class")
                 .append(" ( ")
-                .append("id_class SERIAL PRIMARY KEY, ")
-                .append("class_description TEXT ") //todo: maybe change that name to class_name?
+                .append("idClass SERIAL PRIMARY KEY, ")
+                .append("classDescription TEXT ")
                 .append(");");
         return sb.toString();
 
@@ -235,9 +240,9 @@ final class TablesCreator {
         db.executeUpdate(generateStatementTableArtifact());
         db.executeUpdate(generateStatementTableQuest());
         db.executeUpdate(generateStatementTableQuestsHistory());
-        db.executeUpdate(generateStatementTableArtifactHistory());
-        db.executeUpdate(generateStatementTableShopGroup());
-        db.executeUpdate(generateStatementTableGroupHistory());
+        db.executeUpdate(generateStatementTablePersonalArtifactHistory());
+        db.executeUpdate(generateStatementTableGroupArtifactFunding());
+        db.executeUpdate(generateStatementTableGroupArtifactHistory());
         db.executeUpdate(generateStatementTableLevelChart());
 
     }
