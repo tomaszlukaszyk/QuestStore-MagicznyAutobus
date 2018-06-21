@@ -1,6 +1,6 @@
 package com.codecool.queststore.dbcreation;
 
-import com.codecool.queststore.dao.PostgreDBC;
+import com.codecool.queststore.dao.interfaces.PostgreDBC;
 
 import java.sql.SQLException;
 import java.sql.*;

@@ -165,8 +165,6 @@ final class TablesCreator {
                 .append(" ( ")
                 .append("idStudent SERIAL PRIMARY KEY, ")
                 .append("gitHubAdress TEXT, ")
-                .append("coolcoins INTEGER NOT NULL DEFAULT 0,")
-                .append("xpPoints INTEGER NOT NULL DEFAULT 0,")
                 .append("idUser INTEGER REFERENCES users(idUser), ")
                 .append("idClass INTEGER REFERENCES class(idClass) ")
                 .append(");");
