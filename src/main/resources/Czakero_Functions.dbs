@@ -1,0 +1,68 @@
+
+    CREATE OR REPLACE FUNCTION createMentor (surname TEXT, name TEXT, email TEXT, login TEXT, password TEXT, address TEXT) RETURNS void AS $$
+    DECLARE
+    idrole INTEGER;
+    iduser INTEGER;
+    BEGIN
+ SELECT idcodecoolrole FROM codecoolrole WHERE roledescription = 'mentor' INTO idrole;
+ INSERT INTO users (usersurname, username, useremail, userlogin, userpassword, idcodecoolrole)
+ VALUES (surname, name, email, login, password, idrole);
+ SELECT iduser FROM users WHERE useremail = email INTO iduser;
+ INSERT INTO mentor (mentoraddress, iduser)
+ VALUES (address, iduser);
+ END;
+ $$ LANGUAGE plpgsql;
+
+ CREATE OR REPLACE FUNCTION createArtifact (name TEXT, description TEXT, cost INTEGER, isgroup BOOLEAN) RETURNS void AS $$
+ DECLARE idcategory INTEGER;
+ BEGIN
+ SELECT idartifactcategory FROM artifactcategory WHERE isgroupartifact = isgroup LIMIT 1 INTO idcategory;
+ INSERT INTO artifact (artifactname, artifactdescription, currentartifactcost, idartifactcategory)
+ VALUES (name, description, cost, idcategory);
+ END;
+ $$ LANGUAGE plpgsql;
+
+ CREATE OR REPLACE FUNCTION createQuest (name TEXT, description TEXT, value INTEGER, isgroup BOOLEAN) RETURNS void AS $$
+ DECLARE
+ idcategory INTEGER;
+ BEGIN
+ SELECT idquestcategory FROM questcategory WHERE isgroupquest = isgroup LIMIT 1 INTO idcategory;
+ INSERT INTO quest (questname, questdescription, questvalue, idquestcategory)
+ VALUES (name, description, value, idcategory);
+ END;
+ $$ LANGUAGE plpgsql;
+
+ CREATE OR REPLACE FUNCTION editMentor (mentorid INTEGER, email TEXT, tochangeclassid INTEGER, newclassid INTEGER) RETURNS void AS $$
+ DECLARE userid INTEGER;
+ BEGIN
+ UPDATE mentor_class
+ SET idclass = newclassid
+ WHERE idmentor = mentorid AND idclass = tochangeclassid;
+ SELECT iduser FROM mentor WHERE idmentor = mentorid INTO userid;
+ UPDATE users
+ SET useremail = email
+ WHERE iduser = userid;
+ END;
+ $$ LANGUAGE plpgsql;
+
+ CREATE OR REPLACE FUNCTION sumQuestsGainForStudent (id INTEGER) RETURNS INTEGER AS $$
+ BEGIN
+ RETURN (SELECT COALESCE(SUM(quest.questvalue), 0) FROM questhistory JOIN quest ON questhistory.idquest = quest.idquest WHERE idstudent = id);
+ END;
+ $$ LANGUAGE plpgsql;
+ CREATE OR REPLACE FUNCTION sumArtifactsCostForStudent (id INTEGER) RETURNS INTEGER AS $$
+ BEGIN
+ RETURN (SELECT COALESCE(SUM(personalartifacthistory.cost), 0) FROM personalartifacthistory WHERE idstudent = id);
+ END;
+ $$ LANGUAGE plpgsql;
+
+ CREATE OR REPLACE FUNCTION showWallet (id INTEGER) RETURNS INTEGER AS $$
+ BEGIN
+ RETURN (SELECT sumQuestsGainForStudent(id) - sumArtifactsCostForStudent(id) FROM student WHERE idstudent = id);
+ END;
+ $$ LANGUAGE plpgsql;
+ CREATE OR REPLACE FUNCTION showStudentsWallets () RETURNS TABLE (StudentId INTEGER, Wallet INTEGER) AS $$
+ BEGIN
+ RETURN QUERY (SELECT idstudent, showWallet(idstudent) FROM student);
+ END;
+ $$ LANGUAGE plpgsql;
