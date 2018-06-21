@@ -25,17 +25,17 @@ class FunctionsCreator {
         }
     }
 
-    private void dumpDbScriptsFromFileToStringB(List<String> paths, DbHandler db) throws SQLException {
+    private void dumpDbScriptsFromFileToStringB(List<String> fileName, DbHandler db) throws SQLException {
 
-        for (String path: paths) {
-            db.executeUpdate(" "+ loadDbScript(path).toString() + " ");
+        for (String filePath: fileName) {
+            db.executeUpdate(" "+ loadDbScript(filePath).toString() + " ");
         }
 
     }
 
-    private StringBuilder loadDbScript(String path) {
+    private StringBuilder loadDbScript(String filePath) {
         StringBuilder result = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader(DIR + path))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(DIR + filePath))) {
             for (String line; (line = br.readLine()) != null; ) {
                 result.append(" " + line + " ");
             }
@@ -57,9 +57,5 @@ class FunctionsCreator {
             System.out.println("Error. while trying to load " + DIR + FILE);
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-        new FunctionsCreator().start();
     }
 }
