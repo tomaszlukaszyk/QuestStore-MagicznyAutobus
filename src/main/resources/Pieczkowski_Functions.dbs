@@ -13,10 +13,10 @@
  END;
  $$ LANGUAGE plpgsql;
 
- CREATE OR REPLACE FUNCTION createStudent(userSurname text, username text, useremail text, userlogin text, userpass text, idrole integer, githubacc text)
+ CREATE OR REPLACE FUNCTION createStudent(userSurname text, username text, useremail text, userlogin text, userpass text, githubacc text)
  RETURNS void AS $$
  BEGIN
- INSERT INTO student(githubadress, coolcoins, xppoints, iduser) VALUES (githubacc, 0, 0, createUser(userSurname, username, useremail, userlogin, userpass, idrole));
+ INSERT INTO student(githubadress, iduser) VALUES (githubacc, createUser(userSurname, username, useremail, userlogin, userpass, 3));
  END;
  $$ LANGUAGE plpgsql;
 
