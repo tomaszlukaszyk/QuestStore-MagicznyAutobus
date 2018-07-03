@@ -104,7 +104,7 @@ footer a:link, footer a:visited, nav a:link, nav a:visited, footer a:focus {
 nav {
     display: flex;
     flex-direction: column;
-    width: 10%;
+    width: auto;
     border-right: 2px lime dashed;
     
 }
