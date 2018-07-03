@@ -1,0 +1,49 @@
+
+h1 {
+    display: flex;
+    justify-content: center;
+}
+
+.contener {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em;
+}
+
+.student-view {
+    display: none;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 1em;
+}
+.mentor-view {
+    display: none;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 1em;
+}
+
+.content-box {
+    display: flex;
+    flex-flow: column nowrap;
+    border: 0.1em solid;
+    padding: 1em;
+    background: black;
+    }
+
+div.content-box span {
+    font-weight: bold;
+    }
+h1 {
+    padding-top: 0.5em;
+    width: 100%;
+    border-top: 2px lime  dashed;
+}
+
+.buttonBar {
+    display: flex;
+    justify-content: flex-end;
+}
