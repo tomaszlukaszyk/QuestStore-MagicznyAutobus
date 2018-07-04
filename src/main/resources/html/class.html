@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Class</title>
+        <!--style sheet ref-->
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="classStyle.css">
+        <script src="../javascript/scripts.js"></script>
+    </head>
+    
+    <body>
+        <!--header-->
+        <header include="header.html"></header>
+        <div class="contener">
+            <!--nav bar-->
+            <nav include="navigation.html"></nav>
+            
+            <div class="content">
+                <div class="column">
+                    <p>Assigned mentors</p>
+                    <span id="list-mentor">
+                        <ol class="list">
+                            <li>Bartosz Baron</li>
+                        </ol>
+                    </span>
+                </div>
+                <div class="column">
+                    <p>Students</p>
+                    <span id="list-student">
+                        <ol class="list">
+                            <li>Ala Kot</li>
+                            <li>Jan Kowalski</li>
+                            <li>Janusz Nowak</li>
+                        </ol>
+                    </span>
+                </div>
+                <div class="column">
+                    <p>Classes</p>
+                    <span id="list-class">
+                        <ol class="list">
+                            <li>2018-01</li>
+                            <li>2018-02</li>
+                            <li>2018-03</li>
+                        </ol>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <h1><span id="class-name">Class description</span></h1>        
+        <!--footer-->
+        <footer include="footer.html"></footer>
+        <script>includeHTML();</script>        
+    </body>
+</html>
