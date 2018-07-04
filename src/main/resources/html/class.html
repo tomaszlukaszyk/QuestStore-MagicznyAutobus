@@ -11,6 +11,8 @@
     </head>
     
     <body>
+            
+        <script>setDot("class1");</script>
         <!--header-->
         <header include="header.html"></header>
         <div class="contener">
@@ -20,37 +22,45 @@
             <div class="content">
                 <div class="column">
                     <p>Assigned mentors</p>
-                    <span id="list-mentor">
-                        <ol class="list">
-                            <li>Bartosz Baron</li>
-                        </ol>
-                    </span>
+                    <span id="list-mentor"></span>
                 </div>
                 <div class="column">
                     <p>Students</p>
-                    <span id="list-student">
-                        <ol class="list">
-                            <li>Ala Kot</li>
-                            <li>Jan Kowalski</li>
-                            <li>Janusz Nowak</li>
-                        </ol>
-                    </span>
+                    <span id="list-student"></span>
                 </div>
                 <div class="column">
                     <p>Classes</p>
-                    <span id="list-class">
-                        <ol class="list">
-                            <li>2018-01</li>
-                            <li>2018-02</li>
-                            <li>2018-03</li>
-                        </ol>
+                    <span class="classes" id="list-class">
+                            <p id="class1" onclick="showDetails('class1')">2018-1</p>
+                            <p id="class2" onclick="showDetails('class2')">2018-2</p>
+                            <p id="class3" onclick="showDetails('class3')">2018-3</p>
                     </span>
                 </div>
             </div>
         </div>
-        <h1><span id="class-name">Class description</span></h1>        
+        <h1><span id="class-name">Classes</span></h1>        
         <!--footer-->
         <footer include="footer.html"></footer>
         <script>includeHTML();</script>        
+        <script>
+            function showDetails(id) {
+                var className = document.getElementById(id);
+                var mentors = document.getElementById("list-mentor");
+                var students = document.getElementById("list-student");
+                
+                var class_ = className.textContent;
+                
+                if (class_ == "2018-1") {
+                    students.innerHTML = "<ul class='list'><li>Barbara Kat</li><li>Jakub Marmol</li><li>Pawel Laska</li></ul>";
+                    mentors.innerHTML = "<ul class='list'><li>Bartosz Baron</li></ul>"
+                } else if (class_ == "2018-2") {
+                    students.innerHTML = "<ul class='list'><li>Katarzyna Brzydal</li><li>Ludwik Fajka</li></ul>";
+                    mentors.innerHTML = "<ul class='list'><li>Bartosz Baron</li></ul>"
+                } else if (class_ == "2018-3") {
+                    students.innerHTML = "<ul class='list'><li>Ala Kot</li><li>Jan Kowalski</li><li>Janusz Nowak</li></ul>";
+                    mentors.innerHTML = "<ul class='list'><li>Bartosz Baron</li></ul>"
+                }
+            }
+        </script>
     </body>
 </html>

@@ -21,7 +21,17 @@
     border: 2px lime solid;
 }
 
-p {
+.classes {
+    display: flex;
+    flex-flow: column nowrap;
+    padding-left: 10%;
+}
+
+.column .classes p {
+    border-bottom-style: none;
+}
+
+.column p {
     display: flex;
     justify-content: center;
     padding-bottom: 0.5em;
@@ -34,4 +44,8 @@ h1 {
     padding-top: 0.5em;
     width: 100;
     border-top: 2px lime  dashed;
+}
+
+ul {
+    list-style-type: none;
 }
