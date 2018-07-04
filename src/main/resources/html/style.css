@@ -27,14 +27,12 @@ header {
     margin-bottom: 0.5%;
     margin-left: 1%;
     border-radius: 50%;
-    width: 12%;
     filter: brightness(4);
 }
 
 #logout {
-    
     border-radius: 100%;
-    width: 5%;
+    width: 50%;
     filter: brightness(4);
     align-self: center;
     margin-right: 1%; 
@@ -42,6 +40,12 @@ header {
 
 header p {
     align-self: center;
+}
+
+header a {
+    width: 10%;
+    display: flex;
+    justify-content: center;
 }
 
 #informations {
@@ -106,7 +110,16 @@ nav {
     flex-direction: column;
     width: 10%;
     border-right: 2px lime dashed;
+    align-items: center;
+    padding-top: 10px;
     
+}
+nav a {
+    padding: 2px;
+    text-decoration: none;
+}
+nav a:hover {
+    text-decoration: underline
 }
 section {
     width: 100%;
