@@ -27,14 +27,12 @@ header {
     margin-bottom: 0.5%;
     margin-left: 1%;
     border-radius: 50%;
-    width: 12%;
     filter: brightness(4);
 }
 
 #logout {
-    
     border-radius: 100%;
-    width: 5%;
+    width: 50%;
     filter: brightness(4);
     align-self: center;
     margin-right: 1%; 
@@ -42,6 +40,12 @@ header {
 
 header p {
     align-self: center;
+}
+
+header a {
+    width: 10%;
+    display: flex;
+    justify-content: center;
 }
 
 #informations {
@@ -56,4 +60,71 @@ footer {
 
 footer p {
     text-align: center;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted white;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 150px;
+    background-color: black;
+    color: lime;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    
+}
+
+footer a:link, footer a:visited, nav a:link, nav a:visited, footer a:focus {
+    color: lime;
+    outline: 0;
+    border-bottom: none;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+    border-right: 2px lime dashed;
+    align-items: center;
+    padding-top: 10px;
+    
+}
+nav a {
+    padding: 2px;
+    text-decoration: none;
+}
+nav a:hover {
+    text-decoration: underline
+}
+section {
+    width: 100%;
+}
+#mid {
+    display: flex;
+    flex-direction: row;
 }
