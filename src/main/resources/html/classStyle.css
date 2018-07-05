@@ -4,7 +4,7 @@
     min-height: 58vh;
 }
 
-.content {
+#contentdiv {
     display: grid;
     grid-template-columns: 100%;
     grid-gap: 1em;
@@ -13,8 +13,7 @@
     padding-bottom: 1em;
     padding-right: 1em;
     grid-template-areas: "a";
-
-    }
+}
 .adminPanelContent {
     display: grid;
     grid-template-columns: 50%;
