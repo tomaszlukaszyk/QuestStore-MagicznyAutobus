@@ -2,14 +2,14 @@
     CREATE OR REPLACE FUNCTION createMentor (surname TEXT, name TEXT, email TEXT, login TEXT, password TEXT, address TEXT) RETURNS void AS $$
     DECLARE
     idrole INTEGER;
-    iduser INTEGER;
+    iduser_ INTEGER;
     BEGIN
  SELECT idcodecoolrole FROM codecoolrole WHERE roledescription = 'mentor' INTO idrole;
  INSERT INTO users (usersurname, username, useremail, userlogin, userpassword, idcodecoolrole)
  VALUES (surname, name, email, login, password, idrole);
- SELECT iduser FROM users WHERE useremail = email INTO iduser;
+ SELECT iduser FROM users WHERE useremail = email INTO iduser_;
  INSERT INTO mentor (mentoraddress, iduser)
- VALUES (address, iduser);
+ VALUES (address, iduser_);
  END;
  $$ LANGUAGE plpgsql;
 
