@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Class</title>
+        <!--style sheet ref-->
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="groupBuy.css">
+        <script src="../javascript/scripts.js"></script>
+    </head>
+    
+    <body>
+            
+        <script>setDot("class1");</script>
+        <!--header-->
+        <header include="header.html"></header>
+        <div class="contener">
+            <!--nav bar-->
+            <nav include="navigation.html"></nav>
+            
+            <div class="content">
+                <div class="column">
+                    <p>Status</p>
+                    <p>Target:<span id="target">20</span></p>
+                    <p>One person cost: <span id="fundarising">5</span></p>
+                    <p><button id="buy" onclick="">Buy</button></p>
+                </div>
+                <div class="column">
+                    <p>Students</p>
+                    <span id="list-student"></span>
+                    <ul class='list'>
+                        <li><label><input type="checkbox">Katarzyna Brzydal<span class="checkbox"></span></label></li>
+                        <li><label><input type="checkbox">Ludwik Fajka<span class="checkbox"></span></label></li>
+                        <li><label><input type="checkbox">Barbara Kat<span class="checkbox"></span></label></li>
+                        <li><label><input type="checkbox">Ala Kot<span class="checkbox"></span></label></li>
+                        <li><label><input type="checkbox">Jan Kowalski<span class="checkbox"></span></label></li>
+                        <li><label><input type="checkbox">Pawel Laska<span class="checkbox"></span></label></li>
+                        <li><label><input type="checkbox">Jakub Marmol<span class="checkbox"></span></label></li>
+                        <li><label><input type="checkbox">Janusz Nowak<span class="checkbox"></span></label></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <h1><span id="class-name">Classes</span></h1>        
+        <!--footer-->
+        <footer include="footer.html"></footer>
+        <script>includeHTML();</script>        
+    </body>
+</html>
