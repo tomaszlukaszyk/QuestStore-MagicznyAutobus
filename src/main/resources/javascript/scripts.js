@@ -31,5 +31,17 @@ function showContent() {
   var temp = document.getElementsByTagName("template")[0];
   var clon = temp.content.cloneNode(true);
   document.getElementById("informations").appendChild(clon);
-  
+};
+
+function showStudents(id){
+
+    var writeTo = document.getElementById("insert-student");
+    
+    if(id == "2018.1"){
+        writeTo.innerHTML = "2018.1<br>Ala Kot";
+    } else if (id == "2018.2"){
+        writeTo.innerHTML = "2018.2<br>Bob Budowniczy";
+    } else if (id == "2018.3"){
+        writeTo.innerHTML = "2018.3<br>Adam Małysz<br>Czaka Laka";
+    }
 };
