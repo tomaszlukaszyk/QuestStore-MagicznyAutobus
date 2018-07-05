@@ -13,6 +13,11 @@
     
 }
 
+.btnPanel {
+    display: flex;
+    justify-content: space-between;
+}
+
 .shopitems{
     display: flex;
     flex-flow: row wrap;
