@@ -13,6 +13,35 @@ body {
     flex-direction: column;
 }
 
+#loginform {    
+    text-align: center;
+    padding-top: 3em;
+}
+
+#loginform input {
+    padding: 1em;
+}
+
+#loginform button {
+    padding: 0.5em;
+    margin-top: 50px;
+}
+
+#loginpage {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 33% 33% 33%;
+    grid-template-areas: "a a a"
+                         "d b h"
+                         "c c c";
+}
+
+#logindiv {
+    grid-area: b;
+    border: 2px lime solid;
+    
+}
+
 header {
     display: flex;
     justify-content: space-between;
@@ -127,4 +156,8 @@ section {
 #mid {
     display: flex;
     flex-direction: row;
+}
+
+ul {
+    list-style-type: none;
 }
