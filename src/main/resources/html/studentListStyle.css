@@ -1,0 +1,57 @@
+
+.contener {
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    min-height: 58vh;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 2fr;
+    grid-template-areas: "name";
+    grid-gap: 1em;
+    padding-top: 1em; 
+    padding-left: 1em;
+    
+}
+
+.column {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    border: 2px lime solid;
+}
+
+
+.column p {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0.5em;
+    border-bottom: 2px lime  dashed;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.5em;
+    width: 100;
+    border-top: 2px lime  dashed;
+}
+
+#name {
+    grid-area: "name";
+}
+
+#form {
+    grid-area: "form";
+}
+
+.mentor {
+    display: none;
+}
+
+#student-add-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
