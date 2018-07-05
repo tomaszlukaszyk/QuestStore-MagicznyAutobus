@@ -1,0 +1,38 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <title>Admin Panel</title> 
+        <!--style sheet ref--> 
+        <link rel="stylesheet" href="style.css"> 
+        <link rel="stylesheet" href="classStyle.css"> 
+        <script src="../javascript/scripts.js"></script> 
+    </head>
+<body> 
+    <!--header--> 
+    <header include="header.html"></header>
+        <div class="contener"> 
+            <!--nav bar--> 
+            <nav id="nav" include="navigation.html"></nav>
+                <div class="adminPanelContent"> 
+                    <div id="adminPanel">
+                        <ul id="rankList">
+                            <li>Private</li>
+                            <li>Specialist</li>
+                            <li>Corporal</li>
+                            <li>Sergeant</li>
+                            <li>Captain</li>
+                            <li>Major</li>
+                            <li>Colonel</li>
+                            <li>General</li>
+                        </ul>
+                        <button onclick="adminViewPanel()">Admin panel view test</button>
+                    </div>
+                </div>             
+        </div> 
+    <!--footer-->
+    <footer include="footer.html"></footer>
+    <script>includeHTML();</script>
+    </body> 
+</html>
