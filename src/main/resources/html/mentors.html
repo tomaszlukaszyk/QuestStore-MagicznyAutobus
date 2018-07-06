@@ -1,0 +1,67 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <title>Mentors</title> 
+        <!--style sheet ref--> 
+        <link rel="stylesheet" href="style.css"> 
+        <link rel="stylesheet" href="classStyle.css"> 
+        <script src="../javascript/scripts.js"></script> 
+    </head>
+<body> 
+    <!--header--> 
+    <header include="header.html"></header>
+        <div class="contener"> 
+            <!--nav bar--> 
+            <nav include="navigation.html"></nav>
+                <div id="contentdiv"> 
+                    <div id="mentor-column" class="column"> 
+                        <h2>Mentors</h2> 
+                        <span id="list-mentor"> 
+                            <ol class="list"> 
+                                <li>Bartosz Baron</li>
+                            </ol> 
+                        </span>
+                    </div> 
+                    <button onclick="adminViewMentors()">Mentor view test</button> 
+                    <template>
+                        <div class="mentorform"> 
+                            <h2>Create Mentor</h2> 
+                            <form onkeyup="testIfFormIsEmpty('mentorinputs', 'mentorsubmitbutton')">
+                                <br><br>
+                                <label for="mentorsurname">Surname:</label>
+                                <br><br>
+                                <input type="text" class="mentorinputs" id="mentorsurname" name="mentorsurname" placeholder="Enter mentor surname">
+                                <br><br>
+                                <label for=mentor"name">Name:</label>
+                                <br><br>
+                                <input type="text" class="mentorinputs" id="mentorname" name="mentorname" placeholder="Enter mentor name">
+                                <br><br>
+                                <label for="mentoremail">E-mail:</label>
+                                <br><br>
+                                <input type="text" class="mentorinputs" id="mentoremail" name="mentoremail" placeholder="Enter mentor email">
+                                <br><br>
+                                <label for="mentorlogin">Login:</label>
+                                <br><br>
+                                <input type="text" class="mentorinputs" name="mentorlogin" placeholder="Enter mentor login">
+                                <br><br>
+                                <label for="mentorpassword">Password:</label>
+                                <br><br>
+                                <input type="text" class="mentorinputs" name="mentorpassword" placeholder="Enter mentor password">
+                                <br><br>
+                                <label for="mentoraddress">Address:</label>
+                                <br><br>
+                                <input type="text" class="mentorinputs" name="mentoraddress" placeholder="Enter mentor address">
+                                <br><br>
+                                <button id="mentorsubmitbutton" onclick="return checkMentorInputs()" disabled>SEND</button>
+                            </form> 
+                        </div>
+                    </template>
+                    </div>             
+        </div> 
+    <!--footer-->
+    <footer include="footer.html"></footer>
+    <script>includeHTML();</script>
+    </body> 
+</html>
