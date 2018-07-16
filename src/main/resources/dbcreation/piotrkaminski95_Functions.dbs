@@ -1,0 +1,66 @@
+
+create or replace function showmentorprofile (email_ text)
+returns table (
+    name_ text,
+    surname text,
+    email text,
+    adress text
+) AS 
+$$
+begin
+    return query
+    select username, usersurname, useremail, mentoraddress 
+    from mentor join users on users.iduser = mentor.iduser
+    where useremail=email_;
+end;
+$$ language plpgsql;
+
+create or replace function markQuest (idstudent_ integer, idquest_ integer)
+returns void as
+$$
+begin
+    update questhistory set status='accepted' 
+    where idquest=idquest_ and idstudent=idstudent_ and status!='accepted';
+end;
+$$ language plpgsql;
+
+create or replace function buypersonalartifact(idartifact_ int, idstudent_ int)
+returns void as
+$$
+declare 
+artifactcost int = (
+    select currentartifactcost
+    from artifact
+    where idartifact=idartifact_
+);
+begin
+    insert into personalartifacthistory(idartifact, idstudent, cost) values (idartifact_, idstudent_, artifactcost);
+end;
+$$ language plpgsql;
+
+create or replace function addexplevel(leveltitle_ text)
+returns void as
+$$
+begin
+    insert into levelchart(leveltitle) values (leveltitle_);
+end;
+$$ language plpgsql;
+
+create or replace function verifyexplevel(exppoints int)
+returns int as
+$$
+declare 
+    explevel int = 1;
+    power2 int = 1;
+    x int = 1;
+    n int = 2; 
+begin
+    if exppoints = 1 then return 1; end if;
+    while x < exppoints loop
+        explevel = explevel + 1;
+        x = power(n, power2);
+        power2 = power2 + 1;        
+    end loop;
+    return explevel - 1;
+end;
+$$ language plpgsql;
