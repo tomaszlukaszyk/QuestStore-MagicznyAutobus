@@ -28,7 +28,7 @@ class FunctionsCreator {
     private void dumpDbScriptsFromFileToStringB(List<String> fileName, DbHandler db) throws SQLException {
 
         for (String filePath: fileName) {
-            db.executeUpdate(" "+ loadDbScript(filePath).toString() + " ");
+            db.executeUpdate(" " + loadDbScript(filePath).toString() + " ");
         }
 
     }
