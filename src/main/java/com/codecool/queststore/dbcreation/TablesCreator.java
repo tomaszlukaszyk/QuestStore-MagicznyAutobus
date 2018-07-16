@@ -101,6 +101,8 @@ final class TablesCreator {
                 .append("questName TEXT UNIQUE NOT NULL, ")
                 .append("questDescription TEXT NOT NULL, ")
                 .append("questValue INTEGER NOT NULL, ")
+                .append("image TEXT NOT NULL, ")
+                .append("image_marked TEXT NOT NULL, ")
                 .append("idQuestCategory INTEGER REFERENCES questCategory(idQuestCategory) ")
                 .append(");");
         return sb.toString();
@@ -116,6 +118,8 @@ final class TablesCreator {
                 .append("artifactName TEXT NOT NULL UNIQUE, ")
                 .append("artifactDescription TEXT, ")
                 .append("currentArtifactCost INTEGER NOT NULL, ")
+                .append("image TEXT NOT NULL, ")
+                .append("image_marked TEXT NOT NULL, ")
                 .append("idArtifactCategory INTEGER REFERENCES artifactCategory(idArtifactCategory) ")
                 .append(");");
         return sb.toString();
@@ -222,7 +226,6 @@ final class TablesCreator {
                 .append("classDescription TEXT ")
                 .append(");");
         return sb.toString();
-
     }
 
     private void initializeDatabase(DbHandler db) throws SQLException {
@@ -244,5 +247,4 @@ final class TablesCreator {
         db.executeUpdate(generateStatementTableLevelChart());
 
     }
-
 }

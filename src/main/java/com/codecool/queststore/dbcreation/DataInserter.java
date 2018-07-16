@@ -82,7 +82,7 @@ public class DataInserter {
 //student 1
 
         sb      .append("    INSERT INTO users (userLogin, userPassword, userName, userSurname, userEmail, idCodecoolRole)\n")
-                .append("    VALUES ('test_student1', '123', 'Marry', 'sue', 'marry@sue.com', ")
+                .append("    VALUES ('testStudent1', '123', 'Marry', 'sue', 'marry@sue.com', ")
                 .append("(SELECT idCodecoolRole from codecoolRole where roleDescription = 'student' LIMIT 1));\n")
                 .append("\n")
                 .append("INSERT INTO student (idUser, gitHubAdress, idClass) VALUES\n" +
@@ -91,7 +91,7 @@ public class DataInserter {
 //student2
 
         sb      .append("    INSERT INTO users (userLogin, userPassword, userName, userSurname, userEmail, idCodecoolRole)\n")
-                .append("    VALUES ('test_student2', '123', 'Mark', 'Tfre', 'ma@tue.com', ")
+                .append("    VALUES ('testStudent2', '123', 'Mark', 'Tfre', 'ma@tue.com', ")
                 .append("(SELECT idCodecoolRole from codecoolRole where roleDescription = 'student' LIMIT 1));\n")
                 .append("\n")
                 .append("INSERT INTO student (idUser, gitHubAdress, idClass) VALUES\n" +
@@ -104,7 +104,7 @@ public class DataInserter {
         StringBuilder sb = new StringBuilder();
         sb
                 .append("    INSERT INTO artifactCategory (artifactCategoryDescription, isGroupArtifact)\n")
-                .append("    VALUES ('personal test category', FALSE), ('group test category', TRUE);");
+                .append("    VALUES ('personal', FALSE), ('group', TRUE);");
         return sb.toString();
     }
 
@@ -112,13 +112,13 @@ public class DataInserter {
     private String generateCreationStatementForArtifacts() {
         StringBuilder sb = new StringBuilder();
         sb
-                .append("    INSERT INTO artifact (artifactName, artifactDescription, currentArtifactCost, idArtifactCategory)\n")
-                .append("    VALUES ('test artifact personal', 'it does nothing', 1, ")
-                    .append("(SELECT idArtifactCategory from artifactCategory where artifactCategoryDescription = 'personal test category' LIMIT 1));\n");
+                .append("    INSERT INTO artifact (artifactName, artifactDescription, currentArtifactCost, image, image_marked, idArtifactCategory)\n")
+                .append("    VALUES ('test artifact personal', 'it does nothing', 1, 'image', 'image_m', ")
+                    .append("(SELECT idArtifactCategory from artifactCategory where artifactCategoryDescription = 'personal' LIMIT 1));\n");
         sb
-                .append("    INSERT INTO artifact (artifactName, artifactDescription, currentArtifactCost, idArtifactCategory)\n")
-                .append("    VALUES ('test artifact group', 'it does nothing', 10, ")
-                .append("(SELECT idArtifactCategory from artifactCategory where artifactCategoryDescription = 'group test category' LIMIT 1));\n");
+                .append("    INSERT INTO artifact (artifactName, artifactDescription, currentArtifactCost, image, image_marked, idArtifactCategory)\n")
+                .append("    VALUES ('test artifact group', 'it does nothing', 10, 'image2', 'image2_m', ")
+                .append("(SELECT idArtifactCategory from artifactCategory where artifactCategoryDescription = 'group' LIMIT 1));\n");
         return sb.toString();
     }
 
@@ -126,7 +126,7 @@ public class DataInserter {
         StringBuilder sb = new StringBuilder();
         sb
                 .append("    INSERT INTO questCategory (questCategoryDescription, isGroupQuest)\n")
-                .append("    VALUES ('personal test category', FALSE), ('group test category', TRUE);");
+                .append("    VALUES ('personal', FALSE), ('group', TRUE);");
         return sb.toString();
     }
 
@@ -134,13 +134,13 @@ public class DataInserter {
     private String generateCreationStatementForQuests() {
         StringBuilder sb = new StringBuilder();
         sb
-                .append("    INSERT INTO quest (questName, questDescription, questValue, idQuestCategory)\n")
-                .append("    VALUES ('test quest personal', 'it does nothing', 1, ")
-                .append("(SELECT idQuestCategory from questCategory where questCategoryDescription = 'personal test category' LIMIT 1));\n");
+                .append("    INSERT INTO quest (questName, questDescription, questValue, image, image_marked, idQuestCategory)\n")
+                .append("    VALUES ('test quest personal', 'it does nothing', 1, 'image3','image3_marked',")
+                .append("(SELECT idQuestCategory from questCategory where questCategoryDescription = 'personal' LIMIT 1));\n");
         sb
-                .append("    INSERT INTO quest (questName, questDescription, questValue, idQuestCategory)\n")
-                .append("    VALUES ('test quest group', 'it does nothing', 10, ")
-                .append("(SELECT idQuestCategory from questCategory where questCategoryDescription = 'group test category' LIMIT 1));\n");
+                .append("    INSERT INTO quest (questName, questDescription, questValue,image, image_marked, idQuestCategory )\n")
+                .append("    VALUES ('test quest group', 'it does nothing', 10, 'image4','image4_marked',")
+                .append("(SELECT idQuestCategory from questCategory where questCategoryDescription = 'group' LIMIT 1));\n");
         return sb.toString();
     }
 
