@@ -1,0 +1,156 @@
+/*common style*/
+.main {
+    height: 100%;
+    all: unset;
+    background-color: black;
+    color: lime;
+    font-family: Courier;
+    font-weight: bold;
+    min-height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+
+/*header style*/
+header {
+    display: flex;
+    justify-content: space-between;
+    flex-basis: 100%;
+    margin-top: 1%;
+    border-top: 2px lime dashed;
+    border-bottom: 2px lime dashed;
+    height: 20%;
+}
+
+header p {
+    align-self: center;
+}
+
+header a {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+}
+
+#informations {
+    display: flex;
+    flex-direction: column;
+}
+
+#logo {
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+    margin-left: 1%;
+    border-radius: 50%;
+    filter: brightness(4);
+}
+
+#logout {
+    border-radius: 100%;
+    width: 50%;
+    filter: brightness(4);
+    align-self: center;
+    margin-right: 1%; 
+}
+
+
+/*navigation bar style*/
+nav {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 10%;
+    width: auto;
+    border-right: 2px lime dashed;
+    align-items: center;
+    padding-top: 10px;
+    
+}
+nav a {
+    padding: 2px;
+    text-decoration: none;
+}
+nav a:hover {
+    text-decoration: underline
+}
+
+
+/*content contener style*/
+.contener {
+    display: flex;
+    flex-basis: 89%;
+}
+
+
+/*footer style*/
+footer {
+    position: absolute;
+    bottom: 0px;
+    flex-shrink: 0;
+    width: 100%;
+    border-top: 2px lime dashed;
+    background: inherit;
+}
+
+footer p {
+    text-align: center;
+}
+
+
+footer a:link, footer a:visited, nav a:link, nav a:visited, footer a:focus {
+    color: lime;
+    outline: 0;
+    border-bottom: none;
+}
+
+
+/*class content style*/
+.class-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1em;
+    padding-top: 1em; 
+    padding-left: 1em;
+    padding-bottom: 1em;
+    padding-right: 1em;
+    grid-template-areas: "a";
+    width: 100%;
+}
+
+.class-column {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    border: 2px lime solid;
+}
+
+.classes {
+    display: flex;
+    flex-flow: column nowrap;
+    padding-left: 10%;
+}
+
+.class-column .classes p {
+    border-bottom-style: none;
+}
+
+.class-column p {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0.5em;
+    border-bottom: 2px lime  dashed;
+}
+p {
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.5em;
+    width: 100%;
+    border-top: 2px lime  dashed;
+}
+
+ul {
+    list-style-type: none;
+}

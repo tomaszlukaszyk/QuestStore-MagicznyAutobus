@@ -1,11 +1,13 @@
 
+/*
 .contener {
     display: grid;
     grid-template-columns: 1fr 10fr;
     min-height: 58vh;
 }
+*/
 
-.content {
+.content-groupBuy {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 10%;
@@ -15,26 +17,28 @@
     
 }
 
-.content input {
+.content-groupBuy input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
 }
 
-.column {
+.column-groupBuy {
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
     border: 2px lime solid;
 }
 
+/*
 .classes {
     display: flex;
     flex-flow: column nowrap;
     padding-left: 10%;
 }
+*/
 
-.column p {
+.column-groupBuy p {
     display: flex;
     justify-content: center;
     padding-bottom: 0.5em;
@@ -49,14 +53,14 @@
     background-color: black;
 }
 
-/* On mouse-over, add a grey background color */
+/* On mouse-over, add a black background color */
 .content:hover input ~ .checkbox {
-    background-color: lime;
+    background-color: black;
 }
 
-/* When the checkbox is checked, add a blue background */
+/* When the checkbox is checked, add a lime background */
 .content input:checked ~ .checkbox {
-    background-color: black;
+    background-color: lime;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -69,6 +73,7 @@
 /* Show the checkmark when checked */
 .content input:checked ~ .checkbox:after {
     display: block;
+    background-color: lime;
 }
 
 /* Style the checkmark/indicator */
@@ -76,6 +81,7 @@
     padding-left: 2.5px;
     position: fixed;
     border-width: 0 3px 3px 0;
+    background-color: lime;
 }
 
 h1 {

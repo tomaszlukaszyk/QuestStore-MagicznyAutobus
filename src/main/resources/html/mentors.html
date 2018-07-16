@@ -6,17 +6,18 @@
         <title>Mentors</title> 
         <!--style sheet ref--> 
         <link rel="stylesheet" href="style.css"> 
-        <link rel="stylesheet" href="classStyle.css"> 
+<!--        <link rel="stylesheet" href="classStyle.css"> -->
         <script src="../javascript/scripts.js"></script> 
     </head>
-<body> 
-    <!--header--> 
-    <header include="header.html"></header>
-        <div class="contener"> 
+    <body> 
+        <div class="main">
+            <!--header--> 
+            <header include="header.html"></header>
             <!--nav bar--> 
             <nav include="navigation.html"></nav>
-                <div id="contentdiv"> 
-                    <div id="mentor-column" class="column"> 
+            <div class="contener"> 
+                <div class="content-admin" id="contentdiv"> 
+                    <div id="mentor-column" class="list-column"> 
                         <h2>Mentors</h2> 
                         <span id="list-mentor"> 
                             <ol class="list"> 
@@ -26,7 +27,7 @@
                     </div> 
                     <button onclick="adminViewMentors()">Mentor view test</button> 
                     <template>
-                        <div class="mentorform"> 
+                        <div class="edit-form"> 
                             <h2>Create Mentor</h2> 
                             <form onkeyup="testIfFormIsEmpty('mentorinputs', 'mentorsubmitbutton')">
                                 <br><br>
@@ -34,7 +35,7 @@
                                 <br><br>
                                 <input type="text" class="mentorinputs" id="mentorsurname" name="mentorsurname" placeholder="Enter mentor surname">
                                 <br><br>
-                                <label for=mentor"name">Name:</label>
+                                <label for="mentorname">Name:</label>
                                 <br><br>
                                 <input type="text" class="mentorinputs" id="mentorname" name="mentorname" placeholder="Enter mentor name">
                                 <br><br>
@@ -58,10 +59,11 @@
                             </form> 
                         </div>
                     </template>
-                    </div>             
-        </div> 
-    <!--footer-->
-    <footer include="footer.html"></footer>
-    <script>includeHTML();</script>
+                </div>             
+            </div> 
+            <!--footer-->
+            <footer include="footer.html"></footer>
+            <script>includeHTML();</script>
+        </div>
     </body> 
 </html>

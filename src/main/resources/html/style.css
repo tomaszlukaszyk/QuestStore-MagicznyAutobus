@@ -1,54 +1,57 @@
 html {
-    height: 100%;
+    background-color: black;
 }
 
-body {
-    all: unset;
+/*common style*/
+.main {
     background-color: black;
     color: lime;
     font-family: Courier;
     font-weight: bold;
-    min-height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-flow: row wrap;
+    height: 100%;
 }
 
-#loginform {    
-    text-align: center;
-    padding-top: 3em;
-}
 
-#loginform input {
-    padding: 1em;
-}
-
-#loginform button {
-    padding: 0.5em;
-    margin-top: 50px;
-}
-
-#loginpage {
-    display: grid;
-    grid-template-columns: 33% 33% 33%;
-    grid-template-rows: 33% 33% 33%;
-    grid-template-areas: "a a a"
-                         "d b h"
-                         "c c c";
-}
-
-#logindiv {
-    grid-area: b;
+button {
+    background: black;
+    color: lime;
     border: 2px lime solid;
-    
 }
 
+h1 {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.5em;
+    width: 100%;
+    border-top: 2px lime  dashed;
+}
+
+
+/*header style*/
 header {
     display: flex;
     justify-content: space-between;
-    margin-top: 1%;
+    flex-basis: auto;
     border-top: 2px lime dashed;
     border-bottom: 2px lime dashed;
     height: 20%;
+}
+
+header p {
+    align-self: center;
+}
+
+header a {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+}
+
+#informations {
+    display: flex;
+    flex-direction: column;
 }
 
 #logo {
@@ -67,21 +70,37 @@ header {
     margin-right: 1%; 
 }
 
-header p {
-    align-self: center;
-}
 
-header a {
-    width: 10%;
-    display: flex;
-    justify-content: center;
-}
-
-#informations {
+/*navigation bar style*/
+nav {
     display: flex;
     flex-direction: column;
+    flex-basis: 10%;
+    border-right: 2px lime dashed;
+    align-items: center;
+    padding-top: 10px;
 }
+nav a {
+    padding: 2px;
+    text-decoration: none;
+}
+nav a:hover {
+    text-decoration: underline
+}
+
+
+/*content contener style*/
+.contener {
+    display: flex;
+    flex-basis: 89%;
+}
+
+
+/*footer style*/
 footer {
+    background-color: inherit;
+    position: absolute;
+    bottom: 0px;
     flex-shrink: 0;
     width: 100%;
     border-top: 2px lime dashed;
@@ -89,6 +108,13 @@ footer {
 
 footer p {
     text-align: center;
+}
+
+
+footer a:link, footer a:visited, nav a:link, nav a:visited, footer a:focus {
+    color: lime;
+    outline: 0;
+    border-bottom: none;
 }
 
 .tooltip {
@@ -128,36 +154,172 @@ footer p {
     
 }
 
-footer a:link, footer a:visited, nav a:link, nav a:visited, footer a:focus {
-    color: lime;
-    outline: 0;
-    border-bottom: none;
-}
 
-nav {
-    display: flex;
-    flex-direction: column;
-    width: auto;
-    border-right: 2px lime dashed;
-    align-items: center;
-    padding-top: 10px;
-    
-}
-nav a {
-    padding: 2px;
-    text-decoration: none;
-}
-nav a:hover {
-    text-decoration: underline
-}
-section {
+/*class content style*/
+.class-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1em;
+    padding-top: 1em; 
+    padding-left: 1em;
+    padding-bottom: 1em;
+    padding-right: 1em;
+    grid-template-areas: "a";
     width: 100%;
 }
-#mid {
+
+.class-column {
     display: flex;
-    flex-direction: row;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    border: 2px lime solid;
+}
+
+.classes {
+    display: flex;
+    flex-flow: column nowrap;
+    padding-left: 10%;
+}
+
+.class-column .classes p {
+    border-bottom-style: none;
+}
+
+.class-column p {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0.5em;
+    border-bottom: 2px lime  dashed;
 }
 
 ul {
     list-style-type: none;
 }
+
+
+/*admin panel style*/
+.content-admin {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-gap: 1em;
+    padding-top: 1em; 
+    padding-left: 1em;
+    padding-bottom: 1em;
+    padding-right: 1em;
+    grid-template-areas: "a";
+}
+
+.adminPanelContent {
+    display: grid;
+    grid-template-columns: 50%;
+    grid-gap: 1em;
+    padding-top: 1em; 
+    padding-left: 1em;
+    padding-bottom: 1em;
+    padding-right: 1em;
+    justify-content: center;
+
+}
+
+#adminPanel {
+
+    border: 2px lime solid;
+    text-align: center;
+    padding-bottom: 5%;
+    padding-top: 5%;
+}
+
+
+#loginsubmitbutton {
+    visibility: hidden;
+}
+
+#rankList {
+    padding: 0;
+}
+
+
+/*mentor edit style*/
+.list-column {
+    grid-area: a;
+}
+
+.edit-form {
+    grid-area: b;
+    display: flex;
+    flex-flow: column nowrap;
+    border: 2px lime solid;
+
+}
+
+.edit-form form {
+    align-self: center;
+    text-align: center;
+    padding-bottom: 1em;
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0.5em;
+    border-bottom: 2px lime  dashed;
+}
+
+input {
+    border: 2px lime dotted;
+    padding: 2px 2px;
+    background: black;
+    text-align: center;
+    color: lime;
+}
+
+input::-moz-placeholder {
+    color: lime;
+    text-align: center;
+}
+
+#mentorsubmitbutton {
+    visibility: hidden;
+}
+
+
+/*profile style*/
+.content-profile {
+    display: flex;
+    justify-content: center;
+    flex-basis: 100%;
+    padding: 0.5em;
+}
+
+.profile-view {
+    padding-top: 2%;
+    display: none;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 5%;
+}
+
+.content-box {
+    display: flex;
+    flex-flow: column nowrap;
+    border: 0.1em solid;
+    padding: 1em;
+    background: black;
+    }
+
+div.content-box span {
+    font-weight: bold;
+    }
+h1 {
+    padding-top: 0.5em;
+    width: 100%;
+    border-top: 2px lime  dashed;
+}
+
+.buttonBar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+

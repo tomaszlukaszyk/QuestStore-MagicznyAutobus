@@ -122,6 +122,45 @@ function checkMentorInputs() {
     return true;
 }
 
+function showDetails(id) {
+    var className = document.getElementById(id);
+    var mentors = document.getElementById("list-mentor");
+    var students = document.getElementById("list-student");
+
+    var class_ = className.textContent;
+
+    if (class_ == "2018-1") {
+        students.innerHTML = "<ul class='list'><li>Barbara Kat</li><li>Jakub Marmol</li><li>Pawel Laska</li></ul>";
+        mentors.innerHTML = "<ul class='list'><li>Bartosz Baron</li></ul>"
+    } else if (class_ == "2018-2") {
+        students.innerHTML = "<ul class='list'><li>Katarzyna Brzydal</li><li>Ludwik Fajka</li></ul>";
+        mentors.innerHTML = "<ul class='list'><li>Bartosz Baron</li></ul>"
+    } else if (class_ == "2018-3") {
+        students.innerHTML = "<ul class='list'><li>Ala Kot</li><li>Jan Kowalski</li><li>Janusz Nowak</li></ul>";
+        mentors.innerHTML = "<ul class='list'><li>Bartosz Baron</li></ul>"
+    }
+}
+
+    function mentorIsHere(){
+        var content = document.getElementById("content");
+        var mentorVisible = document.getElementsByClassName("mentor");
+
+        for(var i=0; i < mentorVisible.length; i++){
+            mentorVisible[i].style.display = "flex";
+        }
+            content.setAttribute("style", "grid-template-areas:'name form';grid-template-columns: 2fr 2fr;");
+    };
+
+    function studentIsHere(){
+        var content = document.getElementById("content");
+        var mentorVisible = document.getElementsByClassName("mentor");
+
+        for(var i=0; i < mentorVisible.length; i++){
+            mentorVisible[i].style.display = "none";
+        }
+            content.setAttribute("style", "grid-template-areas:'name';grid-template-columns: 2fr;");
+    };
+
 
 function test() {
   alert("Logged in!");

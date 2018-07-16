@@ -6,101 +6,101 @@
         <title>Profile</title>
         <!--style sheet ref-->
         <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="profileStyle.css">
         <script src="../javascript/scripts.js"></script>
     </head>
     
     <body>
-        <!--header-->
-        <header include="header.html"></header>
-        <div class="contener">
+        <div class="main">
+            <!--header-->
+            <header include="header.html"></header>
             <!--nav bar-->
             <nav include="navigation.html"></nav>
-            <div class="content">
-                <!--Student view-->    
-                <div id="student-view" class="student-view">
-                    <div class="content-box">
-                        <p>Personal Data:</p>
-                        <span id="name">
-                            name: Ala
-                        </span>
+            <div class="contener">
+                <div class="content-profile">
+                    <!--Student view-->    
+                    <div id="student-view" class="profile-view">
+                        <div class="content-box">
+                            <p>Personal Data:</p>
+                            <span id="name">
+                                name: Ala
+                            </span>
 
-                        <span id="surname">
-                            surname: Kot
-                        </span>
+                            <span id="surname">
+                                surname: Kot
+                            </span>
 
-                        <span id="email">
-                            email: ala.kot@student.cc
-                        </span>
+                            <span id="email">
+                                email: ala.kot@student.cc
+                            </span>
 
-                        <span id="adress">
-                            gitHub Adress: www.github.com/ala
-                        </span>
+                            <span id="adress">
+                                gitHub Adress: www.github.com/ala
+                            </span>
+                        </div>
+
+                        <div class="content-box"> 
+                            <p>Class:</p>
+                            <span id="class">
+                                <br>2018.3
+                            </span>                
+                        </div>            
+
+                        <div class="content-box">
+                            <p>Backpack</p>
+                            <span>item1 amount: 25</span>
+                            <span>item2 amount: 5</span>
+                        </div>
                     </div>
 
-                    <div class="content-box"> 
-                        <p>Class:</p>
-                        <span id="class">
-                            <br>2018.3
-                        </span>                
-                    </div>            
+                    <!--Mentor view-->
+                    <div id="mentor-view" class="profile-view">            
+                        <div class="content-box">
 
-                    <div class="content-box">
-                        <p>Backpack</p>
-                        <span>item1 amount: 25</span>
-                        <span>item2 amount: 5</span>
-                    </div>
-                </div>
+                            <p>Personal Data:</p>
 
-                <!--Mentor view-->
-                <div id="mentor-view" class="mentor-view">            
-                    <div class="content-box">
-                        
-                        <p>Personal Data:</p>
-                        
-                        <span id="name">
-                            name: Bartosz
-                        </span>
+                            <span id="name">
+                                name: Bartosz
+                            </span>
 
-                        <span id="surname">
-                            surname: Baron
-                        </span>
-                        
-                        <span id="email">
-                            email: bartoszBaron@mentor.cc
-                        </span>
+                            <span id="surname">
+                                surname: Baron
+                            </span>
 
-                        <span id="adress">
-                            adress: Slusarska 9
-                        </span>
-                    </div>
+                            <span id="email">
+                                email: bartoszBaron@mentor.cc
+                            </span>
 
-                    <div class="content-box">
-                        <p>Class:</p>
-                        <span id="class">
-                            <span onclick="showStudents(2018.1)">2018.1</span><br>
-                            <span onclick="showStudents(2018.2)">2018.2</span><br>
-                            <span onclick="showStudents(2018.3)">2018.3</span>
-                        </span>                
-                    </div>            
+                            <span id="adress">
+                                adress: Slusarska 9
+                            </span>
+                        </div>
 
-                    <div class="content-box assigned-students">
-                        <p>Assigned students:</p>
-                        <span id="insert-student"></span>
+                        <div class="content-box">
+                            <p>Class:</p>
+                            <span id="class">
+                                <span onclick="showStudents(2018.1)">2018.1</span><br>
+                                <span onclick="showStudents(2018.2)">2018.2</span><br>
+                                <span onclick="showStudents(2018.3)">2018.3</span>
+                            </span>                
+                        </div>            
+
+                        <div class="content-box assigned-students">
+                            <p>Assigned students:</p>
+                            <span id="insert-student"></span>
+                        </div>
                     </div>
                 </div>
             </div>
+                <h1>Profile</h1>
+            <!--footer-->
+            <footer include="footer.html"></footer>
+        </div>        
+        <div class="buttonBar">
+            TEST VERSION
+            <button onclick="switchMentor()" >swichMentor</button>
+            <button onclick="switchStudent()" >switchStudent</button>
         </div>
-            <h1>Profile</h1>
-        <!--footer-->
-        <footer include="footer.html"></footer>
-        
-    <div class="buttonBar">
-        TEST VERSION
-        <button onclick="switchMentor()" >swichMentor</button>
-        <button onclick="switchStudent()" >switchStudent</button>
-    </div>
-    <script>includeHTML();</script>        
+        <script>includeHTML();</script>        
     </body>
     <script src="../javascript/hide-show-views.js"></script>
 </html>

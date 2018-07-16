@@ -1,35 +1,38 @@
+/*
 
 .contener {
     display: grid;
     grid-template-columns: 1fr 10fr;
     min-height: 58vh;
 }
+*/
 
-.content {
+.content-studentList {
+    width: 100%;
     display: grid;
-    grid-template-columns: 2fr;
-    grid-template-areas: "name";
+    grid-template-columns: 2fr 2fr;
+    grid-template-areas: 'name form';
     grid-gap: 1em;
     padding-top: 1em; 
     padding-left: 1em;
     
 }
 
-.column {
+.column-student {
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
-    border: 2px lime solid;
 }
 
 
-.column p {
+.column-student p {
     display: flex;
     justify-content: center;
     padding-bottom: 0.5em;
     border-bottom: 2px lime  dashed;
 }
 
+/*
 h1 {
     display: flex;
     justify-content: center;
@@ -37,9 +40,14 @@ h1 {
     width: 100;
     border-top: 2px lime  dashed;
 }
+*/
+
+#blank {
+    grid-area: "blank";
+}
 
 #name {
-    grid-area: "name";
+    grid-area: 'name';
 }
 
 #form {

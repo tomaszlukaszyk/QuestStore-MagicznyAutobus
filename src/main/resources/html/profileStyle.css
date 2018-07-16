@@ -4,26 +4,25 @@ h1 {
     justify-content: center;
 }
 
+/*
 .contener {
     display: grid;
     grid-template-columns: 1fr 5fr;
 }
+*/
 
-.content {
+.content-profile {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-basis: 100%;
     padding: 0.5em;
 }
 
-.student-view {
+.profile-view {
+    padding-top: 2%;
     display: none;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 1em;
-}
-.mentor-view {
-    display: none;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 1em;
+    grid-column-gap: 5%;
 }
 
 .content-box {
