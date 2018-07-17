@@ -11,8 +11,19 @@ import java.sql.SQLException;
 
 public class LoginDAO  implements ConnectionInterface {
 
-    public void validation(String userName, String password) throws SQLException {
+    private final static int USER_ID = 1;
+
+    public int validation(String userName, String password) throws SQLException {
+        int result = 0;
         Connection conn = cp.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("SELECT validation(?, ?)");
+        stmt.setString(1, userName);
+        stmt.setString(2, password);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            result = rs.getInt(USER_ID);
+        }
+        return result;
 
     }
 
