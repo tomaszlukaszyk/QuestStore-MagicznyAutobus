@@ -1,8 +1,5 @@
 package com.codecool.queststore.DAO;
 
-
-import com.codecool.queststore.model.user.User;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +13,7 @@ public class LoginDAO  implements ConnectionInterface {
     public int validation(String userName, String password) throws SQLException {
         int result = 0;
         Connection conn = cp.getConnection();
+        cp.printDbStatus();
         PreparedStatement stmt = conn.prepareStatement("SELECT validation(?, ?)");
         stmt.setString(1, userName);
         stmt.setString(2, password);
@@ -23,8 +21,12 @@ public class LoginDAO  implements ConnectionInterface {
         while (rs.next()) {
             result = rs.getInt(USER_ID);
         }
-        return result;
+        rs.close();
+        stmt.close();
+        conn.close();
+        cp.printDbStatus();
 
+        return result;
     }
 
 }
