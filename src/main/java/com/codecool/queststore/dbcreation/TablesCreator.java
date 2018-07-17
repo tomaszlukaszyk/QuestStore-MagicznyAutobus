@@ -103,7 +103,7 @@ final class TablesCreator {
                 .append("questValue INTEGER NOT NULL, ")
                 .append("image TEXT NOT NULL, ")
                 .append("image_marked TEXT NOT NULL, ")
-                .append("idQuestCategory INTEGER REFERENCES questCategory(idQuestCategory) ")
+                .append("idQuestCategory INTEGER REFERENCES questCategory(idQuestCategory)")
                 .append(");");
         return sb.toString();
 
@@ -229,7 +229,6 @@ final class TablesCreator {
     }
 
     private void initializeDatabase(DbHandler db) throws SQLException {
-
         db.executeUpdate(generateStatementTableCodecoolRole());
         db.executeUpdate(generateStatementTableUsers());
         db.executeUpdate(generateStatementTableMentor());
