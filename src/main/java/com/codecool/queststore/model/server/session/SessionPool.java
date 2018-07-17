@@ -8,10 +8,10 @@ public class SessionPool implements Serializable {
 
     private static Set<Session> sessions = new HashSet<>();
 
-    public static Session getNewSession() {
+    public static Session getNewSession(int userId) {
         Session newSession;
         do {
-         newSession= new Session();
+         newSession= new Session(userId);
         } while (sessions.contains(newSession));
         sessions.add(newSession);
         return newSession;

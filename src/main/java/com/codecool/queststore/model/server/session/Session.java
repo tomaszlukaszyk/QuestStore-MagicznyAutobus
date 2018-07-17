@@ -9,10 +9,12 @@ import java.util.UUID;
 public class Session implements Serializable {
 
     private final UUID uuid;
+    private final int USER_ID;
     private final LocalDateTime expirationDate = LocalDateTime.now().plusHours(4);
 
-    Session () {
+    Session (int userId) {
         this.uuid = UUID.randomUUID();
+        this.USER_ID = userId;
     }
 
     @Override
@@ -31,6 +33,10 @@ public class Session implements Serializable {
 
     UUID getUuid() {
         return uuid;
+    }
+
+    public int getUSER_ID() {
+        return USER_ID;
     }
 
     public HttpCookie getCookie() {
