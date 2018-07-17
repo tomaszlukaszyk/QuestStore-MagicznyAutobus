@@ -14,7 +14,7 @@ public class User {
         this.ID = id;
     }
 
-    public int getWallet() {
+    public Integer getWallet() {
         //todo: Implement using UserDAO
         //if role is student ->
         //return studentDAO->getwallet;
