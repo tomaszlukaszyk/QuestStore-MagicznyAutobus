@@ -187,3 +187,9 @@ begin
     return explevel - 1;
 end;
 $$ language plpgsql;
+
+CREATE OR REPLACE FUNCTION validation(userNamee TEXT, password TEXT) RETURNS INTEGER AS $$
+BEGIN
+RETURN (SELECT iduser FROM users WHERE userlogin = userNamee AND userpassword = password);
+END;
+$$ LANGUAGE plpgsql;
