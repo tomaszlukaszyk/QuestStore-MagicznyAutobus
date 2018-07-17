@@ -22,10 +22,9 @@ button {
 
 h1 {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     padding-top: 0.5em;
-    width: 100%;
-    border-top: 2px lime  dashed;
+    flex-basis: 100%
 }
 
 
@@ -51,7 +50,8 @@ header a {
 
 #informations {
     display: flex;
-    flex-direction: column;
+    flex-flow: column nowrap;
+    padding-left: 2%; 
 }
 
 #logo {
@@ -99,7 +99,7 @@ nav a:hover {
 /*footer style*/
 footer {
     background-color: inherit;
-    position: absolute;
+    position: sticky;
     bottom: 0px;
     flex-shrink: 0;
     width: 100%;
@@ -309,16 +309,58 @@ input::-moz-placeholder {
 
 div.content-box span {
     font-weight: bold;
-    }
-h1 {
-    padding-top: 0.5em;
-    width: 100%;
-    border-top: 2px lime  dashed;
 }
 
 .buttonBar {
     display: flex;
     justify-content: flex-end;
+}
+
+
+/*shop/quests style*/
+.content-shop {
+    display: grid;
+    grid-gap: 1em;
+    padding-top: 1em; 
+    padding-left: 1em;
+    
+}
+
+.btnPanel {
+    display: flex;
+    justify-content: space-around;
+}
+
+.shopitems{
+    display: flex;
+    flex-flow: row wrap;
+    align-content: center;
+    
+}
+
+.shopitem{
+    flex-basis: 40%;
+    margin: 3%; 
+    
+}
+
+.column-shop {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.classes {
+    display: flex;
+    flex-flow: column nowrap;
+    padding-left: 10%;
+}
+
+.shopitem img {
+    width: 100%;
+    filter: brightness(2);
+}
+.column .classes p {
+    border-bottom-style: none;
 }
 
 

@@ -45,41 +45,41 @@
 }
 
 .checkbox {
-    position: fixed;
+    position: absolute;
     height: 15px;
     width: 15px;
     border: 1px lime solid;
-    border-radius: 50%;
+    border-radius: 0%;
     background-color: black;
 }
 
 /* On mouse-over, add a black background color */
-.content:hover input ~ .checkbox {
+.content-groupBuy:hover input ~ .checkbox {
     background-color: black;
 }
 
 /* When the checkbox is checked, add a lime background */
-.content input:checked ~ .checkbox {
+.content-groupBuy input:checked ~ .checkbox {
     background-color: lime;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkbox:after {
     content: "";
-    position: fixed;
     display: none;
 }
 
 /* Show the checkmark when checked */
-.content input:checked ~ .checkbox:after {
+.content-groupBuy input:checked ~ .checkbox:after {
+    position: absolute;
     display: block;
     background-color: lime;
 }
 
 /* Style the checkmark/indicator */
-.content .checkbox:after {
-    padding-left: 2.5px;
-    position: fixed;
+.content-groupBuy .checkbox:after {
+    position: absolute;
+    padding-left: 3px;
     border-width: 0 3px 3px 0;
     background-color: lime;
 }
