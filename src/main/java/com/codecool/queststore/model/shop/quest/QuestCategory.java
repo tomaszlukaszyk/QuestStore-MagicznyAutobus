@@ -2,8 +2,8 @@ package com.codecool.queststore.model.shop.quest;
 
 public enum QuestCategory {
 
-    SIMPLE ("simple"),
-    SPECIAL("special");
+    SIMPLE ("basic"),
+    SPECIAL("extra");
 
     private final String CATEGORY;
     QuestCategory(String name) {

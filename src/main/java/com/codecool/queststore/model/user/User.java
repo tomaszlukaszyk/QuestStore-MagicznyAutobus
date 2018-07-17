@@ -14,28 +14,4 @@ public class User {
         this.ID = id;
     }
 
-    public Integer getWallet() {
-        //todo: Implement using UserDAO
-        //if role is student ->
-        //return studentDAO->getwallet;
-        //else
-        return null;
-    }
-
-    public String getTitle() {
-        //todo: Implement using UserDAO
-        //if role is student ->
-        //return ""; as above
-        //else
-        return null;
-    }
-
-    public String getAddress() {
-        //todo: Implement using UserDAO
-        //if user is student or mentor ->
-        //return ""; as above
-        //else
-        return null;
-    }
-
 }

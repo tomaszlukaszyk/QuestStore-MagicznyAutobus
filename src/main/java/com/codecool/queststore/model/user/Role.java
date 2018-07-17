@@ -4,7 +4,7 @@ public enum Role {
 
     MENTOR ("mentor"),
     STUDENT("student"),
-    ADMIN("admin");
+    ADMIN("creepy guy");
 
     private final String NAME;
     Role(String name) {
