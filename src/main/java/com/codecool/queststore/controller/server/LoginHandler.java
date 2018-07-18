@@ -42,7 +42,7 @@ public class LoginHandler implements HttpHandler {
         if (cookieStr == null || SessionPool.getSessionbyUUID(UUID.fromString(HttpCookie.parse(cookieStr).get(0).getValue())) == null) {
             // send login page and if method request is POST add cookie etc
             System.out.println("sending login page");
-            String path = "html/index.html";
+            String path = "html/index_test.html";
             URL fileURL = getClass().getClassLoader().getResource(path);
             sendFile(httpExchange, fileURL);
         } else {
