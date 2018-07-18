@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Student List</title>
+        <!--style sheet ref-->
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="studentListStyle.css">
+        <script src="../javascript/scripts.js"></script>
+    </head>
+    
+    <body>
+        <!--header-->
+        <header include="header.html"></header>
+        <div class="contener">
+            <!--nav bar-->
+            <nav include="navigation.html"></nav>
+            
+            <div class="content" id="content">
+                <!-- student sees this colum -->
+                <div class="column" id="name">
+                    <p>Student</p>
+                    <span id="insert-name"></span>
+                </div>
+                <!-- mentor also sees form to add student -->
+                <div class="column mentor" id="form">
+                    <p>Add student</p>
+                    <form onkeyup="testIfMentorFormEmpty()" id="student-add-form">
+                        <label for="student-surname">Surname:</label>
+                        <input type="text" id="student-surname" name="student-surname" class="required-input" placeholder="Enter student's surname">
+                        
+                        <label for="student-name">Name:</label>
+                        <input type="text" id="student-name" name="student-name" class="required-input" placeholder="Enter student's name">
+                    
+                        <label for="student-email">E-mail:</label>
+                        <input type="text" id="student-email" name="student-email" class="required-input" placeholder="Enter student's email">
+                    
+                        <label for="student-login">Login:</label>
+                        <input type="text" id="student-login" name="student-login"class="required-input" placeholder="Enter student's login">
+                    
+                        <label for="student-password">Password:</label>
+                        <input type="text" id="student-password" name="student-password" class="required-input" placeholder="Enter student password">
+                    
+                        <button id="student-submit-button" onclick="return checkFields()" disabled>SEND</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <h1><span id="students-name">Students</span></h1> 
+        <!-- buttons for student/mentor views -->
+        <button class="button-mentor" onclick="mentorIsHere()">Mentor is here</button>
+        <button class="student-mentor" onclick="studentIsHere()">Student is here</button>
+        <!--footer-->
+        <footer include="footer.html"></footer>
+        <script>includeHTML();</script>        
+
+
+        <!-- js scripts that should be moved to script file -->
+        <script>
+            function mentorIsHere(){
+                var content = document.getElementById("content");
+                var mentorVisible = document.getElementsByClassName("mentor");
+
+                for(var i=0; i < mentorVisible.length; i++){
+                    mentorVisible[i].style.display = "flex";
+                }
+                    content.setAttribute("style", "grid-template-areas:'name form';grid-template-columns: 2fr 2fr;");
+            };
+
+            function studentIsHere(){
+                var content = document.getElementById("content");
+                var mentorVisible = document.getElementsByClassName("mentor");
+
+                for(var i=0; i < mentorVisible.length; i++){
+                    mentorVisible[i].style.display = "none";
+                }
+                    content.setAttribute("style", "grid-template-areas:'name';grid-template-columns: 2fr;");
+            };
+        </script>
+    </body>
+</html>

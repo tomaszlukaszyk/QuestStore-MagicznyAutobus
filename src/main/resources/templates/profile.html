@@ -1,0 +1,114 @@
+{% set headerData = headerData %}
+{% set data = data %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <!--style sheet ref-->
+    <link rel="stylesheet" href="/QuestStore-MagicznyAutobus/src/main/resources/static/css/style.css">
+    <script src="../javascript/scripts.js"></script>
+</head>
+
+<body>
+<div class="main">
+    <!--header-->
+    <header>{% include "header.html" with headerData %}</header>
+    <!--nav bar-->
+    <nav>{% include "navigation.html" ignore missing %}</nav>
+    <div class="contener">
+        <div class="content-profile">
+            <!--Student view-->
+            <!--<div id="student-view" class="profile-view">-->
+            {% if headerData.role == "student" %}
+                <div class="content-box">
+                    <p>Personal Data:</p>
+                    <span id="name">
+                                name: {{ headerData.hName }}
+                            </span>
+
+                    <span id="surname">
+                                surname: {{ headerData.hSurname }}
+                            </span>
+
+                    <span id="email">
+                                email: {{ data.email }}
+                            </span>
+
+                    <span id="adress">
+                                gitHub Address: {{ data.address }}
+                            </span>
+                </div>
+
+                <div class="content-box">
+                    <p>Class:</p>
+                    <span id="class">
+                                <br>{{ data.class }}
+                            </span>
+                </div>
+
+                <div class="content-box">
+                    <p>Backpack</p>
+                    {% for item in data.items %}
+                    <span>{{ item }}</span>
+                    {% endfor %}
+                </div>
+            <!--</div>-->
+            {% endif %}
+
+            {% if headerData.role == "mentor" %}
+            <!--Mentor view-->
+            <div id="mentor-view" class="profile-view">
+                <div class="content-box">
+
+                    <p>Personal Data:</p>
+
+                    <span id="name">
+                                name: {{ headerData.hName }}
+                            </span>
+
+                    <span id="surname">
+                                surname: {{ headerData.hSurname }}
+                            </span>
+
+                    <span id="email">
+                                email: {{ data.email }}
+                            </span>
+
+                    <span id="adress">
+                                address: {{ data.address }}
+                            </span>
+                </div>
+
+                <div class="content-box">
+                    <p>Class:</p>
+                    <span id="class">
+                        <ul>
+                            {% for class in data.classes %}
+                            <li><span>{{ class }}</span><br></li>
+                            {% endfor %}
+                        </ul>
+                    </span>
+                </div>
+
+                <div class="content-box assigned-students">
+                    <p>Assigned students:</p>
+                    <span id="insert-student">
+                        <ul>
+                            {% for student in data.students %}
+                            <li><span>{{ student }}</span></li>
+                            {% endfor %}
+                        </ul>
+                    </span>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <!--footer-->
+    <footer>{% include "footer.html" ignore missing %}</footer>
+    </div>
+</body>
+</html>
