@@ -42,7 +42,7 @@ final class TablesCreator {
                 .append(" ( ")
                 .append("idArtifactFundingGroup SERIAL PRIMARY KEY, ")
                 .append("groupDescription TEXT NOT NULL, ")
-                .append("idArtifact INTEGER REFERENCES artifact(idArtifact), ")
+                .append("idArtifact INTEGER REFERENCES artifact(idArtifact) ON DELETE CASCADE, ")
                 .append("cost INTEGER NOT NULL ")
                 .append(");");
         return sb.toString();
@@ -55,9 +55,9 @@ final class TablesCreator {
                 .append(" ( ")
                 .append("idGroupArtifactHistory SERIAL PRIMARY KEY, ")
                 .append("donation INTEGER NOT NULL, ")
-                .append("idStudent INTEGER REFERENCES student(idStudent), ")
+                .append("idStudent INTEGER REFERENCES student(idStudent) ON DELETE CASCADE, ")
                 .append("date DATE NOT NULL DEFAULT CURRENT_DATE, ")
-                .append("idArtifactFundingGroup INTEGER REFERENCES artifactFundingGroup(idArtifactFundingGroup) ")
+                .append("idArtifactFundingGroup INTEGER REFERENCES artifactFundingGroup(idArtifactFundingGroup) ON DELETE CASCADE")
                 .append(");");
         return sb.toString();
     }
@@ -69,8 +69,8 @@ final class TablesCreator {
                 .append("personalArtifactHistory")
                 .append(" ( ")
                 .append("idPersonalArtifactHistory SERIAL PRIMARY KEY, ")
-                .append("idStudent INTEGER REFERENCES student(idStudent), ")
-                .append("idArtifact INTEGER REFERENCES artifact(idArtifact), ")
+                .append("idStudent INTEGER REFERENCES student(idStudent) ON DELETE CASCADE, ")
+                .append("idArtifact INTEGER REFERENCES artifact(idArtifact) ON DELETE CASCADE,")
                 .append("cost INTEGER, ")
                 .append("date DATE NOT NULL DEFAULT CURRENT_DATE, ")
                 .append("isUsed BOOLEAN NOT NULL DEFAULT FALSE ")
@@ -84,8 +84,9 @@ final class TablesCreator {
                 .append("questHistory")
                 .append(" ( ")
                 .append("idQuestHistory SERIAL PRIMARY KEY, ")
-                .append("idStudent INTEGER REFERENCES student(idStudent), ")
-                .append("idQuest INTEGER REFERENCES quest(idQuest), ")
+                .append("idStudent INTEGER REFERENCES student(idStudent) ON DELETE CASCADE, ")
+                .append("idQuest INTEGER REFERENCES quest(idQuest) ON DELETE CASCADE, ")
+                .append("value INTEGER NOT NULL, ")
                 .append("date DATE NOT NULL DEFAULT CURRENT_DATE, ")
                 .append("status TEXT ")
                 .append(");");
@@ -155,8 +156,8 @@ final class TablesCreator {
         sb      .append("CREATE TABLE IF NOT EXISTS ")
                 .append("mentor_class")
                 .append(" ( ")
-                .append("idMentor INTEGER REFERENCES mentor(idMentor), ")
-                .append("idClass INTEGER REFERENCES class(idClass), ")
+                .append("idMentor INTEGER REFERENCES mentor(idMentor) ON DELETE CASCADE, ")
+                .append("idClass INTEGER REFERENCES class(idClass) ON DELETE CASCADE, ")
                 .append("PRIMARY KEY (idMentor, idClass) ")
                 .append(");");
         return sb.toString();
@@ -169,8 +170,8 @@ final class TablesCreator {
                 .append(" ( ")
                 .append("idStudent SERIAL PRIMARY KEY, ")
                 .append("gitHubAdress TEXT, ")
-                .append("idUser INTEGER REFERENCES users(idUser), ")
-                .append("idClass INTEGER REFERENCES class(idClass) ")
+                .append("idUser INTEGER REFERENCES users(idUser) ON DELETE CASCADE, ")
+                .append("idClass INTEGER REFERENCES class(idClass) ON DELETE CASCADE")
                 .append(");");
         return sb.toString();
     }
@@ -211,7 +212,7 @@ final class TablesCreator {
                 .append(" ( ")
                 .append("idMentor SERIAL PRIMARY KEY, ")
                 .append("mentorAddress TEXT, ")
-                .append("idUser INTEGER REFERENCES users(idUser)")
+                .append("idUser INTEGER REFERENCES users(idUser) ON DELETE CASCADE")
                 .append(");");
         return sb.toString();
     }
