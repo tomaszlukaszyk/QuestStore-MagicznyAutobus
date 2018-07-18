@@ -11,10 +11,10 @@ import java.net.InetSocketAddress;
 public class Server {
 
     private static SessionPool sessionPool = new SessionPool();
+    private HttpServer server;
 
     public void run() throws IOException {
-
-        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+        server = HttpServer.create(new InetSocketAddress(8000), 0);
         setContext(server);
         server.setExecutor(null);
         server.start();
@@ -22,8 +22,7 @@ public class Server {
 
     // Overload to run server on desired port
     public void run(int port) throws IOException {
-
-        HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
+        server = HttpServer.create(new InetSocketAddress(port), 0);
         setContext(server);
         server.setExecutor(null);
         server.start();
