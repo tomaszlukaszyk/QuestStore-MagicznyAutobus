@@ -2,7 +2,7 @@ package com.codecool.queststore.model.server;
 
 import com.codecool.queststore.controller.server.*;
 
-import com.codecool.queststore.model.server.session.SessionPool;
+import com.codecool.queststore.controller.server.TestHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -10,7 +10,6 @@ import java.net.InetSocketAddress;
 
 public class Server {
 
-    private static SessionPool sessionPool = new SessionPool();
     private HttpServer server;
 
     public void run() throws IOException {
@@ -30,14 +29,11 @@ public class Server {
 
     private void setContext(HttpServer server){
         server.createContext("/", new LoginHandler());
+        server.createContext("/profile", new TestHandler());
 
     }
 
     public void stop(){
         server.stop(0);
-    }
-
-    public static SessionPool getSessionPool() {
-        return sessionPool;
     }
 }

@@ -1,7 +1,7 @@
 package com.codecool.queststore.controller.server;
 
 import com.codecool.queststore.controller.server.helpers.MimeTypeResolver;
-import com.codecool.queststore.model.server.Server;
+import com.codecool.queststore.model.server.session.Session;
 import com.codecool.queststore.model.server.session.SessionPool;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -17,7 +17,6 @@ import java.util.UUID;
 
 public class LoginHandler implements HttpHandler {
 
-    SessionPool sessionPool = Server.getSessionPool();
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
@@ -28,20 +27,28 @@ public class LoginHandler implements HttpHandler {
             boolean password = true;
             if(password){
                 HttpCookie cookie = SessionPool.getNewSession().getCookie();
-                httpExchange.getResponseHeaders().add("Set-Cookie", cookie.toString());
+                System.out.println("generated cookie \\/");
+                System.out.println(cookie);
+                httpExchange.getResponseHeaders().add("Set-Cookie", cookie.toString()); // give user cookie
+
+                httpExchange.getResponseHeaders().set("Location", "profile");
+                httpExchange.sendResponseHeaders(302, -1); // execute redirect
+                return;
             }
         }
 
         String cookieStr = httpExchange.getRequestHeaders().getFirst("Cookie");
         // Check if cookie already exists and if it's UUID is contained by sessionPool
-        if (cookieStr == null || sessionPool.getSessionbyUUID(UUID.fromString(HttpCookie.parse(cookieStr).get(0).getValue())) == null) {
+        if (cookieStr == null || SessionPool.getSessionbyUUID(UUID.fromString(HttpCookie.parse(cookieStr).get(0).getValue())) == null) {
             // send login page and if method request is POST add cookie etc
-            System.out.println("test");
+            System.out.println("sending login page");
             String path = "html/index.html";
             URL fileURL = getClass().getClassLoader().getResource(path);
             sendFile(httpExchange, fileURL);
         } else {
-            // redirect
+            System.out.println("redirecting");
+            httpExchange.getResponseHeaders().set("Location", "profile");
+            httpExchange.sendResponseHeaders(302, -1);
         }
     }
 
@@ -54,14 +61,13 @@ public class LoginHandler implements HttpHandler {
 
         httpExchange.getResponseHeaders().set("Content-Type", mime);
         httpExchange.sendResponseHeaders(200, 0);
-
         OutputStream os = httpExchange.getResponseBody();
 
         // send the file
         FileInputStream fs = new FileInputStream(file);
         final byte[] buffer = new byte[0x10000];
         int count = 0;
-        while ((count = fs.read(buffer)) >= 0) {
+        while ((count = fs.read(buffer))>= 0) {
             os.write(buffer, 0, count);
         }
         os.close();

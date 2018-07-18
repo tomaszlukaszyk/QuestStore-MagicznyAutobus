@@ -18,11 +18,11 @@ public class SessionPool implements Serializable {
     }
 
 
-    public void terminate(Session session) {
+    private static void terminate(Session session) {
         sessions.remove(session);
     }
 
-    public Session getSessionbyUUID( UUID uuid)
+    public static Session getSessionbyUUID( UUID uuid)
     {
         expireCheckAndClean();
         for (Session session: sessions) {
@@ -34,10 +34,10 @@ public class SessionPool implements Serializable {
         return null;
     }
 
-    private void expireCheckAndClean() {
+    private static void expireCheckAndClean() {
         for(Session session: sessions)
         {
-            if(session.getExpirationDate().isAfter(LocalDateTime.now()))
+            if(session.getExpirationDate().isBefore(LocalDateTime.now()))
                 terminate(session);
         }
     }
