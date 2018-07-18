@@ -14,23 +14,34 @@ import java.net.HttpCookie;
 import java.net.URL;
 import java.util.UUID;
 
+
 public class LoginHandler implements HttpHandler {
 
     SessionPool sessionPool = Server.getSessionPool();
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
+
+        // checks user input after using login form
+        if(httpExchange.getRequestMethod().equals("POST")){
+            // check DB for user and password
+            boolean password = true;
+            if(password){
+                HttpCookie cookie = SessionPool.getNewSession().getCookie();
+                httpExchange.getResponseHeaders().add("Set-Cookie", cookie.toString());
+            }
+        }
+
         String cookieStr = httpExchange.getRequestHeaders().getFirst("Cookie");
-
         // Check if cookie already exists and if it's UUID is contained by sessionPool
-        if (cookieStr != null || sessionPool.getSessionbyUUID(UUID.fromString(HttpCookie.parse(cookieStr).get(0).getValue())) != null) {
-            // redirect further
-        } else {
+        if (cookieStr == null || sessionPool.getSessionbyUUID(UUID.fromString(HttpCookie.parse(cookieStr).get(0).getValue())) == null) {
             // send login page and if method request is POST add cookie etc
-
-            /** String path = "html/login.html";
-             URL fileURL = getClass().getClassLoader().getResource(path);
-             sendFile(httpExchange, fileURL); **/
+            System.out.println("test");
+            String path = "html/index.html";
+            URL fileURL = getClass().getClassLoader().getResource(path);
+            sendFile(httpExchange, fileURL);
+        } else {
+            // redirect
         }
     }
 
