@@ -32,19 +32,6 @@
  END;
  $$ LANGUAGE plpgsql;
 
- CREATE OR REPLACE FUNCTION editMentor (mentorid INTEGER, email TEXT, tochangeclassid INTEGER, newclassid INTEGER) RETURNS void AS $$
- DECLARE userid INTEGER;
- BEGIN
- UPDATE mentor_class
- SET idclass = newclassid
- WHERE idmentor = mentorid AND idclass = tochangeclassid;
- SELECT iduser FROM mentor WHERE idmentor = mentorid INTO userid;
- UPDATE users
- SET useremail = email
- WHERE iduser = userid;
- END;
- $$ LANGUAGE plpgsql;
-
  CREATE OR REPLACE FUNCTION sumQuestsGainForStudent (id INTEGER) RETURNS INTEGER AS $$
  BEGIN
  RETURN (SELECT COALESCE(SUM(quest.questvalue), 0) FROM questhistory JOIN quest ON questhistory.idquest = quest.idquest WHERE idstudent = id);
@@ -81,10 +68,10 @@
  END;
  $$ LANGUAGE plpgsql;
 
- CREATE OR REPLACE FUNCTION createStudent(userSurname text, username text, useremail text, userlogin text, userpass text, githubacc text)
+ CREATE OR REPLACE FUNCTION createStudent(userSurname text, username text, useremail text, userlogin text, userpass text, githubacc text, classid integer)
  RETURNS void AS $$
  BEGIN
- INSERT INTO student(githubadress, iduser) VALUES (githubacc, createUser(userSurname, username, useremail, userlogin, userpass, 3));
+ INSERT INTO student(githubadress, iduser, idclass) VALUES (githubacc, createUser(userSurname, username, useremail, userlogin, userpass, 3), classid);
  END;
  $$ LANGUAGE plpgsql;
 
@@ -121,22 +108,6 @@ UPDATE quest SET questvalue = newcost
 WHERE questid = idquest;
 END;
 $updatedartifact$ LANGUAGE plpgsql;
-
-create or replace function showmentorprofile (email_ text)
-returns table (
-    name_ text,
-    surname text,
-    email text,
-    adress text
-) AS 
-$$
-begin
-    return query
-    select username, usersurname, useremail, mentoraddress 
-    from mentor join users on users.iduser = mentor.iduser
-    where useremail=email_;
-end;
-$$ language plpgsql;
 
 create or replace function markQuest (idstudent_ integer, idquest_ integer)
 returns void as
@@ -188,8 +159,77 @@ begin
 end;
 $$ language plpgsql;
 
-CREATE OR REPLACE FUNCTION validation(userNamee TEXT, password TEXT) RETURNS INTEGER AS $$
+CREATE OR REPLACE FUNCTION validation(login TEXT, password TEXT) RETURNS INTEGER AS $$
 BEGIN
-RETURN (SELECT iduser FROM users WHERE userlogin = userNamee AND userpassword = password);
+RETURN (SELECT iduser FROM users WHERE userlogin = login AND userpassword = password);
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getMentor(userid INTEGER) RETURNS TABLE (name_ TEXT, surname TEXT, email TEXT, adress TEXT) AS $$
+BEGIN
+RETURN QUERY (SELECT username, usersurname, useremail, mentoraddress FROM mentor JOIN users ON users.iduser = mentor.iduser WHERE users.iduser = userid);
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getStudent(userid INTEGER) RETURNS TABLE (name_ TEXT, surname TEXT, email TEXT, github TEXT) AS $$
+BEGIN
+RETURN QUERY (SELECT username, usersurname, useremail, githubadress FROM student JOIN users ON users.iduser = student.iduser WHERE users.iduser = userid);
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION takeQuest(userid INTEGER, questid INTEGER) RETURNS VOID AS $$
+BEGIN
+INSERT INTO questhistory(idstudent, idquest, value, status)
+VALUES ((SELECT idstudent FROM student WHERE iduser = userid), questid, (SELECT questvalue FROM quest WHERE idquest = questid), 'IN PROGRESS');
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getExp(userid INTEGER) RETURNS INTEGER AS $$
+BEGIN
+RETURN (SELECT SUM(value) FROM questhistory WHERE idstudent = (SELECT idstudent FROM student WHERE iduser = userid) AND status LIKE 'DONE');
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION deleteUser(userid INTEGER) RETURNS VOID AS $$
+BEGIN
+DELETE FROM users WHERE iduser = userid;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION updateStudent(userid INTEGER, surname TEXT, name_ TEXT, email TEXT, login TEXT, pass TEXT, github TEXT) RETURNS VOID AS $$
+BEGIN
+UPDATE users
+SET usersurname = surname, username = name_, useremail = email, userlogin = login, userpassword = pass
+WHERE iduser = userid;
+UPDATE student
+SET githubadress = github
+WHERE iduser = userid;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION updateMentor(userid INTEGER, surname TEXT, name_ TEXT, email TEXT, login TEXT, pass TEXT, address TEXT) RETURNS VOID AS $$
+BEGIN
+UPDATE users
+SET usersurname = surname, username = name_, useremail = email, userlogin = login, userpassword = pass
+WHERE iduser = userid;
+UPDATE mentor
+SET mentoraddress = address
+WHERE iduser = userid;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION updateArtifact(artifactid INTEGER, name_ TEXT, description TEXT, value INTEGER, first_image TEXT, second_image TEXT) RETURNS VOID AS $$
+BEGIN
+UPDATE artifact
+SET artifactname = name_, artifactdescription = description, currentartifactcost = value, image = first_image, image_marked = second_image
+WHERE idartifact = artifactid;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION updateQuest(questid INTEGER, name_ TEXT, description TEXT, value INTEGER, first_image TEXT, second_image TEXT) RETURNS VOID AS $$
+BEGIN
+UPDATE quest
+SET questname = name_, questdescription = description, questvalue = value, image = first_image, image_marked = second_image
+WHERE idquest = questid;
 END;
 $$ LANGUAGE plpgsql;
