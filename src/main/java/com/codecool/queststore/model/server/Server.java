@@ -1,8 +1,8 @@
 package com.codecool.queststore.model.server;
 
-import com.codecool.queststore.controller.server.*;
-
-import com.codecool.queststore.controller.server.TestHandler;
+import com.codecool.queststore.controller.server.httphandler.LoginHandler;
+import com.codecool.queststore.controller.server.httphandler.TestHandler;
+import com.codecool.queststore.model.server.session.SessionPool;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -16,6 +16,7 @@ public class Server {
         server = HttpServer.create(new InetSocketAddress(8000), 0);
         setContext(server);
         server.setExecutor(null);
+        new SessionPool();
         server.start();
     }
 
