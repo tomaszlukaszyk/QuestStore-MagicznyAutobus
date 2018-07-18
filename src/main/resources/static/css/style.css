@@ -103,7 +103,7 @@ footer {
     position: sticky;
     bottom: 0px;
     flex-shrink: 0;
-    width: 100%;
+    flex-basis: 100%;
     border-top: 2px lime dashed;
 }
 
@@ -288,14 +288,17 @@ input::-moz-placeholder {
 /*profile style*/
 .content-profile {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex-basis: 100%;
-    padding: 0.5em;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 1%;
+    padding-bottom: 1%;
 }
 
 .profile-view {
     padding-top: 2%;
-    display: none;
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: 5%;
 }

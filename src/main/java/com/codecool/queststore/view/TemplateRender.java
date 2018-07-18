@@ -13,36 +13,39 @@ public class TemplateRender implements RenderInteface{
     @Override
     public String RenderClassPage() {
             Map<String, Object> data = getClassDataMap();
-            // collect data
-                String hName = (String) data.get("userName");
-                String hSurname = (String) data.get("userSurname");
-                String role = (String) data.get("userRole");
-                String rank = (String) data.get("rank");
-                String wallet = (String) data.get("wallet");
-                String title = "Class";
-                List classes = (List) data.get("classes");
-                List mentors = (List) data.get("mentors");
-                List students = (List) data.get("students");
+            String title = "Class";
 
-                // get a template file
-                JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
+            // get a template file
+            JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
 
-                // create a model that will be passed to a template
-                JtwigModel model = JtwigModel.newModel();
+            // create a model that will be passed to a template
+            JtwigModel model = JtwigModel.newModel();
 
-                // fill the model with values
-                model.with("hName", hName);
-                model.with("hSurname", hSurname);
-                model.with("role", role);
-                model.with("rank", rank);
-                model.with("wallet", wallet);
-                model.with("title", title);
-                model.with("classes", classes);
-                model.with("mentors", mentors);
-                model.with("students", students);
+            // fill the model with values
+            model.with("headerData", data.get("headerData"));
+            model.with("data", data);
+            model.with("title", title);
 
-                return template.render(model);
+            return template.render(model);
         }
+
+    public String RenderProfilePage() {
+        Map<String, Object> data = getProfileDataMap();
+        String title = "Class";
+
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
+
+        // create a model that will be passed to a template
+        JtwigModel model = JtwigModel.newModel();
+
+        // fill the model with values
+        model.with("headerData", data.get("headerData"));
+        model.with("data", data);
+        model.with("title", title);
+
+        return template.render(model);
+    }
 
     private Map<String,Object> getClassDataMap() {
         // mock data
@@ -62,11 +65,15 @@ public class TemplateRender implements RenderInteface{
 
 
         Map<String, Object> data = new HashMap<>();
-        data.put("userName", "Piotr");
-        data.put("userSurname", "Kaminski");
-        data.put("userRole", "mentor");
-        data.put("rank", "pro");
-        data.put("wallet", "1000");
+        Map<String, String> headerData = new HashMap<>();
+
+        headerData.put("hName", "Piotr");
+        headerData.put("hSurname", "Kaminski");
+        headerData.put("role", "student");
+        headerData.put("rank", "pro");
+        headerData.put("wallet", "1000");
+
+        data.put("headerData", headerData);
         data.put("classes", classes);
         data.put("mentors", mentors);
         data.put("students", students);
@@ -74,8 +81,48 @@ public class TemplateRender implements RenderInteface{
         return data;
     }
 
+    private Map<String,Object> getProfileDataMap() {
+        // mock data
+        List<String> classes = new ArrayList<>();
+        List<String> students = new ArrayList<>();
+//        List<String> items = new ArrayList<>();
+
+        classes.add("2018.1");
+        classes.add("2018.2");
+        classes.add("2018.3");
+//        for (int i= 0; i < 3; i++) {
+//            items.add("item " + Integer.toString(i));
+//        }
+
+        students.add("Piotr Kaminski");
+        students.add("Pawel Kaminski");
+        students.add("Jakub Marmol");
+
+
+        Map<String, Object> data = new HashMap<>();
+        Map<String, String> headerData = new HashMap<>();
+
+        headerData.put("hName", "Piotr");
+        headerData.put("hSurname", "Kaminski");
+        headerData.put("role", "mentor");
+        headerData.put("rank", "pro");
+        headerData.put("wallet", "1000");
+
+        data.put("headerData", headerData);
+        data.put("email", "pkaminski@o2.pl");
+        data.put("address", "Slusarska 9");
+        data.put("class", "2018.1");
+        data.put("classes", classes);
+//        data.put("items", items);
+        data.put("students", students);
+//        data.put("students", students);
+
+        return data;
+    }
+
+
     public static void main(String[] args) {
         RenderInteface rf = new TemplateRender();
-        System.out.println(rf.RenderClassPage());
+        System.out.println(rf.RenderProfilePage());
     }
 }

@@ -1,12 +1,5 @@
-{% set headerData = {
-    name : hName,
-    surname : hSurname,
-    role : role,
-    rank : rank,
-    wallet : wallet,
-    title :title
-    }
-%}
+{% set headerData = headerData %}
+{% set data = data %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,10 +15,8 @@
     <body>
         <div class="main">
             <!--header-->
-            <!--<header include="header.html"></header>-->
             <header>{% include "header.html" with headerData %}</header>
             <!--nav bar-->
-            <!--<nav include="navigation.html"></nav>-->
             <nav>{% include "navigation.html" ignore missing %}</nav>
             <!--content-->
             <div class="contener">
@@ -34,7 +25,7 @@
                         <p>Classes</p>
                         <u>
                         <span class="classes" id="list-class">
-                                {% for class in classes%}
+                                {% for class in data.classes%}
                                     <p>{{ class }}</p><br>
                                 {% endfor %}
                         </span>
@@ -44,7 +35,7 @@
                         <p>Assigned mentors</p>
                         <span id="list-mentor">
                             <ul>
-                            {% for mentor in mentors%}
+                            {% for mentor in data.mentors%}
                             <li>{{ mentor }}</li><br>
                             {% endfor %}
                             </ul>
@@ -54,7 +45,7 @@
                         <p>Students</p>
                         <span id="list-student">
                             <ul>
-                            {% for student in students%}
+                            {% for student in data.students%}
                             <li>{{ student }}</li>
                             {% endfor %}
                             </ul>
