@@ -33,6 +33,10 @@ public class Server {
 
     }
 
+    public void stop(){
+        server.stop(0);
+    }
+
     public static SessionPool getSessionPool() {
         return sessionPool;
     }
