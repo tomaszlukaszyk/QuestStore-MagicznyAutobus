@@ -64,7 +64,7 @@ public class TemplateRender implements RenderInteface{
         Map<String, Object> data = new HashMap<>();
         data.put("userName", "Piotr");
         data.put("userSurname", "Kaminski");
-        data.put("userRole", "student");
+        data.put("userRole", "mentor");
         data.put("rank", "pro");
         data.put("wallet", "1000");
         data.put("classes", classes);

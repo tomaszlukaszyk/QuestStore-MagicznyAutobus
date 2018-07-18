@@ -5,9 +5,10 @@
 <div id="informations">
     <p>Welcome&nbsp;<span id="fullname">{{ hName }} {{ hSurname }}</span>&nbsp;<br>
         you are logged as&nbsp;<span id="role">{{ role }}</span></p>
-    <template>
-        <p>Your rank:&nbsp;<span id="rank">{{ rank }}</span> Your wallet:&nbsp;<span id="wallet"> {{ wallet }}</span></p>
-    </template>
+    {% if role == 'student' %}
+    <p>Your rank:&nbsp;<span id="rank">{{ rank }}</span><br></p>
+    <p>Your wallet:&nbsp;<span id="wallet"> {{ wallet }}</span></p>
+    {% endif %}
 </div>
 <h1>{{ title }}</h1>
 <a href=""><img id="logout" src="../images/logout.png" alt="Logout" title="Logout"></a>
