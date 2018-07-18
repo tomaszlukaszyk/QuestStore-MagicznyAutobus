@@ -93,28 +93,12 @@ WHERE personalartifacthistory.idpersonalartifacthistory = personalartifactid;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION updateartifact(artid integer, newcost integer)
-RETURNS void AS $updatedartifact$
-BEGIN
-UPDATE artifact SET currentartifactcost = newcost
-WHERE artid = idartifact;
-END;
-$updatedartifact$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION updateQuest(questid integer, newcost integer)
-RETURNS void AS $updatedartifact$
-BEGIN
-UPDATE quest SET questvalue = newcost
-WHERE questid = idquest;
-END;
-$updatedartifact$ LANGUAGE plpgsql;
-
 create or replace function markQuest (idstudent_ integer, idquest_ integer)
 returns void as
 $$
 begin
-    update questhistory set status='accepted' 
-    where idquest=idquest_ and idstudent=idstudent_ and status!='accepted';
+    update questhistory set status='DONE' 
+    where idquest = idquest_ and idstudent = idstudent_ and status!='DONE';
 end;
 $$ language plpgsql;
 
