@@ -31,7 +31,7 @@ public class TemplateRender implements RenderInteface{
 
     public String RenderProfilePage() {
         Map<String, Object> data = getProfileDataMap();
-        String title = "Class";
+        String title = "Profile";
 
         // get a template file
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
@@ -43,6 +43,25 @@ public class TemplateRender implements RenderInteface{
         model.with("headerData", data.get("headerData"));
         model.with("data", data);
         model.with("title", title);
+
+        return template.render(model);
+    }
+
+    public String RenderListPage() {
+        Map<String, Object> data = getProfileDataMap();
+        String title = "students";
+
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/userList.html");
+
+        // create a model that will be passed to a template
+        JtwigModel model = JtwigModel.newModel();
+
+        // fill the model with values
+        model.with("headerData", data.get("headerData"));
+        model.with("data", data);
+        model.with("title", title + " List");
+        model.with("listName", title);
 
         return template.render(model);
     }
@@ -114,7 +133,7 @@ public class TemplateRender implements RenderInteface{
         data.put("class", "2018.1");
         data.put("classes", classes);
 //        data.put("items", items);
-        data.put("students", students);
+        data.put("users", students);
 //        data.put("students", students);
 
         return data;
@@ -123,6 +142,6 @@ public class TemplateRender implements RenderInteface{
 
     public static void main(String[] args) {
         RenderInteface rf = new TemplateRender();
-        System.out.println(rf.RenderProfilePage());
+        System.out.println(rf.RenderListPage());
     }
 }

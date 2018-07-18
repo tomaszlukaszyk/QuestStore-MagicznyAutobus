@@ -1,14 +1,18 @@
 <!DOCTYPE html>
+
+
+
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Class</title>
+    <title>mentors List</title>
     <!--style sheet ref-->
     <link rel="stylesheet" href="/QuestStore-MagicznyAutobus/src/main/resources/static/css/style.css">
-    <script src="../javascript/scripts.js"></script>
+    <!--        <link rel="stylesheet" href="classStyle.css"> -->
+    <script src="/QuestStore-MagicznyAutobus/src/main/resources/javascript/scripts.js"></script>
 </head>
-
 <body>
 <div class="main">
     <!--header-->
@@ -21,7 +25,7 @@
                 you are logged as&nbsp;<span id="role">mentor</span></p>
 
         </div>
-        <h1>Class</h1>
+        <h1>mentors List</h1>
         <a href=""><img id="logout" src="../images/logout.png" alt="Logout" title="Logout"></a></header>
     <!--nav bar-->
     <nav><a href="">SHOP</a>
@@ -32,66 +36,74 @@
         <a href="">PROFILE</a>
         <template><a href="">CONTROL PANEL</a></template></nav>
     <div class="contener">
-        <div class="content-profile">
-            <!--Student view-->
-            <!--<div id="student-view" class="profile-view">-->
+        <div class="content-list" id="contentdiv">
+            <div id="user-column" class="list-column">
+                <div class="listName">
+                    <h2>mentors</h2>
 
+                    <div class="addBtnPos">
+                        <button class="addBtn" onclick="showAddForm()">+</button>
+                    </div>
 
-
-            <!--Mentor view-->
-            <div id="mentor-view" class="profile-view">
-                <div class="content-box">
-
-                    <p>Personal Data:</p>
-
-                    <span id="name">
-                                name: Piotr
-                            </span>
-
-                    <span id="surname">
-                                surname: Kaminski
-                            </span>
-
-                    <span id="email">
-                                email: pkaminski@o2.pl
-                            </span>
-
-                    <span id="adress">
-                                address: Slusarska 9
-                            </span>
                 </div>
+                <div class="list-pos">
+                            <span id="list-users">
+                                <ol class="list">
 
-                <div class="content-box">
-                    <p>Class:</p>
-                    <span id="class">
-                        <ul>
+                                        <li>Piotr Kaminski</li>
 
-                            <li><span>2018.1</span><br></li>
+                                        <li>Pawel Kaminski</li>
 
-                            <li><span>2018.2</span><br></li>
+                                        <li>Jakub Marmol</li>
 
-                            <li><span>2018.3</span><br></li>
-
-                        </ul>
-                    </span>
-                </div>
-
-                <div class="content-box assigned-students">
-                    <p>Assigned students:</p>
-                    <span id="insert-student">
-                        <ul>
-
-                            <li><span>Piotr Kaminski</span></li>
-
-                            <li><span>Pawel Kaminski</span></li>
-
-                            <li><span>Jakub Marmol</span></li>
-
-                        </ul>
-                    </span>
+                                </ol>
+                            </span>
                 </div>
             </div>
+            <div id="form" style="display: none;">
 
+
+
+
+
+
+                <div class="edit-form">
+                    <h2>
+                        Create
+                    </h2>
+                    <form onkeyup="testIfFormIsEmpty('mentorinputs', 'mentorsubmitbutton')">
+                        <br><br>
+                        <label for="mentorsurname">Surname:</label>
+                        <br><br>
+                        <input type="text" class="mentorinputs" id="mentorsurname" name="mentorsurname" placeholder="Enter  surname">
+                        <br><br>
+                        <label for="mentorname">Name:</label>
+                        <br><br>
+                        <input type="text" class="mentorinputs" id="mentorname" name="mentorname" placeholder="Enter  name">
+                        <br><br>
+                        <label for="mentoremail">E-mail:</label>
+                        <br><br>
+                        <input type="text" class="mentorinputs" id="mentoremail" name="mentoremail" placeholder="Enter  email">
+                        <br><br>
+                        <label for="mentorlogin">Login:</label>
+                        <br><br>
+                        <input type="text" class="mentorinputs" name="mentorlogin" placeholder="Enter  login">
+                        <br><br>
+                        <label for="mentorpassword">Password:</label>
+                        <br><br>
+                        <input type="text" class="mentorinputs" name="mentorpassword" placeholder="Enter  password">
+                        <br><br>
+                        <label for="mentoraddress">Address:</label>
+                        <br><br>
+                        <input type="text" class="mentorinputs" name="mentoraddress" placeholder="Enter  address">
+                        <br><br>
+                        <button id="mentorsubmitbutton" onclick="return checkMentorInputs()" disabled>SEND</button>
+                    </form>
+                </div>
+                <!--<script src="scripts.js"></script>-->
+
+
+            </div>
         </div>
     </div>
     <!--footer-->
