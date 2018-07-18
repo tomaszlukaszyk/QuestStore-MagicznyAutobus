@@ -232,4 +232,4 @@ UPDATE quest
 SET questname = name_, questdescription = description, questvalue = value, image = first_image, image_marked = second_image
 WHERE idquest = questid;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql;															
