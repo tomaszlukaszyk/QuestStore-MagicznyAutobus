@@ -1,0 +1,103 @@
+
+/*
+.contener {
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    min-height: 58vh;
+}
+*/
+
+.content-groupBuy {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10%;
+    padding-top: 1em; 
+    padding-left: 10%;
+    padding-right: 10%;
+    
+}
+
+.content-groupBuy input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.column-groupBuy {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    border: 2px lime solid;
+}
+
+/*
+.classes {
+    display: flex;
+    flex-flow: column nowrap;
+    padding-left: 10%;
+}
+*/
+
+.column-groupBuy p {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0.5em;
+}
+
+.checkbox {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border: 1px lime solid;
+    border-radius: 0%;
+    background-color: black;
+}
+
+/* On mouse-over, add a black background color */
+.content-groupBuy:hover input ~ .checkbox {
+    background-color: black;
+}
+
+/* When the checkbox is checked, add a lime background */
+.content-groupBuy input:checked ~ .checkbox {
+    background-color: lime;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkbox:after {
+    content: "";
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.content-groupBuy input:checked ~ .checkbox:after {
+    position: absolute;
+    display: block;
+    background-color: lime;
+}
+
+/* Style the checkmark/indicator */
+.content-groupBuy .checkbox:after {
+    position: absolute;
+    padding-left: 3px;
+    border-width: 0 3px 3px 0;
+    background-color: lime;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.5em;
+    width: 100;
+    border-top: 2px lime  dashed;
+}
+
+ul {
+    list-style-type: none;
+}
+
+button {
+    background: black;
+    color: lime;
+    border: 2px lime solid;
+}

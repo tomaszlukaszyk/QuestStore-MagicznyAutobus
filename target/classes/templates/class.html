@@ -1,0 +1,71 @@
+{% set headerData = {
+    name : hName,
+    surname : hSurname,
+    role : role,
+    rank : rank,
+    wallet : wallet,
+    title :title
+    }
+%}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>class</title>
+        <!--style sheet ref-->
+        <link rel="stylesheet" href="/QuestStore-MagicznyAutobus/src/main/resources/static/css/style.css">
+        <!--<script src="../javascript/scripts.js"></script>-->
+    </head>
+    
+    <body>
+        <div class="main">
+            <!--header-->
+            <!--<header include="header.html"></header>-->
+            <header>{% include "header.html" with headerData %}</header>
+            <!--nav bar-->
+            <!--<nav include="navigation.html"></nav>-->
+            <nav>{% include "navigation.html" ignore missing %}</nav>
+            <!--content-->
+            <div class="contener">
+                <div class="class-content">
+                    <div class="class-column">
+                        <p>Classes</p>
+                        <u>
+                        <span class="classes" id="list-class">
+                                {% for class in classes%}
+                                    <p>{{ class }}</p><br>
+                                {% endfor %}
+                        </span>
+                        </u>
+                    </div>
+                    <div class="class-column">
+                        <p>Assigned mentors</p>
+                        <span id="list-mentor">
+                            <ul>
+                            {% for mentor in mentors%}
+                            <li>{{ mentor }}</li><br>
+                            {% endfor %}
+                            </ul>
+                        </span>
+                    </div>
+                    <div class="class-column">
+                        <p>Students</p>
+                        <span id="list-student">
+                            <ul>
+                            {% for student in students%}
+                            <li>{{ student }}</li>
+                            {% endfor %}
+                            </ul>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--footer-->
+            <!--<footer include="footer.html"></footer>-->
+            <footer>{% include "footer.html" ignore missing %}</footer>
+        </div>
+        <!--<script>includeHTML();</script>        -->
+    </body>
+</html>
