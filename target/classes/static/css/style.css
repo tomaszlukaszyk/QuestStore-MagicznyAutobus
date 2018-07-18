@@ -50,7 +50,8 @@ header a {
 
 #informations {
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: column wrap;
+    flex-basis: 20%;
     padding-left: 2%; 
 }
 

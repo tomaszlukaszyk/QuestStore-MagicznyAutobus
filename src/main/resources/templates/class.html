@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>class</title>
         <!--style sheet ref-->
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/QuestStore-MagicznyAutobus/src/main/resources/static/css/style.css">
         <!--<script src="../javascript/scripts.js"></script>-->
     </head>
     
@@ -35,7 +35,7 @@
                         <u>
                         <span class="classes" id="list-class">
                                 {% for class in classes%}
-                                    {{ class }}<br>
+                                    <p>{{ class }}</p><br>
                                 {% endfor %}
                         </span>
                         </u>
@@ -43,17 +43,21 @@
                     <div class="class-column">
                         <p>Assigned mentors</p>
                         <span id="list-mentor">
+                            <ul>
                             {% for mentor in mentors%}
-                                {{ mentor }}<br>
+                            <li>{{ mentor }}</li><br>
                             {% endfor %}
+                            </ul>
                         </span>
                     </div>
                     <div class="class-column">
                         <p>Students</p>
                         <span id="list-student">
+                            <ul>
                             {% for student in students%}
-                                {{ student }}<br>
+                            <li>{{ student }}</li>
                             {% endfor %}
+                            </ul>
                         </span>
                     </div>
                 </div>
