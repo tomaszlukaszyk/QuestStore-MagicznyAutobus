@@ -161,6 +161,11 @@ function showDetails(id) {
             content.setAttribute("style", "grid-template-areas:'name';grid-template-columns: 2fr;");
     };
 
+    function showAddForm() {
+        document.getElementById("contentdiv").className = "content-list-form";
+        document.getElementById("form").style.display = "block";
+    }
+
 
 function test() {
   alert("Logged in!");

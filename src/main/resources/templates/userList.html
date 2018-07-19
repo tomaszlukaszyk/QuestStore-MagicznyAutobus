@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+{% set headerData = headerData %}
+{% set data = data %}
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{ title }}</title>
+        <!--style sheet ref-->
+        <link rel="stylesheet" href="/QuestStore-MagicznyAutobus/src/main/resources/static/css/style.css">
+<!--        <link rel="stylesheet" href="classStyle.css"> -->
+        <script src="../javascript/scripts.js"></script>
+    </head>
+    <body>
+        <div class="main">
+            <!--header-->
+            <header>{% include "header.html" with headerData %}</header>
+            <!--nav bar-->
+            <nav>{% include "navigation.html" ignore missing %}</nav>
+            <div class="contener">
+                <div class="content-list" id="contentdiv">
+                    <div id="user-column" class="list-column">
+                        <div class="listName">
+                            <h2>{{ listName }}</h2>
+                            {% if headerData.role != "student" %}
+                                <div class="addBtnPos">
+                                    <button class="addBtn" onclick="alert('added')">+</button>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="list-pos">
+                            <span id="list-users">
+                                <ol class="list">
+                                    {% for user in data.users %}
+                                        <li>{{ user }}</li>
+                                    {% endfor %}
+                                </ol>
+                            </span>
+                        </div>
+                    </div>
+                    <div id="form" style="display: none;">
+                        {% if headerData.role != "student" %}
+                        {% include "userAddForm.html" with headerData%}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!--footer-->
+            <footer>{% include "footer.html" ignore missing %}</footer>
+        </div>
+        <script>
+            function showAddForm() {
+                document.getElementById("contentdiv").className = "content-list-form";
+                document.getElementById("form").style.display = "block";
+            }
+        </script>
+    </body>
+</html>

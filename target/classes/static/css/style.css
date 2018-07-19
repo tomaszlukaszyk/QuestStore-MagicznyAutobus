@@ -20,6 +20,12 @@ button {
     border: 2px lime solid;
 }
 
+.addBtn {
+    background: black;
+    color: lime;
+    border: 2px lime dotted;
+}
+
 h1 {
     display: flex;
     justify-content: space-around;
@@ -103,7 +109,7 @@ footer {
     position: sticky;
     bottom: 0px;
     flex-shrink: 0;
-    width: 100%;
+    flex-basis: 100%;
     border-top: 2px lime dashed;
 }
 
@@ -241,7 +247,31 @@ ul {
 }
 
 
-/*mentor edit style*/
+/*list style*/
+.content-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-gap: 1em;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-bottom: 1em;
+    padding-right: 1em;
+    grid-template-areas: "b a";
+}
+
+.content-list-form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 1em;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-bottom: 1em;
+    padding-right: 1em;
+    grid-template-areas: "a b";
+}
+
 .list-column {
     grid-area: a;
 }
@@ -264,7 +294,18 @@ h2 {
     display: flex;
     justify-content: center;
     padding-bottom: 0.5em;
-    border-bottom: 2px lime  dashed;
+}
+
+.listName {
+    border-bottom: lime 2px dashed;
+    display: flex;
+    justify-content: center;
+    flex-basis: 100%;
+    }
+
+.list-pos {
+    display: flex;
+    justify-content: center;
 }
 
 input {
@@ -284,18 +325,28 @@ input::-moz-placeholder {
     visibility: hidden;
 }
 
+.addBtnPos {
+    display: flex;
+    flex-direction: column;
+    height: 72px;
+    justify-content: center;
+    padding-left: 5px;
+}
 
 /*profile style*/
 .content-profile {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex-basis: 100%;
-    padding: 0.5em;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 1%;
+    padding-bottom: 1%;
 }
 
 .profile-view {
     padding-top: 2%;
-    display: none;
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: 5%;
 }
@@ -364,5 +415,19 @@ div.content-box span {
     border-bottom-style: none;
 }
 
+/*login page*/
+.loginpage {
+    display: flex;
+    flex-direction: row;
+    flex-basis: 100%;
+    justify-content: flex-end;
+}
+
+.logindiv {
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-content: flex-end;
+}
 
 
