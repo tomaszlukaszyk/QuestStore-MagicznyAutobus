@@ -4,4 +4,5 @@ public interface RenderInteface {
     String RenderClassPage();
     String RenderProfilePage();
     String RenderListPage();
+    String RenderShopPage();
 }

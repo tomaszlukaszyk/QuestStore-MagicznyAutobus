@@ -7,16 +7,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>mentors List</title>
+    <title>Shop</title>
     <!--style sheet ref-->
-    <link rel="stylesheet" href="/QuestStore-MagicznyAutobus/src/main/resources/static/css/style.css">
-    <!--        <link rel="stylesheet" href="classStyle.css"> -->
-    <script src="/QuestStore-MagicznyAutobus/src/main/resources/javascript/scripts.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="../javascript/scripts.js"></script>
 </head>
+
 <body>
 <div class="main">
     <!--header-->
-    <header><link rel="stylesheet" href="style.css">
+    <header><link rel="stylesheet" href="/QuestStore-MagicznyAutobus/src/main/resources/static/css/style.css">
         <a href=""><img id="logo" src="../images/logo.png" alt="Logo"></a>
 
         <!--<button onclick="showWallet()">Wallet test</button>-->
@@ -25,7 +25,7 @@
                 you are logged as&nbsp;<span id="role">mentor</span></p>
 
         </div>
-        <h1>mentors List</h1>
+        <h1>Shop</h1>
         <a href=""><img id="logout" src="../images/logout.png" alt="Logout" title="Logout"></a></header>
     <!--nav bar-->
     <nav><a href="">SHOP</a>
@@ -35,80 +35,78 @@
         <a href="">CLASSES</a>
         <a href="">PROFILE</a>
         <template><a href="">CONTROL PANEL</a></template></nav>
+
     <div class="contener">
-        <div class="content-list" id="contentdiv">
-            <div id="user-column" class="list-column">
-                <div class="listName">
-                    <h2>mentors</h2>
 
-                    <div class="addBtnPos">
-                        <button class="addBtn" onclick="showAddForm()">+</button>
-                    </div>
+        <div class="content-shop">
+
+            <div class="column-shop">
+                <div class= shopitems>
+
+                                <span class="shopitem" id="1">
+                                    <h2><span id ="title">Tipping the fanfare-guy</span></h2> <br />
+                                    <a href=""><img class="image_off" src="../images/artifacts/town-hover.png"></a>
+
+                                    <span value = "category"><p>personal</p></span>
+                                    <span value = "descr"><p>The student can use jukebox exclusively for half day</p></span>
+                                    <span value = "cost"><p>2</p></span>
+                                    <div id="btnPanel" class="btnPanel">
+                                        <span id="buyGroupBtn"><input type="image" src="../images/groupbutton.png" alt="group buy" onclick="" width="20%"/></span>
+                                        <span id="buyBtn"><input type="image" src="../images/buybutton.png" alt="buy" onclick="" width="30%"/></span>
+                                        <span id="editBtn"><input type="image" src="../images/editbutton.png" alt="edit" onclick="" width="20%"/></span>
+                                    </div>
+                                </span>
+
+                    <span class="shopitem" id="2">
+                                    <h2><span id ="title">Summon code elemental</span></h2> <br />
+                                    <a href=""><img class="image_off" src="../images/artifacts/elemental-hover.png"></a>
+
+                                    <span value = "category"><p>personal</p></span>
+                                    <span value = "descr"><p>Mentor joins a student team for one hour (all team members must buy this item)</p></span>
+                                    <span value = "cost"><p>3</p></span>
+                                    <div id="btnPanel" class="btnPanel">
+                                        <span id="buyGroupBtn"><input type="image" src="../images/groupbutton.png" alt="group buy" onclick="" width="20%"/></span>
+                                        <span id="buyBtn"><input type="image" src="../images/buybutton.png" alt="buy" onclick="" width="30%"/></span>
+                                        <span id="editBtn"><input type="image" src="../images/editbutton.png" alt="edit" onclick="" width="20%"/></span>
+                                    </div>
+                                </span>
+
+                    <span class="shopitem" id="3">
+                                    <h2><span id ="title">Teleport</span></h2> <br />
+                                    <a href=""><img class="image_off" src="../images/artifacts/portal-hover.png"></a>
+
+                                    <span value = "category"><p>group</p></span>
+                                    <span value = "descr"><p>The whole room goes to an off-school program instead for a specified day (which is at least 2 weeks ahead)</p></span>
+                                    <span value = "cost"><p>300</p></span>
+                                    <div id="btnPanel" class="btnPanel">
+                                        <span id="buyGroupBtn"><input type="image" src="../images/groupbutton.png" alt="group buy" onclick="" width="20%"/></span>
+                                        <span id="buyBtn"><input type="image" src="../images/buybutton.png" alt="buy" onclick="" width="30%"/></span>
+                                        <span id="editBtn"><input type="image" src="../images/editbutton.png" alt="edit" onclick="" width="20%"/></span>
+                                    </div>
+                                </span>
+
+                    <span class="shopitem" id="4">
+                                    <h2><span id ="title">Tome of knowledge</span></h2> <br />
+                                    <a href=""><img class="image_off" src="../images/artifacts/portal-hover.png"></a>
+
+                                    <span value = "category"><p>group</p></span>
+                                    <span value = "descr"><p>Extra material for the current topic (mentors will do it within 2 weeks)</p></span>
+                                    <span value = "cost"><p>20</p></span>
+                                    <div id="btnPanel" class="btnPanel">
+                                        <span id="buyGroupBtn"><input type="image" src="../images/groupbutton.png" alt="group buy" onclick="" width="20%"/></span>
+                                        <span id="buyBtn"><input type="image" src="../images/buybutton.png" alt="buy" onclick="" width="30%"/></span>
+                                        <span id="editBtn"><input type="image" src="../images/editbutton.png" alt="edit" onclick="" width="20%"/></span>
+                                    </div>
+                                </span>
 
                 </div>
-                <div class="list-pos">
-                            <span id="list-users">
-                                <ol class="list">
-
-                                        <li>Piotr Kaminski</li>
-
-                                        <li>Pawel Kaminski</li>
-
-                                        <li>Jakub Marmol</li>
-
-                                </ol>
-                            </span>
-                </div>
-            </div>
-            <div id="form" style="display: none;">
-
-
-
-
-
-
-                <div class="edit-form">
-                    <h2>
-                        Create
-                    </h2>
-                    <form onkeyup="testIfFormIsEmpty('mentorinputs', 'mentorsubmitbutton')">
-                        <br><br>
-                        <label for="mentorsurname">Surname:</label>
-                        <br><br>
-                        <input type="text" class="mentorinputs" id="mentorsurname" name="mentorsurname" placeholder="Enter  surname">
-                        <br><br>
-                        <label for="mentorname">Name:</label>
-                        <br><br>
-                        <input type="text" class="mentorinputs" id="mentorname" name="mentorname" placeholder="Enter  name">
-                        <br><br>
-                        <label for="mentoremail">E-mail:</label>
-                        <br><br>
-                        <input type="text" class="mentorinputs" id="mentoremail" name="mentoremail" placeholder="Enter  email">
-                        <br><br>
-                        <label for="mentorlogin">Login:</label>
-                        <br><br>
-                        <input type="text" class="mentorinputs" name="mentorlogin" placeholder="Enter  login">
-                        <br><br>
-                        <label for="mentorpassword">Password:</label>
-                        <br><br>
-                        <input type="text" class="mentorinputs" name="mentorpassword" placeholder="Enter  password">
-                        <br><br>
-                        <label for="mentoraddress">Address:</label>
-                        <br><br>
-                        <input type="text" class="mentorinputs" name="mentoraddress" placeholder="Enter  address">
-                        <br><br>
-                        <button id="mentorsubmitbutton" onclick="return checkMentorInputs()" disabled>SEND</button>
-                    </form>
-                </div>
-                <!--<script src="scripts.js"></script>-->
-
-
             </div>
         </div>
     </div>
     <!--footer-->
     <footer><p>Codecool Quest Store by <a href="https://github.com/Czakero/QuestStore-MagicznyAutobus" class="tooltip">&copy; Magiczny Autobus
         <span class="tooltiptext">Tomasz Pieczkowski<br>Bartosz Pyrz<br>Maciej Sikora<br>Piotr Kamiński</span></a></p></footer>
+    <script>includeHTML();</script>
 </div>
 </body>
 </html>
