@@ -144,6 +144,34 @@ public class TemplateRender implements RenderInteface{
         return template.render(model);
     }
 
+    @Override
+    public String RenderQuestPage() {
+        Map<String, Object> data = getQuestDataMap();
+        String title = "Shop";
+
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/quests.html");
+
+        // create a model that will be passed to a template
+        JtwigModel model = JtwigModel.newModel();
+
+        // fill the model with values
+        model.with("headerData", data.get("headerData"));
+        model.with("data", data);
+        model.with("title", title);
+
+        return template.render(model);
+    }
+
+    private Map<String,Object> getQuestDataMap() {
+        Map<String, Object> data = new HashMap<>();
+
+        data.put("headerData", getHeaderData());
+        data.put("items", getQuestItems());
+
+        return data;
+    }
+
     private Map<String,Object> getShopDataMap() {
         Map<String, Object> data = new HashMap<>();
 
@@ -206,6 +234,22 @@ public class TemplateRender implements RenderInteface{
         return items;
     }
 
+    private List<Map<String, String>> getQuestItems() {
+        List<Map<String, String>> items = new ArrayList<>();
+
+        Map<String, String> item = new HashMap<>();
+
+        items.add(getItem("1", "Entering the arena", "15", "arena-hover.png", "Special", "Do a prasentation meet-up"));
+
+        items.add(getItem("2","Making arrowheads", "3", "arrow.png", "regular", "Create Kahoot question list with at least 10 questions in a Codecool related topic"));
+
+        items.add(getItem("3","Fruitful opportunism", "3", "opportunism-hover.png", "regular", "Helping to facilitate a mentor organized workshop"));
+
+        items.add(getItem("4","Visiting the wiseman", "3", "wiseman.png", "regular", "Going to company interview"));
+
+        return items;
+    }
+
     private Map<String,String> getItem(String id, String title, String cost, String fileName, String category, String desc) {
         Map<String, String> item = new HashMap<>();
 
@@ -233,6 +277,6 @@ public class TemplateRender implements RenderInteface{
 
     public static void main(String[] args) {
         RenderInteface rf = new TemplateRender();
-        System.out.println(rf.RenderShopPage());
+        System.out.println(rf.RenderQuestPage());
     }
 }

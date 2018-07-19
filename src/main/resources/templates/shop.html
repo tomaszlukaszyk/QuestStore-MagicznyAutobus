@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ title }}</title>
         <!--style sheet ref-->
-        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/QuestStore-MagicznyAutobus/src/main/resources/static/css/style.css">
         <script src="../javascript/scripts.js"></script>
     </head>
     
@@ -33,7 +33,7 @@
 
                                     <span value = "category"><p>{{ item.category }}</p></span>
                                     <span value = "descr"><p>{{ item.desc }}</p></span>
-                                    <span value = "cost"><p>{{ item.cost }}</p></span>
+                                    <span value = "cost"><p>{{ item.cost }} cc</p></span>
                                     <div id="btnPanel" class="btnPanel">
                                         <span id="buyGroupBtn"><input type="image" src="../images/groupbutton.png" alt="group buy" onclick="" width="20%"/></span>
                                         <span id="buyBtn"><input type="image" src="../images/buybutton.png" alt="buy" onclick="" width="30%"/></span>
@@ -47,7 +47,6 @@
             </div>
             <!--footer-->
             <footer>{% include "footer.html" ignore missing %}</footer>
-            <script>includeHTML();</script>  
-        </div>            
+        </div>
     </body>
 </html>
