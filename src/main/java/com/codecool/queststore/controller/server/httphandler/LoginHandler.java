@@ -9,9 +9,7 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.*;
 import java.net.HttpCookie;
 import java.net.URL;
-import java.sql.SQLOutput;
 import java.util.Map;
-import java.util.UUID;
 
 
 public class LoginHandler extends AbstractHttphandler implements HttpHandler {
@@ -40,7 +38,7 @@ public class LoginHandler extends AbstractHttphandler implements HttpHandler {
         HttpCookie cookie = new HttpCookie("Session-id", cookieStr);
 
         // Check if cookie already exists and if it's UUID is contained by sessionPool
-        if (cookieStr == null || !SessionPool.isSessionbyCookie(cookie)) {
+        if (cookieStr == null || !isCookieValid(cookie)) {
             // send login page and if method request is POST add cookie etc
             System.out.println("sending login page");
             path = "html/index_test.html";

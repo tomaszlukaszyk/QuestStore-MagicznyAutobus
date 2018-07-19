@@ -3,16 +3,23 @@ package com.codecool.queststore.controller.server.httphandler;
 import com.codecool.queststore.controller.server.helpers.MimeTypeResolver;
 
 import java.io.*;
+import java.net.HttpCookie;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.codecool.queststore.model.server.session.SessionPool;
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 
 import java.net.URL;
 
 
     abstract class AbstractHttphandler {
+
+        boolean isCookieValid(HttpCookie cookie) {
+             return SessionPool.isSessionByCookie(cookie);
+
+        }
 
 
         Map<String, String> parseFormData(HttpExchange httpExchange) throws IOException {
