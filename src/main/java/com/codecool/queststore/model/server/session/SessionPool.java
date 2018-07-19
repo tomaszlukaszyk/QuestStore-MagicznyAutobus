@@ -1,6 +1,7 @@
 package com.codecool.queststore.model.server.session;
 
 import java.io.*;
+import java.net.HttpCookie;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -26,6 +27,8 @@ public class SessionPool {
          newSession= new Session(userId);
         } while (sessions.contains(newSession));
         sessions.add(newSession);
+        System.out.println("created Session ID " + newSession.getUuid());
+
         writeObject();
         return newSession;
     }
@@ -33,6 +36,7 @@ public class SessionPool {
 
     private static void terminate(Session session) {
         sessions.remove(session);
+        System.out.println("removed Session ID " + session.getUuid());
         writeObject();
     }
 
@@ -48,10 +52,28 @@ public class SessionPool {
         return null;
     }
 
+    public static boolean isSessionbyCookie( HttpCookie cookie)
+    {
+        expireCheckAndClean();
+        for (Session session: sessions) {
+            System.out.println(session.getUuid().toString());
+            System.out.println(cookie.getValue());
+            if (session.getUuid().toString().equals(cookie.getValue())){
+                System.out.println("found session ID: " + session.getUuid());
+                return true;}
+
+
+        }
+
+            System.out.println("not found session by cookie: " + cookie);
+
+        return false;
+    }
+
     private static void expireCheckAndClean() {
         for(Session session: sessions)
         {
-            if(session.getExpirationDate().isBefore(LocalDateTime.now()))
+            if(session.getExpirationDate().isBefore(    LocalDateTime.now()))
                 terminate(session);
         }
 
@@ -69,6 +91,7 @@ public class SessionPool {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private Set<Session> readObject() throws ClassNotFoundException, IOException {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME));
         return (Set<Session>) ois.readObject();

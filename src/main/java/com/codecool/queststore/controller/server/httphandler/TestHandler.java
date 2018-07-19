@@ -1,4 +1,4 @@
-package com.codecool.queststore.controller.server;
+package com.codecool.queststore.controller.server.httphandler;
 
 
 import com.sun.net.httpserver.HttpExchange;

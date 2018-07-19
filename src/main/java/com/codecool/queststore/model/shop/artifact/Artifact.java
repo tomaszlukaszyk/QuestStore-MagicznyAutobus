@@ -9,20 +9,22 @@ public class Artifact {
     private final String IMAGE_MARKED_FILENAME;
     private final Boolean IS_USED;
     private final ArtifactCategory CATEGORY;
+    private final int ARTIFACT_HISTORY_ID;
 
 
-    public Artifact(String name, String description, int cost, String imageName, String imageMarkedName, ArtifactCategory category, boolean isUsed) {
-        NAME = name;
-        DESCRIPTION = description;
+    public Artifact(int id,String name, String description, int cost, String imageName, String imageMarkedName, ArtifactCategory category, boolean isUsed) {
+        this.NAME = name;
+        this.DESCRIPTION = description;
         this.COST = cost;
         this.IMAGE_FILENAME = imageName;
         this.IMAGE_MARKED_FILENAME = imageMarkedName;
         this.CATEGORY = category;
         this.IS_USED = isUsed;
+        this.ARTIFACT_HISTORY_ID = id;
     }
 
-    public Artifact(String name, String description, int cost, String imageName, String imageMarkedName, boolean isUsed) {
-        this(name, description, cost, imageName, imageMarkedName, ArtifactCategory.PERSONAL, isUsed);
+    public Artifact(int id,String name, String description, int cost, String imageName, String imageMarkedName, boolean isUsed) {
+        this(id, name, description, cost, imageName, imageMarkedName, ArtifactCategory.PERSONAL, isUsed);
     }
 
 }
