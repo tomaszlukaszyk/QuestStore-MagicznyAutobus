@@ -70,6 +70,12 @@ public class LoginHandler extends AbstractHttphandler implements HttpHandler {
             System.out.println("generated cookie \\/");
             System.out.println(cookie.toString());
         }
+        else{
+            System.out.println("sending login page");
+            String path = "html/index_test.html";
+            URL fileURL = getClass().getClassLoader().getResource(path);
+            sendFile(httpExchange, fileURL);
+        }
 
     }
 
