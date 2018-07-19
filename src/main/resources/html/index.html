@@ -5,22 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"> 
         <title>Login</title> 
         <!--style sheet ref--> 
-        <link rel="stylesheet" href="style.css"> 
-        <script src="../javascript/scripts.js"></script>
+        <link rel="stylesheet" href="static/css/style.css"> 
+        <script src="static/javascript/scripts.js"></script>
     </head>
 <body id="loginpage">
     <div id="logindiv">
-        <form id="loginform" onkeyup="testIfFormIsEmpty('loginInputs', 'loginsubmitbutton')">
+        <form id="loginform" onkeyup="testIfFormIsEmpty('loginInputs', 'loginsubmitbutton')" method="POST">
                 <br><br>
                 <label for="login">Login:</label>
                 <br><br>
-                <input type="text" class="loginInputs" id="login" placeholder="Enter login">
+                <input type="text" class="loginInputs" name="login" placeholder="Enter login">
                 <br><br>
                 <label for="password">Password:</label>
                 <br><br>
-                <input type="password" class="loginInputs" id="password" placeholder="Provide password">
+                <input type="password" class="loginInputs" name="password" placeholder="Provide password">
                 <br><br>
-                <button id="loginsubmitbutton" onclick="test()" disabled>LOGIN</button>
+                <button type="submit" id="loginsubmitbutton">LOGIN</button>
         </form> 
     </div>
 </body> 

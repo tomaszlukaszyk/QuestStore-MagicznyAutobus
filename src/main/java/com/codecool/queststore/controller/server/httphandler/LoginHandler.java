@@ -14,6 +14,7 @@ import java.util.Map;
 
 public class LoginHandler extends AbstractHttphandler implements HttpHandler {
 
+    private final String path = "html/index.html";
 
         @Override
     public void handle(HttpExchange httpExchange) throws IOException {
@@ -32,7 +33,6 @@ public class LoginHandler extends AbstractHttphandler implements HttpHandler {
 
     private void handleSession(HttpExchange httpExchange) throws IOException  {
             String cookieStr = httpExchange.getRequestHeaders().getFirst("Cookie");
-            String path;
 
 
         HttpCookie cookie = new HttpCookie("Session-id", cookieStr);
@@ -41,15 +41,12 @@ public class LoginHandler extends AbstractHttphandler implements HttpHandler {
         if (cookieStr == null || !isCookieValid(cookie)) {
             // send login page and if method request is POST add cookie etc
             System.out.println("sending login page");
-            path = "html/index_test.html";
             URL fileURL = getClass().getClassLoader().getResource(path);
             sendFile(httpExchange, fileURL);
         } else {
             httpExchange.getResponseHeaders().set("Location", "profile");
             httpExchange.sendResponseHeaders(302, -1); // execute redirect
         }
-
-
     }
 
     private void handlePost(HttpExchange httpExchange) throws IOException {
@@ -70,7 +67,6 @@ public class LoginHandler extends AbstractHttphandler implements HttpHandler {
         }
         else{
             System.out.println("sending login page");
-            String path = "html/index_test.html";
             URL fileURL = getClass().getClassLoader().getResource(path);
             sendFile(httpExchange, fileURL);
         }
