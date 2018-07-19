@@ -1,5 +1,5 @@
 package com.codecool.queststore.DAO;
 
-public interface ConnectionInterface {
+public interface Connectable {
     ConnectionPool cp = ConnectionPool.getInstance();
 }

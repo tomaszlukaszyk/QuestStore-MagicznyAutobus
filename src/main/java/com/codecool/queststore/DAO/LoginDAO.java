@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class LoginDAO  implements ConnectionInterface {
+public class LoginDAO  implements Connectable {
 
     private final static int USER_ID = 1;
 
@@ -28,6 +28,5 @@ public class LoginDAO  implements ConnectionInterface {
 
         return result;
     }
-
 }
 
