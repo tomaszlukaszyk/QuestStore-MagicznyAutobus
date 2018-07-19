@@ -271,4 +271,28 @@ CREATE OR REPLACE FUNCTION getQuest(questid INTEGER) RETURNS TABLE (name TEXT, d
 BEGIN
 RETURN QUERY (SELECT questname, questdescription, questvalue, image, image_marked, idquestcategory FROM quest WHERE idquest = questid);
 END;
-$$ LANGUAGE plpgsql;														
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getArtifact(artifactid INTEGER) RETURNS TABLE (name TEXT, description TEXT, value INTEGER, first_image TEXT, second_marked TEXT, questcategory INTEGER) AS $$
+BEGIN
+RETURN QUERY (SELECT artifactname, artifactdescription, currentartifactcost, image, image_marked, idartifactcategory FROM artifact WHERE idartifact = artifactid);
+END;
+$$ LANGUAGE plpgsql;	
+
+CREATE OR REPLACE FUNCTION getStudentQuests(userid INTEGER) RETURNS TABLE (historyid INTEGER, questid INTEGER, value_ INTEGER, date_ DATE, status_ TEXT) AS $$
+DECLARE 
+studentid INTEGER;
+BEGIN
+SELECT idstudent FROM student WHERE iduser = userid INTO studentid;
+RETURN QUERY (SELECT idquesthistory, idquest, value, date, status FROM questhistory WHERE idstudent = studentid);
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getStudentPersonalArtifacts(userid INTEGER) RETURNS TABLE (historyid INTEGER, artifactid INTEGER, cost_ INTEGER, date_ DATE, used BOOLEAN) AS $$
+DECLARE
+studentid INTEGER;
+BEGIN
+SELECT idstudent FROM student WHERE iduser = userid INTO studentid;
+RETURN QUERY (SELECT idpersonalartifacthistory, idartifact, cost, date, isused FROM personalartifacthistory WHERE idstudent = studentid);
+END;
+$$ LANGUAGE plpgsql;											
