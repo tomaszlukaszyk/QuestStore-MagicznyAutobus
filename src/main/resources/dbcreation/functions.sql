@@ -1,3 +1,52 @@
+CREATE OR REPLACE FUNCTION ifUserExists(login TEXT, email TEXT) RETURNS BOOLEAN AS $$
+BEGIN
+IF ((SELECT userlogin FROM users WHERE userlogin ILIKE login) IS NOT NULL OR (SELECT useremail FROM users WHERE useremail = email) IS NOT NULL) THEN
+RETURN true;
+ELSE
+RETURN false;
+END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION ifArtifactExists(name_ TEXT) RETURNS BOOLEAN AS $$
+BEGIN
+IF (SELECT artifactname FROM artifact WHERE artifactname ILIKE name_) IS NOT NULL THEN
+RETURN true;
+ELSE
+RETURN false;
+END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION ifQuestExists(name_ TEXT) RETURNS BOOLEAN AS $$
+BEGIN
+IF (SELECT questname FROM quest WHERE questname ILIKE name_) IS NOT NULL THEN
+RETURN true;
+ELSE
+RETURN false;
+END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION ifClassExists(description TEXT) RETURNS BOOLEAN AS $$
+BEGIN
+IF (SELECT classdescription FROM class WHERE classdescription ILIKE description) IS NOT NULL THEN
+RETURN true;
+ELSE
+RETURN false;
+END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION ifLevelExists(title TEXT) RETURNS BOOLEAN AS $$
+BEGIN
+IF (SELECT leveltitle FROM levelchart WHERE leveltitle ILIKE title) IS NOT NULL THEN
+RETURN true;
+ELSE
+RETURN false;
+END IF;
+END;
+$$ LANGUAGE plpgsql;
 
     CREATE OR REPLACE FUNCTION createMentor (surname TEXT, name TEXT, email TEXT, login TEXT, password TEXT, address TEXT) RETURNS void AS $$
     DECLARE
@@ -143,7 +192,7 @@ begin
 end;
 $$ language plpgsql;
 
-CREATE OR REPLACE FUNCTION validation(login TEXT, password TEXT) RETURNS INTEGER AS $$
+CREATE OR REPLACE FUNCTION loginValidation(login TEXT, password TEXT) RETURNS INTEGER AS $$
 BEGIN
 RETURN (SELECT iduser FROM users WHERE userlogin = login AND userpassword = password);
 END;
@@ -216,4 +265,10 @@ UPDATE quest
 SET questname = name_, questdescription = description, questvalue = value, image = first_image, image_marked = second_image
 WHERE idquest = questid;
 END;
-$$ LANGUAGE plpgsql;															
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getQuest(questid INTEGER) RETURNS TABLE (name TEXT, description TEXT, value INTEGER, first_image TEXT, second_marked TEXT, questcategory INTEGER) AS $$
+BEGIN
+RETURN QUERY (SELECT questname, questdescription, questvalue, image, image_marked, idquestcategory FROM quest WHERE idquest = questid);
+END;
+$$ LANGUAGE plpgsql;														

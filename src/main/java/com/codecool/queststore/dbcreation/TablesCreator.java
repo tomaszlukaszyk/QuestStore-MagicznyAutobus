@@ -224,7 +224,7 @@ final class TablesCreator {
                 .append("class")
                 .append(" ( ")
                 .append("idClass SERIAL PRIMARY KEY, ")
-                .append("classDescription TEXT ")
+                .append("classDescription TEXT UNIQUE ")
                 .append(");");
         return sb.toString();
     }
