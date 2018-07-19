@@ -23,8 +23,8 @@ public class Artifact {
         this.ARTIFACT_HISTORY_ID = id;
     }
 
-    public Artifact(int id,String name, String description, int cost, String imageName, String imageMarkedName, boolean isUsed) {
-        this(id, name, description, cost, imageName, imageMarkedName, ArtifactCategory.PERSONAL, isUsed);
+    public Artifact(int id,String name, String description, int cost, String imageName, String imageMarkedName){
+        this(id, name, description, cost, imageName, imageMarkedName, ArtifactCategory.PERSONAL, false);
     }
 
 }
