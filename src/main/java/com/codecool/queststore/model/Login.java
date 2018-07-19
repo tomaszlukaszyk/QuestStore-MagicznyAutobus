@@ -2,6 +2,7 @@ package com.codecool.queststore.model;
 
 import com.codecool.queststore.model.user.Role;
 import com.codecool.queststore.model.user.User;
+import com.codecool.queststore.model.user.UserFactory;
 
 public class Login {
 
@@ -16,7 +17,7 @@ public class Login {
     public User SignIn() {
         //todo: implement with using Login DAO
         if (LOGIN.equals(PASSWORD))
-            return new User("Maciek","Sikora","m@com",1,Role.STUDENT);
+            return new UserFactory().fromData("Maciek","Sikora","m@com",1,Role.STUDENT);
         else
             return null;
     }

@@ -15,7 +15,7 @@ public class User {
     private AddressStrategy address;
     private TitleStrategy title;
 
-    protected User(String name, String surname, String email, int id, Role role) {
+     User(String name, String surname, String email, int id, Role role) {
         this.EMAIL = email;
         this.NAME = name;
         this.SURNAME = surname;
