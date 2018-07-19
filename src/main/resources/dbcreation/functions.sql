@@ -86,6 +86,7 @@ $$ LANGUAGE plpgsql;
  RETURN (SELECT COALESCE(SUM(quest.questvalue), 0) FROM questhistory JOIN quest ON questhistory.idquest = quest.idquest WHERE idstudent = id);
  END;
  $$ LANGUAGE plpgsql;
+
  CREATE OR REPLACE FUNCTION sumArtifactsCostForStudent (id INTEGER) RETURNS INTEGER AS $$
  BEGIN
  RETURN (SELECT COALESCE(SUM(personalartifacthistory.cost), 0) FROM personalartifacthistory WHERE idstudent = id);
@@ -97,6 +98,7 @@ $$ LANGUAGE plpgsql;
  RETURN (SELECT sumQuestsGainForStudent(id) - sumArtifactsCostForStudent(id) FROM student WHERE idstudent = id);
  END;
  $$ LANGUAGE plpgsql;
+
  CREATE OR REPLACE FUNCTION showStudentsWallets () RETURNS TABLE (StudentId INTEGER, Wallet INTEGER) AS $$
  BEGIN
  RETURN QUERY (SELECT idstudent, showWallet(idstudent) FROM student);
