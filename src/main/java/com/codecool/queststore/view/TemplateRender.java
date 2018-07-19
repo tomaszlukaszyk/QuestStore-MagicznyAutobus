@@ -12,6 +12,17 @@ public class TemplateRender implements RenderInteface{
 
     @Override
     public String RenderClassPage() {
+        /* headerData:
+            type: Map<String, String>
+            key: hName, hSurname, role, wallet
+           data:
+            type: Map<String, Object>
+            key,valueType: classes, List<Map>; mentors, List<Map>; students, List<Map>
+            classes keys: id, desc; mentors\students keys: id, fullName
+           title:
+            type: String
+        * */
+
             Map<String, Object> data = getClassDataMap();
             String title = "Class";
 
@@ -57,6 +68,15 @@ public class TemplateRender implements RenderInteface{
     }
 
     public String RenderProfilePage() {
+        /* headerData:
+            type: Map<String, String>
+            key: hName, hSurname, role, wallet
+           data:
+            type: Map<String, Object>
+            key,valueType: email, String; adress, String; classes, List<Map>; items/students, List<Map>
+           title:
+            type: String
+        * */
         Map<String, Object> data = getProfileDataMap();
         String title = "Profile";
 
@@ -107,6 +127,17 @@ public class TemplateRender implements RenderInteface{
     }
 
     public String RenderListPage() {
+        /* headerData:
+            type: Map<String, String>
+            key: hName, hSurname, role, wallet
+           data:
+            type: Map<String, Object>
+            key,valueType: items, List<Map>
+            items keys: id, title, category, desc, cost, fileName
+           title:
+            type: String
+        * */
+
         Map<String, Object> data = getProfileDataMap();
         String title = "students";
 
@@ -127,6 +158,17 @@ public class TemplateRender implements RenderInteface{
 
     @Override
     public String RenderShopPage() {
+        /* headerData:
+            type: Map<String, String>
+            key: hName, hSurname, role, wallet
+           data:
+            type: Map<String, Object>
+            key,valueType: classes, List<Map>; mentors, List<Map>; students, List<Map>
+            classes keys: id, desc; mentors\students keys: id, fullName
+           title:
+            type: String
+        * */
+
         Map<String, Object> data = getShopDataMap();
         String title = "Shop";
 
@@ -146,6 +188,17 @@ public class TemplateRender implements RenderInteface{
 
     @Override
     public String RenderQuestPage() {
+        /* headerData:
+            type: Map<String, String>
+            key: hName, hSurname, role, wallet
+           data:
+            type: Map<String, Object>
+            key,valueType: classes, List<Map>; mentors, List<Map>; students, List<Map>
+            classes keys: id, desc; mentors\students keys: id, fullName
+           title:
+            type: String
+        * */
+
         Map<String, Object> data = getQuestDataMap();
         String title = "Shop";
 

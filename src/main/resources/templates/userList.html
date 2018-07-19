@@ -34,7 +34,7 @@
                             <span id="list-users">
                                 <ol class="list">
                                     {% for user in data.users %}
-                                        <li>{{ user }}</li>
+                                        <li id="{{ user.id }}">{{ user.fullName }}</li>
                                     {% endfor %}
                                 </ol>
                             </span>
