@@ -8,20 +8,22 @@ public class Quest {
     private final String IMAGE_FILENAME;
     private final String IMAGE_MARKED_FILENAME;
     private final QuestCategory CATEGORY;
+    private final int QUEST_HISTORY_ID;
 
 
-    public Quest(String name, String description, int value, String imageName, String imageMarkedName, QuestCategory category, boolean isDone) {
-        NAME = name;
-        DESCRIPTION = description;
+    public Quest(int id, String name, String description, int value, String imageName, String imageMarkedName, QuestCategory category, boolean isDone) {
+        this.NAME = name;
+        this.DESCRIPTION = description;
         this.value = value;
         this.IMAGE_FILENAME = imageName;
         this.IMAGE_MARKED_FILENAME = imageMarkedName;
         this.CATEGORY = category;
         this.IS_DONE = isDone;
+        this.QUEST_HISTORY_ID = id;
     }
 
-    public Quest(String name, String description, int value, String imageName, String imageMarkedName, boolean isDone) {
-        this(name, description, value, imageName, imageMarkedName, QuestCategory.SIMPLE, isDone);
+    public Quest(int id, String name, String description, int value, String imageName, String imageMarkedName, boolean isDone) {
+        this(id, name, description, value, imageName, imageMarkedName, QuestCategory.SIMPLE, isDone);
     }
 
 }
