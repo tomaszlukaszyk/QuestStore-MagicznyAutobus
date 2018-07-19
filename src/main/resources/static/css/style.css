@@ -1,0 +1,371 @@
+html {
+    background-color: black;
+}
+
+/*common style*/
+.main {
+    background-color: black;
+    color: lime;
+    font-family: Courier;
+    font-weight: bold;
+    display: flex;
+    flex-flow: row wrap;
+    height: 100%;
+}
+
+
+button {
+    background: black;
+    color: lime;
+    border: 2px lime solid;
+}
+
+h1 {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 0.5em;
+    flex-basis: 100%
+}
+
+
+/*header style*/
+header {
+    display: flex;
+    justify-content: space-between;
+    flex-basis: auto;
+    border-top: 2px lime dashed;
+    border-bottom: 2px lime dashed;
+    height: 20%;
+}
+
+header p {
+    align-self: center;
+}
+
+header a {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+}
+
+#informations {
+    display: flex;
+    flex-flow: column wrap;
+    flex-basis: 20%;
+    padding-left: 2%; 
+}
+
+#logo {
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+    margin-left: 1%;
+    border-radius: 50%;
+    filter: brightness(4);
+}
+
+#logout {
+    border-radius: 100%;
+    width: 50%;
+    filter: brightness(4);
+    align-self: center;
+    margin-right: 1%; 
+}
+
+
+/*navigation bar style*/
+nav {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 10%;
+    border-right: 2px lime dashed;
+    align-items: center;
+    padding-top: 10px;
+}
+nav a {
+    padding: 2px;
+    text-decoration: none;
+}
+nav a:hover {
+    text-decoration: underline
+}
+
+
+/*content contener style*/
+.contener {
+    display: flex;
+    flex-basis: 89%;
+}
+
+
+/*footer style*/
+footer {
+    background-color: inherit;
+    position: sticky;
+    bottom: 0px;
+    flex-shrink: 0;
+    flex-basis: 100%;
+    border-top: 2px lime dashed;
+}
+
+footer p {
+    text-align: center;
+}
+
+
+footer a:link, footer a:visited, nav a:link, nav a:visited, footer a:focus {
+    color: lime;
+    outline: 0;
+    border-bottom: none;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted white;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 150px;
+    background-color: black;
+    color: lime;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    
+}
+
+
+/*class content style*/
+.class-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1em;
+    padding-top: 1em; 
+    padding-left: 1em;
+    padding-bottom: 1em;
+    padding-right: 1em;
+    grid-template-areas: "a";
+    width: 100%;
+}
+
+.class-column {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    border: 2px lime solid;
+}
+
+.classes {
+    display: flex;
+    flex-flow: column nowrap;
+    padding-left: 10%;
+}
+
+.class-column .classes p {
+    border-bottom-style: none;
+}
+
+.class-column p {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0.5em;
+    border-bottom: 2px lime  dashed;
+}
+
+ul {
+    list-style-type: none;
+}
+
+
+/*admin panel style*/
+.content-admin {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-gap: 1em;
+    padding-top: 1em; 
+    padding-left: 1em;
+    padding-bottom: 1em;
+    padding-right: 1em;
+    grid-template-areas: "a";
+}
+
+.adminPanelContent {
+    display: grid;
+    grid-template-columns: 50%;
+    grid-gap: 1em;
+    padding-top: 1em; 
+    padding-left: 1em;
+    padding-bottom: 1em;
+    padding-right: 1em;
+    justify-content: center;
+
+}
+
+#adminPanel {
+
+    border: 2px lime solid;
+    text-align: center;
+    padding-bottom: 5%;
+    padding-top: 5%;
+}
+
+
+#loginsubmitbutton {
+    visibility: hidden;
+}
+
+#rankList {
+    padding: 0;
+}
+
+
+/*mentor edit style*/
+.list-column {
+    grid-area: a;
+}
+
+.edit-form {
+    grid-area: b;
+    display: flex;
+    flex-flow: column nowrap;
+    border: 2px lime solid;
+
+}
+
+.edit-form form {
+    align-self: center;
+    text-align: center;
+    padding-bottom: 1em;
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0.5em;
+    border-bottom: 2px lime  dashed;
+}
+
+input {
+    border: 2px lime dotted;
+    padding: 2px 2px;
+    background: black;
+    text-align: center;
+    color: lime;
+}
+
+input::-moz-placeholder {
+    color: lime;
+    text-align: center;
+}
+
+#mentorsubmitbutton {
+    visibility: hidden;
+}
+
+
+/*profile style*/
+.content-profile {
+    display: flex;
+    justify-content: space-around;
+    flex-basis: 100%;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.profile-view {
+    padding-top: 2%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 5%;
+}
+
+.content-box {
+    display: flex;
+    flex-flow: column nowrap;
+    border: 0.1em solid;
+    padding: 1em;
+    background: black;
+    }
+
+div.content-box span {
+    font-weight: bold;
+}
+
+.buttonBar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+/*shop/quests style*/
+.content-shop {
+    display: grid;
+    grid-gap: 1em;
+    padding-top: 1em; 
+    padding-left: 1em;
+    
+}
+
+.btnPanel {
+    display: flex;
+    justify-content: space-around;
+}
+
+.shopitems{
+    display: flex;
+    flex-flow: row wrap;
+    align-content: center;
+    
+}
+
+.shopitem{
+    flex-basis: 40%;
+    margin: 3%; 
+    
+}
+
+.column-shop {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.classes {
+    display: flex;
+    flex-flow: column nowrap;
+    padding-left: 10%;
+}
+
+.shopitem img {
+    width: 100%;
+    filter: brightness(2);
+}
+.column .classes p {
+    border-bottom-style: none;
+}
+
+
+

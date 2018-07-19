@@ -1,13 +1,16 @@
 package com.codecool.queststore;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+import com.codecool.queststore.model.server.Server;
+
+public class App {
+
+    public static void main(String[] args){
+        Server server = new Server();
+        try {
+            server.run();
+        }catch (Exception e){
+            System.out.println(e.getStackTrace());
+        }
     }
+
 }

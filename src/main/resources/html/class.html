@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Class</title>
+        <!--style sheet ref-->
+        <link rel="stylesheet" href="style.css">
+<!--        <link rel="stylesheet" href="classStyle.css">-->
+        <script src="../javascript/scripts.js"></script>
+    </head>
+    
+    <body>
+        <div class="main">
+    <!--        <script>setDot("class1");</script>-->
+            <!--header-->
+            <header include="header.html"></header>
+            <!--nav bar-->
+            <nav include="navigation.html"></nav>
+            <!--content-->
+            <div class="contener">
+                <div class="class-content">
+                    <div class="class-column">
+                        <p>Classes</p>
+                        <u>
+                        <span class="classes" id="list-class">
+                                <p id="class1" onclick="showDetails('class1')">2018-1</p>
+                                <p id="class2" onclick="showDetails('class2')">2018-2</p>
+                                <p id="class3" onclick="showDetails('class3')">2018-3</p>
+                        </span>
+                        </u>
+                    </div>
+                    <div class="class-column">
+                        <p>Assigned mentors</p>
+                        <span id="list-mentor"></span>
+                    </div>
+                    <div class="class-column">
+                        <p>Students</p>
+                        <span id="list-student"></span>
+                    </div>
+                </div>
+            </div>
+            <!--footer-->
+            <footer include="footer.html"></footer>
+        </div>
+        <script>includeHTML();</script>        
+    </body>
+</html>
