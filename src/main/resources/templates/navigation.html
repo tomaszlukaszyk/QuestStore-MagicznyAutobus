@@ -4,4 +4,6 @@
 <a href="">STUDENTS</a>
 <a href="">CLASSES</a>
 <a href="">PROFILE</a>
-<template><a href="">CONTROL PANEL</a></template>
+{% if headerData.role ==  "admin" %}
+    <a href="">CONTROL PANEL</a>
+{% endif %}

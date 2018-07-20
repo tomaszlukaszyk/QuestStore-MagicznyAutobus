@@ -18,7 +18,7 @@
             <!--header-->
             <header>{% include "header.html" with headerData %}</header>
             <!--nav bar-->
-            <nav>{% include "navigation.html" ignore missing %}</nav>
+            <nav>{% include "navigation.html" with headerData %}</nav>
             <div class="contener">
                 <div class="content-list" id="contentdiv">
                     <div id="user-column" class="list-column">
@@ -34,7 +34,7 @@
                             <span id="list-users">
                                 <ol class="list">
                                     {% for user in data.users %}
-                                        <li>{{ user }}</li>
+                                        <li id="{{ user.id }}">{{ user.fullName }}</li>
                                     {% endfor %}
                                 </ol>
                             </span>

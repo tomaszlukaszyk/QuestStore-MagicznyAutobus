@@ -18,11 +18,10 @@
     <!--header-->
     <header>{% include "header.html" with headerData %}</header>
     <!--nav bar-->
-    <nav>{% include "navigation.html" ignore missing %}</nav>
+    <nav>{% include "navigation.html" with headerData %}</nav>
     <div class="contener">
         <div class="content-profile">
             <!--Student view-->
-            <!--<div id="student-view" class="profile-view">-->
             {% if headerData.role == "student" %}
                 <div class="content-box">
                     <p>Personal Data:</p>
