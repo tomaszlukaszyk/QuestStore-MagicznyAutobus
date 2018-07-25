@@ -6,6 +6,39 @@ public class Artifact {
     private final String DESCRIPTION;
     private final int COST; // his COST while bought
     private final String IMAGE_FILENAME;
+
+    public String getNAME() {
+        return NAME;
+    }
+
+    public String getDESCRIPTION() {
+        return DESCRIPTION;
+    }
+
+    public int getCOST() {
+        return COST;
+    }
+
+    public String getIMAGE_FILENAME() {
+        return IMAGE_FILENAME;
+    }
+
+    public String getIMAGE_MARKED_FILENAME() {
+        return IMAGE_MARKED_FILENAME;
+    }
+
+    public Boolean getIS_USED() {
+        return IS_USED;
+    }
+
+    public ArtifactCategory getCATEGORY() {
+        return CATEGORY;
+    }
+
+    public int getARTIFACT_HISTORY_ID() {
+        return ARTIFACT_HISTORY_ID;
+    }
+
     private final String IMAGE_MARKED_FILENAME;
     private final Boolean IS_USED;
     private final ArtifactCategory CATEGORY;
