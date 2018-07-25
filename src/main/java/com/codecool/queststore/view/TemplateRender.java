@@ -326,10 +326,4 @@ public class TemplateRender implements RenderInteface{
         headerData.put("wallet", "1000");
         return headerData;
     }
-
-
-    public static void main(String[] args) {
-        RenderInteface rf = new TemplateRender();
-        System.out.println(rf.RenderQuestPage());
-    }
 }
