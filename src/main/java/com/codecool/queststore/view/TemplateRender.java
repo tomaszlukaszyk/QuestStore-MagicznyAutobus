@@ -81,8 +81,12 @@ public class TemplateRender implements RenderInteface{
          */
 
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
+        TemplateModelInterface tmi = new TemplateModelHandler();
 
-        return template.render(getMentorProfileModel());
+        //render from stab
+//        return template.render(getMentorProfileModel());
+        //render from args
+        return template.render(tmi.getProfileMentorModel(currentUser, profile, classes));
     }
 
     @Override
@@ -95,8 +99,13 @@ public class TemplateRender implements RenderInteface{
          */
 
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
+        TemplateModelInterface tmi = new TemplateModelHandler();
 
-        return template.render(getStudentProfileModel());
+        // render from stab
+//        return template.render(getStudentProfileModel());
+
+        // render from args
+        return template.render(tmi.getProfileStudentModel(currentUser, profile, ccClass, items));
     }
 
 //    public String RenderProfilePage(JtwigModel model) {
@@ -115,8 +124,8 @@ public class TemplateRender implements RenderInteface{
     private JtwigModel getMentorProfileModel() {
         TemplateModelInterface tmi = new TemplateModelHandler();
         UserFactory uf = new UserFactory();
-        User currentUser = uf.fromData("Piotr", "Kaminski", "pkaminki95@gmail.com", 1, Role.STUDENT);
-        User user = uf.fromData("Pawel", "Kaminski", "kaminski21@gmail.com", 2, Role.MENTOR);
+        User currentUser = new User("Piotr", "Kaminski", "pkaminki95@gmail.com", "address", 1, Role.STUDENT);
+        User user = new User("Pawel", "Kaminski", "kaminski21@gmail.com", "address", 2, Role.MENTOR);
         List<CodecoolClass> classes = new ArrayList<>();
 
         for (int i = 1; i <= 3; i++) {
