@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 
-{% set headerData = headerData %}
-{% set data = data %}
-
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -16,9 +13,9 @@
     <body>
         <div class="main">
             <!--header-->
-            <header>{% include "header.html" with headerData %}</header>
+            <header>{% include "header.html" with currentUser %}</header>
             <!--nav bar-->
-            <nav>{% include "navigation.html" with headerData %}</nav>
+            <nav>{% include "navigation.html" with currentUser %}</nav>
             <!--content-->
             <div class="contener">
                 <div class="class-content">
@@ -26,8 +23,8 @@
                         <p>Classes</p>
                         <u>
                         <span class="classes" id="list-class">
-                                {% for class in data.classes%}
-                                    <p id="{{ class.id }}">{{ class.desc }}</p><br>
+                                {% for class in classes%}
+                                    <p>{{ class.desc }}</p><br>
                                 {% endfor %}
                         </span>
                         </u>

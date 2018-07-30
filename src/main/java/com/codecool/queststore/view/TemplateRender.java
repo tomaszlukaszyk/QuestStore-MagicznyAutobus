@@ -1,5 +1,10 @@
 package com.codecool.queststore.view;
 
+import com.codecool.queststore.model.classes.CodecoolClass;
+import com.codecool.queststore.model.shop.artifact.Artifact;
+import com.codecool.queststore.model.user.Role;
+import com.codecool.queststore.model.user.User;
+import com.codecool.queststore.model.user.UserFactory;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
@@ -67,63 +72,33 @@ public class TemplateRender implements RenderInteface{
         return data;
     }
 
-    public String RenderProfilePage() {
-        /* headerData:
-            type: Map<String, String>
-            key: hName, hSurname, role, wallet
-           data:
-            type: Map<String, Object>
-            key,valueType: email, String; adress, String; classes, List<Map>; items/students, List<Map>
-           title:
-            type: String
-        * */
-        Map<String, Object> data = getProfileDataMap();
-        String title = "Profile";
+    public String RenderProfilePage(JtwigModel model) {
+        /* Model
+         * currentUser - active user
+         * profile - user with data we want to show
+         * ccClass - CodecoolClass of user
+         * items - list of user's Artifacts
+         */
 
-        // get a template file
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
-
-        // create a model that will be passed to a template
-        JtwigModel model = JtwigModel.newModel();
-
-        // fill the model with values
-        model.with("headerData", data.get("headerData"));
-        model.with("data", data);
-        model.with("title", title);
 
         return template.render(model);
     }
 
-    private Map<String,Object> getProfileDataMap() {
-        // mock data
-        List<String> classes = new ArrayList<>();
-        List<String> students = new ArrayList<>();
-//        List<String> items = new ArrayList<>();
+    public static JtwigModel getProfileModel() {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+        UserFactory uf = new UserFactory();
+        User currentUser = uf.fromData("Piotr", "Kaminski", "pkaminki95@gmail.com", 1, Role.STUDENT);
+        User user = uf.fromData("Pawel", "Kaminski", "kaminski21@gmail.com", 2, Role.STUDENT);
+        CodecoolClass ccClass = new CodecoolClass("2018.1", null, null);
+        List<Artifact> artifacts = new ArrayList<>();
 
-        classes.add("2018.1");
-        classes.add("2018.2");
-        classes.add("2018.3");
-//        for (int i= 0; i < 3; i++) {
-//            items.add("item " + Integer.toString(i));
-//        }
+        for (int i = 1; i <= 3; i++) {
+            Artifact a = new Artifact(i, "item" + String.valueOf(i), ".", 1, ".", ".");
+            artifacts.add(a);
+        }
 
-        students.add("Piotr Kaminski");
-        students.add("Pawel Kaminski");
-        students.add("Jakub Marmol");
-
-
-        Map<String, Object> data = new HashMap<>();
-
-        data.put("headerData", getHeaderData());
-        data.put("email", "pkaminski@o2.pl");
-        data.put("address", "Slusarska 9");
-        data.put("class", "2018.1");
-        data.put("classes", classes);
-//        data.put("items", items);
-        data.put("users", students);
-//        data.put("students", students);
-
-        return data;
+        return tmi.getProfileStudentModel(currentUser, user, ccClass, artifacts);
     }
 
     public String RenderListPage() {
@@ -138,7 +113,7 @@ public class TemplateRender implements RenderInteface{
             type: String
         * */
 
-        Map<String, Object> data = getProfileDataMap();
+//        Map<String, Object> data = getProfileDataMap();
         String title = "students";
 
         // get a template file
@@ -146,12 +121,12 @@ public class TemplateRender implements RenderInteface{
 
         // create a model that will be passed to a template
         JtwigModel model = JtwigModel.newModel();
-
-        // fill the model with values
-        model.with("headerData", data.get("headerData"));
-        model.with("data", data);
-        model.with("title", title + " List");
-        model.with("listName", title);
+//
+//        // fill the model with values
+//        model.with("headerData", data.get("headerData"));
+//        model.with("data", data);
+//        model.with("title", title + " List");
+//        model.with("listName", title);
 
         return template.render(model);
     }
@@ -330,6 +305,6 @@ public class TemplateRender implements RenderInteface{
 
     public static void main(String[] args) {
         RenderInteface rf = new TemplateRender();
-        System.out.println(rf.RenderQuestPage());
+        System.out.println(rf.RenderProfilePage(TemplateRender.getProfileModel()));
     }
 }

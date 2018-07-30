@@ -1,15 +1,20 @@
 package com.codecool.queststore.view;
 
+import com.codecool.queststore.model.classes.CodecoolClass;
+import com.codecool.queststore.model.shop.artifact.Artifact;
+import com.codecool.queststore.model.shop.quest.Quest;
+import com.codecool.queststore.model.user.User;
 import org.jtwig.JtwigModel;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.List;
 import java.util.Map;
 
 public interface TemplateModelInterface {
-    JtwigModel getClassModel(Map<String, String> user, Map<String, Object> ccClass);
-    JtwigModel getProfileStudentModel(Map<String, String> logedUser, Map<String, String> user, String ccClass, Map<String, String> items);
-    JtwigModel getProfileMentorModel(Map<String, String> logedUser, Map<String, String> user, List<Map<String, Object>> classes);
-    JtwigModel getUserListModel(Map<String, String> logedUser, List<Map<String, String>> users);
-    JtwigModel getQuestModel(Map<String, String> logedUser, List<Map<String, String>> quests);
-    JtwigModel getArtifactModel(Map<String, String> logedUser, List<Map<String, String>> artifacts);
+    JtwigModel getClassModel(User user, CodecoolClass ccClass);
+    JtwigModel getProfileStudentModel(User currentUser, User profile, CodecoolClass ccClass, List<Artifact> items);
+    JtwigModel getProfileMentorModel(User logedUser, User user, List<CodecoolClass> classes);
+    JtwigModel getUserListModel(User logedUser, List<User> users);
+    JtwigModel getQuestModel(User logedUser, List<Quest> quests);
+    JtwigModel getArtifactModel(User logedUser, List<Artifact> artifacts);
 }
