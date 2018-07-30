@@ -34,7 +34,7 @@ public class SessionPool {
     }
 
 
-    private static void terminate(Session session) {
+    public static void terminate(Session session) {
         sessions.remove(session);
         System.out.println("removed Session ID " + session.getUuid());
         writeObject();

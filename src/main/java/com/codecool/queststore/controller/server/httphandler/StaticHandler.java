@@ -39,7 +39,7 @@ public class StaticHandler implements HttpHandler {
 
     private void send404(HttpExchange httpExchange) throws IOException {
         String response = "404 (Not Found)\n";
-        httpExchange.sendResponseHeaders(404, response.length());
+        httpExchange.sendResponseHeaders(ResponsesEnum.NF.getCode(), response.length());
         OutputStream os = httpExchange.getResponseBody();
         os.write(response.toString().getBytes());
         os.close();
@@ -53,7 +53,7 @@ public class StaticHandler implements HttpHandler {
         String mime = resolver.getMimeType();
 
         httpExchange.getResponseHeaders().set("Content-Type", mime);
-        httpExchange.sendResponseHeaders(200, 0);
+        httpExchange.sendResponseHeaders(ResponsesEnum.OK.getCode(), 0);
 
         OutputStream os = httpExchange.getResponseBody();
 

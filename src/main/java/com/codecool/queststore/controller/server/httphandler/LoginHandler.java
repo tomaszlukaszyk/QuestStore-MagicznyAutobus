@@ -2,7 +2,6 @@ package com.codecool.queststore.controller.server.httphandler;
 
 import com.codecool.queststore.controller.server.service.LoginService;
 import com.codecool.queststore.model.server.session.Session;
-import com.codecool.queststore.model.server.session.SessionPool;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -44,8 +43,7 @@ public class LoginHandler extends AbstractHttphandler implements HttpHandler {
             URL fileURL = getClass().getClassLoader().getResource(path);
             sendFile(httpExchange, fileURL);
         } else {
-            httpExchange.getResponseHeaders().set("Location", "profile");
-            httpExchange.sendResponseHeaders(302, -1); // execute redirect
+            redirect(httpExchange,"/profile");
         }
     }
 
@@ -60,8 +58,7 @@ public class LoginHandler extends AbstractHttphandler implements HttpHandler {
         if (session != null) {
             HttpCookie cookie = session.getCookie();
             httpExchange.getResponseHeaders().add("Set-Cookie", cookie.getValue());
-            httpExchange.getResponseHeaders().set("Location", "profile");
-            httpExchange.sendResponseHeaders(302, -1); // execute redirect
+            redirect(httpExchange,"profile");
             System.out.println("generated cookie \\/");
             System.out.println(cookie.toString());
         }

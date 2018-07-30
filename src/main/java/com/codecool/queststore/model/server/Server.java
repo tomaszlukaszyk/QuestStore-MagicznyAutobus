@@ -29,7 +29,8 @@ public class Server {
 
     private void setContext(HttpServer server){
         server.createContext("/", new LoginHandler());
-        server.createContext("/profile", new TestHandler());
+        server.createContext("/profile", new ProfileHandler());
+        server.createContext("/logout", new LogoutHandler());
         server.createContext("/static", new StaticHandler());
     }
 
