@@ -8,10 +8,9 @@ import com.codecool.queststore.model.user.UserFactory;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TemplateRender implements RenderInteface{
 
@@ -101,17 +100,16 @@ public class TemplateRender implements RenderInteface{
         return tmi.getProfileStudentModel(currentUser, user, ccClass, artifacts);
     }
 
-    public String RenderListPage() {
+    public String RenderListPage(User currentUser, List<User> users) {
+        /* User list model:
+         *  currentUser - active user
+         *  items - list of user's
+         */
+        TemplateModelInterface tmi = new TemplateModelHandler();
 
-        String title = "students";
-
-        // get a template file
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/userList.html");
 
-        // create a model that will be passed to a template
-        JtwigModel model = JtwigModel.newModel();
-
-        return template.render(model);
+        return template.render(tmi.getUserListModel(currentUser, users));
     }
 
     @Override
@@ -144,6 +142,12 @@ public class TemplateRender implements RenderInteface{
 
     public static void main(String[] args) {
         RenderInteface rf = new TemplateRender();
-        System.out.println(rf.RenderProfilePage(null, null, null));
+        User currentUser = new User("Piotr", "Kaminski", "pkaminki95@gmail.com", "address", 1, Role.MENTOR);
+//        System.out.println(rf.RenderProfilePage(null, null, null));
+
+        TemplateRender tr = new TemplateRender();
+        List<User> users = tr.getUserList(Role.STUDENT, 5);
+
+        System.out.println(rf.RenderListPage(currentUser, users));
     }
 }

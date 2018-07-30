@@ -16,7 +16,7 @@ public interface RenderInteface {
     // student profile
     String RenderProfilePage(User currentUser, User profile, CodecoolClass ccClass, List<Artifact> items);
 
-    String RenderListPage();
+    String RenderListPage(User currentUser, List<User> users);
 
     String RenderShopPage();
 
