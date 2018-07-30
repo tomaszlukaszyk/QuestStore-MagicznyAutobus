@@ -2,6 +2,7 @@ package com.codecool.queststore.model.shop.artifact;
 
 public class Artifact {
 
+    private final int ID;
     private final String NAME;
     private final String DESCRIPTION;
     private final int COST; // his COST while bought
@@ -12,7 +13,8 @@ public class Artifact {
     private final int ARTIFACT_HISTORY_ID;
 
 
-    public Artifact(int id,String name, String description, int cost, String imageName, String imageMarkedName, ArtifactCategory category, boolean isUsed) {
+    public Artifact(int id, int historyId, String name, String description, int cost, String imageName, String imageMarkedName, ArtifactCategory category, boolean isUsed) {
+        this.ID = id;
         this.NAME = name;
         this.DESCRIPTION = description;
         this.COST = cost;
@@ -20,13 +22,15 @@ public class Artifact {
         this.IMAGE_MARKED_FILENAME = imageMarkedName;
         this.CATEGORY = category;
         this.IS_USED = isUsed;
-        this.ARTIFACT_HISTORY_ID = id;
+        this.ARTIFACT_HISTORY_ID = historyId;
     }
 
-    public Artifact(int id,String name, String description, int cost, String imageName, String imageMarkedName, boolean isUsed) {
-        this(id, name, description, cost, imageName, imageMarkedName, ArtifactCategory.PERSONAL, isUsed);
+    public Artifact(int id, int historyId, String name, String description, int cost, String imageName, String imageMarkedName, boolean isUsed) {
+        this(id, historyId, name, description, cost, imageName, imageMarkedName, ArtifactCategory.PERSONAL, isUsed);
     }
-
+    public int getID() {
+        return ID;
+    }
     public String getNAME() {
         return NAME;
     }
