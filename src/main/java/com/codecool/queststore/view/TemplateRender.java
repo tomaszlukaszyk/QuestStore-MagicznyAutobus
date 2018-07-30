@@ -2,6 +2,7 @@ package com.codecool.queststore.view;
 
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
+import com.codecool.queststore.model.shop.quest.Quest;
 import com.codecool.queststore.model.user.Role;
 import com.codecool.queststore.model.user.User;
 import com.codecool.queststore.model.user.UserFactory;
@@ -113,31 +114,23 @@ public class TemplateRender implements RenderInteface{
     }
 
     @Override
-    public String RenderShopPage() {
-
-        String title = "Shop";
+    public String RenderShopPage(User currentUser, List<Artifact> artifacts) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
 
         // get a template file
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/shop.html");
 
-        // create a model that will be passed to a template
-        JtwigModel model = JtwigModel.newModel();
-
-        return template.render(model);
+        return template.render(tmi.getArtifactModel(currentUser, artifacts));
     }
 
     @Override
-    public String RenderQuestPage() {
-
-        String title = "Shop";
+    public String RenderQuestPage(User currentUser, List<Quest> quests) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
 
         // get a template file
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/quests.html");
 
-        // create a model that will be passed to a template
-        JtwigModel model = JtwigModel.newModel();
-
-        return template.render(model);
+        return template.render(tmi.getQuestModel(currentUser, quests));
     }
 
     public static void main(String[] args) {
