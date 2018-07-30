@@ -61,11 +61,21 @@ class TemplateModelHandler implements TemplateModelInterface {
 
     @Override
     public JtwigModel getQuestModel(User currentUser, List<Quest> quests) {
-        return null;
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("items", quests);
+        model.with("title", "Quests");
+
+        return model;
     }
 
     @Override
     public JtwigModel getArtifactModel(User currentUser, List<Artifact> artifacts) {
-        return null;
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("items", artifacts);
+        model.with("title", "Shop");
+
+        return model;
     }
 }
