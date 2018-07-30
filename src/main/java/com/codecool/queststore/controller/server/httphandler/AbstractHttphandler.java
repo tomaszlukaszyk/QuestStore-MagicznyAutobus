@@ -1,26 +1,28 @@
 package com.codecool.queststore.controller.server.httphandler;
 
 import com.codecool.queststore.controller.server.helpers.MimeTypeResolver;
+import com.codecool.queststore.model.server.session.SessionPool;
+import com.sun.net.httpserver.HttpExchange;
 
 import java.io.*;
 import java.net.HttpCookie;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.codecool.queststore.model.server.session.SessionPool;
-import com.sun.net.httpserver.HttpExchange;
 
-import java.net.URL;
-
-
-    abstract class AbstractHttphandler {
+abstract class AbstractHttphandler {
 
         boolean isCookieValid(HttpCookie cookie) {
              return SessionPool.isSessionByCookie(cookie);
-
         }
 
+        void redirect(HttpExchange httpExchange, String path) throws IOException {
+            final int NOW = -1;
+            httpExchange.getResponseHeaders().set("Location", path);
+            httpExchange.sendResponseHeaders(ResponsesEnum.REDIRECT.getCode(), NOW);
+        }
 
         Map<String, String> parseFormData(HttpExchange httpExchange) throws IOException {
             InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");

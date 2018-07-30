@@ -20,7 +20,7 @@ public class TestHandler implements HttpHandler {
         String response = "<html><body>" +
                 "<h1> Witam w profilu xD </h1>" +
                 "</body></html>";
-        httpExchange.sendResponseHeaders(200, response.length());
+        httpExchange.sendResponseHeaders(ResponsesEnum.REDIRECT.getCode(), response.length());
         OutputStream os = httpExchange.getResponseBody();
         os.write(response.getBytes());
         os.close();

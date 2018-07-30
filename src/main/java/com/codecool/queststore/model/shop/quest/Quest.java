@@ -26,5 +26,36 @@ public class Quest {
         this(id, name, description, value, imageName, imageMarkedName, QuestCategory.SIMPLE, isDone);
     }
 
+    public String getNAME() {
+        return NAME;
+    }
+
+    public String getDESCRIPTION() {
+        return DESCRIPTION;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public boolean isIS_DONE() {
+        return IS_DONE;
+    }
+
+    public String getIMAGE_FILENAME() {
+        return IMAGE_FILENAME;
+    }
+
+    public String getIMAGE_MARKED_FILENAME() {
+        return IMAGE_MARKED_FILENAME;
+    }
+
+    public QuestCategory getCATEGORY() {
+        return CATEGORY;
+    }
+
+    public int getQUEST_HISTORY_ID() {
+        return QUEST_HISTORY_ID;
+    }
 }
 
