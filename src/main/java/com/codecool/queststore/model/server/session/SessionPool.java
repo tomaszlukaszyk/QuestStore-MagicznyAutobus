@@ -34,13 +34,13 @@ public class SessionPool {
     }
 
 
-    private static void terminate(Session session) {
+    public static void terminate(Session session) {
         sessions.remove(session);
         System.out.println("removed Session ID " + session.getUuid());
         writeObject();
     }
 
-    public static Session getSessionbyUUID( UUID uuid)
+    public static Session getSessionByUUID( UUID uuid)
     {
         expireCheckAndClean();
         for (Session session: sessions) {
@@ -52,7 +52,7 @@ public class SessionPool {
         return null;
     }
 
-    public static boolean isSessionbyCookie( HttpCookie cookie)
+    public static boolean isSessionByCookie(HttpCookie cookie)
     {
         expireCheckAndClean();
         for (Session session: sessions) {

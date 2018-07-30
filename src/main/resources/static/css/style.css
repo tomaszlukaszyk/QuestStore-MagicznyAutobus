@@ -20,6 +20,12 @@ button {
     border: 2px lime solid;
 }
 
+.addBtn {
+    background: black;
+    color: lime;
+    border: 2px lime dotted;
+}
+
 h1 {
     display: flex;
     justify-content: space-around;
@@ -241,7 +247,31 @@ ul {
 }
 
 
-/*mentor edit style*/
+/*list style*/
+.content-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-gap: 1em;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-bottom: 1em;
+    padding-right: 1em;
+    grid-template-areas: "b a";
+}
+
+.content-list-form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 1em;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-bottom: 1em;
+    padding-right: 1em;
+    grid-template-areas: "a b";
+}
+
 .list-column {
     grid-area: a;
 }
@@ -264,7 +294,18 @@ h2 {
     display: flex;
     justify-content: center;
     padding-bottom: 0.5em;
-    border-bottom: 2px lime  dashed;
+}
+
+.listName {
+    border-bottom: lime 2px dashed;
+    display: flex;
+    justify-content: center;
+    flex-basis: 100%;
+    }
+
+.list-pos {
+    display: flex;
+    justify-content: center;
 }
 
 input {
@@ -284,6 +325,13 @@ input::-moz-placeholder {
     visibility: hidden;
 }
 
+.addBtnPos {
+    display: flex;
+    flex-direction: column;
+    height: 72px;
+    justify-content: center;
+    padding-left: 5px;
+}
 
 /*profile style*/
 .content-profile {
@@ -367,5 +415,33 @@ div.content-box span {
     border-bottom-style: none;
 }
 
+/*login page*/
+#loginform {
+    text-align: center;
+    padding-top: 3em;
+    color: lime;
+}
 
+#loginform input {
+    padding: 1em;
+}
 
+#loginform button {
+    padding: 0.5em;
+    margin-top: 50px;
+}
+
+#loginpage {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 33% 33% 33%;
+    grid-template-areas: "a a a"
+                         "d b h"
+                         "c c c";
+}
+
+#logindiv {
+    grid-area: b;
+    border: 2px lime solid;
+
+}

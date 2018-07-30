@@ -1,15 +1,16 @@
+<!DOCTYPE html>
+
 {% set headerData = headerData %}
 {% set data = data %}
 
-<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>class</title>
         <!--style sheet ref-->
-        <link rel="stylesheet" href="/QuestStore-MagicznyAutobus/src/main/resources/static/css/style.css">
-        <!--<script src="../javascript/scripts.js"></script>-->
+        <link rel="stylesheet" href="static/css/style.css">
+        <!--<script src="static/javascript/scripts.js"></script>-->
     </head>
     
     <body>
@@ -17,7 +18,7 @@
             <!--header-->
             <header>{% include "header.html" with headerData %}</header>
             <!--nav bar-->
-            <nav>{% include "navigation.html" ignore missing %}</nav>
+            <nav>{% include "navigation.html" with headerData %}</nav>
             <!--content-->
             <div class="contener">
                 <div class="class-content">
@@ -26,7 +27,7 @@
                         <u>
                         <span class="classes" id="list-class">
                                 {% for class in data.classes%}
-                                    <p>{{ class }}</p><br>
+                                    <p id="{{ class.id }}">{{ class.desc }}</p><br>
                                 {% endfor %}
                         </span>
                         </u>
@@ -36,7 +37,7 @@
                         <span id="list-mentor">
                             <ul>
                             {% for mentor in data.mentors%}
-                            <li>{{ mentor }}</li><br>
+                            <li id="{{ mentor.id }}">{{ mentor.fullName }}</li><br>
                             {% endfor %}
                             </ul>
                         </span>
@@ -46,7 +47,7 @@
                         <span id="list-student">
                             <ul>
                             {% for student in data.students%}
-                            <li>{{ student }}</li>
+                            <li id="{{ student.id }}">{{ student.fullName }}</li>
                             {% endfor %}
                             </ul>
                         </span>

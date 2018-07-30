@@ -1,7 +1,8 @@
-<a href="">SHOP</a>
-<a href="">QUESTS</a>
-<a href="">MENTORS</a>
-<a href="">STUDENTS</a>
-<a href="">CLASSES</a>
-<a href="">PROFILE</a>
-<template><a href="">CONTROL PANEL</a></template>
+<a href="/shop">SHOP</a>
+<a href="/quests">QUESTS</a>
+<a href="/group">COINCUBATOR</a>
+<a href="/classes">CLASSES</a>
+<a href="/profile">PROFILE</a>
+{% if headerData.role ==  "admin" %}
+    <a href="">CONTROL PANEL</a>
+{% endif %}

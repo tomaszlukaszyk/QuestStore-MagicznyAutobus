@@ -1,7 +1,6 @@
 package com.codecool.queststore.model.server;
 
-import com.codecool.queststore.controller.server.httphandler.LoginHandler;
-import com.codecool.queststore.controller.server.httphandler.TestHandler;
+import com.codecool.queststore.controller.server.httphandler.*;
 import com.codecool.queststore.model.server.session.SessionPool;
 import com.sun.net.httpserver.HttpServer;
 
@@ -30,8 +29,9 @@ public class Server {
 
     private void setContext(HttpServer server){
         server.createContext("/", new LoginHandler());
-        server.createContext("/profile", new TestHandler());
-
+        server.createContext("/profile", new ProfileHandler());
+        server.createContext("/logout", new LogoutHandler());
+        server.createContext("/static", new StaticHandler());
     }
 
     public void stop(){

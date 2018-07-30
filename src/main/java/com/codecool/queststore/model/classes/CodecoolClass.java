@@ -18,6 +18,18 @@ public class CodecoolClass {
         //from dao to class
     }
 
+    public String getNAME() {
+        return NAME;
+    }
+
+    public List<User> getASSIGNED_MENTORS() {
+        return ASSIGNED_MENTORS;
+    }
+
+    public List<User> getASSIGNED_STUDENTS() {
+        return ASSIGNED_STUDENTS;
+    }
+
     public CodecoolClass(String name) {
      this.NAME = name;
      this.ASSIGNED_MENTORS = new ArrayList<>();
