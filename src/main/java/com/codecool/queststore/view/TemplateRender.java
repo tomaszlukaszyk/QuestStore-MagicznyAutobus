@@ -123,7 +123,6 @@ public class TemplateRender implements RenderInteface{
 
     private JtwigModel getMentorProfileModel() {
         TemplateModelInterface tmi = new TemplateModelHandler();
-        UserFactory uf = new UserFactory();
         User currentUser = new User("Piotr", "Kaminski", "pkaminki95@gmail.com", "address", 1, Role.STUDENT);
         User user = new User("Pawel", "Kaminski", "kaminski21@gmail.com", "address", 2, Role.MENTOR);
         List<CodecoolClass> classes = new ArrayList<>();
@@ -139,7 +138,7 @@ public class TemplateRender implements RenderInteface{
     private List<User> getUserList(Role role, int amount) {
         List<User> users = new ArrayList<>();
         for (int i = 1; i <= amount; i++) {
-            users.add(new UserFactory().fromData(role.getNAME(), String.valueOf(i), "---", i, role));
+            users.add(new User(role.getNAME(), String.valueOf(i), "---", "---", i, role));
         }
 
         return users;
@@ -147,14 +146,13 @@ public class TemplateRender implements RenderInteface{
 
     private static JtwigModel getStudentProfileModel() {
         TemplateModelInterface tmi = new TemplateModelHandler();
-        UserFactory uf = new UserFactory();
-        User currentUser = uf.fromData("Piotr", "Kaminski", "pkaminki95@gmail.com", 1, Role.STUDENT);
-        User user = uf.fromData("Pawel", "Kaminski", "kaminski21@gmail.com", 2, Role.STUDENT);
+        User currentUser = new User("Piotr", "Kaminski", "pkaminki95@gmail.com", "address", 1, Role.STUDENT);
+        User user = new User("Pawel", "Kaminski", "kaminski21@gmail.com", "address", 2, Role.MENTOR);
         CodecoolClass ccClass = new CodecoolClass("2018.1", null, null);
         List<Artifact> artifacts = new ArrayList<>();
 
         for (int i = 1; i <= 3; i++) {
-            Artifact a = new Artifact(i, "item" + String.valueOf(i), ".", 1, ".", ".");
+            Artifact a = new Artifact(i, i,"item" + String.valueOf(i), ".", 1, ".", ".", null, false);
             artifacts.add(a);
         }
 
