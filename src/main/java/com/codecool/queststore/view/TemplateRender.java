@@ -5,11 +5,9 @@ import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
 import com.codecool.queststore.model.user.Role;
 import com.codecool.queststore.model.user.User;
-import com.codecool.queststore.model.user.UserFactory;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.List;
 
