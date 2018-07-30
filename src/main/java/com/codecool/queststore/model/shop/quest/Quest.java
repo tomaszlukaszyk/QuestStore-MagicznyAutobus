@@ -38,7 +38,7 @@ public class Quest {
         return value;
     }
 
-    public boolean isIS_DONE() {
+    public boolean IS_DONE() {
         return IS_DONE;
     }
 
@@ -50,8 +50,8 @@ public class Quest {
         return IMAGE_MARKED_FILENAME;
     }
 
-    public QuestCategory getCATEGORY() {
-        return CATEGORY;
+    public String getCATEGORY() {
+        return CATEGORY.getCATEGORY();
     }
 
     public int getQUEST_HISTORY_ID() {
