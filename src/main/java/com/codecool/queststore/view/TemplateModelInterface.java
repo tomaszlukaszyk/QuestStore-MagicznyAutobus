@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 interface TemplateModelInterface {
-    JtwigModel getClassModel(User user, CodecoolClass ccClass);
+    JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes);
     JtwigModel getProfileStudentModel(User currentUser, User profile, CodecoolClass ccClass, List<Artifact> items);
-    JtwigModel getProfileMentorModel(User logedUser, User user, List<CodecoolClass> classes);
-    JtwigModel getUserListModel(User logedUser, List<User> users);
-    JtwigModel getQuestModel(User logedUser, List<Quest> quests);
-    JtwigModel getArtifactModel(User logedUser, List<Artifact> artifacts);
+    JtwigModel getProfileMentorModel(User currentUser, User profile, List<CodecoolClass> classes);
+    JtwigModel getUserListModel(User currentUser, List<User> users);
+    JtwigModel getQuestModel(User currentUser, List<Quest> quests);
+    JtwigModel getArtifactModel(User currentUser, List<Artifact> artifacts);
 }
