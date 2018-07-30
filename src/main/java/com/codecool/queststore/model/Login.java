@@ -16,9 +16,16 @@ public class Login {
     public User SignIn() {
         //todo: implement with using Login DAO
         if (LOGIN.equals(PASSWORD))
-            return new User("Maciek","Sikora","m@com",1,Role.STUDENT);
+            return new User("Maciek","Sikora","m@com","cracow", 0,Role.STUDENT);
         else
             return null;
     }
 
+    public String getLOGIN() {
+        return LOGIN;
+    }
+
+    public String getPASSWORD() {
+        return PASSWORD;
+    }
 }
