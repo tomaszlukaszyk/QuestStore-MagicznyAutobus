@@ -72,20 +72,71 @@ public class TemplateRender implements RenderInteface{
         return data;
     }
 
-    public String RenderProfilePage(JtwigModel model) {
-        /* Model
-         * currentUser - active user
-         * profile - user with data we want to show
-         * ccClass - CodecoolClass of user
-         * items - list of user's Artifacts
+    @Override
+    public String RenderProfilePage(User currentUser, User profile, List<CodecoolClass> classes) {
+        /* Mentor profile model:
+         *  currentUser - active user
+         *  profile - user with data we want to show
+         *  classes - list of Codecool Classes assigned to user
          */
 
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
 
-        return template.render(model);
+        return template.render(getMentorProfileModel());
     }
 
-    public static JtwigModel getProfileModel() {
+    @Override
+    public String RenderProfilePage(User currentUser, User profile, CodecoolClass ccClass, List<Artifact> items) {
+        /* Student profile model:
+         *  currentUser - active user
+         *  profile - user with data we want to show
+         *  ccClass - CodecoolClass of user
+         *  items - list of user's Artifacts
+         */
+
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
+
+        return template.render(getStudentProfileModel());
+    }
+
+//    public String RenderProfilePage(JtwigModel model) {
+//        /* Model
+//         * currentUser - active user
+//         * profile - user with data we want to show
+//         * ccClass - CodecoolClass of user
+//         * items - list of user's Artifacts
+//         */
+//
+//        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
+//
+//        return template.render(get);
+//    }
+
+    private JtwigModel getMentorProfileModel() {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+        UserFactory uf = new UserFactory();
+        User currentUser = uf.fromData("Piotr", "Kaminski", "pkaminki95@gmail.com", 1, Role.STUDENT);
+        User user = uf.fromData("Pawel", "Kaminski", "kaminski21@gmail.com", 2, Role.MENTOR);
+        List<CodecoolClass> classes = new ArrayList<>();
+
+        for (int i = 1; i <= 3; i++) {
+            CodecoolClass c = new CodecoolClass("2018." + i, getUserList(Role.MENTOR, 2), getUserList(Role.STUDENT, 5));
+            classes.add(c);
+        }
+
+        return tmi.getProfileMentorModel(currentUser, user, classes);
+    }
+
+    private List<User> getUserList(Role role, int amount) {
+        List<User> users = new ArrayList<>();
+        for (int i = 1; i <= amount; i++) {
+            users.add(new UserFactory().fromData(role.getNAME(), String.valueOf(i), "---", i, role));
+        }
+
+        return users;
+    }
+
+    private static JtwigModel getStudentProfileModel() {
         TemplateModelInterface tmi = new TemplateModelHandler();
         UserFactory uf = new UserFactory();
         User currentUser = uf.fromData("Piotr", "Kaminski", "pkaminki95@gmail.com", 1, Role.STUDENT);
@@ -305,6 +356,6 @@ public class TemplateRender implements RenderInteface{
 
     public static void main(String[] args) {
         RenderInteface rf = new TemplateRender();
-        System.out.println(rf.RenderProfilePage(TemplateRender.getProfileModel()));
+        System.out.println(rf.RenderProfilePage(null, null, null));
     }
 }

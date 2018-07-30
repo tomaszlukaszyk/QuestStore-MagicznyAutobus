@@ -10,7 +10,7 @@ import javax.jws.soap.SOAPBinding;
 import java.util.List;
 import java.util.Map;
 
-public interface TemplateModelInterface {
+interface TemplateModelInterface {
     JtwigModel getClassModel(User user, CodecoolClass ccClass);
     JtwigModel getProfileStudentModel(User currentUser, User profile, CodecoolClass ccClass, List<Artifact> items);
     JtwigModel getProfileMentorModel(User logedUser, User user, List<CodecoolClass> classes);

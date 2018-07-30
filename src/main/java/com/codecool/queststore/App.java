@@ -9,7 +9,7 @@ public class App {
         try {
             server.run();
         }catch (Exception e){
-            System.out.println(e.getStackTrace());
+            e.getStackTrace();
         }
     }
 
