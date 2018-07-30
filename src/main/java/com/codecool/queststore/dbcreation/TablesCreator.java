@@ -169,7 +169,6 @@ final class TablesCreator {
                 .append("student")
                 .append(" ( ")
                 .append("idStudent SERIAL PRIMARY KEY, ")
-                .append("gitHubAdress TEXT, ")
                 .append("idUser INTEGER REFERENCES users(idUser) ON DELETE CASCADE, ")
                 .append("idClass INTEGER REFERENCES class(idClass) ON DELETE CASCADE")
                 .append(");");
@@ -199,6 +198,7 @@ final class TablesCreator {
                 .append("userLogin TEXT UNIQUE, ")
                 .append("salt INTEGER, ")
                 .append("userPassword TEXT NOT NULL, ")
+                .append("userAddress TEXT, ")
                 .append("idCodecoolRole INTEGER REFERENCES codecoolRole(idCodecoolRole)")
                 .append(" );");
         return sb.toString();
@@ -211,7 +211,6 @@ final class TablesCreator {
                 .append("mentor")
                 .append(" ( ")
                 .append("idMentor SERIAL PRIMARY KEY, ")
-                .append("mentorAddress TEXT, ")
                 .append("idUser INTEGER REFERENCES users(idUser) ON DELETE CASCADE")
                 .append(");");
         return sb.toString();

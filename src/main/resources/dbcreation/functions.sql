@@ -54,11 +54,11 @@ $$ LANGUAGE plpgsql;
     iduser_ INTEGER;
     BEGIN
  SELECT idcodecoolrole FROM codecoolrole WHERE roledescription = 'mentor' INTO idrole;
- INSERT INTO users (usersurname, username, useremail, userlogin, userpassword, idcodecoolrole)
- VALUES (surname, name, email, login, password, idrole);
+ INSERT INTO users (usersurname, username, useremail, userlogin, userpassword, useraddress, idcodecoolrole)
+ VALUES (surname, name, email, login, password, address, idrole);
  SELECT iduser FROM users WHERE useremail = email INTO iduser_;
- INSERT INTO mentor (mentoraddress, iduser)
- VALUES (address, iduser_);
+ INSERT INTO mentor (iduser)
+ VALUES (iduser_);
  END;
  $$ LANGUAGE plpgsql;
 
@@ -122,15 +122,15 @@ $$ LANGUAGE plpgsql;
  CREATE OR REPLACE FUNCTION createStudent(userSurname text, username text, useremail text, userlogin text, userpass text, githubacc text, classid integer)
  RETURNS void AS $$
  BEGIN
- INSERT INTO student(githubadress, iduser, idclass) VALUES (githubacc, createUser(userSurname, username, useremail, userlogin, userpass, 3), classid);
+ INSERT INTO student(iduser, idclass) VALUES (createUser(userSurname, username, useremail, userlogin, userpass, githubacc, 3), classid);
  END;
  $$ LANGUAGE plpgsql;
 
- CREATE OR REPLACE FUNCTION createUser(surname text, firstname text, mail text, login text, userpass text, idrole integer)
+ CREATE OR REPLACE FUNCTION createUser(surname text, firstname text, mail text, login text, userpass text, address TEXT, idrole integer)
  RETURNS integer AS $userid$
  BEGIN
- INSERT INTO users(usersurname, username, useremail, userlogin, userpassword, idcodecoolrole)
- VALUES (surname, firstname, mail, login, userpass, idrole);
+ INSERT INTO users(usersurname, username, useremail, userlogin, userpassword, useraddress, idcodecoolrole)
+ VALUES (surname, firstname, mail, login, userpass, address, idrole);
  RETURN (SELECT iduser FROM users WHERE users.usersurname = surname AND users.username = firstname AND users.useremail = mail AND users.userlogin = login AND users.userpassword = userpass AND users.idcodecoolrole = idrole);
  END;
  $userid$ LANGUAGE plpgsql;
@@ -231,24 +231,10 @@ DELETE FROM users WHERE iduser = userid;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION updateStudent(userid INTEGER, surname TEXT, name_ TEXT, email TEXT, login TEXT, pass TEXT, github TEXT) RETURNS VOID AS $$
+CREATE OR REPLACE FUNCTION updateUser(userid INTEGER, surname TEXT, name_ TEXT, email TEXT, address TEXT) RETURNS VOID AS $$
 BEGIN
 UPDATE users
-SET usersurname = surname, username = name_, useremail = email, userlogin = login, userpassword = pass
-WHERE iduser = userid;
-UPDATE student
-SET githubadress = github
-WHERE iduser = userid;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION updateMentor(userid INTEGER, surname TEXT, name_ TEXT, email TEXT, login TEXT, pass TEXT, address TEXT) RETURNS VOID AS $$
-BEGIN
-UPDATE users
-SET usersurname = surname, username = name_, useremail = email, userlogin = login, userpassword = pass
-WHERE iduser = userid;
-UPDATE mentor
-SET mentoraddress = address
+SET usersurname = surname, username = name_, useremail = email, useraddress = address
 WHERE iduser = userid;
 END;
 $$ LANGUAGE plpgsql;
@@ -297,4 +283,14 @@ BEGIN
 SELECT idstudent FROM student WHERE iduser = userid INTO studentid;
 RETURN QUERY (SELECT idpersonalartifacthistory, idartifact, cost, date, isused FROM personalartifacthistory WHERE idstudent = studentid);
 END;
-$$ LANGUAGE plpgsql;											
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getUser(id INTEGER) RETURNS TABLE (name TEXT, surname TEXT, email TEXT, address TEXT, role TEXT) AS $$
+DECLARE
+rolee INTEGER;
+desc TEXT;
+BEGIN
+SELECT idcodecoolrole FROM users WHERE iduser = id INTO rolee;
+RETURN QUERY (SELECT username, usersurname, useremail, useraddress, (SELECT roledescription FROM codecoolrole WHERE idcodecoolrole = rolee) FROM users WHERE iduser = id);
+END;
+$$ LANGUAGE plpgsql;									
