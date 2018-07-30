@@ -53,21 +53,13 @@ public class DataInserter {
 
     private String generateCreationStatementForMentor() {
         StringBuilder sb = new StringBuilder();
-        sb      .append("    INSERT INTO users (userLogin, userPassword, userName, userSurname, userEmail, idCodecoolRole)\n")
-                .append("    VALUES ('testMentor', '123', 'John', 'Doe', 'john@doe.com', ")
+        sb      .append("    INSERT INTO users (userLogin, userPassword, userName, userSurname, userEmail, userAddress, idCodecoolRole)\n")
+                .append("    VALUES ('testMentor', '123', 'John', 'Doe', 'john@doe.com', 'cracow', ")
                 .append("(SELECT idCodecoolRole from codecoolRole where roleDescription = 'mentor' LIMIT 1));\n")
-                .append("\n")
-                .append("INSERT INTO mentor (idUser, mentorAddress) VALUES\n" +
-                        " ((SELECT idUser FROM users where userEmail='john@doe.com'),'SezameStreet');");
+                .append("\n");
         return sb.toString();
-        //SELECT users.user_name, users.user_surname, mentor.mentor_address FROM mentor
-        //INNER JOIN users ON users.id_user = mentor.id_mentor
-        // user_name | user_surname | mentor_address
-        //
-        //-----------+--------------+----------------
-        // Jane      | Doe          | SezameStreet
-        // -> works
     }
+
     private String generateCreationStatementForClass(){
         StringBuilder sb = new StringBuilder();
         sb      .append("    INSERT INTO class (classDescription)\n")
@@ -81,21 +73,21 @@ public class DataInserter {
 
 //student 1
 
-        sb      .append("    INSERT INTO users (userLogin, userPassword, userName, userSurname, userEmail, idCodecoolRole)\n")
-                .append("    VALUES ('testStudent1', '123', 'Marry', 'sue', 'marry@sue.com', ")
+        sb      .append("    INSERT INTO users (userLogin, userPassword, userName, userSurname, userEmail, userAddress, idCodecoolRole)\n")
+                .append("    VALUES ('testStudent1', '123', 'Marry', 'sue', 'marry@sue.com', 'cracow', ")
                 .append("(SELECT idCodecoolRole from codecoolRole where roleDescription = 'student' LIMIT 1));\n")
-                .append("\n")
-                .append("INSERT INTO student (idUser, gitHubAdress, idClass) VALUES\n" +
-                        "((SELECT idUser FROM users where userEmail='marry@sue.com'),'marryS/github.com',(SELECT idClass FROM class where classDescription = 'javaoop'));");
+                .append("   INSERT INTO student (iduser, idclass)\n")
+                .append("   VALUES (3, 1);")
+                .append("\n");
 
 //student2
 
-        sb      .append("    INSERT INTO users (userLogin, userPassword, userName, userSurname, userEmail, idCodecoolRole)\n")
-                .append("    VALUES ('testStudent2', '123', 'Mark', 'Tfre', 'ma@tue.com', ")
+        sb      .append("    INSERT INTO users (userLogin, userPassword, userName, userSurname, userEmail, userAddress, idCodecoolRole)\n")
+                .append("    VALUES ('testStudent2', '123', 'Mark', 'Tfre', 'ma@tue.com', 'cracow', ")
                 .append("(SELECT idCodecoolRole from codecoolRole where roleDescription = 'student' LIMIT 1));\n")
-                .append("\n")
-                .append("INSERT INTO student (idUser, gitHubAdress, idClass) VALUES\n" +
-                        "((SELECT idUser FROM users where userEmail='ma@tue.com'),'newbie/github.com',(SELECT idClass FROM class where classDescription = 'python'));");
+                .append("   INSERT INTO student (iduser, idclass)\n")
+                .append("   VALUES (4, 2);")
+                .append("\n");
 
                 return sb.toString();
     }

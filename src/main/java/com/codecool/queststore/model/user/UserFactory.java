@@ -7,8 +7,8 @@ public class UserFactory {
     return null;
     }
 
-    public User fromData(String name, String surname, String email, int id, Role role) {
-        return new User(name, surname, email, id, role);
+    public User fromData(String name, String surname, String email, int id, String address, Role role) {
+        return new User(name, surname, email, address, id, role);
     }
 
 }

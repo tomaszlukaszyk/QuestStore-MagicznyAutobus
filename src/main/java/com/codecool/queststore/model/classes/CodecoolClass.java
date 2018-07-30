@@ -36,6 +36,4 @@ public class CodecoolClass {
      this.ASSIGNED_STUDENTS = new ArrayList<>();
      //empty class Todo: write it to database!!
     }
-
-
 }
