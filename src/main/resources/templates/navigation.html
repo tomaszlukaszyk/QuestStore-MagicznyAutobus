@@ -1,8 +1,13 @@
 <a href="/shop">SHOP</a>
 <a href="/quests">QUESTS</a>
-<a href="/group">COINCUBATOR</a>
+{% if curentUser.getROLE().getNAME() == "student" %}
+    <a href="/group">COINCUBATOR</a>
+{% else %}
+    <a href="/list-mentors">MENTORS</a>
+    <a href="/list-students">STUDENTS</a>
+{% endif %}
 <a href="/classes">CLASSES</a>
 <a href="/profile">PROFILE</a>
-{% if headerData.role ==  "admin" %}
+{% if currentUser.getROLE().getNAME() ==  "admin" %}
     <a href="">CONTROL PANEL</a>
 {% endif %}

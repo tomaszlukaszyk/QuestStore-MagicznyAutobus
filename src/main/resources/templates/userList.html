@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-
-{% set headerData = headerData %}
-{% set data = data %}
-
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -10,15 +6,14 @@
         <title>{{ title }}</title>
         <!--style sheet ref-->
         <link rel="stylesheet" href="/QuestStore-MagicznyAutobus/src/main/resources/static/css/style.css">
-<!--        <link rel="stylesheet" href="classStyle.css"> -->
         <script src="../javascript/scripts.js"></script>
     </head>
     <body>
         <div class="main">
             <!--header-->
-            <header>{% include "header.html" with headerData %}</header>
+            <header>{% include "header.html" with currentUser %}</header>
             <!--nav bar-->
-            <nav>{% include "navigation.html" with headerData %}</nav>
+            <nav>{% include "navigation.html" with currentUser %}</nav>
             <div class="contener">
                 <div class="content-list" id="contentdiv">
                     <div id="user-column" class="list-column">
