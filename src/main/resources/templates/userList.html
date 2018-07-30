@@ -19,7 +19,7 @@
                     <div id="user-column" class="list-column">
                         <div class="listName">
                             <h2>{{ listName }}</h2>
-                            {% if headerData.role != "student" %}
+                            {% if currentUser.getROLE().getNAME() != "student" %}
                                 <div class="addBtnPos">
                                     <button class="addBtn" onclick="alert('added')">+</button>
                                 </div>
@@ -28,16 +28,16 @@
                         <div class="list-pos">
                             <span id="list-users">
                                 <ol class="list">
-                                    {% for user in data.users %}
-                                        <li id="{{ user.id }}">{{ user.fullName }}</li>
+                                    {% for user in users %}
+                                        <li id="{{ user.id }}">{{ user.getNAME() }} {{ user.getSURNAME() }}</li>
                                     {% endfor %}
                                 </ol>
                             </span>
                         </div>
                     </div>
                     <div id="form" style="display: none;">
-                        {% if headerData.role != "student" %}
-                        {% include "userAddForm.html" with headerData%}
+                        {% if currentUser.getROLE().getNAME() != "student" %}
+                            {% include "userAddForm.html" with currentUser%}
                         {% endif %}
                     </div>
                 </div>
