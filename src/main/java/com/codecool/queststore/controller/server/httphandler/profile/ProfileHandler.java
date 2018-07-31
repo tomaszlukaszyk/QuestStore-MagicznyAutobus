@@ -1,11 +1,10 @@
 package com.codecool.queststore.controller.server.httphandler.profile;
 
 import com.codecool.queststore.controller.server.httphandler.AbstractHttphandler;
-import com.codecool.queststore.controller.server.httphandler.ResponsesEnum;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.HttpCookie;
 import java.sql.SQLException;
 
@@ -43,22 +42,5 @@ public class ProfileHandler extends AbstractHttphandler implements HttpHandler {
         }
     }
 
-    private void SendReq(HttpExchange httpExchange, String response) throws IOException {
-        Reader rawString = new StringReader(response);
-        BufferedReader result = new BufferedReader(rawString);
-        httpExchange.sendResponseHeaders(ResponsesEnum.OK.getCode(), response.length());
-        OutputStream os = httpExchange.getResponseBody();
-        try {
-            String str;
-            while ((str = result.readLine()) != null) {
-                os.write(str.getBytes());
-            }
-            result.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        os.close();
-        System.out.println(response);
 
-    }
 }

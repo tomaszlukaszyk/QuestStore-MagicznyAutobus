@@ -59,4 +59,23 @@ public abstract class AbstractHttphandler {
             }
             os.close();
         }
+
+    protected void SendReq(HttpExchange httpExchange, String response) throws IOException {
+        Reader rawString = new StringReader(response);
+        BufferedReader result = new BufferedReader(rawString);
+        httpExchange.sendResponseHeaders(ResponsesEnum.OK.getCode(), response.length());
+        OutputStream os = httpExchange.getResponseBody();
+        try {
+            String str;
+            while ((str = result.readLine()) != null) {
+                os.write(str.getBytes());
+            }
+            result.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        os.close();
+        System.out.println(response);
+
+    }
 }
