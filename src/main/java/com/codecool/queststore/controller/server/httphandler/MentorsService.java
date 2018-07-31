@@ -21,7 +21,7 @@ public class MentorsService {
         String generateResponseBody() throws SQLException {
             User currentUser = new UserDAO().getUser(SessionPool.getSessionByUUID(UUID.fromString(cookie.getValue())).getUSER_ID());
 
-            return new TemplateRender().RenderListPage(currentUser, new MentorDAO().getMentors());
+            return new TemplateRender().RenderMentorListPage(currentUser, new MentorDAO().getMentors());
         }
     }
 
