@@ -1,13 +1,22 @@
-<a href="/shop">SHOP</a>
-<a href="/quests">QUESTS</a>
-{% if curentUser.getROLE().getNAME() == "student" %}
+{% if currentUser.getROLE().getNAME() == "student" %}
+    <a href="/profile">PROFILE</a>
+    <a href="/classes">CLASSES</a>
+    <a href="/quests">QUESTS</a>
     <a href="/group">COINCUBATOR</a>
-{% else %}
+    <a href="/shop">SHOP</a>
     <a href="/list-mentors">MENTORS</a>
+{% elseif  currentUser.getROLE().getNAME() == "mentor" %}
+    <a href="/profile">PROFILE</a>
+    <a href="/classes">CLASSES</a>
     <a href="/list-students">STUDENTS</a>
-{% endif %}
-<a href="/classes">CLASSES</a>
-<a href="/profile">PROFILE</a>
-{% if currentUser.getROLE().getNAME() ==  "admin" %}
+    <a href="/quests">QUESTS</a>
+    <a href="/group">COINCUBATOR</a>
+    <a href="/shop">SHOP</a>
+    <a href="/list-mentors">MENTORS</a>
+{% else %}
+    <a href="/profile">PROFILE</a>
+    <a href="/classes">CLASSES</a>
+    <a href="/list-students">STUDENTS</a>
+    <a href="/list-mentors">MENTORS</a>
     <a href="">CONTROL PANEL</a>
 {% endif %}
