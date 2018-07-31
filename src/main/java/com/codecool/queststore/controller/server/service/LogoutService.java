@@ -7,13 +7,11 @@ import java.net.HttpCookie;
 import java.util.UUID;
 
 public class LogoutService {
-
     private final Session session;
 
     public LogoutService(HttpCookie cookie) {
-            this.session = SessionPool.getSessionByUUID(UUID.fromString(cookie.getValue()));
-            System.out.println("terminated");
-            SessionPool.terminate(session);
+        this.session = SessionPool.getSessionByUUID(UUID.fromString(cookie.getValue()));
+        System.out.println("terminated");
+        SessionPool.terminate(session);
     }
-
 }

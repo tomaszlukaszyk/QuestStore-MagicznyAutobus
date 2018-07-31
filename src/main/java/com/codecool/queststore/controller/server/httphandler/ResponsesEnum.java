@@ -1,7 +1,6 @@
 package com.codecool.queststore.controller.server.httphandler;
 
 public enum ResponsesEnum {
-
     REDIRECT(302),
     NF(404),
     OK(200);
@@ -12,7 +11,7 @@ public enum ResponsesEnum {
         this.code = code;
     }
 
-    int getCode() {
+    public int getCode() {
         return code;
     }
 }
