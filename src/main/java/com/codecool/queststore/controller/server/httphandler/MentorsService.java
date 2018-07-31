@@ -18,10 +18,10 @@ public class MentorsService {
         this.cookie = cookie;
     }
 
-        String generateResponseBody() throws SQLException {
+        String generateResponseBody(boolean isCreated) throws SQLException {
             User currentUser = new UserDAO().getUser(SessionPool.getSessionByUUID(UUID.fromString(cookie.getValue())).getUSER_ID());
 
-            return new TemplateRender().RenderMentorListPage(currentUser, new MentorDAO().getMentors());
+            return new TemplateRender().RenderMentorListPage(currentUser, new MentorDAO().getMentors(), isCreated);
         }
     }
 
