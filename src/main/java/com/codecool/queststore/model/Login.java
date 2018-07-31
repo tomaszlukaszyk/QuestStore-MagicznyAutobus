@@ -1,8 +1,10 @@
 package com.codecool.queststore.model;
 
-import com.codecool.queststore.model.user.Role;
+import com.codecool.queststore.DAO.LoginDAO;
+import com.codecool.queststore.DAO.UserDAO;
 import com.codecool.queststore.model.user.User;
-import com.codecool.queststore.model.user.UserFactory;
+
+import java.sql.SQLException;
 
 public class Login {
 
@@ -15,11 +17,16 @@ public class Login {
     }
 
     public User SignIn() {
-        //todo: implement with using Login DAO
-        if (LOGIN.equals(PASSWORD))
-            return new UserFactory().fromData("Maciek","Sikora","m@com",1, "cracow", Role.STUDENT);
-        else
-            return null;
+        try {
+            int userID = new LoginDAO().validation(this);
+
+            if (userID > 0) {
+                return new UserDAO().getUser(userID);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public String getLOGIN() {

@@ -25,7 +25,7 @@ public class UserDAO implements Connectable, UserDAOInterface {
     public User getUser(int id) throws SQLException {
         String name = "";
         String surname = "";
-        String email = "";
+        String email = null;
         String address = "";
         Role role = null;
         Connection conn = cp.getConnection();
@@ -41,6 +41,8 @@ public class UserDAO implements Connectable, UserDAOInterface {
         }
         stmt.close();
         conn.close();
+        if (email == null)
+            return null;
         return new User(name, surname, email, address, id, role);
     }
 
