@@ -33,6 +33,7 @@ public class Server {
         server.createContext("/profile", new ProfileHandler());
         server.createContext("/logout", new LogoutHandler());
         server.createContext("/static", new StaticHandler());
+        server.createContext("/list-mentors", new MentorsHandler());
     }
 
     public void stop(){
