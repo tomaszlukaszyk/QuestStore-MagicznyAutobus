@@ -54,8 +54,8 @@ class TemplateModelHandler implements TemplateModelInterface {
         JtwigModel model = new JtwigModel();
         model.with("currentUser", currentUser);
         model.with("users", users);
-        model.with("listName", "mentors");
-        model.with("title", "Mentor list");
+        model.with("listName", "Create new mentor");
+        model.with("title", "Mentors List");
 
         return model;
     }
