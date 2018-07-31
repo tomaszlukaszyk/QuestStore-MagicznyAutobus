@@ -23,10 +23,10 @@ public class UserDAO implements Connectable, UserDAOInterface {
 
     @Override
     public User getUser(int id) throws SQLException {
-        String name = "";
-        String surname = "";
-        String email = "";
-        String address = "";
+        String name = null;
+        String surname = null;
+        String email = null;
+        String address = null;
         Role role = null;
         Connection conn = cp.getConnection();
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM getUser(?)");
@@ -41,6 +41,9 @@ public class UserDAO implements Connectable, UserDAOInterface {
         }
         stmt.close();
         conn.close();
+
+        if (email == null)
+            return null;
         return new User(name, surname, email, address, id, role);
     }
 

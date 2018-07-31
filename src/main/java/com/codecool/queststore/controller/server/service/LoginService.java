@@ -6,12 +6,12 @@ import com.codecool.queststore.model.server.session.SessionPool;
 import com.codecool.queststore.model.user.User;
 
 public class LoginService {
-
     private final Session session;
 
     public LoginService(String name, String password) {
         Login login = new Login(name, password);
         User user = login.SignIn();
+
         if (user != null)
             this.session = SessionPool.getNewSession(user.getID());
         else
@@ -19,7 +19,6 @@ public class LoginService {
     }
 
     public Session getSession(){
-    return this.session;
+        return this.session;
     }
-
 }

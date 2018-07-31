@@ -6,85 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ title }}</title>
     <!--style sheet ref-->
-    <link rel="stylesheet" href="static/css/style.css">
-    <script src="static/javascript/scripts.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/javascript/scripts.js"></script>
 </head>
 
 <body>
 <div class="main">
     <!--header-->
-    <header>{% include "header.html" with headerData %}</header>
+    <header>{% include "header.html" with currentUser %}</header>
     <!--nav bar-->
-    <nav>{% include "navigation.html" with headerData %}</nav>
+    <nav>{% include "navigation.html" with currentUser %}</nav>
     <div class="contener">
         <div class="content-profile">
             <!--Student view-->
-            {% if headerData.role == "student" %}
+            {% if profile.getROLE().getNAME() == "student" %}
                 <div class="content-box">
                     <p>Personal Data:</p>
                     <span id="name">
-                                name: {{ headerData.hName }}
-                            </span>
+                        name: {{ profile.getNAME() }}
+                    </span>
 
                     <span id="surname">
-                                surname: {{ headerData.hSurname }}
-                            </span>
+                        surname: {{ profile.getSURNAME() }}
+                    </span>
 
                     <span id="email">
-                                email: {{ data.email }}
-                            </span>
+                        email: {{ profile.getEMAIL() }}
+                    </span>
 
-                    <span id="adress">
-                                gitHub Address: {{ data.address }}
-                            </span>
+                    <span id="address">
+                            gitHub Address: {{ profile.getAddress() }}
+                    </span>
                 </div>
 
                 <div class="content-box">
                     <p>Class:</p>
                     <span id="class">
-                                <br>{{ data.class }}
-                            </span>
+                        <br>{{ ccClass.getNAME() }}
+                    </span>
                 </div>
 
                 <div class="content-box">
                     <p>Backpack</p>
-                    {% for item in data.items %}
-                    <span>{{ item }}</span>
+                    {% for item in items %}
+                    <span>{{ item.getNAME() }}</span>
                     {% endfor %}
                 </div>
             <!--</div>-->
             {% endif %}
 
-            {% if headerData.role == "mentor" %}
+            {% if profile.getROLE().getNAME() == "mentor" %}
             <!--Mentor view-->
             <div id="mentor-view" class="profile-view">
                 <div class="content-box">
-
                     <p>Personal Data:</p>
 
                     <span id="name">
-                                name: {{ headerData.hName }}
-                            </span>
+                        name: {{ profile.getNAME() }}
+                    </span>
 
                     <span id="surname">
-                                surname: {{ headerData.hSurname }}
-                            </span>
+                        surname: {{ profile.getSURNAME() }}
+                    </span>
 
                     <span id="email">
-                                email: {{ data.email }}
-                            </span>
+                        email: {{ profile.getEMAIL() }}
+                    </span>
 
-                    <span id="adress">
-                                address: {{ data.address }}
-                            </span>
+                    <span id="address">
+                            Address: {{ profile.getAddress() }}
+                    </span>
+
                 </div>
 
                 <div class="content-box">
                     <p>Class:</p>
                     <span id="class">
                         <ul>
-                            {% for class in data.classes %}
-                            <li><span>{{ class }}</span><br></li>
+                            {% for class in classes %}
+                            <li><span>{{ class.getNAME() }}</span><br></li>
                             {% endfor %}
                         </ul>
                     </span>
@@ -94,8 +94,8 @@
                     <p>Assigned students:</p>
                     <span id="insert-student">
                         <ul>
-                            {% for student in data.students %}
-                            <li><span>{{ student }}</span></li>
+                            {% for student in students %}
+                            <li><a href="/profile/{{ student.getID() }}">{{ student.getNAME() }} {{ student.getSURNAME() }}</a></li>
                             {% endfor %}
                         </ul>
                     </span>

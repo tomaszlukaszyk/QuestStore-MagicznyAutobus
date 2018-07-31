@@ -34,14 +34,13 @@ public class StaticHandler implements HttpHandler {
             // Object exists and is a file: accept with response code 200.
             sendFile(httpExchange, fileURL);
         }
-
     }
 
     private void send404(HttpExchange httpExchange) throws IOException {
         String response = "404 (Not Found)\n";
         httpExchange.sendResponseHeaders(ResponsesEnum.NF.getCode(), response.length());
         OutputStream os = httpExchange.getResponseBody();
-        os.write(response.toString().getBytes());
+        os.write(response.getBytes());
         os.close();
     }
 
@@ -61,11 +60,10 @@ public class StaticHandler implements HttpHandler {
         FileInputStream fs = new FileInputStream(file);
         final byte[] buffer = new byte[0x10000];
         int count = 0;
+
         while ((count = fs.read(buffer)) >= 0) {
             os.write(buffer,0,count);
         }
         os.close();
     }
-
-
 }
