@@ -99,7 +99,7 @@ public class TemplateRender implements RenderInteface{
         return tmi.getProfileStudentModel(currentUser, user, ccClass, artifacts);
     }
 
-    public String RenderListPage(User currentUser, List<User> users) {
+    public String RenderMentorListPage(User currentUser, List<User> users) {
         /* User list model:
          *  currentUser - active user
          *  items - list of user's
@@ -108,7 +108,19 @@ public class TemplateRender implements RenderInteface{
 
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/userList.html");
 
-        return template.render(tmi.getUserListModel(currentUser, users));
+        return template.render(tmi.getMentorsListModel(currentUser, users));
+    }
+
+    public String RenderStudentListPage(User currentUser, List<User> users) {
+        /* User list model:
+         *  currentUser - active user
+         *  items - list of user's
+         */
+        TemplateModelInterface tmi = new TemplateModelHandler();
+
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/userList.html");
+
+        return template.render(tmi.getStudentsListModel(currentUser, users));
     }
 
     @Override
