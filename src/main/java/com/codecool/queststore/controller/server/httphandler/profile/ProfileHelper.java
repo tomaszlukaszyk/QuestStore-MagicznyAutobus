@@ -1,5 +1,6 @@
 package com.codecool.queststore.controller.server.httphandler.profile;
 
+import com.codecool.queststore.DAO.ArtifactDAO;
 import com.codecool.queststore.DAO.UserDAO;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.server.session.SessionPool;
@@ -29,7 +30,7 @@ class ProfileHelper {
             case STUDENT:
                 //todo: fill class and artifacts by theirs daos
                 return new TemplateRender().RenderProfilePage
-                        (currentUser, targetUser, new CodecoolClass("LOL"), new ArrayList<>());
+                        (currentUser, targetUser, new CodecoolClass("LOL"), new ArtifactDAO().getUsersNotUsedArtifactsById(targetUser.getID()));
 
             case MENTOR:
                 //todo: fill classes by their daos
