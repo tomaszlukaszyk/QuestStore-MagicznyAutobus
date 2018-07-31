@@ -11,7 +11,7 @@ import org.jtwig.JtwigTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TemplateRender implements RenderInteface{
+public class TemplateRender implements RenderInteface {
 
     @Override
     public String RenderClassPage() {
@@ -61,7 +61,7 @@ public class TemplateRender implements RenderInteface{
         return template.render(tmi.getProfileStudentModel(currentUser, profile, ccClass, items));
     }
 
-    public String RenderMentorListPage(User currentUser, List<User> users) {
+    public String RenderMentorListPage(User currentUser, List<User> users, boolean isCreated) {
         /* User list model:
          *  currentUser - active user
          *  items - list of user's
@@ -70,7 +70,7 @@ public class TemplateRender implements RenderInteface{
 
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/userList.html");
 
-        return template.render(tmi.getMentorsListModel(currentUser, users));
+        return template.render(tmi.getMentorsListModel(currentUser, users, isCreated));
     }
 
     public String RenderStudentListPage(User currentUser, List<User> users) {
