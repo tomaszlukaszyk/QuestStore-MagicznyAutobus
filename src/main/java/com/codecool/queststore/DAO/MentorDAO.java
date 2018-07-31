@@ -19,7 +19,7 @@ public class MentorDAO implements Connectable ,MentorDAOInterface {
         Connection conn = cp.getConnection();
         PreparedStatement st = conn.prepareStatement("SELECT * FROM ifUserExists(?, ?)");
         st.setString(1, login.getLOGIN());
-        st.setString(2, login.getPASSWORD());
+        st.setString(2, user.getEMAIL());
         ResultSet rs = st.executeQuery();
         while (rs.next()) {
             ifExist = rs.getBoolean(1);
