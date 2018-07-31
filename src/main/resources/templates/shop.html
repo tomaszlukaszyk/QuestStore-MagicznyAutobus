@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-
-{% set headerData = headerData %}
-{% set data = data %}
-
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -16,9 +12,9 @@
     <body>
         <div class="main">
             <!--header-->
-            <header>{% include "header.html" with headerData %}</header>
+            <header>{% include "header.html" with currentUser %}</header>
             <!--nav bar-->
-            <nav>{% include "navigation.html" with headerData %}</nav>
+            <nav>{% include "navigation.html" with currentUser %}</nav>
             
             <div class="contener">
             
@@ -26,14 +22,22 @@
                 
                     <div class="column-shop">
                         <div class= shopitems>
-                            {% for item in data.items %}
-                                <span class="shopitem" id="{{ item.id }}">
-                                    <h2><span id ="title">{{ item.title }}</span></h2> <br />
-                                    <a href=""><img class="image_off" src="static/images/artifacts/{{ item.fileName }}"></a>
+                            {% for item in items %}
+                                <span class="shopitem" id="{{ item.getID() }}">
+                                    <h2><span id ="title">{{ item.getNAME() }}</span></h2> <br />
+                                    {% if currentUser.getROLE().getNAME() == "student" %}
+                                        {% if currentUser.getWallet() < item.getCOST() %}
+                                            <a href=""><img class="image_off" src="static/images/quests/{{ item.getIMAGE_FILENAME }}"></a>
+                                        {% else %}
+                                            <a href=""><img class="image_off" src="static/images/quests/{{ item.getIMAGE_MARKED_FILENAME }}"></a>
+                                        {% endif %}
+                                    {% else %}
+                                        <a href=""><img class="image_off" src="static/images/quests/{{ item.getIMAGE_MARKED_FILENAME }}"></a>
+                                    {% endif %}
 
-                                    <span value = "category"><p>{{ item.category }}</p></span>
-                                    <span value = "descr"><p>{{ item.desc }}</p></span>
-                                    <span value = "cost"><p>{{ item.cost }} cc</p></span>
+                                    <span value = "category"><p>{{ item.getCATEGORY() }}</p></span>
+                                    <span value = "descr"><p>{{ item.getDESCRIPTION() }}</p></span>
+                                    <span value = "cost"><p>{{ item.getCOST() }} cc</p></span>
                                     <div id="btnPanel" class="btnPanel">
                                         <span id="buyGroupBtn"><input type="image" src="static/images/groupbutton.png" alt="group buy" onclick="" width="20%"/></span>
                                         <span id="buyBtn"><input type="image" src="static/images/buybutton.png" alt="buy" onclick="" width="30%"/></span>

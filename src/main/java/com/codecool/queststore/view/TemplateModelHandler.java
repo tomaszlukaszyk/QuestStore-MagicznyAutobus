@@ -7,13 +7,11 @@ import com.codecool.queststore.model.user.User;
 import org.jtwig.JtwigModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 class TemplateModelHandler implements TemplateModelInterface {
     @Override
-    public JtwigModel getClassModel(User user, CodecoolClass ccClass) {
+    public JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes) {
         return null;
     }
 
@@ -52,17 +50,32 @@ class TemplateModelHandler implements TemplateModelInterface {
     }
 
     @Override
-    public JtwigModel getUserListModel(User logedUser, List<User> users) {
-        return null;
+    public JtwigModel getUserListModel(User currentUser, List<User> users) {
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("users", users);
+        model.with("title", "User List");
+
+        return model;
     }
 
     @Override
-    public JtwigModel getQuestModel(User logedUser, List<Quest> quests) {
-        return null;
+    public JtwigModel getQuestModel(User currentUser, List<Quest> quests) {
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("items", quests);
+        model.with("title", "Quests");
+
+        return model;
     }
 
     @Override
-    public JtwigModel getArtifactModel(User logedUser, List<Artifact> artifacts) {
-        return null;
+    public JtwigModel getArtifactModel(User currentUser, List<Artifact> artifacts) {
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("items", artifacts);
+        model.with("title", "Shop");
+
+        return model;
     }
 }
