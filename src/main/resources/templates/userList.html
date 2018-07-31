@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ title }}</title>
         <!--style sheet ref-->
-        <link rel="stylesheet" href="/QuestStore-MagicznyAutobus/src/main/resources/static/css/style.css">
-        <script src="../javascript/scripts.js"></script>
+        <link rel="stylesheet" href="static/css/style.css">
+        <script src="static/javascript/scripts.js"></script>
     </head>
     <body>
         <div class="main">
@@ -19,9 +19,9 @@
                     <div id="user-column" class="list-column">
                         <div class="listName">
                             <h2>{{ listName }}</h2>
-                            {% if currentUser.getROLE().getNAME() != "student" %}
+                            {% if currentUser.getROLE().getNAME() == "admin" %}
                                 <div class="addBtnPos">
-                                    <button class="addBtn" onclick="alert('added')">+</button>
+                                    <button class="addBtn" onclick="showAddForm()">+</button>
                                 </div>
                             {% endif %}
                         </div>
@@ -29,7 +29,7 @@
                             <span id="list-users">
                                 <ol class="list">
                                     {% for user in users %}
-                                        <li id="{{ user.id }}">{{ user.getNAME() }} {{ user.getSURNAME() }}</li>
+                                        <li id="{{ user.id }}">{{ user.getNAME() }} {{ user.getSURNAME() }} {{ user.getEMAIL() }} {{ user.getADDRESS }}</li>
                                     {% endfor %}
                                 </ol>
                             </span>
