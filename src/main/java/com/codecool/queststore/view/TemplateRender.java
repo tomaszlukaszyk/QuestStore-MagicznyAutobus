@@ -61,44 +61,6 @@ public class TemplateRender implements RenderInteface{
         return template.render(tmi.getProfileStudentModel(currentUser, profile, ccClass, items));
     }
 
-    private JtwigModel getMentorProfileModel() {
-        TemplateModelInterface tmi = new TemplateModelHandler();
-        User currentUser = new User("Piotr", "Kaminski", "pkaminki95@gmail.com", "address", 1, Role.STUDENT);
-        User user = new User("Pawel", "Kaminski", "kaminski21@gmail.com", "address", 2, Role.MENTOR);
-        List<CodecoolClass> classes = new ArrayList<>();
-
-        for (int i = 1; i <= 3; i++) {
-            CodecoolClass c = new CodecoolClass("2018." + i, getUserList(Role.MENTOR, 2), getUserList(Role.STUDENT, 5));
-            classes.add(c);
-        }
-
-        return tmi.getProfileMentorModel(currentUser, user, classes);
-    }
-
-    private List<User> getUserList(Role role, int amount) {
-        List<User> users = new ArrayList<>();
-        for (int i = 1; i <= amount; i++) {
-            users.add(new User(role.getNAME(), String.valueOf(i), "---", "---", i, role));
-        }
-
-        return users;
-    }
-
-    private static JtwigModel getStudentProfileModel() {
-        TemplateModelInterface tmi = new TemplateModelHandler();
-        User currentUser = new User("Piotr", "Kaminski", "pkaminki95@gmail.com", "address", 1, Role.STUDENT);
-        User user = new User("Pawel", "Kaminski", "kaminski21@gmail.com", "address", 2, Role.MENTOR);
-        CodecoolClass ccClass = new CodecoolClass("2018.1", null, null);
-        List<Artifact> artifacts = new ArrayList<>();
-
-        for (int i = 1; i <= 3; i++) {
-            Artifact a = new Artifact(i, i,"item" + String.valueOf(i), ".", 1, ".", ".", null, false);
-            artifacts.add(a);
-        }
-
-        return tmi.getProfileStudentModel(currentUser, user, ccClass, artifacts);
-    }
-
     public String RenderMentorListPage(User currentUser, List<User> users) {
         /* User list model:
          *  currentUser - active user
@@ -143,14 +105,4 @@ public class TemplateRender implements RenderInteface{
         return template.render(tmi.getQuestModel(currentUser, quests));
     }
 
-    public static void main(String[] args) {
-        RenderInteface rf = new TemplateRender();
-        User currentUser = new User("Piotr", "Kaminski", "pkaminki95@gmail.com", "address", 1, Role.MENTOR);
-//        System.out.println(rf.RenderProfilePage(null, null, null));
-
-        TemplateRender tr = new TemplateRender();
-        List<User> users = tr.getUserList(Role.STUDENT, 5);
-
-        System.out.println(rf.RenderListPage(currentUser, users));
-    }
 }
