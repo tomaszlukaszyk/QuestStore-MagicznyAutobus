@@ -18,8 +18,8 @@
                 <div class="content-list" id="contentdiv">
                     <div id="user-column" class="list-column">
                         <div class="listName">
-                            <h2>{{ listName }}</h2>
                             {% if currentUser.getROLE().getNAME() == "admin" %}
+                            <h2>{{ listName }}</h2>
                                 <div class="addBtnPos">
                                     <button class="addBtn" onclick="showAddForm()">+</button>
                                 </div>
