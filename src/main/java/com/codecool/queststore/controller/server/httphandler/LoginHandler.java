@@ -43,7 +43,7 @@ public class LoginHandler extends AbstractHttphandler implements HttpHandler {
             URL fileURL = getClass().getClassLoader().getResource(path);
             sendFile(httpExchange, fileURL);
         } else {
-            redirect(httpExchange,"/profile");
+            redirect(httpExchange,"/profile/");
         }
     }
 

@@ -12,7 +12,7 @@ public enum ResponsesEnum {
         this.code = code;
     }
 
-    int getCode() {
+    public int getCode() {
         return code;
     }
 }

@@ -12,13 +12,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-abstract class AbstractHttphandler {
+public abstract class AbstractHttphandler {
 
-        boolean isCookieValid(HttpCookie cookie) {
+        protected boolean isCookieValid(HttpCookie cookie) {
              return SessionPool.isSessionByCookie(cookie);
         }
 
-        void redirect(HttpExchange httpExchange, String path) throws IOException {
+        protected void redirect(HttpExchange httpExchange, String path) throws IOException {
             final int NOW = -1;
             httpExchange.getResponseHeaders().set("Location", path);
             httpExchange.sendResponseHeaders(ResponsesEnum.REDIRECT.getCode(), NOW);
