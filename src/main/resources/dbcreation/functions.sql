@@ -294,3 +294,21 @@ SELECT idcodecoolrole FROM users WHERE iduser = id INTO rolee;
 RETURN QUERY (SELECT username, usersurname, useremail, useraddress, (SELECT roledescription FROM codecoolrole WHERE idcodecoolrole = rolee) FROM users WHERE iduser = id);
 END;
 $$ LANGUAGE plpgsql;									
+
+CREATE OR REPLACE FUNCTION getClassStudents(classid INTEGER) RETURNS TABLE (userid INTEGER, name TEXT, surname TEXT, email TEXT, address TEXT) AS $$
+BEGIN
+RETURN QUERY (SELECT users.iduser, username, usersurname, useremail, useraddress FROM users JOIN student ON users.iduser = student.iduser WHERE idclass = classid);
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getClassMentors(classid INTEGER) RETURNS TABLE (userid INTEGER, name TEXT, surname TEXT, email TEXT, address TEXT) AS $$
+BEGIN
+RETURN QUERY (SELECT users.iduser, username, usersurname, useremail, useraddress FROM users JOIN mentor ON users.iduser = mentor.iduser JOIN mentor_class ON mentor.idmentor = mentor_class.idmentor WHERE idclass = classid);
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getClasses() RETURNS TABLE (id INTEGER, description TEXT) AS $$
+BEGIN
+RETURN QUERY (SELECT idclass, classdescription FROM class);
+END;
+$$ LANGUAGE plpgsql;
