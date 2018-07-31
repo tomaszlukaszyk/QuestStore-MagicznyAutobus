@@ -34,11 +34,4 @@ public class CodecoolClass {
     public List<User> getASSIGNED_STUDENTS() {
         return ASSIGNED_STUDENTS;
     }
-
-    public CodecoolClass(String name) {
-     this.NAME = name;
-     this.ASSIGNED_MENTORS = new ArrayList<>();
-     this.ASSIGNED_STUDENTS = new ArrayList<>();
-     //empty class Todo: write it to database!!
-    }
 }
