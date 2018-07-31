@@ -10,24 +10,20 @@ import java.sql.SQLException;
 
 public class ProfileHandler extends AbstractHttphandler implements HttpHandler {
 
-
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
-
         System.out.println(httpExchange.getRequestMethod());
+
         try {
             handleSession(httpExchange);
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-
+            }
     }
-
 
     private void handleSession(HttpExchange httpExchange) throws IOException, SQLException {
         String cookieStr = httpExchange.getRequestHeaders().getFirst("Cookie");
         HttpCookie cookie = new HttpCookie("Session-id", cookieStr);
-        System.out.println(cookie);
 
         // Check if cookie already exists and if it's UUID is contained by sessionPool
         if (cookieStr == null || !isCookieValid(cookie)) {
@@ -38,9 +34,6 @@ public class ProfileHandler extends AbstractHttphandler implements HttpHandler {
             ProfileHelper profileHelper = new ProfileHelper(cookie,httpExchange.getRequestURI().getPath());
             String response = profileHelper.generateResponseBody();
             SendReq(httpExchange,response);
-
         }
     }
-
-
 }

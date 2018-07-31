@@ -10,30 +10,23 @@ import java.net.HttpCookie;
 import java.net.URL;
 import java.util.Map;
 
-
 public class LoginHandler extends AbstractHttphandler implements HttpHandler {
-
     private final String path = "html/index.html";
 
         @Override
     public void handle(HttpExchange httpExchange) throws IOException {
-
             System.out.println(httpExchange.getRequestMethod());
         // checks user input after using login form
+
         if(httpExchange.getRequestMethod().equals("POST")){
             handlePost(httpExchange);
-
         } else{
             handleSession(httpExchange);
-
         }
-
     }
 
     private void handleSession(HttpExchange httpExchange) throws IOException  {
-            String cookieStr = httpExchange.getRequestHeaders().getFirst("Cookie");
-
-
+        String cookieStr = httpExchange.getRequestHeaders().getFirst("Cookie");
         HttpCookie cookie = new HttpCookie("Session-id", cookieStr);
 
         // Check if cookie already exists and if it's UUID is contained by sessionPool
@@ -48,9 +41,7 @@ public class LoginHandler extends AbstractHttphandler implements HttpHandler {
     }
 
     private void handlePost(HttpExchange httpExchange) throws IOException {
-
         Map inputs = parseFormData(httpExchange);
-
         // check DB for user and password
         LoginService service = new LoginService((String) inputs.get("login"), (String) inputs.get("password"));
         Session session = service.getSession();
@@ -61,14 +52,10 @@ public class LoginHandler extends AbstractHttphandler implements HttpHandler {
             redirect(httpExchange,"profile");
             System.out.println("generated cookie \\/");
             System.out.println(cookie.toString());
-        }
-        else{
+        } else {
             System.out.println("sending login page");
             URL fileURL = getClass().getClassLoader().getResource(path);
             sendFile(httpExchange, fileURL);
         }
-
     }
-
-
 }
