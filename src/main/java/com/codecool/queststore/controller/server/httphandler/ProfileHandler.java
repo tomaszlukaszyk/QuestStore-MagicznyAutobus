@@ -33,22 +33,22 @@ public class ProfileHandler extends AbstractHttphandler implements HttpHandler {
 
             System.out.println("sending profile page");
 
-            String response = new TemplateRender().RenderProfilePage();
-            Reader rawString = new StringReader(response);
-            BufferedReader result = new BufferedReader(rawString);
-            httpExchange.sendResponseHeaders(ResponsesEnum.OK.getCode(), response.length());
-            OutputStream os = httpExchange.getResponseBody();
-            try {
-                String str;
-                while ((str = result.readLine()) != null) {
-                    os.write(str.getBytes());
-                }
-                result.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            os.close();
-            System.out.println(response);
+//            String response = new TemplateRender().RenderProfilePage();
+//            Reader rawString = new StringReader(response);
+//            BufferedReader result = new BufferedReader(rawString);
+//            httpExchange.sendResponseHeaders(ResponsesEnum.OK.getCode(), response.length());
+//            OutputStream os = httpExchange.getResponseBody();
+//            try {
+//                String str;
+//                while ((str = result.readLine()) != null) {
+//                    os.write(str.getBytes());
+//                }
+//                result.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            os.close();
+//            System.out.println(response);
         }
     }
 }

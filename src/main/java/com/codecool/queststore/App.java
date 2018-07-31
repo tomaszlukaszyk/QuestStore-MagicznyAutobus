@@ -1,4 +1,5 @@
 package com.codecool.queststore;
+
 import com.codecool.queststore.model.server.Server;
 import java.sql.SQLException;
 

@@ -4,11 +4,11 @@
 
 <!--<button onclick="showWallet()">Wallet test</button>-->
 <div id="informations">
-    <p>Welcome&nbsp;<span id="fullname">{{ hName }} {{ hSurname }}</span>&nbsp;<br>
-        you are logged as&nbsp;<span id="role">{{ role }}</span></p>
-    {% if role == 'student' %}
-    <p>Your rank:&nbsp;<span id="rank">{{ rank }}</span><br></p>
-    <p>Your wallet:&nbsp;<span id="wallet"> {{ wallet }}</span></p>
+    <p>Welcome&nbsp;<span id="fullname">{{ currentUser.getNAME() }} {{ currentUser.getSURNAME() }}</span>&nbsp;<br>
+        you are logged as&nbsp;<span id="role">{{ currentUser.getROLE().getNAME() }}</span></p>
+    {% if currentUser.getROLE().getNAME() == 'student' %}
+    <p>Your rank:&nbsp;<span id="rank">{{ currentUser.getTittle() }}</span><br></p>
+    <p>Your wallet:&nbsp;<span id="wallet"> {{ currentUser.getWallet() }}</span></p>
     {% endif %}
 </div>
 <h1>{{ title }}</h1>
