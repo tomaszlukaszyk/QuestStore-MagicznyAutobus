@@ -30,7 +30,7 @@ class ProfileHelper {
             case STUDENT:
                 //todo: fill class and artifacts by theirs daos
                 return new TemplateRender().RenderProfilePage
-                        (currentUser, targetUser, new CodecoolClass("LOL"), new ArtifactDAO().getUsersNotUsedArtifactsById(targetUser.getID()));
+                        (currentUser, targetUser, new CodecoolClass(0, "tak", null, null), new ArtifactDAO().getUsersNotUsedArtifactsById(targetUser.getID()));
 
             case MENTOR:
                 //todo: fill classes by their daos
@@ -40,8 +40,7 @@ class ProfileHelper {
             default:
                 //todo: there is no admin view
                 return new TemplateRender().RenderProfilePage
-                        (currentUser, targetUser,
-                         new CodecoolClass("LOL"),new ArrayList<>());
+                        (currentUser, targetUser, new CodecoolClass(0, "tak", null, null),new ArrayList<>());
         }
     }
 
