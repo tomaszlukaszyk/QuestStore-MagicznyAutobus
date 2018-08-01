@@ -19,23 +19,19 @@
             <!--content-->
             <div class="contener">
                 <div class="class-content">
-                        <a class="class-column">
+                        <div class="class-column">
                             <p>Classes</p>
-                            <a class="classes" id="list-class">
-                            <ul>
-                                <li>
-                                    {% for class in classes%}
-                                        <a href="/class/{{ class.getID() }}"><p>{{ class.getNAME() }}</p></a><br>
-                                    {% endfor %}
-                                </li>
-                            </ul>
-                            </a>
-                        </a>
-                    </div>
+                            <div class="classes" id="list-class">
+                                {% for class in classes%}
+                                    <p href="/class/{{ class.getID() }}">{{ class.getNAME() }}</p><br>
+                                {% endfor %}
+                            </div>
+                        </div>
+
                     {% if targetClass != "null" %}
                     <div class="class-column">
                         <p>Assigned mentors</p>
-                        <span id="list-mentor">
+                        <span id="list-mentor" class="list-user">
                             <ul>
                             {% for mentor in targetClass.getASSIGNED_MENTORS()%}
                                 <li><a href="/profile/{{ mentor.getID() }}">{{ mentor.getNAME() }} {{ mentor.getSURNAME }}</a></li>
@@ -45,7 +41,7 @@
                     </div>
                     <div class="class-column">
                         <p>Students</p>
-                        <span id="list-student">
+                        <span id="list-student" class="list-user">
                             <ul>
                             {% for student in targetClass.getASSIGNED_STUDENTS() %}
                                 <li><a href="/profile/{{ student.getID() }}">{{ student.getNAME() }} {{ student.getSURNAME }}</a></li>
@@ -55,6 +51,7 @@
                     </div>
                     {% endif %}
                 </div>
+            </div>
             {% if targetClass == "null" %}
                 <h1>Click on the class to show details</h1>
             {% endif %}

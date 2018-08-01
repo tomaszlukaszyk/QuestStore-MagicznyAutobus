@@ -1,8 +1,10 @@
 package com.codecool.queststore.view;
 
+import com.codecool.queststore.DAO.ClassDAO;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
+import com.codecool.queststore.model.user.Role;
 import com.codecool.queststore.model.user.User;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
@@ -108,5 +110,12 @@ public class TemplateRender implements RenderInteface {
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/quests.html");
 
         return template.render(tmi.getQuestModel(currentUser, quests));
+    }
+
+    public static void main(String[] args) {
+        User currentUser = new User("Piotr", "Kaminski", "pk@o2.pl", "sss", 5, Role.MENTOR);
+        List<CodecoolClass> classes = new ClassDAO().getClasses();
+        RenderInteface renderInteface = new TemplateRender();
+        System.out.println(renderInteface.RenderClassPage(currentUser, classes, classes.get(1)));
     }
 }

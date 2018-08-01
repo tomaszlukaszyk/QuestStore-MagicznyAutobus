@@ -1,6 +1,5 @@
 package com.codecool.queststore.controller.server.httphandler.codecoolClass;
 
-import com.codecool.queststore.DAO.ArtifactDAO;
 import com.codecool.queststore.DAO.ClassDAO;
 import com.codecool.queststore.DAO.UserDAO;
 import com.codecool.queststore.dao.interfaces.ClassDAOInterface;
@@ -12,7 +11,6 @@ import com.codecool.queststore.view.TemplateRender;
 
 import java.net.HttpCookie;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -44,10 +42,9 @@ class ClassHelper {
 
     private CodecoolClass defineTarget(List<CodecoolClass> classes, String path) {
         Integer classID = getTargetClassID(splitURL(path));
-        CodecoolClass target = null;
         Iterator<CodecoolClass> classIterator = classes.iterator();
 
-        if (classID == null) { return null}
+        if (classID == null) { return null;}
         while (classIterator.hasNext()) {
             CodecoolClass class_ = classIterator.next();
             if (class_.getID() == classID) {
