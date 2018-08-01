@@ -85,13 +85,14 @@ class TemplateModelHandler implements TemplateModelInterface {
     }
 
     @Override
-    public JtwigModel getStudentsListModel(User currentUser, List<User> users, boolean isCreated) {
+    public JtwigModel getStudentsListModel(User currentUser, List<User> users, boolean isCreated, List<CodecoolClass> classes) {
         JtwigModel model = new JtwigModel();
         model.with("currentUser", currentUser);
         model.with("users", users);
         model.with("listName", "Create new student");
         model.with("title", "Student list");
         model.with("isCreated", isCreated);
+        model.with("classes", classes);
 
         return model;
     }
