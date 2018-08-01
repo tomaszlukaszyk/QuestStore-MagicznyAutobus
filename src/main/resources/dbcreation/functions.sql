@@ -317,4 +317,10 @@ CREATE OR REPLACE FUNCTION getClasses() RETURNS TABLE (id INTEGER, description T
 BEGIN
 RETURN QUERY (SELECT idclass, classdescription FROM class);
 END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getStudents() RETURNS TABLE (name TEXT, surname TEXT, email TEXT, address TEXT, id INTEGER) AS $$
+BEGIN
+RETURN QUERY (SELECT username, usersurname, useremail, useraddress, iduser FROM users WHERE idcodecoolrole = 3);
+END;
 $$ LANGUAGE plpgsql;					
