@@ -9,7 +9,8 @@ import org.jtwig.JtwigModel;
 import java.util.List;
 
 public interface RenderInteface {
-    String RenderClassPage();
+    String RenderClassPage(User currentUser, List<CodecoolClass> classes);
+    String RenderClassPage(User currentUser, List<CodecoolClass> classes, CodecoolClass targetClass);
 
     // mentor profile
     String RenderProfilePage(User currentUser, User profile, List<CodecoolClass> classes);

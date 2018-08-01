@@ -195,6 +195,11 @@ footer a:link, footer a:visited, nav a:link, nav a:visited, footer a:focus {
     border-bottom: 2px lime  dashed;
 }
 
+.list-user {
+    display: flex;
+    justify-content: center;
+}
+
 ul {
     list-style-type: none;
 }

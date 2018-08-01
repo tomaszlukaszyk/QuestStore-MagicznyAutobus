@@ -12,7 +12,30 @@ import java.util.List;
 class TemplateModelHandler implements TemplateModelInterface {
     @Override
     public JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes) {
-        return null;
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("classes", classes);
+        model.with("targetClass", "null");
+        model.with("title", "Classes");
+
+        return model;
+    }
+
+    @Override
+    public JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes, CodecoolClass targetClass) {
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("classes", classes);
+
+        if (targetClass != null) {
+            model.with("targetClass", targetClass);
+        } else {
+            model.with("targetClass", "null");
+        }
+
+        model.with("title", "Classes");
+
+        return model;
     }
 
     @Override
