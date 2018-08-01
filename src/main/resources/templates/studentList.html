@@ -18,7 +18,7 @@
         <div class="content-list" id="contentdiv">
             <div id="user-column" class="list-column">
                 {% if isCreated != "true" %}
-                <h2 id="error">There is someone else with that login or email!</h2>
+                    <h2 id="error">There is someone else with that login or email!</h2>
                 {% endif %}
                 <div class="listName">
                     {% if currentUser.getROLE().getNAME() == "admin" %}
@@ -40,7 +40,7 @@
             </div>
             <div id="form" style="display: none;">
                 {% if currentUser.getROLE().getNAME() != "student" %}
-                {% include "studentAddForm.html" with currentUser %}
+                {% include "studentAddForm.html" with classes %}
                 {% endif %}
             </div>
         </div>
