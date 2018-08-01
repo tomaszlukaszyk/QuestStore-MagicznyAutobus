@@ -1,7 +1,5 @@
 {% if currentUser.getROLE().getNAME() == "admin" %}
     {% set userRole = "mentor" %}
-{% else %}
-    {% set userRole = "student" %}
 {% endif %}
 
 <div class="edit-form">
