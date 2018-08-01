@@ -1,8 +1,8 @@
 
-    <link rel="stylesheet" href="style.css">
-<a href="/"><img id="logo" src="/static/images/logo.png" alt="Logo"></a>
-
-<!--<button onclick="showWallet()">Wallet test</button>-->
+<link rel="stylesheet" href="style.css">
+<div class="header-image">
+    <a href="/"><img id="logo" src="/static/images/logo.png" alt="Logo"></a>
+</div>
 <div id="informations">
     <p>Welcome&nbsp;<span id="fullname">{{ currentUser.getNAME() }} {{ currentUser.getSURNAME() }}</span>&nbsp;<br>
         you are logged as&nbsp;<span id="role">{{ currentUser.getROLE().getNAME() }}</span></p>
@@ -12,4 +12,6 @@
     {% endif %}
 </div>
 <h1>{{ title }}</h1>
-<a href="/logout"><img id="logout" src="/static/images/logout.png" alt="Logout" title="Logout"></a>
+<div class="header-image">
+    <a href="/logout"><img id="logout" src="/static/images/logout.png" alt="Logout" title="Logout"></a>
+</div>
