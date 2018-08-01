@@ -289,6 +289,8 @@ ul {
     align-self: center;
     text-align: center;
     padding-bottom: 1em;
+    display: flex;
+    flex-direction: column;
 }
 
 h2 {
@@ -428,7 +430,7 @@ div.content-box span {
 }
 
 #loginform button {
-    padding: 0.5em;
+    padding: 3%;
     margin-top: 50px;
 }
 
@@ -470,3 +472,30 @@ div.content-box span {
     padding: 5px;
     justify-content: space-between;
 }
+
+.studentinputs {
+    padding: 2px;
+}
+
+.studentinputs ,.mentorinputs {
+    padding: 3%;
+    margin: 5%;
+}
+
+#studentsubmitbutton, #mentorsubmitbutton {
+    padding: 3%;
+    margin: 5%;
+}
+
+#userclass {
+    background-color: black;
+    border-color: lime;
+    color: lime;
+    border: dotted;
+    text-align: center;
+}
+
+form {
+    padding: 5%;
+}
+
