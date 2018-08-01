@@ -34,6 +34,7 @@ public class Server {
         server.createContext("/logout", new LogoutHandler());
         server.createContext("/static", new StaticHandler());
         server.createContext("/list-mentors", new MentorsHandler());
+        server.createContext("/list-students", new StudentsHandler());
     }
 
     public void stop(){
