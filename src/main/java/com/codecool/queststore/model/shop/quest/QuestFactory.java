@@ -1,5 +1,6 @@
 package com.codecool.queststore.model.shop.quest;
 
+import com.codecool.queststore.dao.QuestDAO;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.artifact.ArtifactCategory;
 
@@ -8,10 +9,8 @@ import java.util.List;
 public class QuestFactory {
 
     public List<Quest> listFromUserID(int id) {
-
-
-
-        return null;
+        QuestDAO dao = new QuestDAO();
+        return dao.getAllQuestsByUser(id);
     }
 
     public QuestTemplate templatefromData(String name, String description, int value, String imageName, String imageMarkedName, QuestCategory category){
