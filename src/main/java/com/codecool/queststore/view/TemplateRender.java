@@ -3,12 +3,9 @@ package com.codecool.queststore.view;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
-import com.codecool.queststore.model.user.Role;
 import com.codecool.queststore.model.user.User;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class TemplateRender implements RenderInteface {
