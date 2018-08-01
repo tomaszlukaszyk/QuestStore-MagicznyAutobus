@@ -1,0 +1,40 @@
+{% if currentUser.getROLE().getNAME() != "student" %}
+{% set userRole = "student" %}
+{% endif %}
+
+<div class="edit-form">
+    <form method="POST" onkeyup="testIfFormIsEmpty('studentinputs', 'studentsubmitbutton')">
+        <br><br>
+        <label for="usersurname">Surname:</label>
+        <br><br>
+        <input type="text" class="studentinputs" id="usersurname" name="studentsurname" placeholder="Enter {{ userRole }} surname">
+        <br><br>
+        <label for="username">Name:</label>
+        <br><br>
+        <input type="text" class="studentinputs" id="username" name="studentname" placeholder="Enter {{ userRole }} name">
+        <br><br>
+        <label for="useremail">E-mail:</label>
+        <br><br>
+        <input type="text" class="studentinputs" id="useremail" name="studentemail" placeholder="Enter {{ userRole }} email">
+        <br><br>
+        <label for="userlogin">Login:</label>
+        <br><br>
+        <input type="text" class="studentinputs" id="userlogin" name="studentlogin" placeholder="Enter {{ userRole }} login">
+        <br><br>
+        <label for="userpassword">Password:</label>
+        <br><br>
+        <input type="text" class="studentinputs" id="userpassword" name="studentpassword" placeholder="Enter {{ userRole }} password">
+        <br><br>
+        <label for="useraddress">Address:</label>
+        <br><br>
+        <input type="text" class="studentinputs" id="useraddress" name="studentaddress" placeholder="Enter {{ userRole }} address">
+        <br><br>
+        <label for="userclass">Class:</label>
+        <br><br>
+        <input type="text" class="studentinputs" id="userclass" name="studentclass" placeholder="Enter {{ userRole }} class">
+        <br><br>
+        <button id="studentsubmitbutton" onclick="return checkUserInputs()" disabled>SEND</button>
+
+    </form>
+</div>
+<script src="static/javascript/scripts.js"></script>
