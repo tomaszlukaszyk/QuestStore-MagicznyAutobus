@@ -51,7 +51,7 @@ public class MentorsHandler extends AbstractHttphandler implements HttpHandler {
             MentorDAO dao = new MentorDAO();
             boolean isCreated = dao.createMentor(new User(inputs.get("mentorname").toString(), inputs.get("mentorsurname").toString(),
                                       inputs.get("mentoremail").toString(), inputs.get("mentoraddress").toString(), 0, Role.MENTOR),
-                                        new Login(inputs.get("mentorlogin").toString(), inputs.get("mentorpassword").toString()));
+                                      new Login(inputs.get("mentorlogin").toString(), inputs.get("mentorpassword").toString()));
 
             String response =  mentorsService.generateResponseBody(isCreated);
             SendReq(httpExchange, response);
