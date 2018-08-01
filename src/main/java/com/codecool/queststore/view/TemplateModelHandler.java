@@ -50,11 +50,23 @@ class TemplateModelHandler implements TemplateModelInterface {
     }
 
     @Override
-    public JtwigModel getUserListModel(User currentUser, List<User> users) {
+    public JtwigModel getMentorsListModel(User currentUser, List<User> users) {
         JtwigModel model = new JtwigModel();
         model.with("currentUser", currentUser);
         model.with("users", users);
-        model.with("title", "User List");
+        model.with("listName", "mentors");
+        model.with("title", "Mentor list");
+
+        return model;
+    }
+
+    @Override
+    public JtwigModel getStudentsListModel(User currentUser, List<User> users) {
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("users", users);
+        model.with("listName", "students");
+        model.with("title", "Student list");
 
         return model;
     }

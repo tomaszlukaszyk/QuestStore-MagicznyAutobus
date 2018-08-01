@@ -6,16 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CodecoolClass {
-
+    private final int ID;
     private final String NAME;
     private final List<User> ASSIGNED_MENTORS;
     private final List<User> ASSIGNED_STUDENTS;
 
-    public CodecoolClass(String name, List<User> assignedMentors, List<User> assignedStudents) {
+    public CodecoolClass(int id, String name, List<User> assignedMentors, List<User> assignedStudents) {
+        this.ID = id;
         this.NAME = name;
         this.ASSIGNED_MENTORS = assignedMentors;
         this.ASSIGNED_STUDENTS = assignedStudents;
         //from dao to class
+    }
+
+    public int getID() {
+        return ID;
     }
 
     public String getNAME() {
