@@ -38,7 +38,7 @@ h1 {
 header {
     display: flex;
     justify-content: space-between;
-    flex-basis: auto;
+    flex-basis: 100%;
     border-top: 2px lime dashed;
     border-bottom: 2px lime dashed;
     height: 20%;
@@ -77,6 +77,11 @@ header a {
     margin-right: 1%; 
 }
 
+.header-image {
+    display: flex;
+    flex-basis: 20%;
+    justify-content: center;
+}
 
 /*navigation bar style*/
 nav {
