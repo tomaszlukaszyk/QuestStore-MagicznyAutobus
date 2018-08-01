@@ -19,7 +19,7 @@ public interface RenderInteface {
 
     String RenderMentorListPage(User currentUser, List<User> users, boolean isCreated);
 
-    String RenderStudentListPage(User currentUser, List<User> users);
+    String RenderStudentListPage(User currentUser, List<User> users, boolean isCreated);
 
     String RenderShopPage(User currentUser, List<Artifact> artifacts);
 
