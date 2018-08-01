@@ -48,7 +48,6 @@ function checkUserInputs() {
         alert("Wrong email!");
         return false;
     }
-    alert("Sent!")
     return true;
 }
 
