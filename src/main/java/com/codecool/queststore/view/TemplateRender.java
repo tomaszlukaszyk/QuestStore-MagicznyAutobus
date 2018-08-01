@@ -3,24 +3,34 @@ package com.codecool.queststore.view;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
-import com.codecool.queststore.model.user.Role;
 import com.codecool.queststore.model.user.User;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TemplateRender implements RenderInteface {
 
     @Override
-    public String RenderClassPage() {
-
+    public String RenderClassPage(User currentUser, List<CodecoolClass> classes) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
         // get a template file
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
 
         // create a model that will be passed to a template
-        JtwigModel model = JtwigModel.newModel();
+        JtwigModel model = tmi.getClassModel(currentUser, classes);
+
+        return template.render(model);
+    }
+
+    @Override
+    public String RenderClassPage(User currentUser, List<CodecoolClass> classes, CodecoolClass targetClass) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
+
+        // create a model that will be passed to a template
+        JtwigModel model = tmi.getClassModel(currentUser, classes, targetClass);
 
         return template.render(model);
     }
