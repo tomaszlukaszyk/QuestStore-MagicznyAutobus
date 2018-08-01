@@ -82,7 +82,7 @@ public class TemplateRender implements RenderInteface {
         return template.render(tmi.getMentorsListModel(currentUser, users, isCreated));
     }
 
-    public String RenderStudentListPage(User currentUser, List<User> users, boolean isCreated) {
+    public String RenderStudentListPage(User currentUser, List<User> users, boolean isCreated, List<CodecoolClass> classes) {
         /* User list model:
          *  currentUser - active user
          *  items - list of user's
@@ -91,7 +91,7 @@ public class TemplateRender implements RenderInteface {
 
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/studentList.html");
 
-        return template.render(tmi.getStudentsListModel(currentUser, users, isCreated));
+        return template.render(tmi.getStudentsListModel(currentUser, users, isCreated, classes));
     }
 
     @Override
