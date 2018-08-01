@@ -14,16 +14,28 @@ import java.util.List;
 public class TemplateRender implements RenderInteface {
 
     @Override
-    public String RenderClassPage() {
+    public String RenderClassPage(User currentUser, List<CodecoolClass> classes) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
 
-            // get a template file
-            JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
+        // create a model that will be passed to a template
+        JtwigModel model = tmi.getClassModel(currentUser, classes);
 
-            // create a model that will be passed to a template
-            JtwigModel model = JtwigModel.newModel();
+        return template.render(model);
+    }
 
-            return template.render(model);
-        }
+    @Override
+    public String RenderClassPage(User currentUser, List<CodecoolClass> classes, CodecoolClass targetClass) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
+
+        // create a model that will be passed to a template
+        JtwigModel model = tmi.getClassModel(currentUser, classes, targetClass);
+
+        return template.render(model);
+    }
 
     @Override
     public String RenderProfilePage(User currentUser, User profile, List<CodecoolClass> classes) {
