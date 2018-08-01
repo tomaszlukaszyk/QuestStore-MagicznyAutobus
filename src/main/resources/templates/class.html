@@ -19,22 +19,26 @@
             <!--content-->
             <div class="contener">
                 <div class="class-content">
-                    <div class="class-column">
-                        <p>Classes</p>
-                        <u>
-                        <span class="classes" id="list-class">
-                                {% for class in classes%}
-                                    <p>{{ class.desc }}</p><br>
-                                {% endfor %}
-                        </span>
-                        </u>
+                        <a class="class-column">
+                            <p>Classes</p>
+                            <a class="classes" id="list-class">
+                            <ul>
+                                <li>
+                                    {% for class in classes%}
+                                        <a href="/class/{{ class.getID() }}"><p>{{ class.getNAME() }}</p></a><br>
+                                    {% endfor %}
+                                </li>
+                            </ul>
+                            </a>
+                        </a>
                     </div>
+                    {% if targetClass != "null" %}
                     <div class="class-column">
                         <p>Assigned mentors</p>
                         <span id="list-mentor">
                             <ul>
-                            {% for mentor in data.mentors%}
-                            <li id="{{ mentor.id }}">{{ mentor.fullName }}</li><br>
+                            {% for mentor in targetClass.getASSIGNED_MENTORS()%}
+                                <li><a href="/profile/{{ mentor.getID() }}">{{ mentor.getNAME() }} {{ mentor.getSURNAME }}</a></li>
                             {% endfor %}
                             </ul>
                         </span>
@@ -43,14 +47,17 @@
                         <p>Students</p>
                         <span id="list-student">
                             <ul>
-                            {% for student in data.students%}
-                            <li id="{{ student.id }}">{{ student.fullName }}</li>
+                            {% for student in targetClass.getASSIGNED_STUDENTS() %}
+                                <li><a href="/profile/{{ student.getID() }}">{{ student.getNAME() }} {{ student.getSURNAME }}</a></li>
                             {% endfor %}
                             </ul>
                         </span>
                     </div>
+                    {% endif %}
                 </div>
-            </div>
+            {% if targetClass == "null" %}
+                <h1>Click on the class to show details</h1>
+            {% endif %}
             <!--footer-->
             <footer>{% include "footer.html" ignore missing %}</footer>
         </div>
