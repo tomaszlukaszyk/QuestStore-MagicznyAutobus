@@ -36,6 +36,7 @@ public class CodecoolClass {
     }
 
     public CodecoolClass(String name) {
+     this.ID = 0;
      this.NAME = name;
      this.ASSIGNED_MENTORS = new ArrayList<>();
      this.ASSIGNED_STUDENTS = new ArrayList<>();
