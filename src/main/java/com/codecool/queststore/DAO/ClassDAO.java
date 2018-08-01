@@ -24,11 +24,51 @@ public class ClassDAO implements ClassDAOInterface, Connectable{
                 String name = rs.getString("description");
                 classes.add(new CodecoolClass(classID, name, getMentors(classID), getStudents(classID)));
             }
-
+            rs.close();
+            stmt.close();
+            conn.close();
             return classes;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public boolean assignMentor(int userID, int classID) {
+        try {
+            Connection conn = cp.getConnection();
+            cp.printDbStatus();
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO mentor_class (idmentor, idclass) VALUES (?, ?)");
+            stmt.setInt(1, userID);
+            stmt.setInt(2, classID);
+            stmt.executeUpdate();
+
+            stmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean assignStudent(int userID, int classID) {
+        try {
+            Connection conn = cp.getConnection();
+            cp.printDbStatus();
+            PreparedStatement stmt = conn.prepareStatement("UPDATE student SET idclass=? WHERE iduser=?");
+            stmt.setInt(2, userID);
+            stmt.setInt(1, classID);
+            stmt.executeUpdate();
+
+            stmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
@@ -50,6 +90,9 @@ public class ClassDAO implements ClassDAOInterface, Connectable{
             users.add(new User(name, surname, email, address, id, Role.MENTOR));
         }
 
+        rs.close();
+        stmt.close();
+        conn.close();
         return users;
     }
 
@@ -70,7 +113,9 @@ public class ClassDAO implements ClassDAOInterface, Connectable{
 
             users.add(new User(name, surname, email, address, id, Role.STUDENT));
         }
-
+        rs.close();
+        stmt.close();
+        conn.close();
         return users;
     }
 }

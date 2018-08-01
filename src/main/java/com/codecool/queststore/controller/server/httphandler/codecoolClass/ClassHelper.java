@@ -25,23 +25,53 @@ class ClassHelper {
     }
 
     String generateResponseBody() throws SQLException {
+        final int ACTION_PLACE = 2;
+        String[] splitedPath = splitURL(path);
+        String message = null;
         ClassDAOInterface classDAOInterface = new ClassDAO();
         RenderInteface renderInteface = new TemplateRender();
         User currentUser = new UserDAO().getUser(SessionPool.getSessionByUUID(UUID.fromString(cookie.getValue())).getUSER_ID());
         CodecoolClass targetClass;
         List<CodecoolClass> classes = classDAOInterface.getClasses();
 
-        targetClass = defineTarget(classes, path);
+        System.out.println("rendering class page...");
+        System.out.println("current user: " + currentUser.getNAME() + " " + currentUser.getSURNAME());
 
+        if (isAction(splitedPath)) {
+            System.out.println("Action: assign");
+            if (assignUser(splitedPath, classDAOInterface)) {
+                System.out.println("Success!");
+                message = "Assigned!";
+            } else {
+                System.out.println("Failed!");
+                message = "Can't perform the operation";
+            }
+        } else System.out.println("no Action");
+
+        System.out.println("looking for target...");
+        targetClass = defineTarget(classes, splitedPath);
         if (targetClass != null) {
+            System.out.println("target class: " + targetClass.getNAME());
             return renderInteface.RenderClassPage(currentUser, classes, targetClass);
         } else {
-            return renderInteface.RenderClassPage(currentUser, classes);
+            System.out.println("target class: null");
+            if (message == null) {
+                return renderInteface.RenderClassPage(currentUser, classes);
+            } else {
+                return renderInteface.RenderClassPage(currentUser, classes, message);
+            }
         }
     }
 
-    private CodecoolClass defineTarget(List<CodecoolClass> classes, String path) {
-        Integer classID = getTargetClassID(splitURL(path));
+    private boolean isAction(String[] splitedPath) {
+        final int ACTION_PLACE = 2;
+        if (ACTION_PLACE < splitedPath.length) {
+            return splitedPath[ACTION_PLACE].equals("assign");
+        } else
+            return false;
+    }
+    private CodecoolClass defineTarget(List<CodecoolClass> classes, String[] array) {
+        Integer classID = getTargetClassID(array);
         Iterator<CodecoolClass> classIterator = classes.iterator();
 
         if (classID == null) { return null;}
@@ -52,6 +82,30 @@ class ClassHelper {
             }
         }
         return null;
+    }
+
+    private boolean assignUser(String[] array, ClassDAOInterface classDAOInterface) {
+        /*
+        example path: /class/assign/mentor/1:1
+         */
+        final int USER_ROLE_PLACE = 3;
+        final int IDS_PLACE = 4;
+        final int USER_ID_PLACE = 0;
+        final int CLASS_ID_PLACE = 1;
+        String[] ids = array[IDS_PLACE].split(":");
+
+        if (isStringCastableToInt(ids[USER_ID_PLACE]) && isStringCastableToInt(ids[CLASS_ID_PLACE])) {
+            switch (array[USER_ROLE_PLACE]) {
+                case "mentor":
+                    return classDAOInterface.assignMentor(Integer.parseInt(ids[USER_ID_PLACE]), Integer.parseInt(ids[CLASS_ID_PLACE]));
+                case "student":
+                    return classDAOInterface.assignMentor(Integer.parseInt(ids[USER_ID_PLACE]), Integer.parseInt(ids[CLASS_ID_PLACE]));
+                default:
+                    return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     private String[] splitURL(String path) {

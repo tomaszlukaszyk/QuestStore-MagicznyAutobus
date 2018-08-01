@@ -38,6 +38,11 @@ public class TemplateRender implements RenderInteface {
     }
 
     @Override
+    public String RenderClassPage(User currentUser, List<CodecoolClass> classes, String message) {
+        return null;
+    }
+
+    @Override
     public String RenderProfilePage(User currentUser, User profile, List<CodecoolClass> classes) {
         /* Mentor profile model:
          *  currentUser - active user

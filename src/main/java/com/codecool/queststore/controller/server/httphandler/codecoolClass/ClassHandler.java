@@ -30,8 +30,10 @@ public class ClassHandler extends AbstractHttphandler implements HttpHandler {
             redirect(httpExchange,"/");
 
         } else {
+            System.out.println("sending class page...");
             ClassHelper classHelper = new ClassHelper(cookie,httpExchange.getRequestURI().getPath());
             String response = classHelper.generateResponseBody();
+            System.out.println("Success!\n\n");
             SendReq(httpExchange,response);
         }
     }
