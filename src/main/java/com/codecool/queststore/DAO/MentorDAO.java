@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MentorDAO implements Connectable ,MentorDAOInterface {
+public class MentorDAO implements Connectable, MentorDAOInterface {
 
     public boolean createMentor(User user, Login login) throws SQLException {
         boolean ifExist = false;
