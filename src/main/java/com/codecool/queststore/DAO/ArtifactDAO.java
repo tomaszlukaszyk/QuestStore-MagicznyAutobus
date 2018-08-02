@@ -1,16 +1,14 @@
 package com.codecool.queststore.DAO;
 
+import com.codecool.queststore.dao.interfaces.ArtifactDAOInterface;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.artifact.ArtifactCategory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtifactDAO implements Connectable {
+public class ArtifactDAO implements Connectable, ArtifactDAOInterface {
 
     public void createArtifact(Artifact artifact) throws SQLException {
         Connection conn = cp.getConnection();
@@ -39,27 +37,75 @@ public class ArtifactDAO implements Connectable {
         conn.close();
     }
 
-    public List<Artifact> getUsersNotUsedArtifactsById(int id) throws SQLException {
+    @Override
+    public void buyArtifact(int idUser, int artifact) {
 
-        String name = null;
-        String description = null;
+        try (Connection conn = cp.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("select buypersonalartifact(?,?)");
+            stmt.setInt(1, artifact);
+            stmt.setInt(2, getIdStudent(idUser, conn));
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-        Connection conn = cp.getConnection();
-        try {
-            PreparedStatement stmt;
-            stmt= conn.prepareStatement(
-                    " SELECT artifactName," +
-                    " artifactDescription\n" +
+    private int getIdStudent(int idUser, Connection conn) {
+        String query = "SELECT idstudent FROM student WHERE iduser=" + idUser;
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            } else return 0;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    @Override
+    public List<Artifact> getArtifacts() {
+        List<Artifact> artifacts = new ArrayList<>();
+        String query = "select idartifact, artifactname, artifactdescription, currentartifactcost, image, image_marked, artifactcategorydescription\n" +
+                "from artifact join artifactcategory on artifact.idartifactcategory = artifactcategory.idartifactcategory;";
+
+        try (Connection conn = cp.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String desc = rs.getString(3);
+                int cost = rs.getInt(4);
+                String image = rs.getString(5);
+                String markedImage = rs.getString(6);
+                String category = rs.getString(7);
+                artifacts.add(new Artifact(id, 0, name, desc, cost, image, markedImage, ArtifactCategory.getCategoryByName(category), false));
+            }
+            return artifacts;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Artifact> getUsersNotUsedArtifactsById(int id) {
+
+        String name;
+        String description;
+
+        try (Connection conn = cp.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(" SELECT artifactName" +
+                    " artifactDescription" +
                     " FROM artifact INNER JOIN personalArtifactHistory ON " +
                     "artifact.idArtifact = personalArtifactHistory.idArtifact" +
                     " WHERE idArtifactCategory = 1 AND isUsed = false " +
-                    "AND idStudent = (select idStudent FROM student where idUser = ?);\n"
-            );
+                    "AND idStudent = (select idStudent FROM student where idUser = ?);");
             stmt.setInt(1,id);
             ResultSet rs = stmt.executeQuery();
             List<Artifact> artifactList = new ArrayList<>();
             while (rs.next()) {
-                name = rs.getString("artifactName");
+                name = rs.getString(1);
                 description = rs.getString("artifactDescription");
                 artifactList.add(new Artifact(0, 0,
                 name, description, 0, null, null,
@@ -67,7 +113,6 @@ public class ArtifactDAO implements Connectable {
             }
             rs.close();
             stmt.close();
-            conn.close();
             return artifactList;
 
             } catch (SQLException e) {
@@ -76,4 +121,13 @@ public class ArtifactDAO implements Connectable {
         return null;
     }
 
+    public static void main(String[] args) {
+        ArtifactDAOInterface aDAO = new ArtifactDAO();
+        aDAO.buyArtifact(3, 2);
+
+//        for (Artifact a : artifacts) {
+//            System.out.println(a.getNAME()+"("+ a.getCATEGORY() + "): " + a.getDESCRIPTION());
+//        }
+        cp.printDbStatus();
+    }
 }

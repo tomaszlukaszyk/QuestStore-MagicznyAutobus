@@ -1,12 +1,7 @@
 package com.codecool.queststore.model.server;
 
 import com.codecool.queststore.controller.server.httphandler.*;
-<<<<<<< Temporary merge branch 1
-import com.codecool.queststore.controller.server.httphandler.codecoolClass.ClassHandler;
-import com.codecool.queststore.controller.server.httphandler.profile.ProfileHandler;
-=======
 import com.codecool.queststore.controller.server.httphandler.ProfileHandler;
->>>>>>> Temporary merge branch 2
 import com.codecool.queststore.model.server.session.SessionPool;
 import com.sun.net.httpserver.HttpServer;
 
