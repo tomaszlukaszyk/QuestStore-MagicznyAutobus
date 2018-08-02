@@ -48,12 +48,8 @@ class QuestHelper extends AbstractHttphandler {
 
             String editTemplatePath = "/quests/edit";
             String addTemplatePath = "/quests/add";
-            if (requestURIString.equals(addTemplatePath) && httpExchange.getRequestMethod().equals("GET")){
-                sendFile(httpExchange, getClass().getClassLoader().getResource("html/questTemplateAdd.html"));
-
-            } else if(requestURIString.equals(addTemplatePath) && httpExchange.getRequestMethod().equals("POST")){
-                addTemplate(httpExchange);
-
+            if (requestURIString.equals(addTemplatePath)){
+                handleAddTemplate(user, httpExchange);
             } else if(requestURIString.contains(editTemplatePath)) {
                 editTemplate(user, httpExchange);
             } else{
@@ -70,8 +66,21 @@ class QuestHelper extends AbstractHttphandler {
 
     }
 
+    private void handleAddTemplate(User currentUser, HttpExchange httpExchange) throws IOException{
+        if(httpExchange.getRequestMethod().equals("GET")){
+            addTemplateGet(currentUser, httpExchange);
+        } else {
+            addTemplatePost(httpExchange);
+        }
+    }
 
-    private QuestTemplate addTemplate(HttpExchange httpExchange) throws IOException{
+    private void addTemplateGet(User currentUser, HttpExchange httpExchange) throws IOException{
+        RenderInteface templateRender = new TemplateRender();
+        String response = templateRender.rendeAddQuestTemplatesPage(currentUser);
+        SendReq(httpExchange, response);
+    }
+
+    private QuestTemplate addTemplatePost(HttpExchange httpExchange) throws IOException{
         Map<String, String> parsedData = parseFormData(httpExchange);
         String questName = parsedData.get("name");
         String questDescription = parsedData.get("description");
