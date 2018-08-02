@@ -20,5 +20,6 @@ public interface QuestDAOInterface {
 
     void markQuest(int historyID);
     void deleteQuest(int historyID);
+    public boolean takeUpQuest(int userID, int questTemplateID, int value);
 
 }

@@ -1,4 +1,4 @@
-package com.codecool.queststore.dao;
+package com.codecool.queststore.DAO;
 
 import com.codecool.queststore.dao.interfaces.QuestDAOInterface;
 import com.codecool.queststore.model.shop.quest.Quest;
@@ -27,10 +27,14 @@ public class QuestDAO implements Connectable, QuestDAOInterface {
 
             QuestFactory questFactory = new QuestFactory();
             QuestCategory category = isGroup ? QuestCategory.GROUP : QuestCategory.PERSONAL;
+            statement.executeUpdate();
 
-            return questFactory.templatefromData(name, description, value, image, imageMarked, category);
+            int templateID = getTemplateID(name, connection);
+
+            return questFactory.templatefromData(templateID, name, description, value, image, imageMarked, category);
         } catch (SQLException e){
             e.printStackTrace();
+
         }
         return null;
     }
@@ -38,21 +42,23 @@ public class QuestDAO implements Connectable, QuestDAOInterface {
     @Override
     public QuestTemplate getQuestTemplate(int questID) {
         try(Connection connection = cp.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT getquest(?)")){
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM getquest(?);")){
 
             statement.setInt(1, questID);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()){
-                String name = resultSet.getString("questname");
-                String description = resultSet.getString("questdescription");
-                int value = resultSet.getInt("questvalue");
-                String imageName = resultSet.getString("image");
-                String imageMarkedName = resultSet.getString("image_marked");
-                int categoryValue = resultSet.getInt("idquestcategory");
+                String name = resultSet.getString("name");
+                String description = resultSet.getString("description");
+                int value = resultSet.getInt("value");
+                String imageName = resultSet.getString("first_image");
+                String imageMarkedName = resultSet.getString("second_marked");
+                int categoryValue = resultSet.getInt("questcategory");
+                int templateID = getTemplateID(name, connection);
+
                 QuestFactory questFactory = new QuestFactory();
 
-                return questFactory.templatefromData(name, description, value, imageName, imageMarkedName, categoryValue);
+                return questFactory.templatefromData(templateID, name, description, value, imageName, imageMarkedName, categoryValue);
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -61,11 +67,11 @@ public class QuestDAO implements Connectable, QuestDAOInterface {
     }
 
     @Override
-    public void updateTemplate(int questID, String name, String description, int value, int categoryValue, String image, String imageMarked) {
+    public void updateTemplate(int qtID, String name, String description, int value, String image, String imageMarked) {
         try(Connection connection = cp.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT updatequest(?, ?, ?, ?, ?, ?);")){
 
-            statement.setInt(1, questID);
+            statement.setInt(1, qtID);
             statement.setString(2, name);
             statement.setString(3, description);
             statement.setInt(4, value);
@@ -102,6 +108,7 @@ public class QuestDAO implements Connectable, QuestDAOInterface {
         } catch (SQLException e){
             e.printStackTrace();
         }
+        return null;
     }
 
     @Override
@@ -130,11 +137,11 @@ public class QuestDAO implements Connectable, QuestDAOInterface {
     @Override
     public List<Quest> getAllQuestsByUser(int userID) {
         try(Connection connection = cp.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT getstudentquests(?)")){
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM getstudentquests(?);")){
 
             int studentID = getStudentIDByUserID(userID, connection);
 
-            statement.setInt(1, studentID);
+            statement.setInt(1, userID);
             ResultSet resultSet = statement.executeQuery();
             QuestFactory questFactory = new QuestFactory();
 
@@ -147,8 +154,8 @@ public class QuestDAO implements Connectable, QuestDAOInterface {
                 int templateID = resultSet.getInt("questid");
                 if (templateID == lastTemplateID){
                     // refactor needed as part is repeated
-                    int historyID = resultSet.getInt("idquesthistory");
-                    String status = resultSet.getString("status").toLowerCase();
+                    int historyID = resultSet.getInt("historyid");
+                    String status = resultSet.getString("status_").toLowerCase();
 
                     Quest quest = status.equals("done") ? questFactory.questfromTemplate(questTemplate, true, historyID, studentID) : questFactory.questfromTemplate(questTemplate, historyID, studentID);
                     questList.add(quest);
@@ -156,8 +163,8 @@ public class QuestDAO implements Connectable, QuestDAOInterface {
                     lastTemplateID = templateID;
                     questTemplate = getQuestTemplate(templateID);
 
-                    int historyID = resultSet.getInt("idquesthistory");
-                    String status = resultSet.getString("status").toLowerCase();
+                    int historyID = resultSet.getInt("historyid");
+                    String status = resultSet.getString("status_").toLowerCase();
 
                     Quest quest = status.equals("done") ? questFactory.questfromTemplate(questTemplate, true, historyID, studentID) : questFactory.questfromTemplate(questTemplate, historyID, studentID);
                     questList.add(quest);
@@ -252,6 +259,24 @@ public class QuestDAO implements Connectable, QuestDAOInterface {
             e.printStackTrace();
         }
     }
+
+    public boolean takeUpQuest(int userID, int questTemplateID, int value){
+        try(Connection connection = cp.getConnection();
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO questhistory(idstudent, idquest, value, status) VALUES (?, ?, ?, 'NOT DONE');")) {
+
+            int studentID = getStudentIDByUserID(userID, connection);
+
+            statement.setInt(1, studentID);
+            statement.setInt(2, questTemplateID);
+            statement.setInt(3, value);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     private int getStudentIDByUserID(int userID, Connection connection){
         try(PreparedStatement statement = connection.prepareStatement("SELECT idstudent FROM student WHERE iduser = ?")){
