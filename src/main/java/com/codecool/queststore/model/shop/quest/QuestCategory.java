@@ -5,25 +5,43 @@ import java.util.Map;
 
 public enum QuestCategory {
 
-    PERSONAL(1),
-    GROUP(2);
+    PERSONAL(1, "personal"),
+    GROUP(2, "group");
 
     private final int VALUE;
-    private static final Map<Integer, QuestCategory> categoryMap = new HashMap<>();
+    private final String asSTRING;
+
+    private static final Map<Integer, QuestCategory> categoryValueMap = new HashMap<>();
+    private static final Map<String, QuestCategory> categoryStringMap = new HashMap<>();
     static {
-        for (QuestCategory questCategory : values()) {
-            categoryMap.put(questCategory.getVALUE(), questCategory);
+        for (QuestCategory questValueCategory : values()) {
+            categoryValueMap.put(questValueCategory.getVALUE(), questValueCategory);
+        }
+        for (QuestCategory questStringCategory : values()) {
+            categoryStringMap.put(questStringCategory.getAsSTRING(), questStringCategory);
         }
     }
-    QuestCategory(int name) {
+
+
+
+    QuestCategory(int name, String asSTRING) {
         this.VALUE = name;
+        this.asSTRING = asSTRING;
     }
 
     public static QuestCategory getByValue(int category){
-        return categoryMap.get(category);
+        return categoryValueMap.get(category);
+    }
+
+    public static QuestCategory getByString(String asString){
+        return categoryStringMap.get(asString);
     }
 
     public int getVALUE() {
-        return VALUE; }
+        return VALUE;
+    }
 
+    public String getAsSTRING() {
+        return asSTRING;
+    }
 }
