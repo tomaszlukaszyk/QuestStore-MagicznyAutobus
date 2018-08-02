@@ -231,13 +231,23 @@ DELETE FROM users WHERE iduser = userid;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION updateUser(userid INTEGER, surname TEXT, name_ TEXT, email TEXT, address TEXT) RETURNS VOID AS $$
+CREATE OR REPLACE FUNCTION updateEmail(userid INTEGER, email TEXT) RETURNS VOID AS $$
 BEGIN
 UPDATE users
-SET usersurname = surname, username = name_, useremail = email, useraddress = address
+SET useremail = email
 WHERE iduser = userid;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION updateAddress(userid INTEGER, address TEXT) RETURNS VOID AS $$
+BEGIN
+UPDATE users
+SET useraddress = address
+WHERE iduser = userid;
+END;
+$$ LANGUAGE plpgsql;
+
+
 
 CREATE OR REPLACE FUNCTION updateArtifact(artifactid INTEGER, name_ TEXT, description TEXT, value INTEGER, first_image TEXT, second_image TEXT) RETURNS VOID AS $$
 BEGIN

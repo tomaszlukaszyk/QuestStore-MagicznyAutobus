@@ -1,16 +1,12 @@
 package com.codecool.queststore.view;
 
-import com.codecool.queststore.DAO.ClassDAO;
 import com.codecool.queststore.model.Title;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
-import com.codecool.queststore.model.user.Role;
 import com.codecool.queststore.model.user.User;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class TemplateRender implements RenderInteface {
@@ -99,7 +95,7 @@ public class TemplateRender implements RenderInteface {
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
         TemplateModelInterface tmi = new TemplateModelHandler();
 
-        return template.render(tmi.getProfileAdminModel(currentUser,titles));
+        return template.render(tmi.getProfileAdminModel(currentUser, titles));
     }
 
     public String RenderMentorListPage(User currentUser, List<User> users, boolean isCreated) {
@@ -145,5 +141,4 @@ public class TemplateRender implements RenderInteface {
 
         return template.render(tmi.getQuestModel(currentUser, quests));
     }
-
 }

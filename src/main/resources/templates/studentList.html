@@ -21,7 +21,7 @@
                     <h2 id="error">There is someone else with that login or email!</h2>
                 {% endif %}
                 <div class="listName">
-                    {% if currentUser.getROLE().getNAME() == "admin" %}
+                    {% if currentUser.getROLE().getNAME() != "student" %}
                     <h2>{{ listName }}</h2>
                     <div class="addBtnPos">
                         <button class="addBtn" onclick="showAddForm()">+</button>

@@ -391,10 +391,16 @@ input::-moz-placeholder {
     border: 0.1em solid;
     padding: 1em;
     background: black;
-    }
+}
+
+#back, #cl {
+    width: 10em;
+    margin-left: 3em;
+}
 
 div.content-box span {
     font-weight: bold;
+    text-align: center;
 }
 
 .buttonBar {
@@ -563,4 +569,10 @@ width: 15em;
 text-align: center;
 padding: 3%;
 }
+
+.editinputss {
+    width: 20em;
+}
+
+
 

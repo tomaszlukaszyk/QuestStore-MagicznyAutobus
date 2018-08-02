@@ -50,6 +50,13 @@ function checkUserInputs() {
     }
     return true;
 }
+function checkUserEmail() {
+    if (!testUserEmail()){
+        alert("Wrong email!");
+        return false;
+    }
+    return true;
+}
 
     function showAddForm() {
         document.getElementById("contentdiv").className = "content-list-form";
