@@ -317,6 +317,8 @@ input {
     background: black;
     text-align: center;
     color: lime;
+    padding: 3%;
+    margin: 5%;
 }
 
 input::-moz-placeholder {
@@ -506,5 +508,39 @@ form {
 }
 .listitems a:hover {
     text-decoration: underline
+}
+p {
+    align-self: center;
+    text-align: center;
+}
+
+.editforms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#newtitlebutton {
+    width: 27%;
+    align-self: center;
+}
+
+#newtitle {
+    display: flex;
+    flex-direction: column;
+}
+#admininfo {
+height: 10em;
+width: 15em;
+}
+
+#createnewtitle {
+height: 10em;
+width: 15em;
+}
+
+.infos {
+text-align: center;
+padding: 3%;
 }
 
