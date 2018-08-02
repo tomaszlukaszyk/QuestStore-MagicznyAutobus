@@ -97,7 +97,7 @@ public class TemplateRender implements RenderInteface {
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
         TemplateModelInterface tmi = new TemplateModelHandler();
 
-        return template.render(tmi.getProfileAdminModel(currentUser,titles));
+        return template.render(tmi.getProfileAdminModel(currentUser, titles));
     }
 
     public String RenderMentorListPage(User currentUser, List<User> users, boolean isCreated) {
@@ -143,15 +143,4 @@ public class TemplateRender implements RenderInteface {
 
         return template.render(tmi.getQuestModel(currentUser, quests));
     }
-
-<<<<<<< Temporary merge branch 1
-    public static void main(String[] args) {
-        User currentUser = new User("Piotr", "Kaminski", "pk@o2.pl", "sss", 5, Role.MENTOR);
-        List<CodecoolClass> classes = new ClassDAO().getClasses();
-        RenderInteface renderInteface = new TemplateRender();
-        System.out.println(renderInteface.RenderClassPage(currentUser, classes, classes.get(1)));
-    }
 }
-=======
-}
->>>>>>> Temporary merge branch 2
