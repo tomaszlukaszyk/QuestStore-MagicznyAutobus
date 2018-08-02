@@ -1,6 +1,5 @@
-{% if currentUser.getROLE().getNAME() == "admin" %}
 <div class="class-column">
-    <p>mentors</p>
+    <p>Choose mentor</p>
     <span id="list-mentor" class="list-user">
         <ul>
         {% for mentor in users %}
@@ -9,15 +8,3 @@
         </ul>
     </span>
 </div>
-{% else %}
-<div class="class-column">
-    <p>Students</p>
-    <span id="list-student" class="list-user">
-        <ul>
-        {% for student in users %}
-            <li><a href="/class/assign/student/classID:{{ student.getID() }}">{{ student.getNAME() }} {{ student.getSURNAME }}</a></li>
-        {% endfor %}
-        </ul>
-    </span>
-</div>
-{% endif %}

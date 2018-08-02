@@ -24,7 +24,7 @@
                                 {% for class in classes%}
                                     <div style="display: flex; justify-content: center;">
                                         <p><a href="/class/{{ class.getID() }}">{{ class.getNAME() }}</a></p>
-                                        {% if currentUser.getROLE().getNAME() != "student" %}
+                                        {% if currentUser.getROLE().getNAME() == "admin" %}
                                             <div class="assignBtn-pos">
                                                 <a class="assignBtn" href="/class/assign/{{ class.getID() }}">assign</a>
                                             </div>

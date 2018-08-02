@@ -73,24 +73,15 @@ class ClassHelper {
         if (splitedPath.length == 4) {
             System.out.println("Choose user");
 
-            switch (currentUser.getROLE()) {
-                case ADMIN: {
+                if (currentUser.getROLE() == Role.ADMIN) {
                     users = userDAOInterface.getUsers(Role.MENTOR);
-                    break;
+                    return renderInteface.RenderClassPage(currentUser, classes, users, Integer.parseInt(splitedPath[TARGET_CLASS_ID_PLACE]));
+                } else {
+                    message = "Can't perform the operation";
+                    return renderInteface.RenderClassPage(currentUser, classes, message);
                 }
-                case MENTOR: {
-                    users = userDAOInterface.getUsers(Role.STUDENT);
-                    break;
-                }
-                default: users = userDAOInterface.getUsers();
-            }
-            System.out.println("splitedPath: ");
-            for (String s : splitedPath) {
-                System.out.println(s);
-            }
 
 
-            return renderInteface.RenderClassPage(currentUser, classes, users, Integer.parseInt(splitedPath[TARGET_CLASS_ID_PLACE]));
 
         }else if (assignUser(splitedPath)) {
             System.out.println("Success!");
@@ -121,21 +112,13 @@ class ClassHelper {
         /*
         example path: /class/assign/mentor/1:1
          */
-        final int USER_ROLE_PLACE = 3;
         final int IDS_PLACE = 4;
         final int USER_ID_PLACE = 1;
         final int CLASS_ID_PLACE = 0;
         String[] ids = array[IDS_PLACE].split(":");
 
         if (isStringCastableToInt(ids[USER_ID_PLACE]) && isStringCastableToInt(ids[CLASS_ID_PLACE])) {
-            switch (array[USER_ROLE_PLACE]) {
-                case "mentor":
-                    return classDAOInterface.assignMentor(Integer.parseInt(ids[USER_ID_PLACE]), Integer.parseInt(ids[CLASS_ID_PLACE]));
-                case "student":
-                    return classDAOInterface.assignStudent(Integer.parseInt(ids[USER_ID_PLACE]), Integer.parseInt(ids[CLASS_ID_PLACE]));
-                default:
-                    return false;
-            }
+            return classDAOInterface.assignMentor(Integer.parseInt(ids[USER_ID_PLACE]), Integer.parseInt(ids[CLASS_ID_PLACE]));
         } else {
             return false;
         }

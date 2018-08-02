@@ -62,25 +62,6 @@ public class ClassDAO implements ClassDAOInterface, Connectable{
         }
     }
 
-    @Override
-    public boolean assignStudent(int userID, int classID) {
-        try {
-            Connection conn = cp.getConnection();
-            cp.printDbStatus();
-            PreparedStatement stmt = conn.prepareStatement("UPDATE student SET idclass=? WHERE iduser=?");
-            stmt.setInt(2, userID);
-            stmt.setInt(1, classID);
-            stmt.executeUpdate();
-
-            stmt.close();
-            conn.close();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     private List<User> getMentors(int idClass) throws SQLException{
         List<User> users = new ArrayList<>();
         cp.printDbStatus();
