@@ -1,5 +1,6 @@
 package com.codecool.queststore.view;
 
+import com.codecool.queststore.model.Title;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
@@ -17,6 +18,7 @@ public interface RenderInteface {
 
     // student profile
     String RenderProfilePage(User currentUser, User profile, CodecoolClass ccClass, List<Artifact> items);
+    String RenderProfilePage(User currentUser, List<Title> titles);
 
     String RenderMentorListPage(User currentUser, List<User> users, boolean isCreated);
 
