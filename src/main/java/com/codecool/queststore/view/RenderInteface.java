@@ -9,7 +9,10 @@ import com.codecool.queststore.model.user.User;
 import java.util.List;
 
 public interface RenderInteface {
-    String RenderClassPage();
+    String RenderClassPage(User currentUser, List<CodecoolClass> classes);
+    String RenderClassPage(User currentUser, List<CodecoolClass> classes, CodecoolClass targetClass);
+    String RenderClassPage(User currentUser, List<CodecoolClass> classes, String message);
+    String RenderClassPage(User currentUser, List<CodecoolClass> classes, List<User> users, int classID);
 
     // mentor profile
     String RenderProfilePage(User currentUser, User profile, List<CodecoolClass> classes);

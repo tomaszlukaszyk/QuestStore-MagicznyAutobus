@@ -1,5 +1,6 @@
 package com.codecool.queststore.view;
 
+import com.codecool.queststore.DAO.ClassDAO;
 import com.codecool.queststore.model.Title;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
@@ -12,19 +13,55 @@ import org.jtwig.JtwigTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TemplateRender implements RenderInteface{
+public class TemplateRender implements RenderInteface {
 
     @Override
-    public String RenderClassPage() {
+    public String RenderClassPage(User currentUser, List<CodecoolClass> classes) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
 
-            // get a template file
-            JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
+        // create a model that will be passed to a template
+        JtwigModel model = tmi.getClassModel(currentUser, classes);
 
-            // create a model that will be passed to a template
-            JtwigModel model = JtwigModel.newModel();
+        return template.render(model);
+    }
 
-            return template.render(model);
-        }
+    @Override
+    public String RenderClassPage(User currentUser, List<CodecoolClass> classes, CodecoolClass targetClass) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
+
+        // create a model that will be passed to a template
+        JtwigModel model = tmi.getClassModel(currentUser, classes, targetClass);
+
+        return template.render(model);
+    }
+
+    @Override
+    public String RenderClassPage(User currentUser, List<CodecoolClass> classes, String message) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
+
+        // create a model that will be passed to a template
+        JtwigModel model = tmi.getClassModel(currentUser, classes, message);
+
+        return template.render(model);
+    }
+
+    @Override
+    public String RenderClassPage(User currentUser, List<CodecoolClass> classes, List<User> users, int classID) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
+
+        // create a model that will be passed to a template
+        JtwigModel model = tmi.getClassModel(currentUser, classes, users, classID);
+
+        return template.render(model);
+    }
 
     @Override
     public String RenderProfilePage(User currentUser, User profile, List<CodecoolClass> classes) {
@@ -37,8 +74,6 @@ public class TemplateRender implements RenderInteface{
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
         TemplateModelInterface tmi = new TemplateModelHandler();
 
-        //render from stab
-//        return template.render(getMentorProfileModel());
         //render from args
         return template.render(tmi.getProfileMentorModel(currentUser, profile, classes));
     }
@@ -54,9 +89,6 @@ public class TemplateRender implements RenderInteface{
 
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
         TemplateModelInterface tmi = new TemplateModelHandler();
-
-        // render from stab
-//        return template.render(getStudentProfileModel());
 
         // render from args
         return template.render(tmi.getProfileStudentModel(currentUser, profile, ccClass, items));
@@ -92,7 +124,7 @@ public class TemplateRender implements RenderInteface{
 
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/userList.html");
 
-        return template.render(tmi.getStudentsListModel(currentUser, users));
+        return template.render(tmi.getMentorsListModel(currentUser, users));
     }
 
     @Override

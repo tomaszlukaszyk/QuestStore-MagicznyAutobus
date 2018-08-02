@@ -1,6 +1,7 @@
 package com.codecool.queststore.model.server;
 
 import com.codecool.queststore.controller.server.httphandler.*;
+import com.codecool.queststore.controller.server.httphandler.ClassHandler;
 import com.codecool.queststore.controller.server.httphandler.ProfileHandler;
 import com.codecool.queststore.model.server.session.SessionPool;
 import com.sun.net.httpserver.HttpServer;
@@ -33,6 +34,7 @@ public class Server {
         server.createContext("/profile", new ProfileHandler());
         server.createContext("/logout", new LogoutHandler());
         server.createContext("/static", new StaticHandler());
+        server.createContext("/class", new ClassHandler());
     }
 
     public void stop(){
