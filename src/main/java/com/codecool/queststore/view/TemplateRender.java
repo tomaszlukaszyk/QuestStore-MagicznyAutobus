@@ -70,17 +70,8 @@ public class TemplateRender implements RenderInteface{
         return template.render(tmi.getProfileAdminModel(currentUser,titles));
     }
 
+    public String RenderMentorListPage(User currentUser, List<User> users) {
 
-    private List<User> getUserList(Role role, int amount) {
-        List<User> users = new ArrayList<>();
-        for (int i = 1; i <= amount; i++) {
-            users.add(new User(role.getNAME(), String.valueOf(i), "---", "---", i, role));
-        }
-
-        return users;
-    }
-
-    public String RenderListPage(User currentUser, List<User> users) {
         /* User list model:
          *  currentUser - active user
          *  items - list of user's
@@ -89,7 +80,19 @@ public class TemplateRender implements RenderInteface{
 
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/userList.html");
 
-        return template.render(tmi.getUserListModel(currentUser, users));
+        return template.render(tmi.getMentorsListModel(currentUser, users));
+    }
+
+    public String RenderStudentListPage(User currentUser, List<User> users) {
+        /* User list model:
+         *  currentUser - active user
+         *  items - list of user's
+         */
+        TemplateModelInterface tmi = new TemplateModelHandler();
+
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/userList.html");
+
+        return template.render(tmi.getStudentsListModel(currentUser, users));
     }
 
     @Override

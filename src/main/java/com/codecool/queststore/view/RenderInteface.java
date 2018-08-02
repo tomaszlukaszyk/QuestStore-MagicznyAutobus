@@ -20,7 +20,9 @@ public interface RenderInteface {
     // admin profile
     String RenderProfilePage(User currentUser, List<Title> titles);
 
-    String RenderListPage(User currentUser, List<User> users);
+    String RenderMentorListPage(User currentUser, List<User> users);
+
+    String RenderStudentListPage(User currentUser, List<User> users);
 
     String RenderShopPage(User currentUser, List<Artifact> artifacts);
 
