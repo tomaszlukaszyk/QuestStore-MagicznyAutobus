@@ -36,4 +36,12 @@ public class Login {
     public String getPASSWORD() {
         return PASSWORD;
     }
+
+    @Override
+    public String toString() {
+        return "Login{" +
+                "LOGIN='" + LOGIN + '\'' +
+                ", PASSWORD='" + PASSWORD + '\'' +
+                '}';
+    }
 }

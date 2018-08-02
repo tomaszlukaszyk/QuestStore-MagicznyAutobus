@@ -231,13 +231,23 @@ DELETE FROM users WHERE iduser = userid;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION updateUser(userid INTEGER, surname TEXT, name_ TEXT, email TEXT, address TEXT) RETURNS VOID AS $$
+CREATE OR REPLACE FUNCTION updateEmail(userid INTEGER, email TEXT) RETURNS VOID AS $$
 BEGIN
 UPDATE users
-SET usersurname = surname, username = name_, useremail = email, useraddress = address
+SET useremail = email
 WHERE iduser = userid;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION updateAddress(userid INTEGER, address TEXT) RETURNS VOID AS $$
+BEGIN
+UPDATE users
+SET useraddress = address
+WHERE iduser = userid;
+END;
+$$ LANGUAGE plpgsql;
+
+
 
 CREATE OR REPLACE FUNCTION updateArtifact(artifactid INTEGER, name_ TEXT, description TEXT, value INTEGER, first_image TEXT, second_image TEXT) RETURNS VOID AS $$
 BEGIN
@@ -294,3 +304,50 @@ SELECT idcodecoolrole FROM users WHERE iduser = id INTO rolee;
 RETURN QUERY (SELECT username, usersurname, useremail, useraddress, (SELECT roledescription FROM codecoolrole WHERE idcodecoolrole = rolee) FROM users WHERE iduser = id);
 END;
 $$ LANGUAGE plpgsql;									
+
+CREATE OR REPLACE FUNCTION getMentors() RETURNS TABLE (name TEXT, surname TEXT, email TEXT, address TEXT, id INTEGER) AS $$
+BEGIN
+RETURN QUERY (SELECT username, usersurname, useremail, useraddress, iduser FROM users WHERE idcodecoolrole = 2);
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getClassStudents(classid INTEGER) RETURNS TABLE (userid INTEGER, name TEXT, surname TEXT, email TEXT, address TEXT) AS $$
+BEGIN
+RETURN QUERY (SELECT users.iduser, username, usersurname, useremail, useraddress FROM users JOIN student ON users.iduser = student.iduser WHERE idclass = classid);
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getClassMentors(classid INTEGER) RETURNS TABLE (userid INTEGER, name TEXT, surname TEXT, email TEXT, address TEXT) AS $$
+BEGIN
+RETURN QUERY (SELECT users.iduser, username, usersurname, useremail, useraddress FROM users JOIN mentor ON users.iduser = mentor.iduser JOIN mentor_class ON mentor.idmentor = mentor_class.idmentor WHERE idclass = classid);
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getClasses() RETURNS TABLE (id INTEGER, description TEXT) AS $$
+BEGIN
+RETURN QUERY (SELECT idclass, classdescription FROM class);
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getUsers() RETURNS TABLE (id INTEGER, name TEXT, surname TEXT, email TEXT, address TEXT, role TEXT) AS $$
+DECLARE
+desc TEXT;
+BEGIN
+RETURN QUERY (select iduser, username, usersurname, useremail, useraddress, roledescription from users join codecoolrole on (users.idcodecoolrole = codecoolrole.idcodecoolrole));
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getUsers(role TEXT) RETURNS TABLE (id INTEGER, name TEXT, surname TEXT, email TEXT, address TEXT) AS $$
+DECLARE
+desc TEXT;
+BEGIN
+RETURN QUERY (select iduser, username, usersurname, useremail, useraddress from users join codecoolrole on (users.idcodecoolrole = codecoolrole.idcodecoolrole) WHERE roledescription=role);
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION getStudents() RETURNS TABLE (name TEXT, surname TEXT, email TEXT, address TEXT, id INTEGER) AS $$
+BEGIN
+RETURN QUERY (SELECT username, usersurname, useremail, useraddress, iduser FROM users WHERE idcodecoolrole = 3);
+END;
+$$ LANGUAGE plpgsql;

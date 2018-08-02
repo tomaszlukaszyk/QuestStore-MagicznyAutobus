@@ -1,8 +1,8 @@
 package com.codecool.queststore.model.server;
 
 import com.codecool.queststore.controller.server.httphandler.*;
-import com.codecool.queststore.controller.server.httphandler.profile.ProfileHandler;
 import com.codecool.queststore.controller.server.httphandler.quest.QuestHandler;
+import com.codecool.queststore.controller.server.httphandler.ProfileHandler;
 import com.codecool.queststore.model.server.session.SessionPool;
 import com.sun.net.httpserver.HttpServer;
 
@@ -35,6 +35,9 @@ public class Server {
         server.createContext("/logout", new LogoutHandler());
         server.createContext("/static", new StaticHandler());
         server.createContext("/quests", new QuestHandler());
+        server.createContext("/list-mentors", new MentorsHandler());
+        server.createContext("/list-students", new StudentsHandler());
+        server.createContext("/class", new ClassHandler());
     }
 
     public void stop(){

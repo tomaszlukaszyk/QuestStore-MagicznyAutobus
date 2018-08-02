@@ -1,5 +1,6 @@
 package com.codecool.queststore.view;
 
+import com.codecool.queststore.model.Title;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
@@ -13,7 +14,63 @@ import java.util.List;
 class TemplateModelHandler implements TemplateModelInterface {
     @Override
     public JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes) {
-        return null;
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("classes", classes);
+        model.with("targetClass", "null");
+        model.with("action", "null");
+        model.with("users", "null");
+        model.with("message", "null");
+        model.with("title", "Classes");
+
+        return model;
+    }
+
+    @Override
+    public JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes, CodecoolClass targetClass) {
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("classes", classes);
+
+        if (targetClass != null) {
+            model.with("targetClass", targetClass);
+        } else {
+            model.with("targetClass", "null");
+        }
+
+        model.with("action", "null");
+        model.with("users", "null");
+        model.with("title", "Classes");
+
+        return model;
+    }
+
+    @Override
+    public JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes, String message) {
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("classes", classes);
+        model.with("targetClass", "null");
+        model.with("action", "null");
+        model.with("users", "null");
+        model.with("message", message);
+        model.with("title", "Classes");
+
+        return model;
+    }
+
+    @Override
+    public JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes, List<User> users, int classID) {
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("classes", classes);
+        model.with("targetClass", "null");
+        model.with("action", "assign");
+        model.with("users", users);
+        model.with("classID", classID);
+        model.with("title", "Classes");
+
+        return model;
     }
 
     @Override
@@ -40,6 +97,17 @@ class TemplateModelHandler implements TemplateModelInterface {
         return model;
     }
 
+    @Override
+    public JtwigModel getProfileAdminModel(User currentUser, List<Title> titles) {
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("profile", currentUser);
+        model.with("roles", titles);
+        model.with("title", "Profile");
+
+        return model;
+    }
+
     private List<User> collectStudents(List<CodecoolClass> classes) {
         List<User> students = new ArrayList<>();
 
@@ -51,23 +119,26 @@ class TemplateModelHandler implements TemplateModelInterface {
     }
 
     @Override
-    public JtwigModel getMentorsListModel(User currentUser, List<User> users) {
+    public JtwigModel getMentorsListModel(User currentUser, List<User> users, boolean isCreated) {
         JtwigModel model = new JtwigModel();
         model.with("currentUser", currentUser);
         model.with("users", users);
-        model.with("listName", "mentors");
-        model.with("title", "Mentor list");
+        model.with("listName", "Create new mentor");
+        model.with("title", "Mentors List");
+        model.with("isCreated", isCreated);
 
         return model;
     }
 
     @Override
-    public JtwigModel getStudentsListModel(User currentUser, List<User> users) {
+    public JtwigModel getStudentsListModel(User currentUser, List<User> users, boolean isCreated, List<CodecoolClass> classes) {
         JtwigModel model = new JtwigModel();
         model.with("currentUser", currentUser);
         model.with("users", users);
-        model.with("listName", "students");
+        model.with("listName", "Create new student");
         model.with("title", "Student list");
+        model.with("isCreated", isCreated);
+        model.with("classes", classes);
 
         return model;
     }

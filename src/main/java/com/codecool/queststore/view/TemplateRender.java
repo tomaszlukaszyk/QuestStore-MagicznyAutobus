@@ -1,5 +1,7 @@
 package com.codecool.queststore.view;
 
+import com.codecool.queststore.DAO.ClassDAO;
+import com.codecool.queststore.model.Title;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
@@ -8,23 +10,57 @@ import com.codecool.queststore.model.user.Role;
 import com.codecool.queststore.model.user.User;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class TemplateRender implements RenderInteface{
+public class TemplateRender implements RenderInteface {
 
     @Override
-    public String RenderClassPage() {
+    public String RenderClassPage(User currentUser, List<CodecoolClass> classes) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
 
-            // get a template file
-            JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
+        // create a model that will be passed to a template
+        JtwigModel model = tmi.getClassModel(currentUser, classes);
 
-            // create a model that will be passed to a template
-            JtwigModel model = JtwigModel.newModel();
+        return template.render(model);
+    }
 
-            return template.render(model);
-        }
+    @Override
+    public String RenderClassPage(User currentUser, List<CodecoolClass> classes, CodecoolClass targetClass) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
+
+        // create a model that will be passed to a template
+        JtwigModel model = tmi.getClassModel(currentUser, classes, targetClass);
+
+        return template.render(model);
+    }
+
+    @Override
+    public String RenderClassPage(User currentUser, List<CodecoolClass> classes, String message) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
+
+        // create a model that will be passed to a template
+        JtwigModel model = tmi.getClassModel(currentUser, classes, message);
+
+        return template.render(model);
+    }
+
+    @Override
+    public String RenderClassPage(User currentUser, List<CodecoolClass> classes, List<User> users, int classID) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
+
+        // create a model that will be passed to a template
+        JtwigModel model = tmi.getClassModel(currentUser, classes, users, classID);
+
+        return template.render(model);
+    }
 
     @Override
     public String RenderProfilePage(User currentUser, User profile, List<CodecoolClass> classes) {
@@ -37,8 +73,6 @@ public class TemplateRender implements RenderInteface{
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
         TemplateModelInterface tmi = new TemplateModelHandler();
 
-        //render from stab
-//        return template.render(getMentorProfileModel());
         //render from args
         return template.render(tmi.getProfileMentorModel(currentUser, profile, classes));
     }
@@ -55,74 +89,40 @@ public class TemplateRender implements RenderInteface{
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
         TemplateModelInterface tmi = new TemplateModelHandler();
 
-        // render from stab
-//        return template.render(getStudentProfileModel());
-
         // render from args
         return template.render(tmi.getProfileStudentModel(currentUser, profile, ccClass, items));
     }
 
-    private JtwigModel getMentorProfileModel() {
+    @Override
+    public String RenderProfilePage(User currentUser, List<Title> titles) {
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
         TemplateModelInterface tmi = new TemplateModelHandler();
-        User currentUser = new User("Piotr", "Kaminski", "pkaminki95@gmail.com", "address", 1, Role.STUDENT);
-        User user = new User("Pawel", "Kaminski", "kaminski21@gmail.com", "address", 2, Role.MENTOR);
-        List<CodecoolClass> classes = new ArrayList<>();
 
-        for (int i = 1; i <= 3; i++) {
-            String id = "2018." + i;
-            CodecoolClass c = new CodecoolClass(Integer.parseInt(id), id , getUserList(Role.MENTOR, 2), getUserList(Role.STUDENT, 5));
-            classes.add(c);
-        }
-
-        return tmi.getProfileMentorModel(currentUser, user, classes);
+        return template.render(tmi.getProfileAdminModel(currentUser, titles));
     }
 
-    private List<User> getUserList(Role role, int amount) {
-        List<User> users = new ArrayList<>();
-        for (int i = 1; i <= amount; i++) {
-            users.add(new User(role.getNAME(), String.valueOf(i), "---", "---", i, role));
-        }
-
-        return users;
-    }
-
-    private static JtwigModel getStudentProfileModel() {
-        TemplateModelInterface tmi = new TemplateModelHandler();
-        User currentUser = new User("Piotr", "Kaminski", "pkaminki95@gmail.com", "address", 1, Role.STUDENT);
-        User user = new User("Pawel", "Kaminski", "kaminski21@gmail.com", "address", 2, Role.MENTOR);
-        CodecoolClass ccClass = new CodecoolClass(Integer.parseInt("2018.1"), "2018.1", null, null);
-        List<Artifact> artifacts = new ArrayList<>();
-
-        for (int i = 1; i <= 3; i++) {
-            Artifact a = new Artifact(i, i,"item" + String.valueOf(i), ".", 1, ".", ".", null, false);
-            artifacts.add(a);
-        }
-
-        return tmi.getProfileStudentModel(currentUser, user, ccClass, artifacts);
-    }
-
-    public String RenderMentorListPage(User currentUser, List<User> users) {
+    public String RenderMentorListPage(User currentUser, List<User> users, boolean isCreated) {
         /* User list model:
          *  currentUser - active user
          *  items - list of user's
          */
         TemplateModelInterface tmi = new TemplateModelHandler();
 
-        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/userList.html");
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/mentorList.html");
 
-        return template.render(tmi.getMentorsListModel(currentUser, users));
+        return template.render(tmi.getMentorsListModel(currentUser, users, isCreated));
     }
 
-    public String RenderStudentListPage(User currentUser, List<User> users) {
+    public String RenderStudentListPage(User currentUser, List<User> users, boolean isCreated, List<CodecoolClass> classes) {
         /* User list model:
          *  currentUser - active user
          *  items - list of user's
          */
         TemplateModelInterface tmi = new TemplateModelHandler();
 
-        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/userList.html");
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/studentList.html");
 
-        return template.render(tmi.getStudentsListModel(currentUser, users));
+        return template.render(tmi.getStudentsListModel(currentUser, users, isCreated, classes));
     }
 
     @Override
@@ -144,7 +144,7 @@ public class TemplateRender implements RenderInteface{
 
         return template.render(tmi.getQuestModel(currentUser, quests));
     }
-
+      
     public String RenderQuestTemplatesPage(User currentUser, List<QuestTemplate> questTemplates) {
         TemplateModelInterface tmi = new TemplateModelHandler();
 
@@ -172,16 +172,3 @@ public class TemplateRender implements RenderInteface{
 
         return template.render(tmi.getAddQuestTemplateModel(currentUser));
     }
-
-
-    public static void main(String[] args) {
-//        RenderInteface rf = new TemplateRender();
-//        User currentUser = new User("Piotr", "Kaminski", "pkaminki95@gmail.com", "address", 1, Role.MENTOR);
-////        System.out.println(rf.RenderProfilePage(null, null, null));
-//
-//        TemplateRender tr = new TemplateRender();
-//        List<User> users = tr.getUserList(Role.STUDENT, 5);
-//
-//        System.out.println(rf.RenderListPage(currentUser, users));
-    }
-}

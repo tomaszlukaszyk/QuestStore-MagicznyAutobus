@@ -24,7 +24,6 @@ public class ArtifactDAO implements Connectable {
         stmt.executeQuery();
         stmt.close();
         conn.close();
-        cp.printDbStatus();
     }
 
     public void updateArtifact(Artifact artifact) throws SQLException {
@@ -38,43 +37,41 @@ public class ArtifactDAO implements Connectable {
         stmt.setString(6, artifact.getIMAGE_MARKED_FILENAME());
         stmt.close();
         conn.close();
-        cp.printDbStatus();
     }
 
     public List<Artifact> getUsersNotUsedArtifactsById(int id) throws SQLException {
 
-        Integer cost = null;
         String name = null;
         String description = null;
-        String artifactImage = null;
 
         Connection conn = cp.getConnection();
         try {
-            PreparedStatement stmt = conn.prepareStatement(
-                    " SELECT artifactname," +
-                    " artifactdescription, image_marked, cost\n" +
-                    " FROM artifact INNER JOIN personalartifacthistory ON artifact.idartifact=personalartifacthistory.idartifact" +
-                    " WHERE idartifactcategory=1 AND isused = false AND idstudent = (select idstudent FROM student where iduser = ?);\n");
-        stmt.setInt(1,id);
+            PreparedStatement stmt;
+            stmt= conn.prepareStatement(
+                    " SELECT artifactName," +
+                    " artifactDescription\n" +
+                    " FROM artifact INNER JOIN personalArtifactHistory ON " +
+                    "artifact.idArtifact = personalArtifactHistory.idArtifact" +
+                    " WHERE idArtifactCategory = 1 AND isUsed = false " +
+                    "AND idStudent = (select idStudent FROM student where idUser = ?);\n"
+            );
+            stmt.setInt(1,id);
             ResultSet rs = stmt.executeQuery();
             List<Artifact> artifactList = new ArrayList<>();
             while (rs.next()) {
-
-                cost = rs.getInt("cost");
-                name = rs.getString("artifactname");
-                description = rs.getString("artifactdescription");
-                artifactImage = rs.getString("image_marked");
-                artifactList.add(new Artifact(0,0,name,description,cost,null,artifactImage,ArtifactCategory.PERSONAL,false));
-
+                name = rs.getString("artifactName");
+                description = rs.getString("artifactDescription");
+                artifactList.add(new Artifact(0, 0,
+                name, description, 0, null, null,
+                ArtifactCategory.PERSONAL, false));
             }
             rs.close();
             stmt.close();
             conn.close();
-            cp.printDbStatus();
             return artifactList;
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
         }
         return null;
     }

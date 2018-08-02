@@ -6,8 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>class</title>
         <!--style sheet ref-->
-        <link rel="stylesheet" href="static/css/style.css">
-        <!--<script src="static/javascript/scripts.js"></script>-->
+        <link rel="stylesheet" href="/static/css/style.css" >
     </head>
     
     <body>
@@ -19,38 +18,41 @@
             <!--content-->
             <div class="contener">
                 <div class="class-content">
-                    <div class="class-column">
-                        <p>Classes</p>
-                        <u>
-                        <span class="classes" id="list-class">
+                        <div class="class-column">
+                            <p>Classes</p>
+                            <div class="classes" id="list-class">
                                 {% for class in classes%}
-                                    <p>{{ class.desc }}</p><br>
+                                    <div style="display: flex; justify-content: center;">
+                                        <p><a href="/class/{{ class.getID() }}">{{ class.getNAME() }}</a></p>
+                                        {% if currentUser.getROLE().getNAME() == "admin" %}
+                                            <div class="assignBtn-pos">
+                                                <a class="assignBtn" href="/class/assign/{{ class.getID() }}">assign</a>
+                                            </div>
+                                        {% endif %}
+                                        <br>
+                                    </div>
                                 {% endfor %}
-                        </span>
-                        </u>
-                    </div>
-                    <div class="class-column">
-                        <p>Assigned mentors</p>
-                        <span id="list-mentor">
-                            <ul>
-                            {% for mentor in data.mentors%}
-                            <li id="{{ mentor.id }}">{{ mentor.fullName }}</li><br>
-                            {% endfor %}
-                            </ul>
-                        </span>
-                    </div>
-                    <div class="class-column">
-                        <p>Students</p>
-                        <span id="list-student">
-                            <ul>
-                            {% for student in data.students%}
-                            <li id="{{ student.id }}">{{ student.fullName }}</li>
-                            {% endfor %}
-                            </ul>
-                        </span>
-                    </div>
+                            </div>
+                        </div>
+
+                    {% if action == "assign" %}
+                    
+                        {% include "class_assign_columns.html" with [currentUser, users, classID] %}
+                    
+                    {% elseif targetClass != "null" %}
+                        {% set message = targetClass.getNAME() %}
+                        {% include "class_details_columns.html" with [currentUser, targetClass] %}
+                    
+                    {% else %}
+                        {% if message == "null" %}
+                            {% set message = "Click on the class to show details" %}
+                        {% endif %}
+                    {% endif %}
                 </div>
             </div>
+            {% if message != "null" %}
+                <p style="display: flex; justify-content: center; flex-basis: 100%;">{{ message }}</p>
+            {% endif %}
             <!--footer-->
             <footer>{% include "footer.html" ignore missing %}</footer>
         </div>
