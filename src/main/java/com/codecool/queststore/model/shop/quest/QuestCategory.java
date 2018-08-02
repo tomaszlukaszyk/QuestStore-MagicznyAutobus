@@ -5,8 +5,8 @@ import java.util.Map;
 
 public enum QuestCategory {
 
-    PERSONAL(1, "personal"),
-    GROUP(2, "group");
+    NORMAL(1, "normal"),
+    SPECIAL(2, "special");
 
     private final int VALUE;
     private final String asSTRING;

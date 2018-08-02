@@ -1,4 +1,4 @@
-package com.codecool.queststore.controller.server.httphandler.quest;
+package com.codecool.queststore.controller.server.service;
 
 import com.codecool.queststore.DAO.QuestDAO;
 import com.codecool.queststore.controller.server.httphandler.AbstractHttphandler;
@@ -22,14 +22,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-class QuestHelper extends AbstractHttphandler {
+public class QuestService extends AbstractHttphandler {
 
     private QuestFactory questFactory = new QuestFactory();
     private QuestDAOInterface questDAO = new QuestDAO();
     private TemplateRender templateRender = new TemplateRender();
 
 
-    void handleSession(HttpExchange httpExchange) throws IOException, SQLException {
+    public void handleSession(HttpExchange httpExchange) throws IOException, SQLException {
         String cookieStr = httpExchange.getRequestHeaders().getFirst("Cookie");
         HttpCookie cookie = new HttpCookie("Session-id", cookieStr);
         User user = new com.codecool.queststore.DAO.UserDAO().getUser(SessionPool.getSessionByUUID(UUID.fromString(cookie.getValue())).getUSER_ID());
@@ -147,11 +147,19 @@ class QuestHelper extends AbstractHttphandler {
     private void viewStudentQuests(User user, HttpExchange httpExchange) throws IOException{
         if (user.getROLE().equals(Role.MENTOR)){
             int userID = Integer.parseInt(URI.create("/quests/view/").relativize(httpExchange.getRequestURI()).toString());
-            List<Quest> quests = questFactory.listFromUserID(userID);
+            List<Quest> temp = questFactory.listFromUserID(userID);
+            List<Quest> quests = new ArrayList<>();
+            for(Quest quest : temp) {
+                if (!quest.IS_DONE()) {
+                    quests.add(quest);
+                }
+            }
+
             String response = templateRender.RenderQuestPage(user, quests);
             SendReq(httpExchange, response);
         } else {
             List<Quest> quests = questFactory.listFromUserID(user.getID());
+
             String response = templateRender.RenderQuestPage(user, quests);
             SendReq(httpExchange, response);
         }

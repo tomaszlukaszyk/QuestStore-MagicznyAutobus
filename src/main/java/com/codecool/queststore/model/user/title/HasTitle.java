@@ -14,6 +14,8 @@ public class HasTitle implements TitleStrategy {
     @Override
     public String getTitle() {
         Title title = new TitleDAO().getUserTitle(user.getID());
+        System.out.println(title.getNAME());
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
      return title.getNAME();
     }
 }

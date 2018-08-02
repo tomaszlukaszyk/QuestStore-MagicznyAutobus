@@ -1,6 +1,6 @@
-package com.codecool.queststore.controller.server.httphandler.quest;
+package com.codecool.queststore.controller.server.httphandler;
 
-import com.codecool.queststore.controller.server.httphandler.AbstractHttphandler;
+import com.codecool.queststore.controller.server.service.QuestService;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -19,8 +19,8 @@ public class QuestHandler extends AbstractHttphandler implements HttpHandler {
             redirect(httpExchange, "/");
         } else {
             try {
-                QuestHelper questHelper = new QuestHelper();
-                questHelper.handleSession(httpExchange);
+                QuestService questService = new QuestService();
+                questService.handleSession(httpExchange);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

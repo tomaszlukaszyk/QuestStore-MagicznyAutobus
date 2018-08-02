@@ -26,7 +26,7 @@ public class QuestDAO implements Connectable, QuestDAOInterface {
             statement.setString(6, imageMarked);
 
             QuestFactory questFactory = new QuestFactory();
-            QuestCategory category = isGroup ? QuestCategory.GROUP : QuestCategory.PERSONAL;
+            QuestCategory category = isGroup ? QuestCategory.SPECIAL : QuestCategory.NORMAL;
             statement.executeUpdate();
 
             int templateID = getTemplateID(name, connection);
@@ -42,7 +42,7 @@ public class QuestDAO implements Connectable, QuestDAOInterface {
     @Override
     public QuestTemplate getQuestTemplate(int questID) {
         try(Connection connection = cp.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM getquest(?);")){
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM getquest(?)")){
 
             statement.setInt(1, questID);
             ResultSet resultSet = statement.executeQuery();
@@ -125,7 +125,7 @@ public class QuestDAO implements Connectable, QuestDAOInterface {
                 String status = resultSet.getString("status");
                 int studentID = resultSet.getInt("idstudent");
 
-                return status.equals("done") ? questFactory.questfromTemplate(questTemplate, true, historyID, studentID) : questFactory.questfromTemplate(questTemplate, historyID, studentID);
+                return status.equals("DONE") ? questFactory.questfromTemplate(questTemplate, true, historyID, studentID) : questFactory.questfromTemplate(questTemplate, historyID, studentID);
             }
         } catch (SQLException e){
             e.printStackTrace();
