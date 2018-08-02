@@ -295,6 +295,12 @@ RETURN QUERY (SELECT username, usersurname, useremail, useraddress, (SELECT role
 END;
 $$ LANGUAGE plpgsql;									
 
+CREATE OR REPLACE FUNCTION getMentors() RETURNS TABLE (name TEXT, surname TEXT, email TEXT, address TEXT, id INTEGER) AS $$
+BEGIN
+RETURN QUERY (SELECT username, usersurname, useremail, useraddress, iduser FROM users WHERE idcodecoolrole = 2);
+END;
+$$ LANGUAGE plpgsql;
+
 CREATE OR REPLACE FUNCTION getClassStudents(classid INTEGER) RETURNS TABLE (userid INTEGER, name TEXT, surname TEXT, email TEXT, address TEXT) AS $$
 BEGIN
 RETURN QUERY (SELECT users.iduser, username, usersurname, useremail, useraddress FROM users JOIN student ON users.iduser = student.iduser WHERE idclass = classid);
@@ -319,7 +325,7 @@ desc TEXT;
 BEGIN
 RETURN QUERY (select iduser, username, usersurname, useremail, useraddress, roledescription from users join codecoolrole on (users.idcodecoolrole = codecoolrole.idcodecoolrole));
 END;
-$$ LANGUAGE plpgsql;									
+$$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION getUsers(role TEXT) RETURNS TABLE (id INTEGER, name TEXT, surname TEXT, email TEXT, address TEXT) AS $$
 DECLARE
@@ -327,4 +333,11 @@ desc TEXT;
 BEGIN
 RETURN QUERY (select iduser, username, usersurname, useremail, useraddress from users join codecoolrole on (users.idcodecoolrole = codecoolrole.idcodecoolrole) WHERE roledescription=role);
 END;
-$$ LANGUAGE plpgsql;									
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION getStudents() RETURNS TABLE (name TEXT, surname TEXT, email TEXT, address TEXT, id INTEGER) AS $$
+BEGIN
+RETURN QUERY (SELECT username, usersurname, useremail, useraddress, iduser FROM users WHERE idcodecoolrole = 3);
+END;
+$$ LANGUAGE plpgsql;

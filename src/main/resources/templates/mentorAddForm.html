@@ -1,15 +1,9 @@
-{% if currentUser.getROLE().getNAME() == "mentor" %}
-    {% set userRole = student %}
-{% else %}
-    {% set userRole = mentor %}
+{% if currentUser.getROLE().getNAME() == "admin" %}
+    {% set userRole = "mentor" %}
 {% endif %}
 
-
 <div class="edit-form">
-    <h2>
-        Create {{ userRole }}
-    </h2>
-    <form onkeyup="testIfFormIsEmpty('mentorinputs', 'mentorsubmitbutton')">
+    <form method="POST" onkeyup="testIfFormIsEmpty('mentorinputs', 'mentorsubmitbutton')">
         <br><br>
         <label for="usersurname">Surname:</label>
         <br><br>
@@ -35,7 +29,7 @@
         <br><br>
         <input type="text" class="mentorinputs" id="useraddress" name="mentoraddress" placeholder="Enter {{ userRole }} address">
         <br><br>
-        <button id="mentorsubmitbutton" onclick="return checkMentorInputs()" disabled>SEND</button>
+        <button id="mentorsubmitbutton" onclick="return checkUserInputs()" disabled>SEND</button>
     </form>
 </div>
 <script src="static/javascript/scripts.js"></script>

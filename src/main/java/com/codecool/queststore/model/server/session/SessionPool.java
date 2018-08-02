@@ -15,7 +15,7 @@ public class SessionPool {
             try {
                 sessions = readObject();
             } catch (IOException e) {
-                System.out.println("there was no data file, so sessions will be empty");
+                System.out.println("There was no data file, so sessions will be empty");
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
@@ -27,7 +27,7 @@ public class SessionPool {
          newSession= new Session(userId);
         } while (sessions.contains(newSession));
         sessions.add(newSession);
-        System.out.println("created Session ID " + newSession.getUuid());
+        System.out.println("Created Session ID " + newSession.getUuid());
 
         writeObject();
         return newSession;
@@ -36,7 +36,7 @@ public class SessionPool {
 
     public static void terminate(Session session) {
         sessions.remove(session);
-        System.out.println("removed Session ID " + session.getUuid());
+        System.out.println("Removed Session ID " + session.getUuid());
         writeObject();
     }
 
@@ -58,13 +58,13 @@ public class SessionPool {
         expireCheckAndClean();
         for (Session session: sessions) {
             if (session.getUuid().toString().equals(cookie.getValue())){
-                System.out.println("found session ID: " + session.getUuid());
+                System.out.println("Found session ID: " + session.getUuid());
                 return true;}
 
 
         }
 
-            System.out.println("not found session by cookie: " + cookie);
+            System.out.println("Not found session by cookie: " + cookie);
 
         return false;
     }

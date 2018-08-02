@@ -11,7 +11,6 @@ public class LogoutService {
 
     public LogoutService(HttpCookie cookie) {
         this.session = SessionPool.getSessionByUUID(UUID.fromString(cookie.getValue()));
-        System.out.println("terminated");
         SessionPool.terminate(session);
     }
 }

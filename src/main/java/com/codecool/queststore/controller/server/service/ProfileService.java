@@ -41,7 +41,6 @@ public class ProfileService {
     }
 
     public void handlePost(Map inputs) throws SQLException {
-        System.out.println(inputs);
         String submit = (String)inputs.get("submit");
 
         if (submit.equals("new")) {
@@ -60,7 +59,6 @@ public class ProfileService {
                         .getSessionByUUID(UUID
                                 .fromString(cookie.getValue()))
                         .getUSER_ID());
-        System.out.println(currentUser.getTitle());
 
         User targetUser = defineTarget(currentUser, path);
 
@@ -68,12 +66,14 @@ public class ProfileService {
 
             case STUDENT:
                 //todo: fill class  by theirs daos
+                System.out.println(targetUser.getADDRESS());
                 return new TemplateRender().RenderProfilePage
                         (currentUser, targetUser, new CodecoolClass("LOL"),
                                 new ArtifactDAO().getUsersNotUsedArtifactsById(targetUser.getID()));
 
             case MENTOR:
                 //todo: fill classes by their daos
+                System.out.println(targetUser.getADDRESS());
                 return new TemplateRender().RenderProfilePage
                         (currentUser, targetUser, new ArrayList<>());
 
@@ -95,8 +95,6 @@ public class ProfileService {
 
         if (userID != null)
             target = new UserDAO().getUser(userID);
-            System.out.println("target user; ");
-            System.out.println(target);
 
         if (target != null) {
             return target;
