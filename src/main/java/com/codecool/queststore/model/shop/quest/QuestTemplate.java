@@ -1,6 +1,7 @@
 package com.codecool.queststore.model.shop.quest;
 
 public class QuestTemplate {
+    private final int ID;
     private final String NAME;
     private final String DESCRIPTION;
     private final int value;
@@ -9,7 +10,8 @@ public class QuestTemplate {
     private final QuestCategory CATEGORY;
 
 
-    public QuestTemplate(String name, String description, int value, String imageName, String imageMarkedName, int category) {
+    public QuestTemplate(int ID, String name, String description, int value, String imageName, String imageMarkedName, int category) {
+        this.ID = ID;
         this.NAME = name;
         this.DESCRIPTION = description;
         this.value = value;
@@ -18,7 +20,8 @@ public class QuestTemplate {
         this.CATEGORY = QuestCategory.getByValue(category);
     }
 
-    public QuestTemplate(String name, String description, int value, String imageName, String imageMarkedName, QuestCategory category) {
+    public QuestTemplate(int ID, String name, String description, int value, String imageName, String imageMarkedName, QuestCategory category) {
+        this.ID = ID;
         this.NAME = name;
         this.DESCRIPTION = description;
         this.value = value;
@@ -51,7 +54,9 @@ public class QuestTemplate {
         return CATEGORY;
     }
 
-
+    public int getID(){
+        return ID;
+    }
 
 }
 
