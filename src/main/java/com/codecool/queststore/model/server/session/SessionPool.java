@@ -45,6 +45,7 @@ public class SessionPool {
         expireCheckAndClean();
         for (Session session: sessions) {
             if (session.getUuid().equals(uuid))
+                session.RenewExpirationDate();
                 return session;
 
 
@@ -56,8 +57,6 @@ public class SessionPool {
     {
         expireCheckAndClean();
         for (Session session: sessions) {
-            System.out.println(session.getUuid().toString());
-            System.out.println(cookie.getValue());
             if (session.getUuid().toString().equals(cookie.getValue())){
                 System.out.println("found session ID: " + session.getUuid());
                 return true;}
