@@ -3,6 +3,7 @@ package com.codecool.queststore.view;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
+import com.codecool.queststore.model.shop.quest.QuestTemplate;
 import com.codecool.queststore.model.user.User;
 import org.jtwig.JtwigModel;
 
@@ -77,6 +78,16 @@ class TemplateModelHandler implements TemplateModelInterface {
         model.with("currentUser", currentUser);
         model.with("items", quests);
         model.with("title", "Quests");
+
+        return model;
+    }
+
+    @Override
+    public JtwigModel getQuestTemplateModel(User currentUser, List<QuestTemplate> questTemplates) {
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("items", questTemplates);
+        model.with("title", "Quest Templates");
 
         return model;
     }
