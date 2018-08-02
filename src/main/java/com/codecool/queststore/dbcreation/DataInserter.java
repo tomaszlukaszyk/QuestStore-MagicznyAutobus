@@ -1,5 +1,11 @@
 package com.codecool.queststore.dbcreation;
 
+import com.codecool.queststore.DAO.ArtifactDAO;
+import com.codecool.queststore.DAO.QuestDAO;
+import com.codecool.queststore.dao.interfaces.QuestDAOInterface;
+import com.codecool.queststore.model.shop.artifact.ArtifactCategory;
+import com.codecool.queststore.model.shop.artifact.ArtifactFactory;
+
 import java.sql.SQLException;
 
 public class DataInserter {
@@ -24,15 +30,29 @@ public class DataInserter {
         db.executeUpdate(generateCreationStatementForLevelChart());
         db.executeUpdate(generateCreationStatementForRoles());
         db.executeUpdate(generateCreationStatementForAdmin());
-        db.executeUpdate(generateCreationStatementForMentor());
+        //db.executeUpdate(generateCreationStatementForMentor());
         db.executeUpdate(generateCreationStatementForClass());
-        db.executeUpdate(generateCreationStatementForStudent());
+        //db.executeUpdate(generateCreationStatementForStudent());
         db.executeUpdate(generateCreationStatementForArtifactsCategories());
-        db.executeUpdate(generateCreationStatementForArtifacts());
+        //db.executeUpdate(generateCreationStatementForArtifacts());
+        new ArtifactDAO().createArtifact(new ArtifactFactory()
+                .fromData(0, 0, "Summon Code Elemental", "Mentor joins a student team for one hour (all team members must buy this item)", 3,"elemental.png", "elemental-hover", ArtifactCategory.PERSONAL));
+        new ArtifactDAO().createArtifact(new ArtifactFactory()
+                .fromData(0, 0, "Teleport", "The whole room goes to an off-school program instead for a specified day (which is at least 2 weeks ahead))", 10,"portal.png", "portal-hover", com.codecool.queststore.model.shop.artifact.ArtifactCategory.GROUP));
+        new ArtifactDAO().createArtifact(new ArtifactFactory()
+                .fromData(0, 0, "Tipping the fanfare-guy", "The student can use jukebox exclusively for half day", 5,"town.png", "town-hover", com.codecool.queststore.model.shop.artifact.ArtifactCategory.PERSONAL));
+
         db.executeUpdate(generateCreationStatementForQuestCategories());
-        db.executeUpdate(generateCreationStatementForQuests());
-        db.executeUpdate(generateCreationStatementForFundingGroup());
-        db.executeUpdate(generateCreationStatementForPersonalArtifactHistory());
+        //db.executeUpdate(generateCreationStatementForQuests());
+        QuestDAOInterface questDAO = new QuestDAO();
+        questDAO.createTemplate("Enter the arena", "Do a presentation", 15, false,
+                "arena.png", "arena-hover");
+        questDAO.createTemplate("Fruitful opportunism", "Helping mentor with workshops", 3, false,
+                "opportunism.png", "opportunism-hover");
+        questDAO.createTemplate("Making arrowheads", "Make Kahoot questions list", 3, true,
+                "arrow.png", "arrow-hover");
+        //db.executeUpdate(generateCreationStatementForFundingGroup());
+        //db.executeUpdate(generateCreationStatementForPersonalArtifactHistory());
 
     }
 
