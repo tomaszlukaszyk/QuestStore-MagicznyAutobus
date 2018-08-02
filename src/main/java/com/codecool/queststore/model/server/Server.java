@@ -36,7 +36,6 @@ public class Server {
         server.createContext("/list-mentors", new MentorsHandler());
         server.createContext("/list-students", new StudentsHandler());
         server.createContext("/class", new ClassHandler());
-//        server.createContext("/edit", new EditHandler());
     }
 
     public void stop(){
