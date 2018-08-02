@@ -21,25 +21,25 @@
             <!--Student view-->
             {% if profile.getROLE().getNAME() == "student" %}
                 <div class="content-box">
-                    <span id="role">
-                        ROLE: {{ profile.getROLE() }}
+                    <span id="role" class="infos">
+                        Role: {{ profile.getROLE() }}
                     </span>
                     <p>Personal Data:</p>
 
-                    <span id="name">
-                        name: {{ profile.getNAME() }}
+                    <span id="name" class="infos">
+                        Name: {{ profile.getNAME() }}
                     </span>
 
-                    <span id="surname">
-                        surname: {{ profile.getSURNAME() }}
+                    <span id="surname" class="infos">
+                        Surname: {{ profile.getSURNAME() }}
                     </span>
 
-                    <span id="email">
-                        email: {{ profile.getEMAIL() }}
+                    <span id="email" class="infos">
+                        E-mail: {{ profile.getEMAIL() }}
                     </span>
 
-                    <span id="address">
-                            gitHub Address: {{ profile.getADDRESS() }}
+                    <span id="address" class="infos">
+                            Address: {{ profile.getADDRESS() }}
                     </span>
                 </div>
 
@@ -64,26 +64,26 @@
             <div id="mentor-view" class="profile-view">
                 <div class="content-box">
 
-                    <span id="role">
+                    <span id="role" class="infos">
                         ROLE: {{ profile.getROLE() }}
                     </span>
 
                     <p>Personal Data:</p>
 
-                    <span id="name">
-                        name: {{ profile.getNAME() }}
+                    <span id="name" class="infos">
+                        Name: {{ profile.getNAME() }}
                     </span>
 
-                    <span id="surname">
-                        surname: {{ profile.getSURNAME() }}
+                    <span id="surname" class="infos">
+                        Surname: {{ profile.getSURNAME() }}
                     </span>
 
-                    <span id="email">
-                        email: {{ profile.getEMAIL() }}
+                    <span id="email" class="infos">
+                        E-mail: {{ profile.getEMAIL() }}
                     </span>
 
-                    <span id="address">
-                            Address: {{ profile.getAddress() }}
+                    <span id="address" class="infos">
+                            Address: {{ profile.getADDRESS() }}
                     </span>
 
                 </div>
@@ -114,52 +114,55 @@
 
             <!--Admin view-->
             {% if profile.getROLE().getNAME() == "admin" %}
-            <div class="content-box">
-                    <span id="role">
+            <div class="content-box" id="admininfo">
+                    <span id="role" class="infos">
                         ROLE: {{ profile.getROLE() }}
                     </span>
                 <p>Personal Data:</p>
 
-                <span id="name">
-                        name: {{ profile.getNAME() }}
+                <span id="name" class="infos">
+                        Name: {{ profile.getNAME() }}
                     </span>
 
-                <span id="surname">
-                        surname: {{ profile.getSURNAME() }}
+                <span id="surname" class="infos">
+                        Surname: {{ profile.getSURNAME() }}
                     </span>
 
-                <span id="email">
-                        email: {{ profile.getEMAIL() }}
+                <span id="email" class="infos">
+                        E-mail: {{ profile.getEMAIL() }}
                     </span>
 
             </div>
 
             <div class="content-box">
-                <p>Titles changer</p>
+                <p>Experience Titles</p>
                 <span id="roles">
                     <div class= roles>
                             {% for e in roles %}
 
-        <form id="editform-{{ e.getID() }}" method="POST">
+        <form id="editform-{{ e.getID() }}" method="POST" class="editforms">
                 <br>
                 <input type="text" class="loginInputs" name="name" placeholder="{{ e.getNAME() }}">
-                <button type="submit" name="submit" value = "{{e.getID}}">update</button>
+                <button type="submit" name="submit" value = "{{e.getID}}">Update</button>
         </form>
                             {% endfor %}
                         </div>
-                    <div class = newtitle>
-                                    <form id="newtitle" method="POST">
-                <br>
-                    <hr><p>new title</p>
-                <br>
-                <input type="text" class="loginInputs" name="name" placeholder="enter name of new title">
-                <button type="submit" name="submit" value = "new">create new title</button>
-        </form>
 
-                    </div>
+
+
                     </span>
             </div>
-
+        <div class="content-box" id="createnewtitle">
+            <div class = newtitle>
+                <form id="newtitle" method="POST">
+                    <br>
+                    <p>Create new title</p>
+                    <br>
+                    <input type="text" class="loginInputs" name="name" placeholder="Enter name of new title">
+                    <button id="newtitlebutton" type="submit" name="submit" value = "new">SEND</button>
+                </form>
+            </div>
+        </div>
 
             <!--</div>-->
             {% endif %}
