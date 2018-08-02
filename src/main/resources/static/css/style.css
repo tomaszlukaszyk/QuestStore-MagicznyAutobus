@@ -395,6 +395,7 @@ input::-moz-placeholder {
 
 #back, #cl {
     width: 10em;
+    margin-left: 3em;
 }
 
 div.content-box span {
@@ -568,4 +569,10 @@ width: 15em;
 text-align: center;
 padding: 3%;
 }
+
+.editinputss {
+    width: 20em;
+}
+
+
 
