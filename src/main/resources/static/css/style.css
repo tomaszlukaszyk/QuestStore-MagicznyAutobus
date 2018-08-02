@@ -499,3 +499,12 @@ form {
     padding: 5%;
 }
 
+.listitems a {
+    padding: 2px;
+    text-decoration: none;
+    color: lime;
+}
+.listitems a:hover {
+    text-decoration: underline
+}
+
