@@ -50,7 +50,6 @@ public class StudentDAO implements Connectable {
         }
         rs.close();
         conn.close();
-        System.out.println(result);
         return result;
     }
 }

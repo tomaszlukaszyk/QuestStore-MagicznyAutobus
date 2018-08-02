@@ -12,7 +12,6 @@ public class ProfileHandler extends AbstractHttphandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
-        System.out.println(httpExchange.getRequestMethod());
 
         try {
             if(httpExchange.getRequestMethod().equals("POST")){

@@ -13,7 +13,6 @@ public class LogoutHandler extends AbstractHttphandler implements HttpHandler {
     public void handle(HttpExchange httpExchange) throws IOException {
         String cookieStr = httpExchange.getRequestHeaders().getFirst("Cookie");
         HttpCookie cookie = new HttpCookie("Session-id", cookieStr);
-        System.out.println("logout");
 
         new LogoutService(cookie);
         redirect(httpExchange,"/");

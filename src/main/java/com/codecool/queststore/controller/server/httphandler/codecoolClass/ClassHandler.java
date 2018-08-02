@@ -11,8 +11,6 @@ import java.sql.SQLException;
 public class ClassHandler extends AbstractHttphandler implements HttpHandler {
     @Override
     public void handle(HttpExchange httpExchange) throws IOException{
-        System.out.println(httpExchange.getRequestMethod());
-
         try {
             handleSession(httpExchange);
         } catch (SQLException e) {

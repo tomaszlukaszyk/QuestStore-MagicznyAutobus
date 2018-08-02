@@ -31,10 +31,6 @@ public class ConnectionPool {
         }
     }
 
-    public void print() {
-        System.out.println(pool);
-        System.out.println(db);
-    }
     @SuppressWarnings("unused")
     private DataSource setUpPool() {
         // Creates an Instance of GenericObjectPool That Holds Our Pool of Connections Object!

@@ -48,7 +48,6 @@ public class StudentsHandler extends AbstractHttphandler implements HttpHandler{
             HttpCookie cookie = new HttpCookie("Session-id", cookieStr);
             StudentsService studentsService = new StudentsService(cookie);
             Map inputs = parseFormData(httpExchange);
-            System.out.println(inputs.toString());
             StudentDAO dao = new StudentDAO();
 
             boolean isCreated = dao.createStudent(new User(inputs.get("studentname").toString(), inputs.get("studentsurname").toString(),

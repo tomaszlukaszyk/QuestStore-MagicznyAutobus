@@ -52,7 +52,6 @@ public class MentorDAO implements Connectable, MentorDAOInterface {
         }
         rs.close();
         conn.close();
-        System.out.println(result);
         return result;
 
     }
