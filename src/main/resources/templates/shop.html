@@ -27,12 +27,12 @@
                                     <h2><span id ="title">{{ item.getNAME() }}</span></h2> <br />
                                     {% if currentUser.getROLE().getNAME() == "student" %}
                                         {% if currentUser.getWallet() < item.getCOST() %}
-                                            <a href=""><img class="image_off" src="static/images/quests/{{ item.getIMAGE_FILENAME }}"></a>
+                                            <a href=""><img class="image_off" src="static/images/artifacts/{{ item.getIMAGE_FILENAME }}"></a>
                                         {% else %}
-                                            <a href=""><img class="image_off" src="static/images/quests/{{ item.getIMAGE_MARKED_FILENAME }}"></a>
+                                            <a href=""><img class="image_off" src="static/images/artifacts/{{ item.getIMAGE_MARKED_FILENAME }}"></a>
                                         {% endif %}
                                     {% else %}
-                                        <a href=""><img class="image_off" src="static/images/quests/{{ item.getIMAGE_MARKED_FILENAME }}"></a>
+                                        <a href=""><img class="image_off" src="static/images/artifacts/{{ item.getIMAGE_MARKED_FILENAME }}"></a>
                                     {% endif %}
 
                                     <span value = "category"><p>{{ item.getCATEGORY() }}</p></span>
@@ -40,7 +40,7 @@
                                     <span value = "cost"><p>{{ item.getCOST() }} cc</p></span>
                                     <div id="btnPanel" class="btnPanel">
                                         <span id="buyGroupBtn"><input type="image" src="static/images/groupbutton.png" alt="group buy" onclick="" width="20%"/></span>
-                                        <span id="buyBtn"><input type="image" src="static/images/buybutton.png" alt="buy" onclick="" width="30%"/></span>
+                                        <span id="buyBtn"><a href="/shop/buy/{{ item.getID() }}"><input type="image" src="static/images/buybutton.png" alt="buy" width="30%"/></a></span>
                                         <span id="editBtn"><input type="image" src="static/images/editbutton.png" alt="edit" onclick="" width="20%"/></span>
                                     </div>
                                 </span>

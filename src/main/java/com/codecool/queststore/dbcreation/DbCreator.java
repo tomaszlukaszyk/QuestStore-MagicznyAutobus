@@ -9,6 +9,11 @@ package com.codecool.queststore.dbcreation;
 final class DbCreator {
 
 public static void main(String args[]){
+    System.out.println("create tables");
     new TablesCreator().start();
+    System.out.println("create functions");
+    new FunctionsCreator().start();
+    System.out.println("insert data");
+    new DataInserter().start();
     }
 }

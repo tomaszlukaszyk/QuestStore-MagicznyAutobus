@@ -27,7 +27,7 @@
                                         {% if item.IS_DONE() %}
                                             <img class="image_off" src="/static/images/quests/{{ item.getIMAGE_MARKED_FILENAME }}.png">
                                         {% else %}
-                                            <img class="image_off" src="/static/images/quests/{{ item.getIMAGE_FILENAME }}.png">
+                                            <img class="image_off" src="/static/images/quests/{{ item.getIMAGE_FILENAME }}">
                                         {% endif %}
                                         <span value = "category"><p>{{ item.getCATEGORY() }}</p></span>
                                         <span value = "descr"><p>{{ item.DESCRIPTION() }}</p></span>

@@ -16,12 +16,13 @@ final class TablesCreator {
             db.connect();
 
             initializeDatabase(db);
-            new DataInserter().start();
 
             db.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     private String generateStatementTableLevelChart() {
