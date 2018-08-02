@@ -43,14 +43,14 @@
                     </span>
                 </div>
 
-                <div class="content-box">
+                <div class="content-box" id="cl">
                     <p>Class:</p>
                     <span id="class">
                         <br>{{ ccClass.getNAME() }}
                     </span>
                 </div>
 
-                <div class="content-box">
+                <div class="content-box" id="back">
                     <p>Backpack</p>
                     {% for item in items %}
                     <span>{{ item.getNAME() }}</span>
@@ -89,7 +89,7 @@
                 </div>
 
                 <div class="content-box">
-                    <p>Class:</p>
+                    <p>Classes:</p>
                     <span id="class">
                         <ul>
                             {% for class in classes %}
