@@ -1,5 +1,7 @@
 package com.codecool.queststore.model.user.title;
 
+import com.codecool.queststore.DAO.TitleDAO;
+import com.codecool.queststore.model.Title;
 import com.codecool.queststore.model.user.User;
 
 public class HasTitle implements TitleStrategy {
@@ -11,7 +13,7 @@ public class HasTitle implements TitleStrategy {
 
     @Override
     public String getTitle() {
-     //todo: Implement
-        return null;
+        Title title = new TitleDAO().getUserTitle(user.getID());
+     return title.getNAME();
     }
 }
