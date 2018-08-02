@@ -1,6 +1,9 @@
 package com.codecool.queststore.model.user.wallet;
 
+import com.codecool.queststore.DAO.WalletDAO;
 import com.codecool.queststore.model.user.User;
+
+import java.sql.SQLException;
 
 public class HasWallet implements WalletStrategy {
 
@@ -13,7 +16,11 @@ public class HasWallet implements WalletStrategy {
 
     @Override
     public Integer getWallet() {
-        //todo: implement
+        try {
+            return new WalletDAO().getWalletExceptGroupArtifacts(user.getID());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

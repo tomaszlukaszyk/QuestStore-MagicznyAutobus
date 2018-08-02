@@ -83,7 +83,7 @@ $$ LANGUAGE plpgsql;
 
  CREATE OR REPLACE FUNCTION sumQuestsGainForStudent (id INTEGER) RETURNS INTEGER AS $$
  BEGIN
- RETURN (SELECT COALESCE(SUM(quest.questvalue), 0) FROM questhistory JOIN quest ON questhistory.idquest = quest.idquest WHERE idstudent = id);
+ RETURN (SELECT COALESCE(SUM(quest.questvalue), 0) FROM questhistory JOIN quest ON questhistory.idquest = quest.idquest WHERE idstudent = id AND status = 'DONE');
  END;
  $$ LANGUAGE plpgsql;
 
