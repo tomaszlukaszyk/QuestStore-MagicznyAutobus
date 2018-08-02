@@ -24,7 +24,7 @@ public abstract class AbstractHttphandler {
         httpExchange.sendResponseHeaders(ResponsesEnum.REDIRECT.getCode(), NOW);
     }
 
-    Map<String, String> parseFormData(HttpExchange httpExchange) throws IOException {
+    protected Map<String, String> parseFormData(HttpExchange httpExchange) throws IOException {
         InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");
         BufferedReader br = new BufferedReader(isr);
         String formData = br.readLine();
@@ -40,7 +40,7 @@ public abstract class AbstractHttphandler {
         return map;
     }
 
-    void sendFile(HttpExchange httpExchange, URL fileURL) throws IOException {
+    protected void sendFile(HttpExchange httpExchange, URL fileURL) throws IOException {
 
         // get the file
         File file = new File(fileURL.getFile());
