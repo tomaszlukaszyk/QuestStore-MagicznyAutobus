@@ -1,6 +1,7 @@
 package com.codecool.queststore.controller.server.service;
 
 import com.codecool.queststore.DAO.ArtifactDAO;
+import com.codecool.queststore.DAO.ClassDAO;
 import com.codecool.queststore.DAO.TitleDAO;
 import com.codecool.queststore.DAO.UserDAO;
 import com.codecool.queststore.model.Title;
@@ -12,7 +13,6 @@ import com.codecool.queststore.view.TemplateRender;
 
 import java.net.HttpCookie;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
 
@@ -83,21 +83,21 @@ public class ProfileService {
                 //todo: fill class  by theirs daos
                 System.out.println(targetUser.getADDRESS());
                 return new TemplateRender().RenderProfilePage
-                        (currentUser, targetUser, new CodecoolClass("LOL"),
+                        (currentUser, targetUser, new ClassDAO().getstudentClasses(targetUser.getID()),
                                 new ArtifactDAO().getUsersNotUsedArtifactsById(targetUser.getID()));
 
             case MENTOR:
                 //todo: fill classes by their daos
                 System.out.println(targetUser.getADDRESS());
                 return new TemplateRender().RenderProfilePage
-                        (currentUser, targetUser, new ArrayList<>());
+                        (currentUser, targetUser, new ClassDAO().getMentorClasses(targetUser.getID()));
 
             case ADMIN:
                 if (currentUser.getROLE() == Role.ADMIN)
                    return new TemplateRender().RenderProfilePage(currentUser, new TitleDAO().getTitlesList());
                 else
                     return new TemplateRender().RenderProfilePage
-                            (currentUser, currentUser, new CodecoolClass("LOL"),
+                            (currentUser, currentUser, new CodecoolClass(""),
                                     new ArtifactDAO().getUsersNotUsedArtifactsById(targetUser.getID()));
         }
         return null;
