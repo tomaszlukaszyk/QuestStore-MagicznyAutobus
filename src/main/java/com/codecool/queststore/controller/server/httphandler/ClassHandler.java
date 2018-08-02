@@ -1,6 +1,6 @@
-package com.codecool.queststore.controller.server.httphandler.codecoolClass;
+package com.codecool.queststore.controller.server.httphandler;
 
-import com.codecool.queststore.controller.server.httphandler.AbstractHttphandler;
+import com.codecool.queststore.controller.server.service.ClassService;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -35,8 +35,8 @@ public class ClassHandler extends AbstractHttphandler implements HttpHandler {
                     return;
                 }
                 System.out.println("sending class page...");
-                ClassHelper classHelper = new ClassHelper(cookie, httpExchange.getRequestURI().getPath());
-                String response = classHelper.generateResponseBody();
+                ClassService classService = new ClassService(cookie, httpExchange.getRequestURI().getPath());
+                String response = classService.generateResponseBody();
                 System.out.println("Success!\n\n");
                 SendReq(httpExchange, response);
             }catch (Exception e) {

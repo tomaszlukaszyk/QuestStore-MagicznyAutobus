@@ -1,4 +1,4 @@
-package com.codecool.queststore.controller.server.httphandler.codecoolClass;
+package com.codecool.queststore.controller.server.service;
 
 import com.codecool.queststore.DAO.ClassDAO;
 import com.codecool.queststore.DAO.UserDAO;
@@ -11,26 +11,24 @@ import com.codecool.queststore.model.user.User;
 import com.codecool.queststore.view.RenderInteface;
 import com.codecool.queststore.view.TemplateRender;
 
-import javax.jws.soap.SOAPBinding;
 import java.net.HttpCookie;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-class ClassHelper {
+public class ClassService {
     private final HttpCookie cookie;
     private final String path;
     private ClassDAOInterface classDAOInterface = new ClassDAO();
     private RenderInteface renderInteface = new TemplateRender();
 
-    ClassHelper(HttpCookie cookie, String path) {
+    public ClassService(HttpCookie cookie, String path) {
         this.cookie = cookie;
         this.path = path;
     }
 
-    String generateResponseBody() throws SQLException {
+    public String generateResponseBody() throws SQLException {
         System.out.println("path: " + path);
         String[] splitedPath = splitURL(path);
         User currentUser = new UserDAO().getUser(SessionPool.getSessionByUUID(UUID.fromString(cookie.getValue())).getUSER_ID());
