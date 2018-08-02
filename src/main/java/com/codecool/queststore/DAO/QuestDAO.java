@@ -72,6 +72,33 @@ public class QuestDAO implements Connectable, QuestDAOInterface {
             statement.setString(5, image);
             statement.setString(6, imageMarked);
 
+            statement.execute();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<QuestTemplate> getAllQuestTemplates() {
+        try(Connection connection = cp.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM quest;")){
+
+            List<QuestTemplate> templates = new ArrayList<>();
+            ResultSet resultSet = statement.executeQuery();
+            QuestFactory questFactory = new QuestFactory();
+
+            while (resultSet.next()){
+                String name = resultSet.getString("questname");
+                String description = resultSet.getString("questdescription");
+                int value = resultSet.getInt("questvalue");
+                String imageName = resultSet.getString("image");
+                String imageMarkedName = resultSet.getString("image_marked");
+                int categoryValue = resultSet.getInt("idquestcategory");
+                int templateID = getTemplateID(name, connection);
+                templates.add(questFactory.templatefromData(templateID, name, description, value, imageName, imageMarkedName, categoryValue));
+            }
+                return templates;
+
         } catch (SQLException e){
             e.printStackTrace();
         }

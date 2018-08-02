@@ -9,8 +9,9 @@ public interface QuestDAOInterface {
 
     QuestTemplate createTemplate(String name, String description, int value, boolean isGroup, String image, String imageMarked);
     QuestTemplate getQuestTemplate(int questID);
-    void updateTemplate(int questID, String name, String description, int value, int categoryValue, String image, String imageMarked);
+    void updateTemplate(int qtID, String name, String description, int value, String image, String imageMarked);
 
+    List<QuestTemplate> getAllQuestTemplates();
     Quest getQuest(int historyID);
     List<Quest> getAllQuestsByUser(int userID);
 
