@@ -3,6 +3,7 @@ package com.codecool.queststore.view;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
+import com.codecool.queststore.model.shop.quest.QuestTemplate;
 import com.codecool.queststore.model.user.User;
 import org.jtwig.JtwigModel;
 
@@ -24,4 +25,9 @@ public interface RenderInteface {
     String RenderShopPage(User currentUser, List<Artifact> artifacts);
 
     String RenderQuestPage(User currentUser, List<Quest> quests);
+
+    String RenderQuestTemplatesPage(User currentUser, List<QuestTemplate> quests);
+    String RenderEditQuestTemplatesPage(User currentUser, List<QuestTemplate> questTemplates);
+
+    String rendeAddQuestTemplatesPage(User currentUser);
 }

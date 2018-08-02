@@ -3,6 +3,7 @@ package com.codecool.queststore.view;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
+import com.codecool.queststore.model.shop.quest.QuestTemplate;
 import com.codecool.queststore.model.user.Role;
 import com.codecool.queststore.model.user.User;
 import org.jtwig.JtwigModel;
@@ -68,7 +69,8 @@ public class TemplateRender implements RenderInteface{
         List<CodecoolClass> classes = new ArrayList<>();
 
         for (int i = 1; i <= 3; i++) {
-            CodecoolClass c = new CodecoolClass("2018." + i, getUserList(Role.MENTOR, 2), getUserList(Role.STUDENT, 5));
+            String id = "2018." + i;
+            CodecoolClass c = new CodecoolClass(Integer.parseInt(id), id , getUserList(Role.MENTOR, 2), getUserList(Role.STUDENT, 5));
             classes.add(c);
         }
 
@@ -88,7 +90,7 @@ public class TemplateRender implements RenderInteface{
         TemplateModelInterface tmi = new TemplateModelHandler();
         User currentUser = new User("Piotr", "Kaminski", "pkaminki95@gmail.com", "address", 1, Role.STUDENT);
         User user = new User("Pawel", "Kaminski", "kaminski21@gmail.com", "address", 2, Role.MENTOR);
-        CodecoolClass ccClass = new CodecoolClass("2018.1", null, null);
+        CodecoolClass ccClass = new CodecoolClass(Integer.parseInt("2018.1"), "2018.1", null, null);
         List<Artifact> artifacts = new ArrayList<>();
 
         for (int i = 1; i <= 3; i++) {
@@ -143,14 +145,43 @@ public class TemplateRender implements RenderInteface{
         return template.render(tmi.getQuestModel(currentUser, quests));
     }
 
+    public String RenderQuestTemplatesPage(User currentUser, List<QuestTemplate> questTemplates) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/questsTemplates.html");
+
+        return template.render(tmi.getQuestTemplateModel(currentUser, questTemplates));
+    }
+
+    public String RenderEditQuestTemplatesPage(User currentUser, List<QuestTemplate> questTemplates) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/editTemplate.html");
+
+        return template.render(tmi.getQuestTemplateModel(currentUser, questTemplates));
+    }
+
+    @Override
+    public String rendeAddQuestTemplatesPage(User currentUser) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/questTemplateAdd.html");
+
+        return template.render(tmi.getAddQuestTemplateModel(currentUser));
+    }
+
+
     public static void main(String[] args) {
-        RenderInteface rf = new TemplateRender();
-        User currentUser = new User("Piotr", "Kaminski", "pkaminki95@gmail.com", "address", 1, Role.MENTOR);
-//        System.out.println(rf.RenderProfilePage(null, null, null));
-
-        TemplateRender tr = new TemplateRender();
-        List<User> users = tr.getUserList(Role.STUDENT, 5);
-
-        System.out.println(rf.RenderListPage(currentUser, users));
+//        RenderInteface rf = new TemplateRender();
+//        User currentUser = new User("Piotr", "Kaminski", "pkaminki95@gmail.com", "address", 1, Role.MENTOR);
+////        System.out.println(rf.RenderProfilePage(null, null, null));
+//
+//        TemplateRender tr = new TemplateRender();
+//        List<User> users = tr.getUserList(Role.STUDENT, 5);
+//
+//        System.out.println(rf.RenderListPage(currentUser, users));
     }
 }
