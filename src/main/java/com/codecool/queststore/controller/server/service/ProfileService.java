@@ -40,18 +40,33 @@ public class ProfileService {
         }
     }
 
-    public void handlePost(Map inputs) throws SQLException {
+    public boolean updateEmail(int id, String email) {
+        return new UserDAO().updateEmail(id, email);
+    }
+
+    public void updateAddress(int id, String address) {
+        try {
+            new UserDAO().updateAddress(id, address);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void handlePost(Map inputs) {
         String submit = (String)inputs.get("submit");
 
         if (submit.equals("new")) {
             addNewTitle((String)inputs.get("name"));
+        } else if (submit.equals("updateemail")) {
+            System.out.println(updateEmail(Integer.parseInt(inputs.get("id").toString()), (String) inputs.get("email")));
+        } else if (submit.equals("updateaddress")) {
+            updateAddress(Integer.parseInt(inputs.get("id").toString()), (String) inputs.get("address"));
         } else {
-            editTitle(Integer.parseInt(submit),(String)inputs.get("name"));
+            editTitle(Integer.parseInt(submit), (String) inputs.get("name"));
         }
-
-
-
     }
+
 
     public String generateResponseBody() throws SQLException {
         User currentUser = new UserDAO()

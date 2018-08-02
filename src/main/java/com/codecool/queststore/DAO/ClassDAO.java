@@ -39,7 +39,6 @@ public class ClassDAO implements ClassDAOInterface, Connectable{
     public boolean assignMentor(int userID, int classID) {
         try {
             Connection conn = cp.getConnection();
-            cp.printDbStatus();
             PreparedStatement statement = conn.prepareStatement("select idmentor from mentor where iduser=?");
             statement.setInt(1, userID);
             ResultSet rs = statement.executeQuery();
@@ -64,7 +63,6 @@ public class ClassDAO implements ClassDAOInterface, Connectable{
 
     private List<User> getMentors(int idClass) throws SQLException{
         List<User> users = new ArrayList<>();
-        cp.printDbStatus();
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM getClassMentors(?)");
         stmt.setInt(1, idClass);
         ResultSet rs = stmt.executeQuery();
