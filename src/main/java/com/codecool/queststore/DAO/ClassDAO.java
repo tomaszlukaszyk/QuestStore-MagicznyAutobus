@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClassDAO implements ClassDAOInterface, Connectable{
+    private Connection conn = null;
     @Override
     public List<CodecoolClass> getClasses() {
         List<CodecoolClass> classes = new ArrayList<>();
         try {
-            Connection conn = cp.getConnection();
+            conn = cp.getConnection();
             cp.printDbStatus();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM getClasses()");
@@ -82,7 +83,6 @@ public class ClassDAO implements ClassDAOInterface, Connectable{
 
     private List<User> getMentors(int idClass) throws SQLException{
         List<User> users = new ArrayList<>();
-        Connection conn = cp.getConnection();
         cp.printDbStatus();
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM getClassMentors(?)");
         stmt.setInt(1, idClass);
@@ -100,14 +100,11 @@ public class ClassDAO implements ClassDAOInterface, Connectable{
 
         rs.close();
         stmt.close();
-        conn.close();
         return users;
     }
 
     private List<User> getStudents(int idClass) throws SQLException{
         List<User> users = new ArrayList<>();
-        Connection conn = cp.getConnection();
-        cp.printDbStatus();
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM getClassStudents(?)");
         stmt.setInt(1, idClass);
         ResultSet rs = stmt.executeQuery();
@@ -123,7 +120,6 @@ public class ClassDAO implements ClassDAOInterface, Connectable{
         }
         rs.close();
         stmt.close();
-        conn.close();
         return users;
     }
 }

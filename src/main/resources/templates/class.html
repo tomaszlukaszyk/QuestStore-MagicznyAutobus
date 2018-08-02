@@ -40,18 +40,18 @@
                         {% include "class_assign_columns.html" with [currentUser, users, classID] %}
                     
                     {% elseif targetClass != "null" %}
-                        
+                        {% set message = targetClass.getNAME() %}
                         {% include "class_details_columns.html" with [currentUser, targetClass] %}
                     
                     {% else %}
-                    
-                        {% set message = "Click on the class to show details" %}
-                    
+                        {% if message == "null" %}
+                            {% set message = "Click on the class to show details" %}
+                        {% endif %}
                     {% endif %}
                 </div>
             </div>
             {% if message != "null" %}
-                <p>{{ message }}</p>
+                <p style="display: flex; justify-content: center; flex-basis: 100%;">{{ message }}</p>
             {% endif %}
             <!--footer-->
             <footer>{% include "footer.html" ignore missing %}</footer>

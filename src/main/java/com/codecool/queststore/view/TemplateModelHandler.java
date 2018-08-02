@@ -18,6 +18,7 @@ class TemplateModelHandler implements TemplateModelInterface {
         model.with("targetClass", "null");
         model.with("action", "null");
         model.with("users", "null");
+        model.with("message", "null");
         model.with("title", "Classes");
 
         return model;

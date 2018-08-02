@@ -225,6 +225,7 @@ footer a:link, footer a:visited, nav a:link, nav a:visited, footer a:focus {
 .assignBtn-pos a {
     border: 2px lime dotted;
     padding: 2px;
+    margin-bottom: 4px;
 }
 
 .list-user {
