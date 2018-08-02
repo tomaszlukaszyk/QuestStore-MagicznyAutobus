@@ -32,7 +32,7 @@
                             <span id="list-users">
                                 <ol class="list">
                                     {% for user in users %}
-                                        <li id="{{ user.id }}" class="listitems">{{ user.getNAME() }} {{ user.getSURNAME() }} {{ user.getEMAIL() }} {{ user.getADDRESS }} <button class="edit"><img  class="editimage" src="/static/images/editbutton.png" alt="Edit"></button></li>
+                                    <li id="{{ user.id }}" class="listitems"><a href="/profile/{{ user.getID() }}"> {{ user.getNAME() }} {{ user.getSURNAME() }} {{ user.getEMAIL() }} {{ user.getADDRESS }}</a></li>
                                     {% endfor %}
                                 </ol>
                             </span>
