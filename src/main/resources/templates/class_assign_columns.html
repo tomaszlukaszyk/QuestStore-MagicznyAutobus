@@ -1,0 +1,10 @@
+<div class="class-column">
+    <p>Choose mentor</p>
+    <span id="list-mentor" class="list-user">
+        <ul>
+        {% for mentor in users %}
+            <li><a href="/class/assign/mentor/{{ classID }}:{{ mentor.getID() }}">{{ mentor.getNAME() }} {{ mentor.getSURNAME }}</a></li>
+        {% endfor %}
+        </ul>
+    </span>
+</div>

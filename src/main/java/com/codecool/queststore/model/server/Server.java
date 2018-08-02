@@ -1,7 +1,6 @@
 package com.codecool.queststore.model.server;
 
 import com.codecool.queststore.controller.server.httphandler.*;
-import com.codecool.queststore.controller.server.httphandler.codecoolClass.ClassHandler;
 import com.codecool.queststore.controller.server.httphandler.ProfileHandler;
 import com.codecool.queststore.model.server.session.SessionPool;
 import com.sun.net.httpserver.HttpServer;

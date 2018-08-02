@@ -12,6 +12,8 @@ import java.util.List;
 interface TemplateModelInterface {
     JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes);
     JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes, CodecoolClass targetClass);
+    JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes, String message);
+    JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes, List<User> users, int classID);
     JtwigModel getProfileStudentModel(User currentUser, User profile, CodecoolClass ccClass, List<Artifact> items);
     JtwigModel getProfileMentorModel(User currentUser, User profile, List<CodecoolClass> classes);
     JtwigModel getProfileAdminModel(User currentUser, List<Title> titles);

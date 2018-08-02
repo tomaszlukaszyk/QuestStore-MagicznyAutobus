@@ -1,9 +1,11 @@
 package com.codecool.queststore.view;
 
+import com.codecool.queststore.DAO.ClassDAO;
 import com.codecool.queststore.model.Title;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
+import com.codecool.queststore.model.user.Role;
 import com.codecool.queststore.model.user.User;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
@@ -36,6 +38,30 @@ public class TemplateRender implements RenderInteface {
     }
 
     @Override
+    public String RenderClassPage(User currentUser, List<CodecoolClass> classes, String message) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
+
+        // create a model that will be passed to a template
+        JtwigModel model = tmi.getClassModel(currentUser, classes, message);
+
+        return template.render(model);
+    }
+
+    @Override
+    public String RenderClassPage(User currentUser, List<CodecoolClass> classes, List<User> users, int classID) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
+
+        // create a model that will be passed to a template
+        JtwigModel model = tmi.getClassModel(currentUser, classes, users, classID);
+
+        return template.render(model);
+    }
+
+    @Override
     public String RenderProfilePage(User currentUser, User profile, List<CodecoolClass> classes) {
         /* Mentor profile model:
          *  currentUser - active user
@@ -46,8 +72,6 @@ public class TemplateRender implements RenderInteface {
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
         TemplateModelInterface tmi = new TemplateModelHandler();
 
-        //render from stab
-//        return template.render(getMentorProfileModel());
         //render from args
         return template.render(tmi.getProfileMentorModel(currentUser, profile, classes));
     }
@@ -63,9 +87,6 @@ public class TemplateRender implements RenderInteface {
 
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
         TemplateModelInterface tmi = new TemplateModelHandler();
-
-        // render from stab
-//        return template.render(getStudentProfileModel());
 
         // render from args
         return template.render(tmi.getProfileStudentModel(currentUser, profile, ccClass, items));
@@ -123,4 +144,14 @@ public class TemplateRender implements RenderInteface {
         return template.render(tmi.getQuestModel(currentUser, quests));
     }
 
+<<<<<<< Temporary merge branch 1
+    public static void main(String[] args) {
+        User currentUser = new User("Piotr", "Kaminski", "pk@o2.pl", "sss", 5, Role.MENTOR);
+        List<CodecoolClass> classes = new ClassDAO().getClasses();
+        RenderInteface renderInteface = new TemplateRender();
+        System.out.println(renderInteface.RenderClassPage(currentUser, classes, classes.get(1)));
+    }
 }
+=======
+}
+>>>>>>> Temporary merge branch 2
