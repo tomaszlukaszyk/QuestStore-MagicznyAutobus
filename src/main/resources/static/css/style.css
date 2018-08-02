@@ -477,6 +477,26 @@ div.content-box span {
 
 }
 
+#column-edit{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 33% 33% 33%;
+    grid-template-areas: "a b c"
+                         "a b c"
+                         "a b c";
+    padding: 20px 20px;
+}
+
+#previousValues{
+   grid-template-areas: "a";
+}
+
+#editform{
+    grid-template-areas: "c";
+    text-align: center
+ }
+
 .edit {
     border: none;
     width: 5%;
@@ -573,6 +593,3 @@ padding: 3%;
 .editinputss {
     width: 20em;
 }
-
-
-

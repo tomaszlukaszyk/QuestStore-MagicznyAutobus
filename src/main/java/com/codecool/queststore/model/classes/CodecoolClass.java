@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CodecoolClass {
-    private final int ID;
+    private int ID = 0;
     private final String NAME;
     private final List<User> ASSIGNED_MENTORS;
     private final List<User> ASSIGNED_STUDENTS;

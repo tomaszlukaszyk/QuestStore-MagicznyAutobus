@@ -24,7 +24,7 @@ public abstract class AbstractHttphandler {
         httpExchange.sendResponseHeaders(ResponsesEnum.REDIRECT.getCode(), NOW);
     }
 
-    Map<String, String> parseFormData(HttpExchange httpExchange) throws IOException {
+    protected Map<String, String> parseFormData(HttpExchange httpExchange) throws IOException {
         InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");
         BufferedReader br = new BufferedReader(isr);
         String formData = br.readLine();
@@ -34,13 +34,13 @@ public abstract class AbstractHttphandler {
         for(String pair : pairs){
             String[] keyValue = pair.split("=");
             // We have to decode the value because it's urlencoded. see: https://en.wikipedia.org/wiki/POST_(HTTP)#Use_for_submitting_web_forms
-            String value = new URLDecoder().decode(keyValue[1], "UTF-8");
+            String value = URLDecoder.decode(keyValue[1], "UTF-8");
             map.put(keyValue[0], value);
         }
         return map;
     }
 
-    void sendFile(HttpExchange httpExchange, URL fileURL) throws IOException {
+    protected void sendFile(HttpExchange httpExchange, URL fileURL) throws IOException {
 
         // get the file
         File file = new File(fileURL.getFile());

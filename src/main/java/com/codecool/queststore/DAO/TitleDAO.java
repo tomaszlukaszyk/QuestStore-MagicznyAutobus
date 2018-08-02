@@ -63,7 +63,7 @@ public class TitleDAO implements Connectable {
         try {
             Connection conn = cp.getConnection();
             PreparedStatement stmt = conn.prepareStatement("select * from levelchart where idlevelchart = ?");
-            stmt.setInt(1,id);
+            stmt.setInt(1,id+1);
             stmt.executeQuery();
             ResultSet rs = stmt.executeQuery();
 

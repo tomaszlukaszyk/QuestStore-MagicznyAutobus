@@ -1,14 +1,14 @@
 package com.codecool.queststore.view;
 
-import com.codecool.queststore.DAO.ClassDAO;
 import com.codecool.queststore.model.Title;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
-import com.codecool.queststore.model.user.Role;
+import com.codecool.queststore.model.shop.quest.QuestTemplate;
 import com.codecool.queststore.model.user.User;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
+
 import java.util.List;
 
 public class TemplateRender implements RenderInteface {
@@ -142,5 +142,33 @@ public class TemplateRender implements RenderInteface {
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/quests.html");
 
         return template.render(tmi.getQuestModel(currentUser, quests));
+    }
+
+    public String RenderQuestTemplatesPage(User currentUser, List<QuestTemplate> questTemplates) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/questsTemplates.html");
+
+        return template.render(tmi.getQuestTemplateModel(currentUser, questTemplates));
+    }
+
+    public String RenderEditQuestTemplatesPage(User currentUser, List<QuestTemplate> questTemplates) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/editTemplate.html");
+
+        return template.render(tmi.getQuestTemplateModel(currentUser, questTemplates));
+    }
+
+    @Override
+    public String rendeAddQuestTemplatesPage(User currentUser) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/questTemplateAdd.html");
+
+        return template.render(tmi.getAddQuestTemplateModel(currentUser));
     }
 }
