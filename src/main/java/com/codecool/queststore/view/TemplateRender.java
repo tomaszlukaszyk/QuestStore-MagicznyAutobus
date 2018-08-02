@@ -1,5 +1,6 @@
 package com.codecool.queststore.view;
 
+import com.codecool.queststore.model.Title;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
@@ -68,6 +69,14 @@ public class TemplateRender implements RenderInteface {
 
         // render from args
         return template.render(tmi.getProfileStudentModel(currentUser, profile, ccClass, items));
+    }
+
+    @Override
+    public String RenderProfilePage(User currentUser, List<Title> titles) {
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
+        TemplateModelInterface tmi = new TemplateModelHandler();
+
+        return template.render(tmi.getProfileAdminModel(currentUser,titles));
     }
 
     public String RenderMentorListPage(User currentUser, List<User> users, boolean isCreated) {
