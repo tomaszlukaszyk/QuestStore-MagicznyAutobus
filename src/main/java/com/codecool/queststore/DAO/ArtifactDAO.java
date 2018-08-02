@@ -24,7 +24,6 @@ public class ArtifactDAO implements Connectable {
         stmt.executeQuery();
         stmt.close();
         conn.close();
-        cp.printDbStatus();
     }
 
     public void updateArtifact(Artifact artifact) throws SQLException {
@@ -38,7 +37,6 @@ public class ArtifactDAO implements Connectable {
         stmt.setString(6, artifact.getIMAGE_MARKED_FILENAME());
         stmt.close();
         conn.close();
-        cp.printDbStatus();
     }
 
     public List<Artifact> getUsersNotUsedArtifactsById(int id) throws SQLException {
@@ -70,7 +68,6 @@ public class ArtifactDAO implements Connectable {
             rs.close();
             stmt.close();
             conn.close();
-            cp.printDbStatus();
             return artifactList;
 
             } catch (SQLException e) {

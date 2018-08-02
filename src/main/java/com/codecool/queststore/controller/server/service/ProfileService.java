@@ -40,19 +40,33 @@ public class ProfileService {
         }
     }
 
-    public void handlePost(Map inputs) throws SQLException {
-        System.out.println(inputs);
+    public boolean updateEmail(int id, String email) {
+        return new UserDAO().updateEmail(id, email);
+    }
+
+    public void updateAddress(int id, String address) {
+        try {
+            new UserDAO().updateAddress(id, address);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void handlePost(Map inputs) {
         String submit = (String)inputs.get("submit");
 
         if (submit.equals("new")) {
             addNewTitle((String)inputs.get("name"));
+        } else if (submit.equals("updateemail")) {
+            System.out.println(updateEmail(Integer.parseInt(inputs.get("id").toString()), (String) inputs.get("email")));
+        } else if (submit.equals("updateaddress")) {
+            updateAddress(Integer.parseInt(inputs.get("id").toString()), (String) inputs.get("address"));
         } else {
-            editTitle(Integer.parseInt(submit),(String)inputs.get("name"));
+            editTitle(Integer.parseInt(submit), (String) inputs.get("name"));
         }
-
-
-
     }
+
 
     public String generateResponseBody() throws SQLException {
         User currentUser = new UserDAO()
@@ -60,7 +74,6 @@ public class ProfileService {
                         .getSessionByUUID(UUID
                                 .fromString(cookie.getValue()))
                         .getUSER_ID());
-        System.out.println(currentUser.getTitle());
 
         User targetUser = defineTarget(currentUser, path);
 
@@ -68,12 +81,14 @@ public class ProfileService {
 
             case STUDENT:
                 //todo: fill class  by theirs daos
+                System.out.println(targetUser.getADDRESS());
                 return new TemplateRender().RenderProfilePage
                         (currentUser, targetUser, new ClassDAO().getstudentClasses(targetUser.getID()),
                                 new ArtifactDAO().getUsersNotUsedArtifactsById(targetUser.getID()));
 
             case MENTOR:
                 //todo: fill classes by their daos
+                System.out.println(targetUser.getADDRESS());
                 return new TemplateRender().RenderProfilePage
                         (currentUser, targetUser, new ClassDAO().getMentorClasses(targetUser.getID()));
 
@@ -95,8 +110,6 @@ public class ProfileService {
 
         if (userID != null)
             target = new UserDAO().getUser(userID);
-            System.out.println("target user; ");
-            System.out.println(target);
 
         if (target != null) {
             return target;

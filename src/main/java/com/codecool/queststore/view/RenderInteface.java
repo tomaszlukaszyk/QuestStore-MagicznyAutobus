@@ -4,7 +4,9 @@ import com.codecool.queststore.model.Title;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
+import com.codecool.queststore.model.shop.quest.QuestTemplate;
 import com.codecool.queststore.model.user.User;
+import org.jtwig.JtwigModel;
 
 import java.util.List;
 
@@ -19,15 +21,18 @@ public interface RenderInteface {
 
     // student profile
     String RenderProfilePage(User currentUser, User profile, CodecoolClass ccClass, List<Artifact> items);
-
-    // admin profile
     String RenderProfilePage(User currentUser, List<Title> titles);
 
-    String RenderMentorListPage(User currentUser, List<User> users);
+    String RenderMentorListPage(User currentUser, List<User> users, boolean isCreated);
 
-    String RenderStudentListPage(User currentUser, List<User> users);
+    String RenderStudentListPage(User currentUser, List<User> users, boolean isCreated, List<CodecoolClass> classes);
 
     String RenderShopPage(User currentUser, List<Artifact> artifacts);
 
     String RenderQuestPage(User currentUser, List<Quest> quests);
+
+    String RenderQuestTemplatesPage(User currentUser, List<QuestTemplate> quests);
+    String RenderEditQuestTemplatesPage(User currentUser, List<QuestTemplate> questTemplates);
+
+    String rendeAddQuestTemplatesPage(User currentUser);
 }

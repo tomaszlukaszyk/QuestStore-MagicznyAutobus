@@ -19,7 +19,6 @@ public class TitleDAO implements Connectable {
             stmt.executeQuery();
             stmt.close();
             conn.close();
-            cp.printDbStatus();
             return true;
     } catch (SQLException e) {
        return false;}
@@ -36,7 +35,6 @@ public class TitleDAO implements Connectable {
             stmt.executeQuery();
             stmt.close();
             conn.close();
-            cp.printDbStatus();
             return true;
         } catch (SQLException e) {
         return false;}
@@ -54,7 +52,6 @@ public class TitleDAO implements Connectable {
                 result.add(new Title(rs.getInt(1),rs.getString(2)));
             stmt.close();
             conn.close();
-            cp.printDbStatus();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -66,7 +63,7 @@ public class TitleDAO implements Connectable {
         try {
             Connection conn = cp.getConnection();
             PreparedStatement stmt = conn.prepareStatement("select * from levelchart where idlevelchart = ?");
-            stmt.setInt(1,id);
+            stmt.setInt(1,id+1);
             stmt.executeQuery();
             ResultSet rs = stmt.executeQuery();
 
@@ -76,7 +73,6 @@ public class TitleDAO implements Connectable {
 
             stmt.close();
             conn.close();
-            cp.printDbStatus();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -103,7 +99,6 @@ public class TitleDAO implements Connectable {
 
             stmt.close();
             conn.close();
-            cp.printDbStatus();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -119,7 +114,6 @@ public class TitleDAO implements Connectable {
 
             stmt.close();
             conn.close();
-            cp.printDbStatus();
 
         } catch (SQLException e) {
             e.printStackTrace();

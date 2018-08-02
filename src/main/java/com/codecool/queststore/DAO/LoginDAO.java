@@ -13,7 +13,6 @@ public class LoginDAO  implements Connectable {
     public int validation(Login login) throws SQLException {
         int result = 0;
         Connection conn = cp.getConnection();
-        cp.printDbStatus();
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM loginValidation(?, ?)");
         stmt.setString(1, login.getLOGIN());
         stmt.setString(2, login.getPASSWORD());
@@ -24,7 +23,6 @@ public class LoginDAO  implements Connectable {
         rs.close();
         stmt.close();
         conn.close();
-        cp.printDbStatus();
 
         return result;
     }

@@ -1,16 +1,14 @@
 package com.codecool.queststore.view;
 
-import com.codecool.queststore.DAO.ClassDAO;
 import com.codecool.queststore.model.Title;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
-import com.codecool.queststore.model.user.Role;
+import com.codecool.queststore.model.shop.quest.QuestTemplate;
 import com.codecool.queststore.model.user.User;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TemplateRender implements RenderInteface {
@@ -99,32 +97,31 @@ public class TemplateRender implements RenderInteface {
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/profile.html");
         TemplateModelInterface tmi = new TemplateModelHandler();
 
-        return template.render(tmi.getProfileAdminModel(currentUser,titles));
+        return template.render(tmi.getProfileAdminModel(currentUser, titles));
     }
 
-    public String RenderMentorListPage(User currentUser, List<User> users) {
-
+    public String RenderMentorListPage(User currentUser, List<User> users, boolean isCreated) {
         /* User list model:
          *  currentUser - active user
          *  items - list of user's
          */
         TemplateModelInterface tmi = new TemplateModelHandler();
 
-        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/userList.html");
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/mentorList.html");
 
-        return template.render(tmi.getMentorsListModel(currentUser, users));
+        return template.render(tmi.getMentorsListModel(currentUser, users, isCreated));
     }
 
-    public String RenderStudentListPage(User currentUser, List<User> users) {
+    public String RenderStudentListPage(User currentUser, List<User> users, boolean isCreated, List<CodecoolClass> classes) {
         /* User list model:
          *  currentUser - active user
          *  items - list of user's
          */
         TemplateModelInterface tmi = new TemplateModelHandler();
 
-        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/userList.html");
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/studentList.html");
 
-        return template.render(tmi.getMentorsListModel(currentUser, users));
+        return template.render(tmi.getStudentsListModel(currentUser, users, isCreated, classes));
     }
 
     @Override
@@ -147,4 +144,31 @@ public class TemplateRender implements RenderInteface {
         return template.render(tmi.getQuestModel(currentUser, quests));
     }
 
+    public String RenderQuestTemplatesPage(User currentUser, List<QuestTemplate> questTemplates) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/questsTemplates.html");
+
+        return template.render(tmi.getQuestTemplateModel(currentUser, questTemplates));
+    }
+
+    public String RenderEditQuestTemplatesPage(User currentUser, List<QuestTemplate> questTemplates) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/editTemplate.html");
+
+        return template.render(tmi.getQuestTemplateModel(currentUser, questTemplates));
+    }
+
+    @Override
+    public String rendeAddQuestTemplatesPage(User currentUser) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/questTemplateAdd.html");
+
+        return template.render(tmi.getAddQuestTemplateModel(currentUser));
+    }
 }

@@ -3,8 +3,6 @@ package com.codecool.queststore.DAO;
 import com.codecool.queststore.dao.interfaces.UserDAOInterface;
 import com.codecool.queststore.model.user.Role;
 import com.codecool.queststore.model.user.User;
-import sun.nio.cs.US_ASCII;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -120,17 +118,33 @@ public class UserDAO implements Connectable, UserDAOInterface {
         }
     }
 
-    @Override
-    public void updateUser(User user) throws SQLException {
+    public boolean updateEmail(int id, String email) {
+        try {
+            Connection conn = cp.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT updateEmail(?, ?)");
+            stmt.setInt(1, id);
+            stmt.setString(2, email);
+            stmt.executeQuery();
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+
+        }
+
+        public void updateAddress(int id, String address) throws SQLException {
         Connection conn = cp.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT updateUser(?, ?, ?, ?, ?)");
-        stmt.setInt(1, user.getID());
-        stmt.setString(2, user.getSURNAME());
-        stmt.setString(3, user.getNAME());
-        stmt.setString(4, user.getEMAIL());
-        stmt.setString(5, user.getADDRESS());
+        PreparedStatement stmt = conn.prepareStatement("SELECT updateAddress(?, ?)");
+        stmt.setInt(1, id);
+        stmt.setString(2, address);
         stmt.executeQuery();
         stmt.close();
         conn.close();
+
+
     }
 }

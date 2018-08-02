@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <!--style sheet ref-->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/javascript/scripts.js"></script>
+</head>
+
+<body>
+<div class="main">
+    <!--header-->
+    <header>{% include "header.html" with currentUser %}</header>
+    <!--nav bar-->
+    <nav>{% include "navigation.html" with currentUser %}</nav>
+
+    {% for item in items %}
+
+        <div class="contener">
+            <div id="column-edit">
+                <span id="previousValues">
+                    <div class="editVal">
+                    <label for="name">Previous name: {{ item.getNAME() }}</label>
+                    </div>
+                    <br><br>
+                    <div class="editVal">
+                    <label for="description">Previous description: {{ item.getDESCRIPTION() }}</label>
+                    </div>
+                    <br><br>
+                    <div class="editVal">
+                    <label for="value">Previous value: {{ item.getValue() }}</label>
+                    </div>
+                    <br><br>
+                    <div class="editVal">
+                    <label for="image1">Previous file for ON Image: {{ item.getIMAGE_FILENAME }}</label>
+                    </div>
+                    <br><br>
+                    <div class="editVal">
+                    <label for="image2">Previous file for OFF Image: {{ item.getIMAGE_MARKED_FILENAME }}</label>
+                    </div>
+                    <br><br>
+                </span>
+                <form id="editform" method="POST">
+                    <input type="text" class="templateInputs" name="name" placeholder="Quest name" id="name" value="{{ item.getNAME() }}" required>
+                    <br><br>
+
+                    <textarea type="text" class="templateInputs" name="description" placeholder="Provide description required" id="description">{{ item.DESCRIPTION() }}</textarea>
+                    <br><br>
+
+                    <input type="number" min="1" class="templateInputs" name="value" placeholder="Value" id="value" value="{{ item.getCOST() }}" required>
+                    <br><br>
+
+                    <input type="text" class="templateInputs" name="image1" placeholder="Image name" id="image1" value="{{ item.getIMAGE_FILENAME }}" required>
+                    <br><br>
+
+                    <input type="text" class="templateInputs" name="image2" placeholder="Marked image name" id="image2" value="{{ item.getIMAGE_MARKED_FILENAME }}" required>
+                    <br><br>
+
+                    <button type="submit" id="templatesubmitbutton">EDIT</button>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+    <!--footer-->
+    <footer>{% include "footer.html" ignore missing %}</footer>
+</body>
+</html>

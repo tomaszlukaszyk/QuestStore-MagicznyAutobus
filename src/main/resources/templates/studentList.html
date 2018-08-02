@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <!--style sheet ref-->
+    <link rel="stylesheet" href="static/css/style.css">
+    <script src="static/javascript/scripts.js"></script>
+</head>
+<body>
+<div class="main">
+    <!--header-->
+    <header>{% include "header.html" with currentUser %}</header>
+    <!--nav bar-->
+    <nav>{% include "navigation.html" with currentUser %}</nav>
+    <div class="contener">
+        <div class="content-list" id="contentdiv">
+            <div id="user-column" class="list-column">
+                {% if isCreated != "true" %}
+                    <h2 id="error">There is someone else with that login or email!</h2>
+                {% endif %}
+                <div class="listName">
+                    {% if currentUser.getROLE().getNAME() != "student" %}
+                    <h2>{{ listName }}</h2>
+                    <div class="addBtnPos">
+                        <button class="addBtn" onclick="showAddForm()">+</button>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="list-pos">
+                            <span id="list-users">
+                                <ol class="list">
+                                    {% for user in users %}
+                                    <li id="{{ user.getID() }}" class="listitems"><a href="/profile/{{ user.getID() }}"> {{ user.getNAME() }} {{ user.getSURNAME() }} {{ user.getEMAIL() }} {{ user.getADDRESS }}</a></li>
+                                    {% endfor %}
+                                </ol>
+                            </span>
+                </div>
+            </div>
+            <div id="form" style="display: none;">
+                {% if currentUser.getROLE().getNAME() != "student" %}
+                {% include "studentAddForm.html" with classes %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    <footer>{% include "footer.html" ignore missing %}</footer>
+</div>
+<script>
+            function showAddForm() {
+                document.getElementById("contentdiv").className = "content-list-form";
+                document.getElementById("form").style.display = "block";
+            }
+        </script>
+</body>
+</html>
