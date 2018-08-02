@@ -51,7 +51,8 @@ public class UserDAO implements Connectable, UserDAOInterface {
     }
 
     @Override
-    public List<User> getUsers() throws SQLException {
+    public List<User> getUsers() {
+        try {
         List<User> users = new ArrayList<>();
         int id = 0;
         String name = null;
@@ -76,38 +77,47 @@ public class UserDAO implements Connectable, UserDAOInterface {
         stmt.close();
         conn.close();
         return users;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
-    public List<User> getUsers(Role role) throws SQLException {
-        List<User> users = new ArrayList<>();
+    public List<User> getUsers(Role role) {
+        try {
+            List<User> users = new ArrayList<>();
 
-        String roleStr = role.getNAME();
-        if (roleStr == null) return null;
+            String roleStr = role.getNAME();
+            if (roleStr == null) return null;
 
-        int id = 0;
-        String name = null;
-        String surname = null;
-        String email = null;
-        String address = null;
+            int id = 0;
+            String name = null;
+            String surname = null;
+            String email = null;
+            String address = null;
 
-        Connection conn = cp.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM getusers(?)");
-        stmt.setString(1, roleStr);
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            id = rs.getInt(1);
-            name = rs.getString(2);
-            surname = rs.getString(3);
-            email = rs.getString(4);
-            address = rs.getString(5);
+            Connection conn = cp.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM getusers(?)");
+            stmt.setString(1, roleStr);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt(1);
+                name = rs.getString(2);
+                surname = rs.getString(3);
+                email = rs.getString(4);
+                address = rs.getString(5);
 
-            if (email != null)
-                users.add(new User(name, surname, email, address, id, role));
+                if (email != null)
+                    users.add(new User(name, surname, email, address, id, role));
+            }
+            stmt.close();
+            conn.close();
+            return users;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
-        stmt.close();
-        conn.close();
-        return users;
     }
 
     @Override

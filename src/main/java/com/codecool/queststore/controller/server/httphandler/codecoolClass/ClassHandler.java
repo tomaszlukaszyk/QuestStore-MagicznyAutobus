@@ -31,10 +31,13 @@ public class ClassHandler extends AbstractHttphandler implements HttpHandler {
 
         } else {
             try {
+                if (httpExchange.getRequestURI().getPath().equals("/class/style.css")) {
+                    return;
+                }
                 System.out.println("sending class page...");
                 ClassHelper classHelper = new ClassHelper(cookie, httpExchange.getRequestURI().getPath());
                 String response = classHelper.generateResponseBody();
-                System.out.println("Success!\n\n" + response);
+                System.out.println("Success!\n\n");
                 SendReq(httpExchange, response);
             }catch (Exception e) {
                 e.printStackTrace();

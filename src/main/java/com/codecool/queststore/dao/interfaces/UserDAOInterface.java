@@ -9,6 +9,6 @@ public interface UserDAOInterface {
     void deleteUser(int id) throws SQLException;
     void updateUser(User user) throws SQLException;
     User getUser(int id) throws SQLException;
-    List<User> getUsers() throws SQLException;
-    List<User> getUsers(Role role) throws SQLException;
+    List<User> getUsers();
+    List<User> getUsers(Role role);
 }

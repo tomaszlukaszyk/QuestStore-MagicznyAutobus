@@ -3,14 +3,18 @@ package com.codecool.queststore.controller.server.httphandler.codecoolClass;
 import com.codecool.queststore.DAO.ClassDAO;
 import com.codecool.queststore.DAO.UserDAO;
 import com.codecool.queststore.dao.interfaces.ClassDAOInterface;
+import com.codecool.queststore.dao.interfaces.UserDAOInterface;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.server.session.SessionPool;
+import com.codecool.queststore.model.user.Role;
 import com.codecool.queststore.model.user.User;
 import com.codecool.queststore.view.RenderInteface;
 import com.codecool.queststore.view.TemplateRender;
 
+import javax.jws.soap.SOAPBinding;
 import java.net.HttpCookie;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -18,6 +22,8 @@ import java.util.UUID;
 class ClassHelper {
     private final HttpCookie cookie;
     private final String path;
+    private ClassDAOInterface classDAOInterface = new ClassDAO();
+    private RenderInteface renderInteface = new TemplateRender();
 
     ClassHelper(HttpCookie cookie, String path) {
         this.cookie = cookie;
@@ -25,11 +31,8 @@ class ClassHelper {
     }
 
     String generateResponseBody() throws SQLException {
-        final int ACTION_PLACE = 2;
+        System.out.println("path: " + path);
         String[] splitedPath = splitURL(path);
-        String message = null;
-        ClassDAOInterface classDAOInterface = new ClassDAO();
-        RenderInteface renderInteface = new TemplateRender();
         User currentUser = new UserDAO().getUser(SessionPool.getSessionByUUID(UUID.fromString(cookie.getValue())).getUSER_ID());
         CodecoolClass targetClass;
         List<CodecoolClass> classes = classDAOInterface.getClasses();
@@ -41,18 +44,7 @@ class ClassHelper {
 
         if (isAction(splitedPath)) {
             System.out.println("Action: assign");
-            if (splitedPath.length == 3) {
-                System.out.println("Choose user");
-
-            }else if (assignUser(splitedPath, classDAOInterface)) {
-                System.out.println("Success!");
-                message = "Assigned!";
-                return renderInteface.RenderClassPage(currentUser, classes, message);
-            } else {
-                System.out.println("Failed!");
-                message = "Can't perform the operation";
-                return renderInteface.RenderClassPage(currentUser, classes, message);
-            }
+            return handleAction(splitedPath, currentUser, classes);
 
         } else if (targetClass != null) {
             System.out.println("target class: " + targetClass.getNAME());
@@ -62,16 +54,55 @@ class ClassHelper {
             System.out.println("target class: null");
             return renderInteface.RenderClassPage(currentUser, classes);
         }
-        return null;
     }
 
     private boolean isAction(String[] splitedPath) {
         final int ACTION_PLACE = 2;
         if (ACTION_PLACE < splitedPath.length) {
-            return splitedPath[ACTION_PLACE].equals("assign");
+            return splitedPath[ACTION_PLACE].split(":")[0].equals("assign");
         } else
             return false;
     }
+
+    private String handleAction(String[] splitedPath, User currentUser, List<CodecoolClass> classes) {
+        final int TARGET_CLASS_ID_PLACE = 3;
+        String message;
+        List<User> users;
+        UserDAOInterface userDAOInterface = new UserDAO();
+
+        if (splitedPath.length == 4) {
+            System.out.println("Choose user");
+
+            switch (currentUser.getROLE()) {
+                case ADMIN: {
+                    users = userDAOInterface.getUsers(Role.MENTOR);
+                    break;
+                }
+                case MENTOR: {
+                    users = userDAOInterface.getUsers(Role.STUDENT);
+                    break;
+                }
+                default: users = userDAOInterface.getUsers();
+            }
+            System.out.println("splitedPath: ");
+            for (String s : splitedPath) {
+                System.out.println(s);
+            }
+
+
+            return renderInteface.RenderClassPage(currentUser, classes, users, Integer.parseInt(splitedPath[TARGET_CLASS_ID_PLACE]));
+
+        }else if (assignUser(splitedPath)) {
+            System.out.println("Success!");
+            message = "Assigned!";
+            return renderInteface.RenderClassPage(currentUser, classes, message);
+        } else {
+            System.out.println("Failed!");
+            message = "Can't perform the operation";
+            return renderInteface.RenderClassPage(currentUser, classes, message);
+        }
+    }
+
     private CodecoolClass defineTarget(List<CodecoolClass> classes, String[] array) {
         Integer classID = getTargetClassID(array);
         Iterator<CodecoolClass> classIterator = classes.iterator();
@@ -86,14 +117,14 @@ class ClassHelper {
         return null;
     }
 
-    private boolean assignUser(String[] array, ClassDAOInterface classDAOInterface) {
+    private boolean assignUser(String[] array) {
         /*
         example path: /class/assign/mentor/1:1
          */
         final int USER_ROLE_PLACE = 3;
         final int IDS_PLACE = 4;
-        final int USER_ID_PLACE = 0;
-        final int CLASS_ID_PLACE = 1;
+        final int USER_ID_PLACE = 1;
+        final int CLASS_ID_PLACE = 0;
         String[] ids = array[IDS_PLACE].split(":");
 
         if (isStringCastableToInt(ids[USER_ID_PLACE]) && isStringCastableToInt(ids[CLASS_ID_PLACE])) {
@@ -101,7 +132,7 @@ class ClassHelper {
                 case "mentor":
                     return classDAOInterface.assignMentor(Integer.parseInt(ids[USER_ID_PLACE]), Integer.parseInt(ids[CLASS_ID_PLACE]));
                 case "student":
-                    return classDAOInterface.assignMentor(Integer.parseInt(ids[USER_ID_PLACE]), Integer.parseInt(ids[CLASS_ID_PLACE]));
+                    return classDAOInterface.assignStudent(Integer.parseInt(ids[USER_ID_PLACE]), Integer.parseInt(ids[CLASS_ID_PLACE]));
                 default:
                     return false;
             }

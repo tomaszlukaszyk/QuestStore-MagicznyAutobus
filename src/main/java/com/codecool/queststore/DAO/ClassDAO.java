@@ -39,12 +39,20 @@ public class ClassDAO implements ClassDAOInterface, Connectable{
         try {
             Connection conn = cp.getConnection();
             cp.printDbStatus();
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO mentor_class (idmentor, idclass) VALUES (?, ?)");
-            stmt.setInt(1, userID);
-            stmt.setInt(2, classID);
-            stmt.executeUpdate();
+            PreparedStatement statement = conn.prepareStatement("select idmentor from mentor where iduser=?");
+            statement.setInt(1, userID);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                int mentorID = rs.getInt(1);
 
-            stmt.close();
+                PreparedStatement stmt = conn.prepareStatement("INSERT INTO mentor_class (idmentor, idclass) VALUES (?, ?)");
+                stmt.setInt(1, mentorID);
+                stmt.setInt(2, classID);
+                stmt.executeUpdate();
+                stmt.close();
+            }
+            rs.close();
+            statement.close();
             conn.close();
             return true;
         } catch (SQLException e) {

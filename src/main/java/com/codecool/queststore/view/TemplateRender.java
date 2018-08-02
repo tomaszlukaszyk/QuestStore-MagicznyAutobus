@@ -50,13 +50,13 @@ public class TemplateRender implements RenderInteface {
     }
 
     @Override
-    public String RenderClassPage(User currentUser, List<CodecoolClass> classes, List<User> users) {
+    public String RenderClassPage(User currentUser, List<CodecoolClass> classes, List<User> users, int classID) {
         TemplateModelInterface tmi = new TemplateModelHandler();
         // get a template file
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/class.html");
 
         // create a model that will be passed to a template
-        JtwigModel model = tmi.getClassModel(currentUser, classes, users);
+        JtwigModel model = tmi.getClassModel(currentUser, classes, users, classID);
 
         return template.render(model);
     }

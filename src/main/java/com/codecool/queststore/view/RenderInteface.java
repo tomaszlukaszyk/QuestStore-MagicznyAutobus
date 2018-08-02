@@ -12,7 +12,7 @@ public interface RenderInteface {
     String RenderClassPage(User currentUser, List<CodecoolClass> classes);
     String RenderClassPage(User currentUser, List<CodecoolClass> classes, CodecoolClass targetClass);
     String RenderClassPage(User currentUser, List<CodecoolClass> classes, String message);
-    String RenderClassPage(User currentUser, List<CodecoolClass> classes, List<User> users);
+    String RenderClassPage(User currentUser, List<CodecoolClass> classes, List<User> users, int classID);
 
     // mentor profile
     String RenderProfilePage(User currentUser, User profile, List<CodecoolClass> classes);

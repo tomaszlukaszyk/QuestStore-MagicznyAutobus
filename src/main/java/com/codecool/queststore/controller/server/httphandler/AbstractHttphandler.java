@@ -81,6 +81,6 @@ public abstract class AbstractHttphandler {
         }
 
         os.close();
-        System.out.println(response);
+//        System.out.println(response);
     }
 }

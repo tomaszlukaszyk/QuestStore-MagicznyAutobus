@@ -26,7 +26,7 @@
                                         <p><a href="/class/{{ class.getID() }}">{{ class.getNAME() }}</a></p>
                                         {% if currentUser.getROLE().getNAME() != "student" %}
                                             <div class="assignBtn-pos">
-                                                <a class="assignBtn" href="/class/assign">assign</a>
+                                                <a class="assignBtn" href="/class/assign/{{ class.getID() }}">assign</a>
                                             </div>
                                         {% endif %}
                                         <br>
@@ -37,11 +37,11 @@
 
                     {% if action == "assign" %}
                     
-                        {% include "class_assign_columns.html" with [currentUser, users] %}
+                        {% include "class_assign_columns.html" with [currentUser, users, classID] %}
                     
                     {% elseif targetClass != "null" %}
                         
-                        {% include "class_details_columns.html" with [currentUser, users] %}
+                        {% include "class_details_columns.html" with [currentUser, targetClass] %}
                     
                     {% else %}
                     
