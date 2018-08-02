@@ -36,31 +36,33 @@ class ClassHelper {
 
         System.out.println("rendering class page...");
         System.out.println("current user: " + currentUser.getNAME() + " " + currentUser.getSURNAME());
+        System.out.println("looking for target...");
+        targetClass = defineTarget(classes, splitedPath);
 
         if (isAction(splitedPath)) {
             System.out.println("Action: assign");
-            if (assignUser(splitedPath, classDAOInterface)) {
+            if (splitedPath.length == 3) {
+                System.out.println("Choose user");
+
+            }else if (assignUser(splitedPath, classDAOInterface)) {
                 System.out.println("Success!");
                 message = "Assigned!";
+                return renderInteface.RenderClassPage(currentUser, classes, message);
             } else {
                 System.out.println("Failed!");
                 message = "Can't perform the operation";
-            }
-        } else System.out.println("no Action");
-
-        System.out.println("looking for target...");
-        targetClass = defineTarget(classes, splitedPath);
-        if (targetClass != null) {
-            System.out.println("target class: " + targetClass.getNAME());
-            return renderInteface.RenderClassPage(currentUser, classes, targetClass);
-        } else {
-            System.out.println("target class: null");
-            if (message == null) {
-                return renderInteface.RenderClassPage(currentUser, classes);
-            } else {
                 return renderInteface.RenderClassPage(currentUser, classes, message);
             }
+
+        } else if (targetClass != null) {
+            System.out.println("target class: " + targetClass.getNAME());
+            return renderInteface.RenderClassPage(currentUser, classes, targetClass);
+
+        } else {
+            System.out.println("target class: null");
+            return renderInteface.RenderClassPage(currentUser, classes);
         }
+        return null;
     }
 
     private boolean isAction(String[] splitedPath) {

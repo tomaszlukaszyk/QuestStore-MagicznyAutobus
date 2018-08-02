@@ -22,37 +22,36 @@
                             <p>Classes</p>
                             <div class="classes" id="list-class">
                                 {% for class in classes%}
-                                    <p><a href="/class/{{ class.getID() }}">{{ class.getNAME() }}</a></p><br>
+                                    <div style="display: flex; justify-content: center;">
+                                        <p><a href="/class/{{ class.getID() }}">{{ class.getNAME() }}</a></p>
+                                        {% if currentUser.getROLE().getNAME() != "student" %}
+                                            <div class="assignBtn-pos">
+                                                <a class="assignBtn" href="/class/assign">assign</a>
+                                            </div>
+                                        {% endif %}
+                                        <br>
+                                    </div>
                                 {% endfor %}
                             </div>
                         </div>
 
-                    {% if targetClass != "null" %}
-                    <div class="class-column">
-                        <p>Assigned mentors</p>
-                        <span id="list-mentor" class="list-user">
-                            <ul>
-                            {% for mentor in targetClass.getASSIGNED_MENTORS()%}
-                                <li><a href="/profile/{{ mentor.getID() }}">{{ mentor.getNAME() }} {{ mentor.getSURNAME }}</a></li>
-                            {% endfor %}
-                            </ul>
-                        </span>
-                    </div>
-                    <div class="class-column">
-                        <p>Students</p>
-                        <span id="list-student" class="list-user">
-                            <ul>
-                            {% for student in targetClass.getASSIGNED_STUDENTS() %}
-                                <li><a href="/profile/{{ student.getID() }}">{{ student.getNAME() }} {{ student.getSURNAME }}</a></li>
-                            {% endfor %}
-                            </ul>
-                        </span>
-                    </div>
+                    {% if action == "assign" %}
+                    
+                        {% include "class_assign_columns.html" with [currentUser, users] %}
+                    
+                    {% elseif targetClass != "null" %}
+                        
+                        {% include "class_details_columns.html" with [currentUser, users] %}
+                    
+                    {% else %}
+                    
+                        {% set message = "Click on the class to show details" %}
+                    
                     {% endif %}
                 </div>
             </div>
-            {% if targetClass == "null" %}
-                <h1>Click on the class to show details</h1>
+            {% if message != "null" %}
+                <p>{{ message }}</p>
             {% endif %}
             <!--footer-->
             <footer>{% include "footer.html" ignore missing %}</footer>

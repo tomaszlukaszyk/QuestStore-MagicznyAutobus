@@ -312,3 +312,19 @@ BEGIN
 RETURN QUERY (SELECT idclass, classdescription FROM class);
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getUsers() RETURNS TABLE (id INTEGER, name TEXT, surname TEXT, email TEXT, address TEXT, role TEXT) AS $$
+DECLARE
+desc TEXT;
+BEGIN
+RETURN QUERY (select iduser, username, usersurname, useremail, useraddress, roledescription from users join codecoolrole on (users.idcodecoolrole = codecoolrole.idcodecoolrole));
+END;
+$$ LANGUAGE plpgsql;									
+
+CREATE OR REPLACE FUNCTION getUsers(role TEXT) RETURNS TABLE (id INTEGER, name TEXT, surname TEXT, email TEXT, address TEXT) AS $$
+DECLARE
+desc TEXT;
+BEGIN
+RETURN QUERY (select iduser, username, usersurname, useremail, useraddress from users join codecoolrole on (users.idcodecoolrole = codecoolrole.idcodecoolrole) WHERE roledescription=role);
+END;
+$$ LANGUAGE plpgsql;									

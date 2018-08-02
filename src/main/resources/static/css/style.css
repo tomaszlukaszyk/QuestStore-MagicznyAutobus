@@ -194,6 +194,7 @@ footer a:link, footer a:visited, nav a:link, nav a:visited, footer a:focus {
 
 .class-column .classes p {
     border-bottom-style: none;
+    padding-top: 0.5em;
 }
 
 .class-column p {
@@ -211,6 +212,19 @@ footer a:link, footer a:visited, nav a:link, nav a:visited, footer a:focus {
 .class-column a:hover {
     color: inherit;
     text-decoration: underline;
+}
+
+.assignBtn-pos {
+    display: flex;
+    flex-direction: column;
+    height: 72px;
+    justify-content: center;
+    padding-left: 20px;
+}
+
+.assignBtn-pos a {
+    border: 2px lime dotted;
+    padding: 2px;
 }
 
 .list-user {
@@ -420,18 +434,9 @@ div.content-box span {
     flex-flow: column nowrap;
 }
 
-.classes {
-    display: flex;
-    flex-flow: column nowrap;
-    padding-left: 10%;
-}
-
 .shopitem img {
     width: 100%;
     filter: brightness(2);
-}
-.column .classes p {
-    border-bottom-style: none;
 }
 
 /*login page*/

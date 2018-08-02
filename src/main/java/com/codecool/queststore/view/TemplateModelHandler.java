@@ -16,6 +16,8 @@ class TemplateModelHandler implements TemplateModelInterface {
         model.with("currentUser", currentUser);
         model.with("classes", classes);
         model.with("targetClass", "null");
+        model.with("action", "null");
+        model.with("users", "null");
         model.with("title", "Classes");
 
         return model;
@@ -33,6 +35,35 @@ class TemplateModelHandler implements TemplateModelInterface {
             model.with("targetClass", "null");
         }
 
+        model.with("action", "null");
+        model.with("users", "null");
+        model.with("title", "Classes");
+
+        return model;
+    }
+
+    @Override
+    public JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes, String message) {
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("classes", classes);
+        model.with("targetClass", "null");
+        model.with("action", "null");
+        model.with("users", "null");
+        model.with("message", message);
+        model.with("title", "Classes");
+
+        return model;
+    }
+
+    @Override
+    public JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes, List<User> users) {
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("classes", classes);
+        model.with("targetClass", "null");
+        model.with("action", "assign");
+        model.with("users", users);
         model.with("title", "Classes");
 
         return model;

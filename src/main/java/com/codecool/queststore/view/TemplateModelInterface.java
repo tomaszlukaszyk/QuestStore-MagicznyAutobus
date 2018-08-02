@@ -13,6 +13,8 @@ import java.util.Map;
 interface TemplateModelInterface {
     JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes);
     JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes, CodecoolClass targetClass);
+    JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes, String message);
+    JtwigModel getClassModel(User currentUser, List<CodecoolClass> classes, List<User> users);
     JtwigModel getProfileStudentModel(User currentUser, User profile, CodecoolClass ccClass, List<Artifact> items);
     JtwigModel getProfileMentorModel(User currentUser, User profile, List<CodecoolClass> classes);
     JtwigModel getStudentsListModel(User currentUser, List<User> users);
