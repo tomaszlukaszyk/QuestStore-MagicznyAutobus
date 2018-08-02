@@ -15,7 +15,6 @@ public class LoginHandler extends AbstractHttphandler implements HttpHandler {
 
         @Override
     public void handle(HttpExchange httpExchange) throws IOException {
-            System.out.println(httpExchange.getRequestMethod());
         // checks user input after using login form
 
         if(httpExchange.getRequestMethod().equals("POST")){
@@ -32,7 +31,6 @@ public class LoginHandler extends AbstractHttphandler implements HttpHandler {
         // Check if cookie already exists and if it's UUID is contained by sessionPool
         if (cookieStr == null || !isCookieValid(cookie)) {
             // send login page and if method request is POST add cookie etc
-            System.out.println("sending login page");
             URL fileURL = getClass().getClassLoader().getResource(path);
             sendFile(httpExchange, fileURL);
         } else {
@@ -50,10 +48,7 @@ public class LoginHandler extends AbstractHttphandler implements HttpHandler {
             HttpCookie cookie = session.getCookie();
             httpExchange.getResponseHeaders().add("Set-Cookie", cookie.getValue());
             redirect(httpExchange,"profile");
-            System.out.println("generated cookie \\/");
-            System.out.println(cookie.toString());
         } else {
-            System.out.println("sending login page");
             URL fileURL = getClass().getClassLoader().getResource(path);
             sendFile(httpExchange, fileURL);
         }

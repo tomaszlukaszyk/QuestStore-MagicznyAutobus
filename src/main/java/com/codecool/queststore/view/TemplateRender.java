@@ -102,29 +102,28 @@ public class TemplateRender implements RenderInteface {
         return template.render(tmi.getProfileAdminModel(currentUser,titles));
     }
 
-    public String RenderMentorListPage(User currentUser, List<User> users) {
-
+    public String RenderMentorListPage(User currentUser, List<User> users, boolean isCreated) {
         /* User list model:
          *  currentUser - active user
          *  items - list of user's
          */
         TemplateModelInterface tmi = new TemplateModelHandler();
 
-        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/userList.html");
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/mentorList.html");
 
-        return template.render(tmi.getMentorsListModel(currentUser, users));
+        return template.render(tmi.getMentorsListModel(currentUser, users, isCreated));
     }
 
-    public String RenderStudentListPage(User currentUser, List<User> users) {
+    public String RenderStudentListPage(User currentUser, List<User> users, boolean isCreated, List<CodecoolClass> classes) {
         /* User list model:
          *  currentUser - active user
          *  items - list of user's
          */
         TemplateModelInterface tmi = new TemplateModelHandler();
 
-        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/userList.html");
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/studentList.html");
 
-        return template.render(tmi.getMentorsListModel(currentUser, users));
+        return template.render(tmi.getStudentsListModel(currentUser, users, isCreated, classes));
     }
 
     @Override

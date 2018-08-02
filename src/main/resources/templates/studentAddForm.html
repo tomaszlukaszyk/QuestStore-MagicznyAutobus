@@ -1,0 +1,38 @@
+<div class="edit-form">
+    <form method="POST" onkeyup="testIfFormIsEmpty('studentinputs', 'studentsubmitbutton')">
+        <br><br>
+        <label for="usersurname">Surname:</label>
+        <br><br>
+        <input type="text" class="studentinputs" id="usersurname" name="studentsurname" placeholder="Enter student surname">
+        <br><br>
+        <label for="username">Name:</label>
+        <br><br>
+        <input type="text" class="studentinputs" id="username" name="studentname" placeholder="Enter student name">
+        <br><br>
+        <label for="useremail">E-mail:</label>
+        <br><br>
+        <input type="text" class="studentinputs" id="useremail" name="studentemail" placeholder="Enter student email">
+        <br><br>
+        <label for="userlogin">Login:</label>
+        <br><br>
+        <input type="text" class="studentinputs" id="userlogin" name="studentlogin" placeholder="Enter student login">
+        <br><br>
+        <label for="userpassword">Password:</label>
+        <br><br>
+        <input type="text" class="studentinputs" id="userpassword" name="studentpassword" placeholder="Enter student password">
+        <br><br>
+        <label for="useraddress">Address:</label>
+        <br><br>
+        <input type="text" class="studentinputs" id="useraddress" name="studentaddress" placeholder="Enter student address">
+        <br><br>
+        <label for="userclass">Class:</label>
+        <br><br>
+        <select id="userclass" name="studentclass" class="studentinputs">
+            {% for class in classes %}
+                <option value="{{ class.getID() }}">{{ class.getNAME() }}</option>
+            {% endfor %}
+        </select>
+        <button id="studentsubmitbutton" onclick="return checkUserInputs()" disabled>SEND</button>
+    </form>
+</div>
+<script src="static/javascript/scripts.js"></script>
