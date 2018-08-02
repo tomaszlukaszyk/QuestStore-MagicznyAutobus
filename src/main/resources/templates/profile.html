@@ -78,13 +78,19 @@
                     <span>{{ item.getNAME() }}</span>
                     {% endfor %}
                 </div>
-
+            {% if currentUser.getROLE().getNAME() == "student" %}
+            <div class="content-box" id="cl">
+                <p>View user achievments:</p>
+                <a href="/quests/view/{{profile.getID}}">here</a>
+            </div>
+            {% endif %}
             {% if currentUser.getROLE().getNAME() == "mentor" %}
             <div class="content-box" id="cl">
                 <p>For accepting this user quest go:</p>
                 <a href="/quests/view/{{profile.getID}}">here</a>
             </div>
             {% endif %}
+
             <!--</div>-->
             {% endif %}
 

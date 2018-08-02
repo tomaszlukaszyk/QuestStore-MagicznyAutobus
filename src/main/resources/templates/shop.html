@@ -27,12 +27,12 @@
                                     <h2><span id ="title">{{ item.getNAME() }}</span></h2> <br />
                                     {% if currentUser.getROLE().getNAME() == "student" %}
                                         {% if currentUser.getWallet() < item.getCOST() %}
-                                            <a href=""><img class="image_off" src="static/images/quests/{{ item.getIMAGE_FILENAME }}"></a>
+                                            <a href=""><img class="image_off" src="static/images/artifacts/{{ item.getIMAGE_FILENAME }}"></a>
                                         {% else %}
-                                            <a href=""><img class="image_off" src="static/images/quests/{{ item.getIMAGE_MARKED_FILENAME }}"></a>
+                                            <a href=""><img class="image_off" src="static/images/artifacts/{{ item.getIMAGE_MARKED_FILENAME }}"></a>
                                         {% endif %}
                                     {% else %}
-                                        <a href=""><img class="image_off" src="static/images/quests/{{ item.getIMAGE_MARKED_FILENAME }}"></a>
+                                        <a href=""><img class="image_off" src="static/images/artifacts/{{ item.getIMAGE_MARKED_FILENAME }}"></a>
                                     {% endif %}
 
                                     <span value = "category"><p>{{ item.getCATEGORY() }}</p></span>
