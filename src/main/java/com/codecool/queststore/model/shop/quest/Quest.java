@@ -7,8 +7,8 @@ public class Quest extends QuestTemplate{
     private final int STUDENT_ID;
 
 
-    public Quest(String name, String description, int value, String imageName, String imageMarkedName, QuestCategory category, boolean isDone, int historyID, int studentID) {
-        super(name, description, value, imageName, imageMarkedName, category);
+    public Quest(int ID, String name, String description, int value, String imageName, String imageMarkedName, QuestCategory category, boolean isDone, int historyID, int studentID) {
+        super(ID, name, description, value, imageName, imageMarkedName, category);
         this.IS_DONE = isDone;
         this.QUEST_HISTORY_ID = historyID;
         this.STUDENT_ID = studentID;
@@ -16,7 +16,7 @@ public class Quest extends QuestTemplate{
 
 
     public Quest(QuestTemplate questTemplate, boolean isDone, int historyID, int studentID) {
-        super(questTemplate.getNAME(), questTemplate.getDESCRIPTION(), questTemplate.getValue(), questTemplate.getIMAGE_FILENAME(), questTemplate.getIMAGE_MARKED_FILENAME(), questTemplate.getCATEGORY());
+        super(questTemplate.getID(), questTemplate.getNAME(), questTemplate.getDESCRIPTION(), questTemplate.getValue(), questTemplate.getIMAGE_FILENAME(), questTemplate.getIMAGE_MARKED_FILENAME(), questTemplate.getCATEGORY());
         this.IS_DONE = isDone;
         this.QUEST_HISTORY_ID = historyID;
         this.STUDENT_ID = studentID;
