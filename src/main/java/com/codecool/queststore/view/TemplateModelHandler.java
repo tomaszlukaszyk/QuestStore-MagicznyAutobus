@@ -1,5 +1,6 @@
 package com.codecool.queststore.view;
 
+import com.codecool.queststore.model.Title;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.quest.Quest;
@@ -90,6 +91,17 @@ class TemplateModelHandler implements TemplateModelInterface {
         model.with("profile", profile);
         model.with("classes", classes);
         model.with("students", collectStudents(classes));
+        model.with("title", "Profile");
+
+        return model;
+    }
+
+    @Override
+    public JtwigModel getProfileAdminModel(User currentUser, List<Title> titles) {
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        model.with("profile", currentUser);
+        model.with("roles", titles);
         model.with("title", "Profile");
 
         return model;
