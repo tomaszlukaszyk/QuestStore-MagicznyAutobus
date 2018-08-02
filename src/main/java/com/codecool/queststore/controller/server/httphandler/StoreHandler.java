@@ -33,7 +33,10 @@ public class StoreHandler extends AbstractHttphandler implements HttpHandler {
                 System.out.println("sending shop page...");
                 StoreService storeService = new StoreService(cookie, httpExchange.getRequestURI().getPath());
                 String response = storeService.generateResponseBody();
-                SendReq(httpExchange, response);
+                if (response != null)
+                    SendReq(httpExchange, response);
+                else
+                    redirect(httpExchange, "/shop");
             }catch (Exception e) {
                 e.printStackTrace();
             }
