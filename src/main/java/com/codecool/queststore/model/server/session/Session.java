@@ -10,7 +10,7 @@ public class Session implements Serializable {
     private static final long serialVersionUID = 1L; // necessary UID for serialization, but JVM can generate it.
     private final UUID uuid;
     private final int USER_ID;
-    private LocalDateTime expirationDate = LocalDateTime.now().plusMinutes(2);
+    private LocalDateTime expirationDate = LocalDateTime.now().plusMinutes(3);
 
     public Session(int userId) {
         this.uuid = UUID.randomUUID();
@@ -18,7 +18,7 @@ public class Session implements Serializable {
     }
 
     void RenewExpirationDate() {
-        this.expirationDate = LocalDateTime.now().plusMinutes(2);
+        this.expirationDate = LocalDateTime.now().plusMinutes(3);
     }
 
     @Override
