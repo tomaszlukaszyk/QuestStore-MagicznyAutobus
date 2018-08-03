@@ -27,7 +27,7 @@
                                     <h2><span id ="title">{{ item.getNAME() }}</span></h2> <br />
                                     {% if currentUser.getROLE().getNAME() == "student" %}
                                         {% if currentUser.getWallet() < item.getCOST() %}
-                                            <a href=""><img class="image_off" src="static/images/artifacts/{{item.getIMAGE_FILENAME}}.png"></a>
+                                            <a href=""><img class="image_off" src="static/images/artifacts/{{item.getIMAGE_FILENAME}}"></a>
                                         {% else %}
                                             <a href=""><img class="image_off" src="static/images/artifacts/{{ item.getIMAGE_MARKED_FILENAME}}.png"></a>
                                         {% endif %}
