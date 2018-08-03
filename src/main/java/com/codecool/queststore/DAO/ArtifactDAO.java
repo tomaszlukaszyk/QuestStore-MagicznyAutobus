@@ -3,6 +3,9 @@ package com.codecool.queststore.DAO;
 import com.codecool.queststore.dao.interfaces.ArtifactDAOInterface;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.shop.artifact.ArtifactCategory;
+import com.codecool.queststore.model.shop.artifact.ArtifactFactory;
+import com.codecool.queststore.model.shop.groupfunding.GroupTransaction;
+import com.codecool.queststore.model.user.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -50,6 +53,43 @@ public class ArtifactDAO implements Connectable, ArtifactDAOInterface {
             e.printStackTrace();
         }
     }
+
+    public void finalizeGroupTransaction(GroupTransaction transaction) {
+
+        try (Connection conn = cp.getConnection()) {
+            for(User user: transaction.getUsers())
+            {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO groupartifacthistory " +
+                    " (donation, idstudent) " +
+                    "VALUES (?,(SELECT idstudent from student where iduser = ?))");
+            stmt.setInt(2, user.getID());
+                stmt.setDouble(1, transaction.getSharedCost());
+
+            stmt.execute();
+            stmt.close();}
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Artifact getArtifact(int idArtifact) throws SQLException {
+
+        try (Connection conn = cp.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("Select * from Artifact" +
+                    " WHERE idartifact = ?");
+            stmt.setInt(1, idArtifact);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next())
+                return new ArtifactFactory().fromData((int)rs.getInt(1), 0, (String)rs.getString("artifactname"), (String)rs.getString("artifactdescription"), (int)rs.getInt("currentartifactcost"),(String)rs.getString("image"),(String)rs.getString("image_marked"), ArtifactCategory.GROUP);
+
+                stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
     private int getIdStudent(int idUser, Connection conn) {
         String query = "SELECT idstudent FROM student WHERE iduser=" + idUser;

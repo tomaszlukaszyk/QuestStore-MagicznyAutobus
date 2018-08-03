@@ -2,9 +2,28 @@ package com.codecool.queststore.model.user;
 import com.codecool.queststore.model.user.title.*;
 import com.codecool.queststore.model.user.wallet.*;
 
+import java.util.Objects;
+
 public class User {
 
     private final String NAME;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(getNAME(), user.getNAME()) &&
+                Objects.equals(getSURNAME(), user.getSURNAME()) &&
+                Objects.equals(getEMAIL(), user.getEMAIL());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getNAME(), getSURNAME(), getEMAIL());
+    }
+
     private final String SURNAME;
     private final String EMAIL;
     private final String ADDRESS;
@@ -24,8 +43,13 @@ public class User {
         setStrategies();
     }
 
-    public int getWallet() {
+    public Double getWallet() {
         return wallet.getWallet();
+    }
+
+    public String getWalletText(){
+     return    String.format( "%.2f", getWallet() );
+
     }
 
     public String getADDRESS() {

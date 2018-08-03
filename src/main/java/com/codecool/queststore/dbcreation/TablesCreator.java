@@ -55,7 +55,7 @@ final class TablesCreator {
                 .append("groupArtifactHistory")
                 .append(" ( ")
                 .append("idGroupArtifactHistory SERIAL PRIMARY KEY, ")
-                .append("donation INTEGER NOT NULL, ")
+                .append("donation NUMERIC NOT NULL, ")
                 .append("idStudent INTEGER REFERENCES student(idStudent) ON DELETE CASCADE, ")
                 .append("date DATE NOT NULL DEFAULT CURRENT_DATE, ")
                 .append("idArtifactFundingGroup INTEGER REFERENCES artifactFundingGroup(idArtifactFundingGroup) ON DELETE CASCADE")

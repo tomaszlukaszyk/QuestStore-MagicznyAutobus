@@ -6,7 +6,7 @@
         you are logged as&nbsp;<span id="role">{{ currentUser.getROLE().getNAME() }}</span></p>
     {% if currentUser.getROLE().getNAME() == 'student' %}
     <p>Your rank:&nbsp;<span id="rank">{{ currentUser.getTitle() }}</span><br></p>
-    <p>Your wallet:&nbsp;<span id="wallet"> {{ currentUser.getWallet() }}</span></p>
+    <p>Your wallet:&nbsp;<span id="wallet"> {{ currentUser.getWalletText() }} </span></p>
     {% endif %}
 </div>
 <h1>{{ title }}</h1>
