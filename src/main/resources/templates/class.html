@@ -19,7 +19,13 @@
             <div class="contener">
                 <div class="class-content">
                         <div class="class-column">
-                            <p>Classes</p>
+                            {% if currentUser.getROLE().getNAME() == 'admin' %}
+                            <span id="addClass">
+                                <p id="title">Classes </p>
+                                <a href="/classes/add" id="addBtn"><input type="image" src="/static/images/addButton.png" alt="add" width="80%"/></a>
+                            </span>
+                            {% endif %}
+
                             <div class="classes" id="list-class">
                                 {% for class in classes%}
                                     <div style="display: flex; justify-content: center;">

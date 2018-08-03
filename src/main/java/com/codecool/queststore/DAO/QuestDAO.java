@@ -27,7 +27,7 @@ public class QuestDAO implements Connectable, QuestDAOInterface {
 
             QuestFactory questFactory = new QuestFactory();
             QuestCategory category = isGroup ? QuestCategory.SPECIAL : QuestCategory.NORMAL;
-            statement.executeUpdate();
+            statement.executeQuery();
 
             int templateID = getTemplateID(name, connection);
 

@@ -35,4 +35,6 @@ public interface RenderInteface {
     String RenderEditQuestTemplatesPage(User currentUser, List<QuestTemplate> questTemplates);
 
     String rendeAddQuestTemplatesPage(User currentUser);
+
+    String renderAddClassTemplatesPage(User currentUser);
 }

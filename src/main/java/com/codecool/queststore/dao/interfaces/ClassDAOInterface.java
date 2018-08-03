@@ -8,4 +8,5 @@ import java.util.List;
 public interface ClassDAOInterface {
     List<CodecoolClass> getClasses();
     boolean assignMentor(int userID, int classID);
+    boolean createClass(String description);
 }

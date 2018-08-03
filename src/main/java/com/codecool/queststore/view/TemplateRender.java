@@ -171,4 +171,16 @@ public class TemplateRender implements RenderInteface {
 
         return template.render(tmi.getAddQuestTemplateModel(currentUser));
     }
+
+    @Override
+    public String renderAddClassTemplatesPage(User currentUser) {
+        TemplateModelInterface tmi = new TemplateModelHandler();
+
+        // get a template file
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/classAdd.html");
+
+        return template.render(tmi.getAddClassModel(currentUser));
+    }
+
+
 }

@@ -180,4 +180,11 @@ class TemplateModelHandler implements TemplateModelInterface {
         return model;
     }
 
+    @Override
+    public JtwigModel getAddClassModel(User currentUser) {
+        JtwigModel model = new JtwigModel();
+        model.with("currentUser", currentUser);
+        return model;
+    }
+
 }
