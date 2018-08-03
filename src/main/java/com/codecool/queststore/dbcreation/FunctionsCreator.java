@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class FunctionsCreator {
-    private static final String DIR = "src/main/resources/";
+    private static final String DIR = "src/main/resources/dbcreation/";
     private static final String FILE = "dbsPaths.txt";
 
     void start() {
@@ -28,7 +28,7 @@ class FunctionsCreator {
     private void dumpDbScriptsFromFileToStringB(List<String> fileName, DbHandler db) throws SQLException {
 
         for (String filePath: fileName) {
-            db.executeUpdate(" "+ loadDbScript(filePath).toString() + " ");
+            db.executeUpdate(" " + loadDbScript(filePath).toString() + " ");
         }
 
     }

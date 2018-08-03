@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Group buy</title>
+        <!--style sheet ref-->
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="groupBuy.css">
+        <script src="../javascript/scripts.js"></script>
+    </head>
+    
+    <body>
+        <div class="main">
+                    
+<!--            <script>setDot("class1");</script>-->
+            <!--header-->
+            <header include="header.html"></header>
+            <!--nav bar-->
+            <nav include="navigation.html"></nav>
+            <div class="contener">
+
+                <div class="content-groupBuy">
+                    <div class="column-groupBuy">
+                        <p>Status</p>
+                        <p>Target:<span id="target">20</span></p>
+                        <p>One person cost: <span id="fundarising">5</span></p>
+                        <p><button id="buy" onclick="">Buy</button></p>
+                    </div>
+                    <div class="column-groupBuy">
+                        <p>Students</p>
+                        <span id="list-student"></span>
+                        <ul class='list'>
+                            <li>
+                                <label>Katarzyna Brzydal</label>
+                                <input type="checkbox"><span class="checkbox"></span>
+                            </li>
+                            <li>
+                                <label>Ludwik Fajka</label>
+                                <input type="checkbox"><span class="checkbox"></span>
+                            </li>
+                            <li>
+                                <label>Barbara Kat</label>
+                                <input type="checkbox" ><span class="checkbox"></span>
+                            </li>
+                            <li>
+                                <label>Ala Kot</label>
+                                <input type="checkbox"><span class="checkbox"></span>
+                            </li>
+                            <li>
+                                <label>Jan Kowalski</label>
+                                <input type="checkbox"><span class="checkbox"></span>
+                            </li>
+                            <li>
+                                <label>Pawel Laska</label>
+                                <input type="checkbox"><span class="checkbox"></span>
+                            </li>
+                            <li>
+                                <label>Jakub Marmol</label>
+                                    <input type="checkbox"><span class="checkbox"></span>
+                            </li>
+                            <li>
+                                <label>Janusz Nowak</label>
+                                    <input type="checkbox"><span class="checkbox"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    <!--        <h1><span id="class-name">Group buy</span></h1>        -->
+            <!--footer-->
+            <footer include="footer.html"></footer>
+            <script>includeHTML();</script>        
+        </div>
+    </body>
+</html>

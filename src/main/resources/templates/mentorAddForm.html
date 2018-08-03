@@ -1,0 +1,35 @@
+{% if currentUser.getROLE().getNAME() == "admin" %}
+    {% set userRole = "mentor" %}
+{% endif %}
+
+<div class="edit-form">
+    <form method="POST" onkeyup="testIfFormIsEmpty('mentorinputs', 'mentorsubmitbutton')">
+        <br><br>
+        <label for="usersurname">Surname:</label>
+        <br><br>
+        <input type="text" class="mentorinputs" id="usersurname" name="mentorsurname" placeholder="Enter {{ userRole }} surname">
+        <br><br>
+        <label for="username">Name:</label>
+        <br><br>
+        <input type="text" class="mentorinputs" id="username" name="mentorname" placeholder="Enter {{ userRole }} name">
+        <br><br>
+        <label for="useremail">E-mail:</label>
+        <br><br>
+        <input type="text" class="mentorinputs" id="useremail" name="mentoremail" placeholder="Enter {{ userRole }} email">
+        <br><br>
+        <label for="userlogin">Login:</label>
+        <br><br>
+        <input type="text" class="mentorinputs" id="userlogin" name="mentorlogin" placeholder="Enter {{ userRole }} login">
+        <br><br>
+        <label for="userpassword">Password:</label>
+        <br><br>
+        <input type="text" class="mentorinputs" id="userpassword" name="mentorpassword" placeholder="Enter {{ userRole }} password">
+        <br><br>
+        <label for="useraddress">Address:</label>
+        <br><br>
+        <input type="text" class="mentorinputs" id="useraddress" name="mentoraddress" placeholder="Enter {{ userRole }} address">
+        <br><br>
+        <button id="mentorsubmitbutton" onclick="return checkUserInputs()" disabled>SEND</button>
+    </form>
+</div>
+<script src="static/javascript/scripts.js"></script>

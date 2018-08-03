@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>class</title>
+        <!--style sheet ref-->
+        <link rel="stylesheet" href="/static/css/style.css" >
+    </head>
+    
+    <body>
+        <div class="main">
+            <!--header-->
+            <header>{% include "header.html" with currentUser %}</header>
+            <!--nav bar-->
+            <nav>{% include "navigation.html" with currentUser %}</nav>
+            <!--content-->
+            <div class="contener">
+                <div class="class-content">
+                        <div class="class-column">
+                            {% if currentUser.getROLE().getNAME() == 'admin' %}
+                            <span id="addClass">
+                                <p id="title">Classes </p>
+                                <a href="/classes/add" id="addBtn"><input type="image" src="/static/images/addButton.png" alt="add" width="80%"/></a>
+                            </span>
+                            {% endif %}
+
+                            <div class="classes" id="list-class">
+                                {% for class in classes%}
+                                    <div style="display: flex; justify-content: center;">
+                                        <p><a href="/class/{{ class.getID() }}">{{ class.getNAME() }}</a></p>
+                                        {% if currentUser.getROLE().getNAME() == "admin" %}
+                                            <div class="assignBtn-pos">
+                                                <a class="assignBtn" href="/class/assign/{{ class.getID() }}">assign</a>
+                                            </div>
+                                        {% endif %}
+                                        <br>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    {% if action == "assign" %}
+                    
+                        {% include "class_assign_columns.html" with [currentUser, users, classID] %}
+                    
+                    {% elseif targetClass != "null" %}
+                        {% set message = targetClass.getNAME() %}
+                        {% include "class_details_columns.html" with [currentUser, targetClass] %}
+                    
+                    {% else %}
+                        {% if message == "null" %}
+                            {% set message = "Click on the class to show details" %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            {% if message != "null" %}
+                <p style="display: flex; justify-content: center; flex-basis: 100%;">{{ message }}</p>
+            {% endif %}
+            <!--footer-->
+            <footer>{% include "footer.html" ignore missing %}</footer>
+        </div>
+    </body>
+</html>

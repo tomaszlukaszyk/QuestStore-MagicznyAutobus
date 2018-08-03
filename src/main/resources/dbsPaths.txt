@@ -1,3 +1,0 @@
-Czakero_Functions.dbs
-Pieczkowski_Functions.dbs
-piotrkaminski95_Functions.dbs

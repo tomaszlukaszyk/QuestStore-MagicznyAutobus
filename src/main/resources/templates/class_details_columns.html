@@ -1,0 +1,20 @@
+<div class="class-column">
+    <p>Assigned mentors</p>
+    <span id="list-mentor" class="list-user">
+        <ul>
+        {% for mentor in targetClass.getASSIGNED_MENTORS()%}
+            <li><a href="/profile/{{ mentor.getID() }}">{{ mentor.getNAME() }} {{ mentor.getSURNAME }}</a></li>
+        {% endfor %}
+        </ul>
+    </span>
+</div>
+<div class="class-column">
+    <p>Students</p>
+    <span id="list-student" class="list-user">
+        <ul>
+        {% for student in targetClass.getASSIGNED_STUDENTS() %}
+            <li><a href="/profile/{{ student.getID() }}">{{ student.getNAME() }} {{ student.getSURNAME }}</a></li>
+        {% endfor %}
+        </ul>
+    </span>
+</div>

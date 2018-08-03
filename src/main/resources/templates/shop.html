@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{ title }}</title>
+        <!--style sheet ref-->
+        <link rel="stylesheet" href="static/css/style.css">
+        <script src="static/javascript/scripts.js"></script>
+    </head>
+    
+    <body>
+        <div class="main">
+            <!--header-->
+            <header>{% include "header.html" with currentUser %}</header>
+            <!--nav bar-->
+            <nav>{% include "navigation.html" with currentUser %}</nav>
+            
+            <div class="contener">
+            
+                <div class="content-shop">
+                
+                    <div class="column-shop">
+                        <div class= shopitems>
+                            {% for item in items %}
+                                <span class="shopitem" id="{{ item.getID() }}">
+                                    <h2><span id ="title">{{ item.getNAME() }}</span></h2> <br />
+                                    {% if currentUser.getROLE().getNAME() == "student" %}
+                                        {% if currentUser.getWallet() < item.getCOST() %}
+                                            <a href=""><img class="image_off" src="static/images/artifacts/{{item.getIMAGE_FILENAME}}"></a>
+                                        {% else %}
+                                            <a href=""><img class="image_off" src="static/images/artifacts/{{ item.getIMAGE_MARKED_FILENAME}}.png"></a>
+                                        {% endif %}
+                                    {% else %}
+                                        <a href=""><img class="image_off" src="static/images/artifacts/{{ item.getIMAGE_MARKED_FILENAME }}.png"></a>
+                                    {% endif %}
+
+                                    <span value = "category"><p>{{ item.getCATEGORY() }}</p></span>
+                                    <span value = "descr"><p>{{ item.getDESCRIPTION() }}</p></span>
+                                    <span value = "cost"><p>{{ item.getCOST() }} cc</p></span>
+                                    <div id="btnPanel" class="btnPanel">
+                                        {% if item.getCATEGORY() == 'GROUP' and currentUser.getROLE().getNAME() == 'student' %}
+                                        <span id="buyGroupBtn"><input type="image" src="static/images/groupbutton.png" alt="group buy" onclick="" width="20%"/></span>
+                                        {% elseif item.getCATEGORY() == 'PERSONAL' and currentUser.getROLE().getNAME() == 'student' %}
+                                        <span id="buyBtn"><a href="/shop/buy/{{ item.getID() }}"><input type="image" src="static/images/buybutton.png" alt="buy" width="30%"/></a></span>
+                                        {% else %}
+                                        <span id="editBtn"><input type="image" src="static/images/editbutton.png" alt="edit" onclick="" width="20%"/></span>
+                                        {% endif %}
+                                    </div>
+                                </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--footer-->
+            <footer>{% include "footer.html" ignore missing %}</footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <title>Add Quest</title> 
+        <!--style sheet ref--> 
+        <link rel="stylesheet" href="/static/css/style.css">
+        <script src="/static/javascript/scripts.js"></script>
+    </head>
+<body id="addpage">
+    <div class="main">
+        <!--header-->
+        <header>{% include "header.html" with currentUser %}</header>
+        <!--nav bar-->
+        <nav>{% include "navigation.html" with currentUser %}</nav>
+
+        <div id="formdiv">
+            <form id="addform" method="POST">
+                    <br><br>
+                    <label for="name">Name:</label>
+                    <br><br>
+                    <input type="text" class="templateInputs" name="name" placeholder="Quest name" id="name" required>
+                    <br><br>
+                    <label for="description">Description:</label>
+                    <br><br>
+                    <textarea class="templateInputs" name="description" placeholder="Provide description required" id="description"></textarea>
+                    <br><br>
+                    <label for="value">Value:</label>
+                    <br><br>
+                    <input type="number" min="1" class="templateInputs" name="value" placeholder="Value" id="value" required>
+                    <br><br>
+                    <label for="image1">Image1:</label>
+                    <br><br>
+                    <input type="text" class="templateInputs" name="image1" placeholder="Image name" id="image1" required>
+                    <br><br>
+                    <label for="image2">Image2:</label>
+                    <br><br>
+                    <input type="text" class="templateInputs" name="image2" placeholder="Marked image name" id="image2" required>
+                    <br><br>
+                    <label>Category:</label>
+                    <br><br>
+                    <input type="radio" value="personal" checked class="templateInputs" name="category" placeholder="category"> Personal
+                    <input type="radio" value="group" class="templateInputs" name="category" placeholder="category"> Group
+                    <br><br>
+                    <button type="submit" id="templatesubmitbutton">ADD</button>
+            </form>
+        </div>
+        <footer>{% include "footer.html" ignore missing %}</footer>
+    </div>
+</body> 
+</html>

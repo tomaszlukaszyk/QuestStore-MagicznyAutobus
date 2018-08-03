@@ -16,12 +16,13 @@ final class TablesCreator {
             db.connect();
 
             initializeDatabase(db);
-            new DataInserter().start();
 
             db.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     private String generateStatementTableLevelChart() {
@@ -42,7 +43,7 @@ final class TablesCreator {
                 .append(" ( ")
                 .append("idArtifactFundingGroup SERIAL PRIMARY KEY, ")
                 .append("groupDescription TEXT NOT NULL, ")
-                .append("idArtifact INTEGER REFERENCES artifact(idArtifact), ")
+                .append("idArtifact INTEGER REFERENCES artifact(idArtifact) ON DELETE CASCADE, ")
                 .append("cost INTEGER NOT NULL ")
                 .append(");");
         return sb.toString();
@@ -54,10 +55,10 @@ final class TablesCreator {
                 .append("groupArtifactHistory")
                 .append(" ( ")
                 .append("idGroupArtifactHistory SERIAL PRIMARY KEY, ")
-                .append("donation INTEGER NOT NULL, ")
-                .append("idStudent INTEGER REFERENCES student(idStudent), ")
+                .append("donation NUMERIC NOT NULL, ")
+                .append("idStudent INTEGER REFERENCES student(idStudent) ON DELETE CASCADE, ")
                 .append("date DATE NOT NULL DEFAULT CURRENT_DATE, ")
-                .append("idArtifactFundingGroup INTEGER REFERENCES artifactFundingGroup(idArtifactFundingGroup) ")
+                .append("idArtifactFundingGroup INTEGER REFERENCES artifactFundingGroup(idArtifactFundingGroup) ON DELETE CASCADE")
                 .append(");");
         return sb.toString();
     }
@@ -69,8 +70,8 @@ final class TablesCreator {
                 .append("personalArtifactHistory")
                 .append(" ( ")
                 .append("idPersonalArtifactHistory SERIAL PRIMARY KEY, ")
-                .append("idStudent INTEGER REFERENCES student(idStudent), ")
-                .append("idArtifact INTEGER REFERENCES artifact(idArtifact), ")
+                .append("idStudent INTEGER REFERENCES student(idStudent) ON DELETE CASCADE, ")
+                .append("idArtifact INTEGER REFERENCES artifact(idArtifact) ON DELETE CASCADE,")
                 .append("cost INTEGER, ")
                 .append("date DATE NOT NULL DEFAULT CURRENT_DATE, ")
                 .append("isUsed BOOLEAN NOT NULL DEFAULT FALSE ")
@@ -84,8 +85,9 @@ final class TablesCreator {
                 .append("questHistory")
                 .append(" ( ")
                 .append("idQuestHistory SERIAL PRIMARY KEY, ")
-                .append("idStudent INTEGER REFERENCES student(idStudent), ")
-                .append("idQuest INTEGER REFERENCES quest(idQuest), ")
+                .append("idStudent INTEGER REFERENCES student(idStudent) ON DELETE CASCADE, ")
+                .append("idQuest INTEGER REFERENCES quest(idQuest) ON DELETE CASCADE, ")
+                .append("value INTEGER NOT NULL, ")
                 .append("date DATE NOT NULL DEFAULT CURRENT_DATE, ")
                 .append("status TEXT ")
                 .append(");");
@@ -101,7 +103,9 @@ final class TablesCreator {
                 .append("questName TEXT UNIQUE NOT NULL, ")
                 .append("questDescription TEXT NOT NULL, ")
                 .append("questValue INTEGER NOT NULL, ")
-                .append("idQuestCategory INTEGER REFERENCES questCategory(idQuestCategory) ")
+                .append("image TEXT NOT NULL, ")
+                .append("image_marked TEXT NOT NULL, ")
+                .append("idQuestCategory INTEGER REFERENCES questCategory(idQuestCategory)")
                 .append(");");
         return sb.toString();
 
@@ -116,6 +120,8 @@ final class TablesCreator {
                 .append("artifactName TEXT NOT NULL UNIQUE, ")
                 .append("artifactDescription TEXT, ")
                 .append("currentArtifactCost INTEGER NOT NULL, ")
+                .append("image TEXT NOT NULL, ")
+                .append("image_marked TEXT NOT NULL, ")
                 .append("idArtifactCategory INTEGER REFERENCES artifactCategory(idArtifactCategory) ")
                 .append(");");
         return sb.toString();
@@ -151,8 +157,8 @@ final class TablesCreator {
         sb      .append("CREATE TABLE IF NOT EXISTS ")
                 .append("mentor_class")
                 .append(" ( ")
-                .append("idMentor INTEGER REFERENCES mentor(idMentor), ")
-                .append("idClass INTEGER REFERENCES class(idClass), ")
+                .append("idMentor INTEGER REFERENCES mentor(idMentor) ON DELETE CASCADE, ")
+                .append("idClass INTEGER REFERENCES class(idClass) ON DELETE CASCADE, ")
                 .append("PRIMARY KEY (idMentor, idClass) ")
                 .append(");");
         return sb.toString();
@@ -164,9 +170,8 @@ final class TablesCreator {
                 .append("student")
                 .append(" ( ")
                 .append("idStudent SERIAL PRIMARY KEY, ")
-                .append("gitHubAdress TEXT, ")
-                .append("idUser INTEGER REFERENCES users(idUser), ")
-                .append("idClass INTEGER REFERENCES class(idClass) ")
+                .append("idUser INTEGER REFERENCES users(idUser) ON DELETE CASCADE, ")
+                .append("idClass INTEGER REFERENCES class(idClass) ON DELETE CASCADE")
                 .append(");");
         return sb.toString();
     }
@@ -194,6 +199,7 @@ final class TablesCreator {
                 .append("userLogin TEXT UNIQUE, ")
                 .append("salt INTEGER, ")
                 .append("userPassword TEXT NOT NULL, ")
+                .append("userAddress TEXT, ")
                 .append("idCodecoolRole INTEGER REFERENCES codecoolRole(idCodecoolRole)")
                 .append(" );");
         return sb.toString();
@@ -206,8 +212,7 @@ final class TablesCreator {
                 .append("mentor")
                 .append(" ( ")
                 .append("idMentor SERIAL PRIMARY KEY, ")
-                .append("mentorAddress TEXT, ")
-                .append("idUser INTEGER REFERENCES users(idUser)")
+                .append("idUser INTEGER REFERENCES users(idUser) ON DELETE CASCADE")
                 .append(");");
         return sb.toString();
     }
@@ -219,14 +224,12 @@ final class TablesCreator {
                 .append("class")
                 .append(" ( ")
                 .append("idClass SERIAL PRIMARY KEY, ")
-                .append("classDescription TEXT ")
+                .append("classDescription TEXT UNIQUE ")
                 .append(");");
         return sb.toString();
-
     }
 
     private void initializeDatabase(DbHandler db) throws SQLException {
-
         db.executeUpdate(generateStatementTableCodecoolRole());
         db.executeUpdate(generateStatementTableUsers());
         db.executeUpdate(generateStatementTableMentor());
@@ -244,5 +247,4 @@ final class TablesCreator {
         db.executeUpdate(generateStatementTableLevelChart());
 
     }
-
 }

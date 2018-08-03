@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <!--style sheet ref-->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/javascript/scripts.js"></script>
+</head>
+
+<body>
+<div class="main">
+    <!--header-->
+    <header>{% include "header.html" with currentUser %}</header>
+    <!--nav bar-->
+    <nav>{% include "navigation.html" with currentUser %}</nav>
+    <div class="contener">
+        <div class="content-profile">
+            <!--Student view-->
+            {% if profile.getROLE().getNAME() == "student" %}
+                <div class="content-box">
+                    <span id="role" class="infos">
+                        Role: {{ profile.getROLE() }}
+                    </span>
+                    <p>Personal Data:</p>
+
+                    <span id="name" class="infos">
+                        Name: {{ profile.getNAME() }}
+                    </span>
+
+                    <span id="surname" class="infos">
+                        Surname: {{ profile.getSURNAME() }}
+                    </span>
+
+                    <span id="email" class="infos">
+                        {% if currentUser.getROLE().getNAME() == "student" %}
+                            E-mail: {{ profile.getEMAIL() }}
+                        {% endif %}
+                        {% if currentUser.getROLE().getNAME() != "student" %}
+                            <form method="POST" style="padding: 0;">
+                                <br>
+                                <label for="email">E-mail:</label>
+                                <input type="text" id="userid" name="id" value="{{ profile.getID() }}" style="display: none;">
+                                <input type="text" id="useremail" name="email" placeholder="{{ profile.getEMAIL() }}">
+                                <button type="submit" name="submit" value = "updateemail" onclick="return checkUserEmail()">Update</button>
+                            </form>
+                        {% endif %}
+                    </span>
+
+                    <span id="address" class="infos">
+                        {% if currentUser.getROLE().getNAME() == "student" %}
+                            Address: {{ profile.getADDRESS() }}
+                        {% endif %}
+                        {% if currentUser.getROLE().getNAME() != "student" %}
+                            <form method="POST" style="padding: 0;">
+                                <br>
+                                <label for="address">Address:</label>
+                                <input type="text" id="userid" name="id" value="{{ profile.getID() }}" style="display: none;">
+                                <input type="text" id="useraddress" name="address" placeholder="{{ profile.getADDRESS() }}">
+                                <button type="submit" name="submit" value="updateaddress">Update</button>
+                            </form>
+                        {% endif %}
+                    </span>
+                </div>
+
+                <div class="content-box" id="cl">
+                    <p>Class:</p>
+                    <span id="class">
+                        <br>{{ ccClass.getNAME() }}
+                    </span>
+                </div>
+
+                <div class="content-box" id="back">
+                    <p>Backpack</p>
+                    {% for item in items %}
+                    <span>{{ item.getNAME() }}</span>
+                    {% endfor %}
+                </div>
+            {% if currentUser.getROLE().getNAME() == "student" %}
+            <div class="content-box" id="cl">
+                <p>View user achievments:</p>
+                <a href="/quests/view/{{profile.getID}}">here</a>
+            </div>
+            {% endif %}
+            {% if currentUser.getROLE().getNAME() == "mentor" %}
+            <div class="content-box" id="cl">
+                <p>For accepting this user quest go:</p>
+                <a href="/quests/view/{{profile.getID}}">here</a>
+            </div>
+            {% endif %}
+
+            <!--</div>-->
+            {% endif %}
+
+            {% if profile.getROLE().getNAME() == "mentor" %}
+            <!--Mentor view-->
+            <div id="mentor-view" class="profile-view">
+                <div class="content-box">
+
+                    <span id="role" class="infos">
+                        ROLE: {{ profile.getROLE() }}
+                    </span>
+
+                    <p>Personal Data:</p>
+
+                    <span id="name" class="infos">
+                        Name: {{ profile.getNAME() }}
+                    </span>
+
+                    <span id="surname" class="infos">
+                        Surname: {{ profile.getSURNAME() }}
+                    </span>
+
+                    <span id="email" class="infos">
+                        {% if currentUser.getROLE().getNAME() != "admin" %}
+                            E-mail: {{ profile.getEMAIL() }}
+                        {% endif %}
+                        {% if currentUser.getROLE().getNAME() == "admin" %}
+                            <form method="POST" style="padding: 0;" class="editinputss">
+                                <br>
+                                <label for="email">E-mail:</label>
+                                <input type="text" id="userid" name="id" value="{{ profile.getID() }}" style="display: none;">
+                                <input type="text" id="useremail" name="email" placeholder="{{ profile.getEMAIL() }}">
+                                <button type="submit" name="submit" value = "updateemail" onclick="return checkUserEmail()">Update</button>
+                            </form>
+                        {% endif %}
+                    </span>
+
+                    <span id="address" class="infos">
+                        {% if currentUser.getROLE().getNAME() != "admin" %}
+                            Address: {{ profile.getADDRESS() }}
+                        {% endif %}
+                        {% if currentUser.getROLE().getNAME() == "admin" %}
+                            <form method="POST" style="padding: 0;" class="editinputss">
+                                <br>
+                                <label for="address">Address:</label>
+                                <input type="text" id="userid" name="id" value="{{ profile.getID() }}" style="display: none;">
+                                <input type="text" id="address" name="address" placeholder="{{ profile.getADDRESS() }}">
+                                <button type="submit" name="submit" value="updateaddress">Update</button>
+                            </form>
+                        {% endif %}
+                    </span>
+
+                </div>
+
+                <div class="content-box">
+                    <p>Classes:</p>
+                    <span id="class">
+                        <ul>
+                            {% for class in classes %}
+                            <li><span>{{ class.getNAME() }}</span><br></li>
+                            {% endfor %}
+                        </ul>
+                    </span>
+                </div>
+
+                <div class="content-box assigned-students">
+                    <p>Assigned students:</p>
+                    <span id="insert-student">
+                        <ul>
+                            {% for student in students %}
+                            <li><a href="/profile/{{ student.getID() }}">{{ student.getNAME() }} {{ student.getSURNAME() }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </span>
+                </div>
+            </div>
+            {% endif %}
+
+            <!--Admin view-->
+            {% if profile.getROLE().getNAME() == "admin" %}
+            <div class="content-box" id="admininfo">
+                    <span id="role" class="infos">
+                        ROLE: {{ profile.getROLE() }}
+                    </span>
+                <p>Personal Data:</p>
+
+                <span id="name" class="infos">
+                        Name: {{ profile.getNAME() }}
+                    </span>
+
+                <span id="surname" class="infos">
+                        Surname: {{ profile.getSURNAME() }}
+                    </span>
+
+                <span id="email" class="infos">
+                        E-mail: {{ profile.getEMAIL() }}
+                    </span>
+
+            </div>
+
+            <div class="content-box">
+                <p>Experience Titles</p>
+                <span id="roles">
+                    <div class= roles>
+                            {% for e in roles %}
+
+        <form id="editform-{{ e.getID() }}" method="POST" class="editforms">
+                <br>
+                <input type="text" class="loginInputs" name="name" placeholder="{{ e.getNAME() }}">
+                <button type="submit" name="submit" value = "{{e.getID}}">Update</button>
+        </form>
+                            {% endfor %}
+                        </div>
+
+
+
+                    </span>
+            </div>
+        <div class="content-box" id="createnewtitle">
+            <div class = newtitle>
+                <form id="newtitle" method="POST">
+                    <br>
+                    <p>Create new title</p>
+                    <br>
+                    <input type="text" class="loginInputs" name="name" placeholder="Enter name of new title">
+                    <button id="newtitlebutton" type="submit" name="submit" value = "new">SEND</button>
+                </form>
+            </div>
+        </div>
+
+            <!--</div>-->
+            {% endif %}
+        </div>
+    </div>
+    <!--footer-->
+    <footer>{% include "footer.html" ignore missing %}</footer>
+    </div>
+</body>
+</html>

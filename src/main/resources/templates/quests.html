@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{ title }}</title>
+        <!--style sheet ref-->
+        <link rel="stylesheet" href="/static/css/style.css">
+        <script src="/static/javascript/scripts.js"></script>
+    </head>
+    
+    <body>
+        <div class="main">
+            <!--header-->
+            <header>{% include "header.html" with currentUser %}</header>
+            <!--nav bar-->
+            <nav>{% include "navigation.html" with currentUser %}</nav>
+            
+            <div class="contener">
+ 
+                <div class="content-shop">
+                    <div class="column-shop">
+                        <div class= shopitems>
+                                {% for item in items %}
+                                    <span class="shopitem" id="{{ item.getID() }}">
+                                        <h2><span id ="title">{{ item.getNAME() }}</span></h2> <br/>
+                                        {% if item.IS_DONE() %}
+                                            <img class="image_off" src="/static/images/quests/{{ item.getIMAGE_MARKED_FILENAME }}.png">
+                                        {% else %}
+                                            <img class="image_off" src="/static/images/quests/{{ item.getIMAGE_FILENAME }}">
+                                        {% endif %}
+                                        <span value = "category"><p>{{ item.getCATEGORY() }}</p></span>
+                                        <span value = "descr"><p>{{ item.DESCRIPTION() }}</p></span>
+                                        <span value = "cost"><p>{{ item.getValue() }} cc</p></span>
+                                        <div id="btnPanel" class="btnPanel">
+                                            {% if currentUser.getROLE().getNAME() == 'mentor' and not template %}
+                                            <span id="markBtn"><a href="/quests/mark/{{item.getQUEST_HISTORY_ID}}"><input type="image" src="/static/images/mark-zuckerberg.png" alt="mark" onclick="" width="20%"/></a></span>
+
+                                            {% elseif currentUser.getROLE().getNAME() == 'student' %}
+                                            <!--<span id="delBtn"><input type="image" src="/static/images/logout.png" alt="take" onclick="" width="20%"/></span>-->
+                                            {% endif %}
+                                        </div>
+                                    </span>
+                                {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--footer-->
+            <footer>{% include "footer.html" ignore missing %}</footer>
+        </div>            
+    </body>
+</html>

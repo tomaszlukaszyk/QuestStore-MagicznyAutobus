@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <!--style sheet ref-->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/javascript/scripts.js"></script>
+</head>
+
+<body>
+<div class="main">
+    <!--header-->
+    <header>{% include "header.html" with currentUser %}</header>
+    <!--nav bar-->
+    <nav>{% include "navigation.html" with currentUser %}</nav>
+
+    <div class="contener">
+
+        <div class="content-shop">
+            <div class="mentor-control">
+                {% if currentUser.getROLE().getNAME() == 'mentor' %}
+                <span id="addTempl"><a href="/quests/add"><input type="image" src="/static/images/addButton.png" alt="add" width="20%"/></a></span>
+                {% endif %}
+            </div>
+            <div class="column-shop">
+                <div class= shopitems>
+                    {% for item in items %}
+                        <span class="shopitem" id="{{ item.getID() }}">
+                            <h2><span id ="title">{{ item.getNAME() }}</span></h2> <br/>
+                            <img class="image_off" src="/static/images/quests/{{ item.getIMAGE_MARKED_FILENAME }}.png">
+
+                            <span value = "category"><p>{{ item.getCATEGORY() }}</p></span>
+                            <span value = "descr"><p>{{ item.DESCRIPTION() }}</p></span>
+                            <span value = "cost"><p>{{ item.getValue() }} cc</p></span>
+                            <div id="btnPanel" class="btnPanel">
+                                {% if currentUser.getROLE().getNAME() == 'mentor' %}
+                                <span id="editBtn"><a href="/quests/edit/{{item.getID}}"><input type="image" src="/static/images/editbutton.png" alt="edit" onclick="" width="20%"/></a></span>
+
+                                {% elseif currentUser.getROLE().getNAME() == 'student' %}
+                                <span id="takeBtn"><a href="/quests/take/{{item.getID}}"><input type="image" src="/static/images/logout.png" alt="del" onclick="" width="20%"/></a></span>
+                                {% endif %}
+                            </div>
+                        </span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    <footer>{% include "footer.html" ignore missing %}</footer>
+</div>
+</body>
+</html>
