@@ -154,4 +154,17 @@ public class ClassDAO implements ClassDAOInterface, Connectable{
         stmt.close();
         return users;
     }
+
+    public boolean createClass(String description){
+        try(Connection connection = cp.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM createclass(?);")){
+
+            statement.setString(1, description);
+            statement.executeQuery();
+            return true;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

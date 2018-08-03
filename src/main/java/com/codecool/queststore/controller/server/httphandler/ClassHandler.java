@@ -1,12 +1,15 @@
 package com.codecool.queststore.controller.server.httphandler;
 
+import com.codecool.queststore.DAO.ClassDAO;
 import com.codecool.queststore.controller.server.service.ClassService;
+import com.codecool.queststore.dao.interfaces.ClassDAOInterface;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
 import java.net.HttpCookie;
 import java.sql.SQLException;
+import java.util.Map;
 
 public class ClassHandler extends AbstractHttphandler implements HttpHandler {
     @Override
@@ -32,11 +35,20 @@ public class ClassHandler extends AbstractHttphandler implements HttpHandler {
                 if (httpExchange.getRequestURI().getPath().equals("/class/style.css")) {
                     return;
                 }
-                System.out.println("sending class page...");
-                ClassService classService = new ClassService(cookie, httpExchange.getRequestURI().getPath());
-                String response = classService.generateResponseBody();
-                System.out.println("Success!\n\n");
-                SendReq(httpExchange, response);
+                String path = httpExchange.getRequestURI().getPath();
+                if(path.equals("/classes/add") && httpExchange.getRequestMethod().equals("POST")) {
+                    ClassDAOInterface classDAO = new ClassDAO();
+                    Map<String, String> parsedData = parseFormData(httpExchange);
+                    classDAO.createClass(parsedData.get("name"));
+                    redirect(httpExchange, "/class");
+                } else {
+
+                    System.out.println("sending class page...");
+                    ClassService classService = new ClassService(cookie, httpExchange.getRequestURI().getPath());
+                    String response = classService.generateResponseBody();
+                    System.out.println("Success!\n\n");
+                    SendReq(httpExchange, response);
+                }
             }catch (Exception e) {
                 e.printStackTrace();
             }

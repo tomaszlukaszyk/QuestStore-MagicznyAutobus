@@ -39,8 +39,9 @@ public class ClassService {
         System.out.println("current user: " + currentUser.getNAME() + " " + currentUser.getSURNAME());
         System.out.println("looking for target...");
         targetClass = defineTarget(classes, splitedPath);
-
-        if (isAction(splitedPath)) {
+        if(path.equals("/classes/add")){
+            return renderAddClass(currentUser);
+        }else if (isAction(splitedPath)) {
             System.out.println("Action: assign");
             return handleAction(splitedPath, currentUser, classes);
 
@@ -144,5 +145,9 @@ public class ClassService {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    private String renderAddClass(User currentuser){
+        return renderInteface.renderAddClassTemplatesPage(currentuser);
     }
 }

@@ -605,3 +605,12 @@ padding: 3%;
 .editinputss {
     width: 20em;
 }
+
+
+#addClass {
+    border: 0px;
+    padding: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}

@@ -24,4 +24,5 @@ interface TemplateModelInterface {
     JtwigModel getQuestTemplateModel(User currentUser, List<QuestTemplate> quests);
     JtwigModel getArtifactModel(User currentUser, List<Artifact> artifacts);
     JtwigModel getAddQuestTemplateModel(User currentUser);
+    JtwigModel getAddClassModel(User currentUser);
 }
