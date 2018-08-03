@@ -15,9 +15,9 @@ public class HasWallet implements WalletStrategy {
 
 
     @Override
-    public Integer getWallet() {
+    public Double getWallet() {
         try {
-            return new WalletDAO().getWalletExceptGroupArtifacts(user.getID());
+            return new WalletDAO().getWalletExceptGroupArtifacts(user.getID()) - new WalletDAO().getWalletGroupExpences(user.getID());
         } catch (SQLException e) {
             e.printStackTrace();
         }
