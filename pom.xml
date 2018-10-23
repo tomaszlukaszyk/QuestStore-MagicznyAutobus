@@ -24,13 +24,19 @@
           <artifactId>commons-dbcp</artifactId>
           <version>1.4</version>
       </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
+      <dependency>
+          <groupId>org.junit.jupiter</groupId>
+          <artifactId>junit-jupiter-api</artifactId>
+          <version>5.3.1</version>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.mockito</groupId>
+          <artifactId>mockito-all</artifactId>
+          <version>1.10.19</version>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>42.1.4</version>
@@ -44,11 +50,6 @@
           <groupId>org.slf4j</groupId>
           <artifactId>slf4j-simple</artifactId>
           <version>1.7.21</version>
-      </dependency>
-      <dependency>
-          <groupId>org.jtwig</groupId>
-          <artifactId>jtwig-core</artifactId>
-          <version>5.87.0.RELEASE</version>
       </dependency>
   </dependencies>
 
