@@ -11,7 +11,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtifactDAO implements Connectable, ArtifactDAOInterface {
+public class ArtifactDAO implements ArtifactDAOInterface {
+
+    private ConnectionPool cp;
+
+    public ArtifactDAO(ConnectionPool cp) {
+        this.cp = cp;
+    }
 
     public void createArtifact(Artifact artifact) throws SQLException {
         Connection conn = cp.getConnection();
@@ -161,13 +167,13 @@ public class ArtifactDAO implements Connectable, ArtifactDAOInterface {
         return null;
     }
 
-    public static void main(String[] args) {
-        ArtifactDAOInterface aDAO = new ArtifactDAO();
-        aDAO.buyArtifact(3, 2);
-
-//        for (Artifact a : artifacts) {
-//            System.out.println(a.getNAME()+"("+ a.getCATEGORY() + "): " + a.getDESCRIPTION());
-//        }
-        cp.printDbStatus();
-    }
+//    public static void main(String[] args) {
+//        ArtifactDAOInterface aDAO = new ArtifactDAO();
+//        aDAO.buyArtifact(3, 2);
+//
+////        for (Artifact a : artifacts) {
+////            System.out.println(a.getNAME()+"("+ a.getCATEGORY() + "): " + a.getDESCRIPTION());
+////        }
+//        cp.printDbStatus();
+//    }
 }

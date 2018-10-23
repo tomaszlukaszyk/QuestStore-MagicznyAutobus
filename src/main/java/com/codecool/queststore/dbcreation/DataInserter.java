@@ -1,6 +1,7 @@
 package com.codecool.queststore.dbcreation;
 
 import com.codecool.queststore.DAO.ArtifactDAO;
+import com.codecool.queststore.DAO.ConnectionPool;
 import com.codecool.queststore.DAO.QuestDAO;
 import com.codecool.queststore.dao.interfaces.QuestDAOInterface;
 import com.codecool.queststore.model.shop.artifact.ArtifactCategory;
@@ -35,11 +36,11 @@ public class DataInserter {
         //db.executeUpdate(generateCreationStatementForStudent());
         db.executeUpdate(generateCreationStatementForArtifactsCategories());
         //db.executeUpdate(generateCreationStatementForArtifacts());
-        new ArtifactDAO().createArtifact(new ArtifactFactory()
+        new ArtifactDAO(ConnectionPool.getInstance()).createArtifact(new ArtifactFactory()
                 .fromData(0, 0, "Summon Code Elemental", "Mentor joins a student team for one hour (all team members must buy this item)", 3,"elemental.png", "elemental-hover", ArtifactCategory.PERSONAL));
-        new ArtifactDAO().createArtifact(new ArtifactFactory()
+        new ArtifactDAO(ConnectionPool.getInstance()).createArtifact(new ArtifactFactory()
                 .fromData(0, 0, "Teleport", "The whole room goes to an off-school program instead for a specified day (which is at least 2 weeks ahead))", 10,"portal.png", "portal-hover", com.codecool.queststore.model.shop.artifact.ArtifactCategory.GROUP));
-        new ArtifactDAO().createArtifact(new ArtifactFactory()
+        new ArtifactDAO(ConnectionPool.getInstance()).createArtifact(new ArtifactFactory()
                 .fromData(0, 0, "Tipping the fanfare-guy", "The student can use jukebox exclusively for half day", 5,"town.png", "town-hover", com.codecool.queststore.model.shop.artifact.ArtifactCategory.PERSONAL));
 
         db.executeUpdate(generateCreationStatementForQuestCategories());
