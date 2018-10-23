@@ -69,4 +69,12 @@ class ArtifactDAOTest {
         artifactDAO.createArtifact(artifact);
         Mockito.verify(statement).executeQuery();
     }
+
+
+    @Test
+    void testCreateAndRetrieveArtifact() throws SQLException {
+        artifactDAO.createArtifact(artifact);
+        Artifact retrievedArtifact = artifactDAO.getArtifact(1);
+        assertEquals(artifact, retrievedArtifact);
+    }
 }
