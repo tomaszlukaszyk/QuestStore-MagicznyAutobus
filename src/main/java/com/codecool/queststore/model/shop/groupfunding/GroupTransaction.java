@@ -1,6 +1,7 @@
 package com.codecool.queststore.model.shop.groupfunding;
 
 import com.codecool.queststore.DAO.ArtifactDAO;
+import com.codecool.queststore.DAO.ConnectionPool;
 import com.codecool.queststore.model.shop.artifact.Artifact;
 import com.codecool.queststore.model.user.User;
 
@@ -82,7 +83,7 @@ public class GroupTransaction {
     }
 
     public void finalize() {
-        ArtifactDAO dao =  new ArtifactDAO();
+        ArtifactDAO dao =  new ArtifactDAO(ConnectionPool.getInstance());
 
         //if (areTheyAllAbleToPayYet()) {
             dao.finalizeGroupTransaction(this);
