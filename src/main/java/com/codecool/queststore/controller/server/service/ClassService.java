@@ -81,6 +81,8 @@ public class ClassService {
             System.out.println("Choose user");
 
                 if (currentUser.getROLE() == Role.ADMIN) {
+                    if (!isStringCastableToInt(splitedPath[TARGET_CLASS_ID_PLACE]))
+                        return renderInteface.RenderClassPage(currentUser, classes);
                     users = userDAOInterface.getUsers(Role.MENTOR);
                     return renderInteface.RenderClassPage(currentUser, classes, users, Integer.parseInt(splitedPath[TARGET_CLASS_ID_PLACE]));
                 } else {
@@ -123,6 +125,10 @@ public class ClassService {
         final int USER_ID_PLACE = 1;
         final int CLASS_ID_PLACE = 0;
         String[] ids = array[IDS_PLACE].split(":");
+
+        if (ids.length == 1) {
+            return false;
+        }
 
         if (isStringCastableToInt(ids[USER_ID_PLACE]) && isStringCastableToInt(ids[CLASS_ID_PLACE])) {
             return classDAOInterface.assignMentor(Integer.parseInt(ids[USER_ID_PLACE]), Integer.parseInt(ids[CLASS_ID_PLACE]));
