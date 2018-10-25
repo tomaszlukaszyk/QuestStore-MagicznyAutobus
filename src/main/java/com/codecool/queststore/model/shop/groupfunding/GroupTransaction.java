@@ -18,6 +18,12 @@ public class GroupTransaction {
 
 
     public GroupTransaction(User owner, Artifact target) {
+        if (target == null) {
+            throw new IllegalArgumentException("Artifact can't be null");
+        }
+        if (owner == null) {
+            throw new IllegalArgumentException("Owner can't be null");
+        }
 
         this.owner = owner;
         allParticipants.add(new Participant(true, owner));
@@ -55,10 +61,18 @@ public class GroupTransaction {
     }
 
     public void addParticipant(User user){
-        allParticipants.add(new Participant(user));
+        if (user == null)
+            return;
+
+        Participant newParticipant = new Participant(user);
+        if (!allParticipants.contains(newParticipant))
+            allParticipants.add(newParticipant);
     }
 
     public void deleteParticipant(User user){
+        if (user == null || user.equals(owner))
+            return;
+
         allParticipants.remove(new Participant(user));
     }
 
