@@ -22,16 +22,25 @@ public class ClassService {
     private final String path;
     private ClassDAOInterface classDAOInterface = new ClassDAO();
     private RenderInteface renderInteface = new TemplateRender();
+    private UserDAOInterface userDAOInterface = new UserDAO();
 
     public ClassService(HttpCookie cookie, String path) {
         this.cookie = cookie;
         this.path = path;
     }
 
+    public ClassService(HttpCookie cookie, String path, ClassDAOInterface classDAOInterface, RenderInteface renderInteface, UserDAOInterface userDAOInterface) {
+        this.cookie = cookie;
+        this.path = path;
+        this.classDAOInterface = classDAOInterface;
+        this.renderInteface = renderInteface;
+        this.userDAOInterface = userDAOInterface;
+    }
+
     public String generateResponseBody() throws SQLException {
         System.out.println("path: " + path);
         String[] splitedPath = splitURL(path);
-        User currentUser = new UserDAO().getUser(SessionPool.getSessionByUUID(UUID.fromString(cookie.getValue())).getUSER_ID());
+        User currentUser = userDAOInterface.getUser(SessionPool.getSessionByUUID(UUID.fromString(cookie.getValue())).getUSER_ID());
         CodecoolClass targetClass;
         List<CodecoolClass> classes = classDAOInterface.getClasses();
 
@@ -67,12 +76,13 @@ public class ClassService {
         final int TARGET_CLASS_ID_PLACE = 3;
         String message;
         List<User> users;
-        UserDAOInterface userDAOInterface = new UserDAO();
 
         if (splitedPath.length == 4) {
             System.out.println("Choose user");
 
                 if (currentUser.getROLE() == Role.ADMIN) {
+                    if (!isStringCastableToInt(splitedPath[TARGET_CLASS_ID_PLACE]))
+                        return renderInteface.RenderClassPage(currentUser, classes);
                     users = userDAOInterface.getUsers(Role.MENTOR);
                     return renderInteface.RenderClassPage(currentUser, classes, users, Integer.parseInt(splitedPath[TARGET_CLASS_ID_PLACE]));
                 } else {
@@ -115,6 +125,10 @@ public class ClassService {
         final int USER_ID_PLACE = 1;
         final int CLASS_ID_PLACE = 0;
         String[] ids = array[IDS_PLACE].split(":");
+
+        if (ids.length == 1) {
+            return false;
+        }
 
         if (isStringCastableToInt(ids[USER_ID_PLACE]) && isStringCastableToInt(ids[CLASS_ID_PLACE])) {
             return classDAOInterface.assignMentor(Integer.parseInt(ids[USER_ID_PLACE]), Integer.parseInt(ids[CLASS_ID_PLACE]));

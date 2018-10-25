@@ -1,9 +1,6 @@
 package com.codecool.queststore.controller.server.service;
 
-import com.codecool.queststore.DAO.ArtifactDAO;
-import com.codecool.queststore.DAO.ClassDAO;
-import com.codecool.queststore.DAO.TitleDAO;
-import com.codecool.queststore.DAO.UserDAO;
+import com.codecool.queststore.DAO.*;
 import com.codecool.queststore.model.Title;
 import com.codecool.queststore.model.classes.CodecoolClass;
 import com.codecool.queststore.model.server.session.SessionPool;
@@ -84,7 +81,7 @@ public class ProfileService {
                 System.out.println(targetUser.getADDRESS());
                 return new TemplateRender().RenderProfilePage
                         (currentUser, targetUser, new ClassDAO().getstudentClasses(targetUser.getID()),
-                                new ArtifactDAO().getUsersNotUsedArtifactsById(targetUser.getID()));
+                                new ArtifactDAO(ConnectionPool.getInstance()).getUsersNotUsedArtifactsById(targetUser.getID()));
 
             case MENTOR:
                 //todo: fill classes by their daos
@@ -98,7 +95,7 @@ public class ProfileService {
                 else
                     return new TemplateRender().RenderProfilePage
                             (currentUser, currentUser, new CodecoolClass(""),
-                                    new ArtifactDAO().getUsersNotUsedArtifactsById(targetUser.getID()));
+                                    new ArtifactDAO(ConnectionPool.getInstance()).getUsersNotUsedArtifactsById(targetUser.getID()));
         }
         return null;
 

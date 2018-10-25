@@ -2,6 +2,7 @@ package com.codecool.queststore.controller.server.service;
 
 import com.codecool.queststore.DAO.ArtifactDAO;
 import com.codecool.queststore.DAO.ClassDAO;
+import com.codecool.queststore.DAO.ConnectionPool;
 import com.codecool.queststore.DAO.UserDAO;
 import com.codecool.queststore.dao.interfaces.ArtifactDAOInterface;
 import com.codecool.queststore.model.server.session.SessionPool;
@@ -19,7 +20,7 @@ import java.util.UUID;
 public class StoreService {
     private final HttpCookie cookie;
     private final String path;
-    private ArtifactDAOInterface artifactDAOInterface = new ArtifactDAO();
+    private ArtifactDAOInterface artifactDAOInterface = new ArtifactDAO(ConnectionPool.getInstance());
     private RenderInteface renderInteface = new TemplateRender();
 
     public StoreService(HttpCookie cookie, String path) {

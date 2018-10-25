@@ -1,5 +1,7 @@
 package com.codecool.queststore.model.shop.artifact;
 
+import java.util.Objects;
+
 public class Artifact {
 
     private final int ID;
@@ -61,5 +63,26 @@ public class Artifact {
 
     public int getARTIFACT_HISTORY_ID() {
         return ARTIFACT_HISTORY_ID;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Artifact artifact = (Artifact) o;
+        return ID == artifact.ID &&
+                COST == artifact.COST &&
+                ARTIFACT_HISTORY_ID == artifact.ARTIFACT_HISTORY_ID &&
+                Objects.equals(NAME, artifact.NAME) &&
+                Objects.equals(DESCRIPTION, artifact.DESCRIPTION) &&
+                Objects.equals(IMAGE_FILENAME, artifact.IMAGE_FILENAME) &&
+                Objects.equals(IMAGE_MARKED_FILENAME, artifact.IMAGE_MARKED_FILENAME) &&
+                Objects.equals(IS_USED, artifact.IS_USED) &&
+                CATEGORY == artifact.CATEGORY;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, NAME, DESCRIPTION, COST, IMAGE_FILENAME, IMAGE_MARKED_FILENAME, IS_USED, CATEGORY, ARTIFACT_HISTORY_ID);
     }
 }
