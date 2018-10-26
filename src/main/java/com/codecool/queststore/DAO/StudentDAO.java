@@ -1,5 +1,6 @@
 package com.codecool.queststore.DAO;
 
+import com.codecool.queststore.dao.interfaces.StudentDAOInterface;
 import com.codecool.queststore.model.Login;
 import com.codecool.queststore.model.user.Role;
 import com.codecool.queststore.model.user.User;
@@ -10,7 +11,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentDAO implements Connectable {
+public class StudentDAO implements StudentDAOInterface, Connectable{
+
+
+    @Override
     public boolean createStudent(User user, Login login, int classId) throws SQLException {
         boolean ifExist = false;
         Connection conn = cp.getConnection();
@@ -39,6 +43,7 @@ public class StudentDAO implements Connectable {
         return false;
     }
 
+    @Override
     public List<User> getStudents() throws SQLException {
         List<User> result = new ArrayList<>();
         Connection conn = cp.getConnection();
