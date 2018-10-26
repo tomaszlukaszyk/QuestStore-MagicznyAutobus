@@ -7,30 +7,12 @@ import java.util.Objects;
 public class User {
 
     private final String NAME;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return Objects.equals(getNAME(), user.getNAME()) &&
-                Objects.equals(getSURNAME(), user.getSURNAME()) &&
-                Objects.equals(getEMAIL(), user.getEMAIL());
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(getNAME(), getSURNAME(), getEMAIL());
-    }
-
     private final String SURNAME;
     private final String EMAIL;
     private final String ADDRESS;
     private final int ID;
     private final Role ROLE;
     private WalletStrategy wallet;
-
     private TitleStrategy title;
 
     public User(String name, String surname, String email, String address, int id, Role role) {
@@ -41,6 +23,14 @@ public class User {
         this.ID = id;
         this.ROLE = role;
         setStrategies();
+    }
+
+    public WalletStrategy getWalletStrategy() {
+        return wallet;
+    }
+
+    public TitleStrategy getTitleStrategy() {
+        return title;
     }
 
     public Double getWallet() {
@@ -94,6 +84,7 @@ public class User {
         }
     }
 
+
     private void setTitleStrategy() {
         switch (ROLE){
             case STUDENT:
@@ -117,5 +108,23 @@ public class User {
                 ", address=" + ADDRESS +
                 ", title=" + title +
                 '}';
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(getNAME(), user.getNAME()) &&
+                Objects.equals(getSURNAME(), user.getSURNAME()) &&
+                Objects.equals(getEMAIL(), user.getEMAIL());
+    }
+
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getNAME(), getSURNAME(), getEMAIL());
     }
 }
